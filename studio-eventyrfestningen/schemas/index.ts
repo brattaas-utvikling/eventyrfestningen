@@ -1,9 +1,11 @@
 // schemas/index.ts
 import { milestone } from "./documents/milestone";
+import { organization } from "./documents/organization";
 import { performanceDoc } from "./documents/performance";
 import { person } from "./documents/person";
 import { post } from "./documents/post";
 import { show } from "./documents/show";
+import { siteSettings } from "./documents/siteSettings";
 import { sponsor } from "./documents/sponsor";
 import { seo } from "./object/seo";
 
@@ -16,6 +18,8 @@ export const schemaTypes = [
   milestone,
   post,
   sponsor,
+  siteSettings,
+  organization,
   // Objects
   seo
 ]

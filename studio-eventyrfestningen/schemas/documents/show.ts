@@ -56,6 +56,14 @@ export const show = {
       options: { hotspot: true }
     },
     {
+      name: "logoImage",
+      title: "Forestillingslogo",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    },    
+    {
       name: 'cast',
       title: 'Rollebesetning',
       type: 'array',
