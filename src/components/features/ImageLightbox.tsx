@@ -3,7 +3,12 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { urlFor } from '@/lib/sanity'
-import type { LightboxImage } from '@/types/LightboxImage'
+
+type LightboxImage = {
+  url: string;
+  alt?: string;
+  caption?: string;
+};
 
 interface ImageLightboxProps {
   isOpen: boolean
