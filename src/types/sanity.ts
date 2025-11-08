@@ -10,6 +10,8 @@ export type SanityImage = {
   _type: "image";
   asset: SanityImageAsset;
   alt?: string;
+  _key?: string;
+  caption?: string;
   // Sanity kan ha hotspot/crop, men vi gjør dem valgfrie
   hotspot?: {
     x: number;

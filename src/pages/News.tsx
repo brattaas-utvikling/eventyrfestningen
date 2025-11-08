@@ -1,6 +1,5 @@
 // src/routes/News.tsx
 import { useParams, Link } from 'react-router-dom'
-import { PortableText } from '@portabletext/react'
 import { useSanityQuery } from '@/hooks/useSanityQuery'
 import { queries } from '@/lib/sanityQueries'
 import { urlFor } from '@/lib/sanity'
@@ -8,11 +7,48 @@ import { SEOHead } from '@/components/SEOHead'
 import { generateArticleSchema } from '@/config/seo'
 import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
-import { NewsSection } from '@/components/sections/NewsSection'
 import { Button } from '@/components/ui/Button'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { Calendar, ArrowLeft, Share2 } from 'lucide-react'
-import type { Post } from '@/types/sanity'
+import type { Post, PortableText as PortableTextType } from '@/types/sanity'
+import { NewsSection } from '@/components/sections/NewsSection'
+
+// liten, lokal renderer for Sanity Portable Text
+function RenderPortableText({ value }: { value?: PortableTextType }) {
+  if (!value) return null
+
+  return (
+    <>
+      {value.map((block) => {
+        if (block._type !== 'block') return null
+
+        const text =
+          block.children?.map((child) => child.text).join('') ?? ''
+
+        switch (block.style) {
+          case 'h2':
+            return (
+              <h2 key={block._key} className="mt-6 mb-3 text-3xl font-display">
+                {text}
+              </h2>
+            )
+          case 'h3':
+            return (
+              <h3 key={block._key} className="mt-5 mb-2 text-2xl font-display">
+                {text}
+              </h3>
+            )
+          default:
+            return (
+              <p key={block._key} className="mb-4 leading-relaxed text-gray-700">
+                {text}
+              </p>
+            )
+        }
+      })}
+    </>
+  )
+}
 
 export function NewsPost() {
   const { slug } = useParams<{ slug: string }>()
@@ -23,7 +59,7 @@ export function NewsPost() {
   )
 
   const { data: relatedPosts } = useSanityQuery<Post[]>(
-    ['recent-posts', 3],
+    ['recent-posts', '3'],
     queries.recentPosts(3)
   )
 
@@ -82,7 +118,7 @@ export function NewsPost() {
         type="article"
         schema={generateArticleSchema(post)}
       />
-
+      
       <section className="py-12 sm:py-16 bg-navy-50">
         <Container size="md">
           <Button variant="ghost" className="mb-8" asChild>
@@ -133,7 +169,8 @@ export function NewsPost() {
       <Section background="white">
         <Container size="md">
           <article className="prose prose-lg max-w-none">
-            {post.body ? <PortableText value={post.body} /> : null}
+            {/* erstatter <PortableText /> */}
+            <RenderPortableText value={post.body} />
           </article>
         </Container>
       </Section>

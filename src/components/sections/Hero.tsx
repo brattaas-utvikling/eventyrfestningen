@@ -25,7 +25,7 @@ export function Hero({ show, nextPerformance }: HeroProps) {
   const logoImage = showWithLogo.logoImage;
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden pb-16">
       {/* Background */}
       <div className="absolute inset-0">
         {show.heroImage && (
@@ -165,7 +165,7 @@ export function Hero({ show, nextPerformance }: HeroProps) {
         </div>
       </Container>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
@@ -178,7 +178,7 @@ export function Hero({ show, nextPerformance }: HeroProps) {
             transition={{ duration: 2, repeat: Infinity }}
           />
         </div>
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 }

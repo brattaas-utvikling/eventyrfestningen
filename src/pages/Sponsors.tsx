@@ -1,184 +1,125 @@
-// src/routes/Sponsors.tsx
-import { motion } from 'framer-motion'
+// src/pages/Sponsors.tsx
+import React from 'react'
+import { Handshake, Medal, Gem, Star } from 'lucide-react'
 import { useSanityQuery } from '@/hooks/useSanityQuery'
 import { queries } from '@/lib/sanityQueries'
-import { urlFor } from '@/lib/sanity'
-import { SEOHead } from '@/components/SEOHead'
 import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
-import { Button } from '@/components/ui/Button'
-import { Card, CardContent } from '@/components/ui/Card'
-import { Download, Mail, Award, Star, Heart } from 'lucide-react'
-import { Skeleton } from '@/components/ui/Skeleton'
+import { urlFor } from '@/lib/sanity'
 import type { Sponsor } from '@/types/sanity'
 
-type SponsorTier = 'main' | 'gold' | 'silver' | 'partner' | string
+// 1) definer hvilke tiers vi støtter
+const TIERS = ['main', 'gold', 'silver', 'partner'] as const
+type SponsorTier = (typeof TIERS)[number]
 
-const tierConfig: Record<
-  Exclude<SponsorTier, string> | 'partner',
+// 2) metadata for hver tier
+const TIER_META: Record<
+  SponsorTier,
   {
     title: string
-    icon: typeof Award
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
     description: string
   }
 > = {
   main: {
     title: 'Hovedsponsor',
-    icon: Award,
-    description: 'Vår viktigste partner som gjør det mulig å skape magi',
+    icon: Star,
+    description: 'Våre viktigste støttespillere.',
   },
   gold: {
-    title: 'Gullsponsorer',
-    icon: Star,
-    description: 'Gullsponsorer som bidrar betydelig til produksjonen',
+    title: 'Gullpartnere',
+    icon: Gem,
+    description: 'Bidrar til å løfte produksjonen.',
   },
   silver: {
-    title: 'Sølvsponsorer',
-    icon: Heart,
-    description: 'Verdifulle bidragsytere til vårt teater',
+    title: 'Sølvpartnere',
+    icon: Medal,
+    description: 'Støtter kultur i regionen.',
   },
   partner: {
-    title: 'Samarbeidspartnere',
-    icon: Heart,
-    description: 'Lokale bedrifter som støtter kulturen',
+    title: 'Partnere',
+    icon: Handshake,
+    description: 'Samarbeid og lokal støtte.',
   },
 }
 
+// 3) liten hjelper: tar en ukjent string (eller undefined) og gir oss en trygg tier
+function normalizeTier(value: string | undefined): SponsorTier {
+  if (value && TIERS.includes(value as SponsorTier)) {
+    return value as SponsorTier
+  }
+  return 'partner'
+}
+
 export function Sponsors() {
-  const { data: sponsors, isLoading } = useSanityQuery<Sponsor[]>(
+  const { data: sponsors } = useSanityQuery<Sponsor[]>(
     'sponsors',
     queries.sponsors
   )
 
-  // legg dem i grupper
-  const sponsorsByTier: Record<string, Sponsor[]> =
-    sponsors?.reduce<Record<string, Sponsor[]>>((acc, sponsor) => {
-      const tier = sponsor.tier ?? 'partner'
-      if (!acc[tier]) acc[tier] = []
-      acc[tier].push(sponsor)
-      return acc
-    }, {}) ?? {}
+  // 4) grupper per tier – nå med typesikker key
+  const grouped: Partial<Record<SponsorTier, Sponsor[]>> = {}
 
-  const orderedTiers: SponsorTier[] = ['main', 'gold', 'silver', 'partner']
+  sponsors?.forEach((sponsor) => {
+    const tier = normalizeTier(sponsor.tier)
+    if (!grouped[tier]) {
+      grouped[tier] = []
+    }
+    grouped[tier]!.push(sponsor)
+  })
 
   return (
-    <>
-      <SEOHead
-        title="Sponsorer og partnere"
-        description="Møt bedriftene som gjør forestillingene mulig."
-      />
+    <Section background="white">
+      <Container>
+        <h1 className="text-4xl font-display mb-10 text-navy-900">
+          Sponsorer
+        </h1>
 
-      <section className="py-20 sm:py-28 bg-gradient-to-br from-navy-900 to-burgundy-900 text-white">
-        <Container>
-          <div className="max-w-3xl">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold mb-6">
-              Våre sponsorer
-            </h1>
-            <p className="text-xl text-gray-200">
-              Uten våre fantastiske sponsorer og samarbeidspartnere ville ikke
-              dette vært mulig.
-            </p>
-          </div>
-        </Container>
-      </section>
+        {TIERS.map((tierKey) => {
+          const tierSponsors = grouped[tierKey]
+          if (!tierSponsors || tierSponsors.length === 0) {
+            return null
+          }
 
-      {isLoading ? (
-        <Section background="white">
-          <Container>
-            <div className="space-y-12">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i}>
-                  <Skeleton className="h-12 w-48 mb-8" />
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {Array.from({ length: 4 }).map((__, j) => (
-                      <Skeleton key={j} className="h-28 w-full" />
-                    ))}
-                  </div>
+          const meta = TIER_META[tierKey]
+          const Icon = meta.icon
+
+          return (
+            <div key={tierKey} className="mb-12">
+              <div className="flex items-center gap-3 mb-4">
+                <Icon className="h-6 w-6 text-gold-500" />
+                <div>
+                  <h2 className="text-2xl font-display text-navy-900">
+                    {meta.title}
+                  </h2>
+                  <p className="text-gray-600 text-sm">{meta.description}</p>
                 </div>
-              ))}
-            </div>
-          </Container>
-        </Section>
-      ) : (
-        <Section background="white">
-          <Container className="space-y-16">
-            {orderedTiers.map((tier) => {
-              const tierSponsors = sponsorsByTier[tier]
-              if (!tierSponsors || tierSponsors.length === 0) return null
+              </div>
 
-              const TierIcon = tierConfig[tier as keyof typeof tierConfig].icon
-
-              return (
-                <div key={tier}>
-                  <div className="flex items-center gap-3 mb-6">
-                    <TierIcon className="h-7 w-7 text-gold-500" />
-                    <div>
-                      <h2 className="text-3xl font-display font-bold text-navy-900">
-                        {tierConfig[tier as keyof typeof tierConfig].title}
-                      </h2>
-                      <p className="text-gray-600">
-                        {tierConfig[tier as keyof typeof tierConfig].description}
-                      </p>
-                    </div>
+              <div className="flex flex-wrap gap-6">
+                {tierSponsors.map((sponsor) => (
+                  <div
+                    key={sponsor._id}
+                    className="bg-white border border-gray-200 rounded-lg p-4 w-48 flex items-center justify-center"
+                  >
+                    {sponsor.logo ? (
+                      <img
+                        src={urlFor(sponsor.logo).width(220).url()}
+                        alt={sponsor.name}
+                        className="max-h-16 object-contain"
+                      />
+                    ) : (
+                      <span className="text-navy-900 font-medium">
+                        {sponsor.name}
+                      </span>
+                    )}
                   </div>
-
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {tierSponsors.map((sponsor) => (
-                      <motion.div
-                        key={sponsor._id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="flex items-center justify-center"
-                      >
-                        <Card className="w-full h-28 flex items-center justify-center p-4 hover:shadow-xl transition-shadow">
-                          <CardContent className="flex items-center justify-center">
-                            {sponsor.logo ? (
-                              <img
-                                src={urlFor(sponsor.logo).width(280).url()}
-                                alt={sponsor.name}
-                                className="max-h-16 object-contain"
-                              />
-                            ) : (
-                              <span className="font-semibold text-navy-900">
-                                {sponsor.name}
-                              </span>
-                            )}
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              )
-            })}
-
-            {/* CTA */}
-            <div className="bg-navy-900 rounded-2xl p-10 text-center text-white">
-              <h2 className="text-3xl font-display font-bold mb-2">
-                Vil din bedrift bli sponsor?
-              </h2>
-              <p className="text-gray-200 mb-6">
-                Vi har fleksible pakker for lokale bedrifter.
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Button variant="torch" asChild>
-                  <a href="mailto:post@festningsteater.no">
-                    <Mail className="h-4 w-4 mr-2" />
-                    Ta kontakt
-                  </a>
-                </Button>
-                <Button variant="outline" asChild>
-                  <a href="/sponsor-pakke.pdf">
-                    <Download className="h-4 w-4 mr-2" />
-                    Last ned sponsorinfo
-                  </a>
-                </Button>
+                ))}
               </div>
             </div>
-          </Container>
-        </Section>
-      )}
-    </>
+          )
+        })}
+      </Container>
+    </Section>
   )
 }

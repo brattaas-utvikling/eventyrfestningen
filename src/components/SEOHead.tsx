@@ -1,96 +1,124 @@
 // src/components/SEOHead.tsx
 import { useEffect } from 'react'
 
+type SeoType = 'website' | 'article'
+
 interface SEOHeadProps {
   title?: string
   description?: string
+  image?: string
+  url?: string
+  type?: SeoType
+  schema?: object | object[] | null
 }
 
-export function SEOHead({ title, description }: SEOHeadProps) {
+export function SEOHead({
+  title,
+  description,
+  image,
+  url,
+  type = 'website',
+  schema,
+}: SEOHeadProps) {
   useEffect(() => {
-    if (title) {
-      document.title = `${title} | Eventyrfestningen`
-    } else {
-      document.title = 'Eventyrfestningen'
+    const siteName = 'Eventyrfestningen'
+    const fullTitle = title ? `${title} | ${siteName}` : siteName
+
+    document.title = fullTitle
+
+    // liten helper for å "upserte" meta-tags
+    const upsertMeta = (attrs: Record<string, string>) => {
+      const selector = Object.entries(attrs)
+        .map(([key, value]) => `[${key}="${value}"]`)
+        .join('')
+
+      let el = document.head.querySelector<HTMLMetaElement>(selector)
+      if (!el) {
+        el = document.createElement('meta')
+        Object.entries(attrs).forEach(([k, v]) => el!.setAttribute(k, v))
+        document.head.appendChild(el)
+      }
+      return el
     }
+
+    // description
     if (description) {
-      // her kan du også sett meta via DOM hvis du vil
+      let metaDesc = document.head.querySelector<HTMLMetaElement>(
+        'meta[name="description"]'
+      )
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta')
+        metaDesc.setAttribute('name', 'description')
+        document.head.appendChild(metaDesc)
+      }
+      metaDesc.setAttribute('content', description)
     }
-  }, [title, description])
+
+    // Open Graph
+    const ogTitle = upsertMeta({ property: 'og:title' })
+    ogTitle.setAttribute('content', fullTitle)
+
+    if (description) {
+      const ogDesc = upsertMeta({ property: 'og:description' })
+      ogDesc.setAttribute('content', description)
+    }
+
+    const ogType = upsertMeta({ property: 'og:type' })
+    ogType.setAttribute('content', type)
+
+    if (url) {
+      const ogUrl = upsertMeta({ property: 'og:url' })
+      ogUrl.setAttribute('content', url)
+    }
+
+    if (image) {
+      const ogImage = upsertMeta({ property: 'og:image' })
+      ogImage.setAttribute('content', image)
+    }
+
+    // Twitter
+    const twCard = upsertMeta({ name: 'twitter:card' })
+    twCard.setAttribute('content', 'summary_large_image')
+
+    const twTitle = upsertMeta({ name: 'twitter:title' })
+    twTitle.setAttribute('content', fullTitle)
+
+    if (description) {
+      const twDesc = upsertMeta({ name: 'twitter:description' })
+      twDesc.setAttribute('content', description)
+    }
+
+    if (image) {
+      const twImage = upsertMeta({ name: 'twitter:image' })
+      twImage.setAttribute('content', image)
+    }
+
+    // canonical
+    if (url) {
+      let link = document.head.querySelector<HTMLLinkElement>(
+        'link[rel="canonical"]'
+      )
+      if (!link) {
+        link = document.createElement('link')
+        link.setAttribute('rel', 'canonical')
+        document.head.appendChild(link)
+      }
+      link.setAttribute('href', url)
+    }
+
+    // JSON-LD
+    const existing = document.getElementById('seo-jsonld')
+    if (existing) {
+      existing.remove()
+    }
+    if (schema) {
+      const script = document.createElement('script')
+      script.type = 'application/ld+json'
+      script.id = 'seo-jsonld'
+      script.text = JSON.stringify(Array.isArray(schema) ? schema : [schema])
+      document.head.appendChild(script)
+    }
+  }, [title, description, image, url, type, schema])
 
   return null
 }
-
-
-// // src/components/SEOHead.tsx
-// import { Helmet } from 'react-helmet-async'
-// import { generateMetaTags } from '@/config/seo'
-
-// interface SEOHeadProps {
-//   title?: string
-//   description?: string
-//   keywords?: string[]
-//   image?: string
-//   url?: string
-//   type?: 'website' | 'article'
-//   schema?: object | object[]
-// }
-
-// export function SEOHead({
-//   title,
-//   description,
-//   keywords,
-//   image,
-//   url,
-//   type,
-//   schema,
-// }: SEOHeadProps) {
-//   const meta = generateMetaTags({
-//     title,
-//     description,
-//     keywords,
-//     image,
-//     url,
-//     type,
-//   })
-
-//   return (
-//     <Helmet>
-//       {/* Basic Meta Tags */}
-//       <title>{meta.title}</title>
-//       <meta name="description" content={meta.description} />
-//       <meta name="keywords" content={meta.keywords} />
-//       <link rel="canonical" href={meta.canonical} />
-
-//       {/* Open Graph */}
-//       <meta property="og:type" content={meta.openGraph.type} />
-//       <meta property="og:url" content={meta.openGraph.url} />
-//       <meta property="og:title" content={meta.openGraph.title} />
-//       <meta property="og:description" content={meta.openGraph.description} />
-//       <meta property="og:image" content={meta.openGraph.images[0].url} />
-//       <meta property="og:image:width" content="1200" />
-//       <meta property="og:image:height" content="630" />
-//       <meta property="og:site_name" content={meta.openGraph.siteName} />
-
-//       {/* Twitter Card */}
-//       <meta name="twitter:card" content={meta.twitter.card} />
-//       <meta name="twitter:site" content={meta.twitter.site} />
-//       <meta name="twitter:title" content={meta.twitter.title} />
-//       <meta name="twitter:description" content={meta.twitter.description} />
-//       <meta name="twitter:image" content={meta.twitter.image} />
-
-//       {/* Structured Data */}
-//       {schema ? (
-//         <script type="application/ld+json">
-//           {JSON.stringify(Array.isArray(schema) ? schema : [schema])}
-//         </script>
-//       ) : null}
-
-//       {/* Additional SEO tags */}
-//       <meta name="robots" content="index, follow" />
-//       <meta name="language" content="Norwegian" />
-//       <meta name="geo.region" content="NO-34" />
-//       <meta name="geo.placename" content="Kongsvinger" />
-//     </Helmet>
-//   )
-// }

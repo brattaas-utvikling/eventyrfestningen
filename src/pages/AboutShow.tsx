@@ -38,6 +38,13 @@ export function AboutShow() {
     setLightboxOpen(true)
   }
 
+  // 🔁 gjør om Sanity-images → lightbox-format
+  const lightboxImages = (show.galleryImages ?? []).map((img) => ({
+    url: urlFor(img).width(1400).url(),
+    alt: img.alt ?? show.title,
+    caption: 'Bak kulissene'
+  }))
+
   return (
     <>
       <SEOHead
@@ -66,7 +73,7 @@ export function AboutShow() {
               alt={show.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/50 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-navy-900/50 to-transparent" />
 
             <Container className="absolute bottom-0 left-0 right-0 pb-12">
               <motion.div
@@ -78,8 +85,7 @@ export function AboutShow() {
                   {show.title}
                 </h1>
                 <p className="text-xl sm:text-2xl text-gray-200">
-                  {show.type === 'main' ? 'Hovedforestilling' : 'Halloween-forestilling'}{' '}
-                  {show.year}
+                  {show.type === 'main' ? 'Hovedforestilling' : 'Halloween-forestilling'} {show.year}
                 </p>
               </motion.div>
             </Container>
@@ -87,21 +93,21 @@ export function AboutShow() {
         )}
       </section>
 
-      {/* Show Overview */}
+      {/* Show Overview – nå med onImageClick */}
       <ShowOverview show={show} onImageClick={openLightbox} />
 
       {/* Cast & Crew */}
       <CastGallery show={show} />
 
-      {/* Lightbox if you need it */}
-      {show.galleryImages && show.galleryImages.length > 0 ? (
+      {/* Lightbox */}
+      {lightboxImages.length > 0 && (
         <ImageLightbox
           isOpen={lightboxOpen}
-          images={show.galleryImages}
+          images={lightboxImages}
           initialIndex={lightboxIndex}
           onClose={() => setLightboxOpen(false)}
         />
-      ) : null}
+      )}
     </>
   )
 }

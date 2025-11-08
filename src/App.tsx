@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import Home from "@/pages/Home";
-import Calendar from "./components/Calendar";
+// import Calendar from "./components/Calendar";
 import { About } from "./pages/About";
 import { Sponsors } from "./pages/Sponsors";
 import { Contact } from "./pages/Contact";
 import { AboutShow } from "./pages/AboutShow";
 import { Archive } from "./pages/Archive";
+import { NewsList, NewsPost } from "./pages/News";
 
 
 export default function App() {
@@ -16,7 +17,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/forestilling" element={<AboutShow />} />
-            <Route path="/kalender" element={<Calendar />} />
+            <Route path="/nyheter" element={<NewsList />} />
+            <Route path="/nyheter/:slug" element={<NewsPost />} />
             <Route path="/om-oss" element={<About />} />
             <Route path="/sponsorer" element={<Sponsors />} />
             <Route path="/arkiv" element={<Archive />} />
