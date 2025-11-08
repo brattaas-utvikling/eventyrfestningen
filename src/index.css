@@ -1,68 +1,104 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/typography";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* her definerer vi det du hadde i theme.extend */
+@theme {
+  /* farger */
+  --color-navy-50: #f0f4f8;
+  --color-navy-100: #d9e2ec;
+  --color-navy-200: #bcccdc;
+  --color-navy-300: #9fb3c8;
+  --color-navy-400: #829ab1;
+  --color-navy-500: #627d98;
+  --color-navy-600: #486581;
+  --color-navy-700: #334e68;
+  --color-navy-800: #243b53;
+  --color-navy-900: #102a43;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  --color-burgundy-50: #fdf4f5;
+  --color-burgundy-100: #fce8eb;
+  --color-burgundy-200: #f8d0d7;
+  --color-burgundy-300: #f3a8b4;
+  --color-burgundy-400: #ed7a8f;
+  --color-burgundy-500: #e0536c;
+  --color-burgundy-600: #c9395b;
+  --color-burgundy-700: #a92a4a;
+  --color-burgundy-800: #8b2440;
+  --color-burgundy-900: #6d1d33;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+  --color-gold-800: #92400e;
+  --color-gold-900: #78350f;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  --color-torch-50: #fff7ed;
+  --color-torch-100: #ffedd5;
+  --color-torch-200: #fed7aa;
+  --color-torch-300: #fdba74;
+  --color-torch-400: #fb923c;
+  --color-torch-500: #f97316;
+  --color-torch-600: #ea580c;
+  --color-torch-700: #c2410c;
+  --color-torch-800: #9a3412;
+  --color-torch-900: #7c2d12;
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+  /* fonter */
+  --font-display: "Cinzel", "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+  /* bakgrunner */
+  --background-image-paper-texture: url("/textures/old-paper.png");
+  --background-image-fortress-overlay: linear-gradient(
+    to bottom,
+    rgba(16, 42, 67, 0.7),
+    rgba(16, 42, 67, 0.9)
+  );
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+  /* shadows */
+  --shadow-torch: 0 0 20px rgba(249, 115, 22, 0.5),
+    0 0 40px rgba(249, 115, 22, 0.3);
+  --shadow-embossed: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+
+  /* animations */
+  --animate-flicker: flicker 3s ease-in-out infinite;
+  --animate-fade-in: fadeIn 0.5s ease-in;
+  --animate-slide-up: slideUp 0.6s ease-out;
+
+  @keyframes flicker {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
   }
-  a:hover {
-    color: #747bff;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
-  button {
-    background-color: #f9f9f9;
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 }
