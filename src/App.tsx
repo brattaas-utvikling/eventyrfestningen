@@ -10,6 +10,7 @@ import { Archive } from "./pages/Archive";
 import { NewsList, NewsPost } from "./pages/News";
 import Contact from "./pages/Contact";
 import ScrollToTop from "./components/layout/SrollToTop";
+import NotFound from "./pages/NotFound";
 
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/sponsorer" element={<Sponsors />} />
             <Route path="/arkiv" element={<Archive />} />
             <Route path="/kontakt" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
       </BrowserRouter>
