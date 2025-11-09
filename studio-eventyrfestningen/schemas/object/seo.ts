@@ -15,7 +15,7 @@ export const seo = {
       title: 'Meta Description',
       type: 'text',
       rows: 3,
-      validation: (Rule: any) => Rule.max(160)
+      validation: (Rule: any) => Rule.max(200)
     },
     {
       name: 'keywords',

@@ -1,242 +1,341 @@
 // src/components/show/CastGallery.tsx
-import { urlFor } from '@/lib/sanity'
-import type { Show } from '@/types/sanity'
-import { motion } from 'framer-motion'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { urlFor } from "@/lib/sanity";
+import type { Show, SanityImage, Person } from "@/types/sanity";
 
 interface CastGalleryProps {
-  show: Show
+  show: Show;
 }
 
-type CastItem = NonNullable<Show['cast']>[number]
+type CastItem = NonNullable<Show["cast"]>[number];
+
+// type guard
+function hasImageAsset(img: SanityImage | undefined): img is SanityImage {
+  return !!img && !!img.asset && typeof img.asset._ref === "string";
+}
 
 export function CastGallery({ show }: CastGalleryProps) {
-  if (!show.cast || show.cast.length === 0) {
-    return null
+  const [selectedPerson, setSelectedPerson] = useState<{
+    role: string;
+    actor: Person | undefined;
+  } | null>(null);
+
+  const cast = show.cast ?? [];
+  const crew = show.crew ?? [];
+
+  if (cast.length === 0 && crew.length === 0) {
+    return null;
   }
 
   return (
-    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {show.cast.map((item: CastItem) => (
-        <motion.div
-          key={item.actor._id}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-xl bg-white/5 backdrop-blur border border-white/10 p-4 text-center"
-        >
-          <div className="mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full border-2 border-gold-400/60">
-            {item.actor.image ? (
-              <img
-                src={urlFor(item.actor.image).width(300).height(300).url()}
-                alt={item.actor.name}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div className="h-full w-full bg-navy-900/30" />
-            )}
+    <>
+      {/* CAST */}
+      {cast.length > 0 && (
+        <div className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10 pb-8 border-b border-white/10"
+          >
+            <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-3">
+              Rollebesetning
+            </h3>
+            <p className="text-navy-100/70 text-sm">
+              Møt de talentfulle skuespillerne som gir liv til historien
+            </p>
+          </motion.div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto">
+            {cast.map((item: CastItem, index) => {
+              const actor: Person | undefined = item.actor;
+
+              const key =
+                actor?._id ??
+                `${actor?.name ?? "ukjent"}-${item.role ?? "rolle"}-${index}`;
+
+              const hasImg = hasImageAsset(actor?.image);
+              const imgUrl = hasImg
+                ? urlFor(actor!.image!).width(300).height(300).url()
+                : null;
+
+              return (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                  className="group rounded-xl bg-white/5 backdrop-blur border border-white/10 p-4 text-center cursor-pointer hover:bg-white/10 hover:border-gold-400/30 transition-all"
+                  onClick={() =>
+                    setSelectedPerson({ role: item.role, actor: item.actor })
+                  }
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedPerson({ role: item.role, actor: item.actor });
+                    }
+                  }}
+                  aria-label={`Les mer om ${actor?.name ?? "skuespiller"}`}
+                >
+                  <div className="mx-auto mb-4 h-28 w-28 overflow-hidden rounded-full border-2 border-gold-400/60 group-hover:border-gold-400 transition-colors relative">
+                    {imgUrl ? (
+                      <motion.img
+                        src={imgUrl}
+                        alt={actor?.name ?? "Skuespiller"}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    ) : (
+                      <div className="h-full w-full bg-navy-900/30 flex items-center justify-center">
+                        <span className="text-gold-400/30 text-4xl font-bold">
+                          {actor?.name?.charAt(0) ?? "?"}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="absolute inset-0 bg-navy-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="text-white text-xs font-semibold">
+                        Les mer →
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3 className="text-white font-semibold group-hover:text-gold-400 transition-colors">
+                    {actor?.name ?? "Ukjent skuespiller"}
+                  </h3>
+
+                  {item.role && (
+                    <p className="text-gold-200 text-sm mt-1">{item.role}</p>
+                  )}
+
+                  {actor?.bio && (
+                    <p className="text-xs text-navy-100/70 mt-3 line-clamp-2">
+                      {actor.bio}
+                    </p>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
-          <h3 className="text-white font-semibold">{item.actor.name}</h3>
-          <p className="text-gold-200 text-sm mt-1">{item.role}</p>
-          {item.actor.bio ? (
-            <p className="text-xs text-navy-100/70 mt-3 line-clamp-3">{item.actor.bio}</p>
-          ) : null}
-        </motion.div>
-      ))}
-    </div>
-  )
+        </div>
+      )}
+
+      {/* CREW */}
+      {crew.length > 0 && (
+        <div className="mt-16 pt-12 border-t border-white/10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-10"
+          >
+            <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-3">
+              Produksjonsteam
+            </h3>
+            <p className="text-navy-100/70 text-sm">
+              De kreative hodene bak kulissene
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {crew.map((crewMember, index) => {
+              const person = crewMember.person;
+              const hasImg = hasImageAsset(person?.image);
+              const imgUrl = hasImg
+                ? urlFor(person!.image!).width(80).height(80).url()
+                : null;
+
+              return (
+                <motion.div
+                  key={person?._id ?? `crew-${index}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  whileHover={{ transition: { duration: 0.2 } }}
+                  /* HER: gjør crew klikkbart på samme måte */
+                  className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur border border-white/10 rounded-lg hover:bg-white/10 hover:border-gold-400/30 transition-all group cursor-pointer"
+                  onClick={() =>
+                    setSelectedPerson({
+                      role: crewMember.role,
+                      actor: crewMember.person,
+                    })
+                  }
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setSelectedPerson({
+                        role: crewMember.role,
+                        actor: crewMember.person,
+                      });
+                    }
+                  }}
+                  aria-label={`Les mer om ${person?.name ?? "person"}`}
+                >
+                  <div className="shrink-0">
+                    {imgUrl ? (
+                      <img
+                        src={imgUrl}
+                        alt={person?.name ?? "Crew member"}
+                        className="w-14 h-14 rounded-full object-cover border-2 border-gold-400/40 group-hover:border-gold-400 transition-colors"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-14 h-14 rounded-full bg-navy-900/30 border-2 border-gold-400/40 group-hover:border-gold-400 flex items-center justify-center transition-colors">
+                        <span className="text-gold-400/60 text-xl font-bold">
+                          {person?.name?.charAt(0) ?? "?"}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs text-gold-200/80 font-medium uppercase tracking-wider mb-1">
+                      {crewMember.role}
+                    </div>
+                    <div className="text-white font-semibold truncate group-hover:text-gold-400 transition-colors">
+                      {person?.name ?? "Ukjent"}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* MODAL – funker nå for både cast og crew */}
+      <AnimatePresence>
+        {selectedPerson && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-900/90 backdrop-blur-md"
+            onClick={() => setSelectedPerson(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl max-w-3xl w-full max-h-[85vh] overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <motion.button
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: 90 }}
+                transition={{ delay: 0.1 }}
+                onClick={() => setSelectedPerson(null)}
+                className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 backdrop-blur rounded-full flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400"
+                aria-label="Lukk modal"
+              >
+                <X className="h-6 w-6 text-white" />
+              </motion.button>
+
+              <div className="flex flex-col md:flex-row max-h-[85vh] overflow-y-auto">
+                {hasImageAsset(selectedPerson.actor?.image) && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="md:w-2/5 shrink-0"
+                  >
+                    <div className="relative h-64 md:h-full">
+                      <img
+                        src={urlFor(selectedPerson.actor!.image!)
+                          .width(600)
+                          .height(800)
+                          .quality(90)
+                          .url()}
+                        alt={selectedPerson.actor?.name ?? "Skuespiller"}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-linear-to-t from-navy-900/50 to-transparent md:bg-linear-to-r" />
+                    </div>
+                  </motion.div>
+                )}
+
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="flex-1 p-8 md:p-10"
+                >
+                  {selectedPerson.role && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="inline-block px-4 py-1.5 mb-4 bg-gold-400/20 border border-gold-400/30 text-gold-200 text-sm font-semibold rounded-full backdrop-blur"
+                    >
+                      {selectedPerson.role}
+                    </motion.div>
+                  )}
+
+                  <motion.h3
+                    id="modal-title"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 }}
+                    className="text-3xl md:text-4xl font-display font-bold text-white mb-6"
+                  >
+                    {selectedPerson.actor?.name ?? "Ukjent person"}
+                  </motion.h3>
+
+                  {selectedPerson.actor?.bio ? (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="text-navy-100/90 leading-relaxed space-y-4"
+                    >
+                      {selectedPerson.actor.bio
+                        .split("\n\n")
+                        .map((paragraph, i) => (
+                          <p key={i}>{paragraph}</p>
+                        ))}
+                    </motion.div>
+                  ) : (
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      className="text-navy-100/70 italic"
+                    >
+                      Ingen biografi tilgjengelig.
+                    </motion.p>
+                  )}
+
+                  <motion.div
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
+                    className="mt-8 h-1 w-24 bg-linear-to-r from-gold-400 to-transparent rounded-full"
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
-
-
-// // components/sections/CastGallery.tsx
-// import { useState } from 'react'
-// import { motion, AnimatePresence } from 'framer-motion'
-// import { X } from 'lucide-react'
-// import { Container } from '@/components/layout/Container'
-// import { urlFor } from '@/lib/sanity'
-// import type { Show } from '@/types/sanity'
-
-// interface CastGalleryProps {
-//   show: Show
-// }
-
-// export function CastGallery({ show }: CastGalleryProps) {
-//   const [selectedPerson, setSelectedPerson] = useState<any>(null)
-
-//   if (!show.cast || show.cast.length === 0) return null
-
-//   return (
-//     <section className="py-16 sm:py-20 lg:py-24 bg-navy-50">
-//       <Container>
-//         {/* Section Header */}
-//         <div className="text-center mb-12">
-//           <h2 className="text-4xl sm:text-5xl font-display font-bold text-navy-900 mb-4">
-//             Rollebesetning
-//           </h2>
-//           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-//             Møt de talentfulle skuespillerne som gir liv til historien
-//           </p>
-//         </div>
-
-//         {/* Cast Grid */}
-//         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-//           {show.cast.map((castMember, index) => (
-//             <motion.div
-//               key={castMember.actor._id}
-//               initial={{ opacity: 0, y: 20 }}
-//               whileInView={{ opacity: 1, y: 0 }}
-//               viewport={{ once: true }}
-//               transition={{ duration: 0.5, delay: index * 0.1 }}
-//               className="group cursor-pointer"
-//               onClick={() => setSelectedPerson(castMember)}
-//             >
-//               <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-2">
-//                 {/* Image */}
-//                 <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-navy-900 to-burgundy-900">
-//                   {castMember.actor.image ? (
-//                     <img
-//                       src={urlFor(castMember.actor.image)
-//                         .width(400)
-//                         .height(533)
-//                         .quality(85)
-//                         .auto('format')
-//                         .url()}
-//                       alt={castMember.actor.image.alt || castMember.actor.name}
-//                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-//                     />
-//                   ) : (
-//                     <div className="w-full h-full flex items-center justify-center">
-//                       <span className="text-6xl text-white font-display">
-//                         {castMember.actor.name.charAt(0)}
-//                       </span>
-//                     </div>
-//                   )}
-                  
-//                   {/* Overlay on hover */}
-//                   <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-//                     <span className="text-white text-sm font-medium">
-//                       Les mer →
-//                     </span>
-//                   </div>
-//                 </div>
-
-//                 {/* Info */}
-//                 <div className="p-4 text-center">
-//                   <h3 className="font-display font-bold text-lg text-navy-900 mb-1">
-//                     {castMember.actor.name}
-//                   </h3>
-//                   <p className="text-sm text-gold-600 font-medium">
-//                     {castMember.role}
-//                   </p>
-//                 </div>
-//               </div>
-//             </motion.div>
-//           ))}
-//         </div>
-
-//         {/* Crew Section */}
-//         {show.crew && show.crew.length > 0 && (
-//           <div className="mt-16">
-//             <h3 className="text-3xl font-display font-bold text-navy-900 mb-8 text-center">
-//               Produksjonsteam
-//             </h3>
-//             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-//               {show.crew.map((crewMember, index) => (
-//                 <motion.div
-//                   key={crewMember.person._id}
-//                   initial={{ opacity: 0, y: 20 }}
-//                   whileInView={{ opacity: 1, y: 0 }}
-//                   viewport={{ once: true }}
-//                   transition={{ duration: 0.5, delay: index * 0.1 }}
-//                   className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
-//                 >
-//                   {crewMember.person.image && (
-//                     <img
-//                       src={urlFor(crewMember.person.image)
-//                         .width(80)
-//                         .height(80)
-//                         .quality(85)
-//                         .auto('format')
-//                         .url()}
-//                       alt={crewMember.person.name}
-//                       className="w-16 h-16 rounded-full object-cover"
-//                     />
-//                   )}
-//                   <div>
-//                     <div className="text-sm text-gray-600 mb-1">{crewMember.role}</div>
-//                     <div className="font-semibold text-navy-900">
-//                       {crewMember.person.name}
-//                     </div>
-//                   </div>
-//                 </motion.div>
-//               ))}
-//             </div>
-//           </div>
-//         )}
-//       </Container>
-
-//       {/* Modal */}
-//       <AnimatePresence>
-//         {selectedPerson && (
-//           <motion.div
-//             initial={{ opacity: 0 }}
-//             animate={{ opacity: 1 }}
-//             exit={{ opacity: 0 }}
-//             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-900/80 backdrop-blur-sm"
-//             onClick={() => setSelectedPerson(null)}
-//           >
-//             <motion.div
-//               initial={{ scale: 0.9, opacity: 0 }}
-//               animate={{ scale: 1, opacity: 1 }}
-//               exit={{ scale: 0.9, opacity: 0 }}
-//               className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-//               onClick={(e) => e.stopPropagation()}
-//             >
-//               {/* Close button */}
-//               <button
-//                 onClick={() => setSelectedPerson(null)}
-//                 className="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors"
-//               >
-//                 <X className="h-6 w-6 text-navy-900" />
-//               </button>
-
-//               <div className="md:flex">
-//                 {/* Image */}
-//                 {selectedPerson.actor.image && (
-//                   <div className="md:w-1/2">
-//                     <img
-//                       src={urlFor(selectedPerson.actor.image)
-//                         .width(600)
-//                         .height(800)
-//                         .quality(90)
-//                         .auto('format')
-//                         .url()}
-//                       alt={selectedPerson.actor.name}
-//                       className="w-full h-full object-cover"
-//                     />
-//                   </div>
-//                 )}
-
-//                 {/* Content */}
-//                 <div className="p-8 md:w-1/2">
-//                   <div className="inline-block px-3 py-1 mb-4 bg-gold-100 text-gold-800 text-sm font-semibold rounded-full">
-//                     {selectedPerson.role}
-//                   </div>
-                  
-//                   <h3 className="text-3xl font-display font-bold text-navy-900 mb-4">
-//                     {selectedPerson.actor.name}
-//                   </h3>
-
-//                   {selectedPerson.actor.bio && (
-//                     <p className="text-gray-700 leading-relaxed">
-//                       {selectedPerson.actor.bio}
-//                     </p>
-//                   )}
-//                 </div>
-//               </div>
-//             </motion.div>
-//           </motion.div>
-//         )}
-//       </AnimatePresence>
-//     </section>
-//   )
-// }

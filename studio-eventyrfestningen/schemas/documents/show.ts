@@ -53,7 +53,10 @@ export const show = {
       name: 'heroImage',
       title: 'Hero-bilde',
       type: 'image',
-      options: { hotspot: true }
+      options: { hotspot: true },
+      fields: [
+        { name: 'alt', type: 'string', title: 'Alt-tekst' }
+      ]
     },
     {
       name: "logoImage",
