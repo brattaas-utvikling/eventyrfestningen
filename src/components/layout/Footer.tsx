@@ -1,112 +1,161 @@
-// src/components/layout/Footer.tsx
-import { Mail, Phone, MapPin, Facebook, Instagram } from "lucide-react";
+
+import { Mail, Phone, MapPin, Facebook, Instagram, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Container } from "./Container";
+import { useMemo } from "react";
 
-export function Footer() {
+type FooterProps = {
+  /** Bruk "contrast" for lys footer som bryter fra mørke sider/sekjoner */
+  variant?: "dark" | "contrast";
+};
+
+export function Footer({ variant = "dark" }: FooterProps) {
+  const year = useMemo(() => new Date().getFullYear(), []);
+
+  const isDark = variant === "dark";
+
+  const wrap = isDark ? "bg-navy-900 text-white" : "bg-white text-navy-900";
+  const heading = isDark ? "text-gold-400" : "text-torch-600";
+  const subtext = isDark ? "text-gray-300" : "text-navy-700";
+  const link = isDark
+    ? "hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/50"
+    : "hover:text-torch-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-500/40";
+  const divider = isDark ? "border-navy-700" : "border-navy-200";
+
+  const socialBtn = isDark
+    ? "bg-white/5 text-white hover:bg-gold-400/80 hover:text-navy-900"
+    : "bg-navy-100 text-navy-800 hover:bg-torch-500 hover:text-navy-900";
+
   return (
-    <footer className="bg-navy-900 text-white">
+    <footer className={`relative ${wrap}`} aria-labelledby="site-footer-heading">
+      {/* tynn gradientlinje på toppen for “avslutning” */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-gold-500/60 to-transparent"
+      />
+
       <Container>
-      <div className="py-12 lg:py-16">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {/* About */}
-            <div>
-              <h3 className="text-lg font-display font-semibold text-gold-400 mb-4">
+        <div className="py-12 lg:py-16">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Om oss */}
+            <section aria-labelledby="footer-about">
+              <h3 id="footer-about" className={`text-lg font-display font-semibold mb-4 ${heading}`}>
                 Om oss
               </h3>
-              <p className="text-sm text-gray-300">
-                Kongsvinger Festningsteater setter opp storslåtte familieforestillinger 
-                med historie og dramatikk i hjertet.
+              <p className={`text-sm ${subtext}`}>
+                Eventyrfestningen setter opp storslåtte familieforestillinger
+                med historie, dramatikk og lekenhet i hjertet.
               </p>
-            </div>
+            </section>
 
-            {/* Contact */}
-            <div>
-              <h3 className="text-lg font-display font-semibold text-gold-400 mb-4">
+            {/* Kontakt */}
+            <section aria-labelledby="footer-contact">
+              <h3 id="footer-contact" className={`text-lg font-display font-semibold mb-4 ${heading}`}>
                 Kontakt
               </h3>
-              <ul className="space-y-3 text-sm">
-                <li className="flex items-start gap-2">
-                  <Mail className="h-5 w-5 text-gold-400 shrink-0 mt-0.5" />
-                  <a href="mailto:post@festningsteater.no" className="hover:text-gold-400 transition-colors">
-                    post@festningsteater.no
+              <address className={`not-italic text-sm space-y-3 ${subtext}`}>
+                <p className="flex items-start gap-2">
+                  <Mail className={`h-5 w-5 ${isDark ? "text-gold-400" : "text-torch-600"} shrink-0 mt-0.5`} />
+                  <a href="mailto:post@festningsteater.no" className={link}>
+                    post@eventyrfestningen.no
                   </a>
-                </li>
-                <li className="flex items-start gap-2">
-                  <Phone className="h-5 w-5 text-gold-400 shrink-0 mt-0.5" />
-                  <a href="tel:+4712345678" className="hover:text-gold-400 transition-colors">
+                </p>
+                <p className="flex items-start gap-2">
+                  <Phone className={`h-5 w-5 ${isDark ? "text-gold-400" : "text-torch-600"} shrink-0 mt-0.5`} />
+                  <a href="tel:+4712345678" className={link}>
                     +47 123 45 678
                   </a>
-                </li>
-                <li className="flex items-start gap-2">
-                  <MapPin className="h-5 w-5 text-gold-400 shrink-0 mt-0.5" />
-                  <span className="text-gray-300">
-                    Kongsvinger Festning<br />
+                </p>
+                <p className="flex items-start gap-2">
+                  <MapPin className={`h-5 w-5 ${isDark ? "text-gold-400" : "text-torch-600"} shrink-0 mt-0.5`} />
+                  <span>
+                    Kongsvinger Festning
+                    <br />
                     2226 Kongsvinger
                   </span>
-                </li>
-              </ul>
-            </div>
+                </p>
+              </address>
+            </section>
 
-            {/* Quick Links */}
-            <div>
-              <h3 className="text-lg font-display font-semibold text-gold-400 mb-4">
+            {/* Snarveier */}
+            <nav aria-labelledby="footer-links">
+              <h3 id="footer-links" className={`text-lg font-display font-semibold mb-4 ${heading}`}>
                 Snarveier
               </h3>
-              <ul className="space-y-2 text-sm">
+              <ul className={`space-y-2 text-sm ${subtext}`}>
                 <li>
-                  <Link to="/kalender" className="hover:text-gold-400 transition-colors">
-                    Forestillingskalender
+                  <Link to="/kalender" className={`inline-flex items-center gap-1 ${link}`}>
+                    Forestillingskalender <ArrowUpRight className="h-4 w-4 translate-y-px" />
                   </Link>
                 </li>
                 <li>
-                  <Link to="/om-oss" className="hover:text-gold-400 transition-colors">
-                    Bli frivillig
+                  <Link to="/om-oss" className={`inline-flex items-center gap-1 ${link}`}>
+                    Bli frivillig <ArrowUpRight className="h-4 w-4 translate-y-px" />
                   </Link>
                 </li>
                 <li>
-                  <Link to="/sponsorer" className="hover:text-gold-400 transition-colors">
-                    Bli sponsor
+                  <Link to="/sponsorer" className={`inline-flex items-center gap-1 ${link}`}>
+                    Bli sponsor <ArrowUpRight className="h-4 w-4 translate-y-px" />
                   </Link>
                 </li>
                 <li>
-                  <Link to="/arkiv" className="hover:text-gold-400 transition-colors">
-                    Tidligere forestillinger
+                  <Link to="/arkiv" className={`inline-flex items-center gap-1 ${link}`}>
+                    Tidligere forestillinger <ArrowUpRight className="h-4 w-4 translate-y-px" />
                   </Link>
                 </li>
               </ul>
-            </div>
+            </nav>
 
-            {/* Social */}
-            <div>
-              <h3 className="text-lg font-display font-semibold text-gold-400 mb-4">
+            {/* Følg oss */}
+            <section aria-labelledby="footer-social">
+              <h3 id="footer-social" className={`text-lg font-display font-semibold mb-4 ${heading}`}>
                 Følg oss
               </h3>
-              <div className="flex gap-4">
-                <a 
-                  href="https://facebook.com" 
-                  target="_blank" 
-                  rel="noopener"
-                  className="text-white hover:text-gold-400 transition-colors"
+              <div className="flex gap-3">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group flex h-10 w-10 items-center justify-center rounded-full transition ${socialBtn} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${isDark ? "focus-visible:ring-gold-400/50" : "focus-visible:ring-torch-500/40"}`}
                   aria-label="Facebook"
                 >
-                  <Facebook className="h-6 w-6" />
+                  <Facebook className="h-5 w-5 transition-transform group-hover:-rotate-3 group-active:scale-95" />
                 </a>
-                <a 
-                  href="https://instagram.com" 
-                  target="_blank" 
-                  rel="noopener"
-                  className="text-white hover:text-gold-400 transition-colors"
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group flex h-10 w-10 items-center justify-center rounded-full transition ${socialBtn} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${isDark ? "focus-visible:ring-gold-400/50" : "focus-visible:ring-torch-500/40"}`}
                   aria-label="Instagram"
                 >
-                  <Instagram className="h-6 w-6" />
+                  <Instagram className="h-5 w-5 transition-transform group-hover:rotate-3 group-active:scale-95" />
                 </a>
               </div>
-            </div>
+            </section>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-navy-700 text-center text-sm text-gray-400">
-            <p>© {new Date().getFullYear()} Kongsvinger Festningsteater. Alle rettigheter reservert.</p>
+          {/* bunnlinje */}
+          <div className={`mt-12 pt-8 border-t ${divider} flex flex-col items-center gap-4 sm:flex-row sm:justify-between`}>
+            <p className={`text-sm ${subtext}`}>
+              © {year} Kongsvinger Festningsteater. Alle rettigheter reservert.
+            </p>
+
+            <ul className={`flex flex-wrap items-center gap-4 text-sm ${subtext}`}>
+              <li>
+                <Link to="/personvern" className={link}>Personvern</Link>
+              </li>
+              <li>
+                <Link to="/cookies" className={link}>Informasjonskapsler</Link>
+              </li>
+              <li>
+                <Link to="/tilgjengelighet" className={link}>Tilgjengelighet</Link>
+              </li>
+              <li>
+                <a href="#top" className={link} aria-label="Til toppen">
+                  Til toppen
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </Container>

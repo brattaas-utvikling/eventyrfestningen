@@ -250,10 +250,10 @@ export function Header() {
             <motion.div whileTap={{ scale: 0.98 }}>
               <Button variant="torch" size="lg" asChild>
                 <a
-                  href="https://billetter.no"
+                  href="https://ticketco.events/"
                   target="_blank"
                   rel="noreferrer"
-                  className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900"
+                  className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display"
                 >
                   Kjøp billetter
                 </a>
@@ -315,7 +315,7 @@ export function Header() {
                     <NavLink
                       item={item}
                       className={cn(
-                        "block px-3 py-2 text-base font-medium rounded-md",
+                        "block px-3 py-2 text-base font-medium rounded-md text-center",
                         isActiveRoute(item.href)
                           ? "bg-gold-500/20"
                           : "hover:bg-navy-800"
@@ -336,10 +336,10 @@ export function Header() {
                   >
                     <Button variant="torch" className="w-full" asChild>
                       <a
-                        href="https://billetter.no"
+                        href="https://ticketco.events/"
                         target="_blank"
                         rel="noreferrer"
-                        className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900"
+                        className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display"
                       >
                         Kjøp billetter
                       </a>
