@@ -5,54 +5,60 @@
 /* her definerer vi det du hadde i theme.extend */
 @theme {
   /* farger */
+  /* NAVY (Ink Neutral) */
+  --color-navy-50: #fafafa; /* Ink Neutral 50 */
+  --color-navy-100: #f5f5f5; /* Ink Neutral 100 */
+  --color-navy-200: #e5e5e5; /* Ink Neutral 200 */
+  --color-navy-300: #d4d4d4; /* Ink Neutral 300 */
+  --color-navy-400: #a3a3a3; /* Ink Neutral 400 */
+  --color-navy-500: #737373; /* Ink Neutral 500 */
+  --color-navy-600: #525252; /* Ink Neutral 600 */
+  --color-navy-700: #404040; /* Ink Neutral 700 */
+  --color-navy-800: #262626; /* Ink Neutral 800 */
+  --color-navy-900: #171717; /* Ink Neutral 900 */
 
-  /* NAVY (Midnight Slate) */
-  --color-navy-50: #f8fafc; /* Midnight Slate 50 */
-  --color-navy-100: #f1f5f9; /* Midnight Slate 100 */
-  --color-navy-200: #e2e8f0; /* Midnight Slate 200 */
-  --color-navy-300: #cbd5e1; /* Midnight Slate 300 */
-  --color-navy-400: #94a3b8; /* Midnight Slate 400 */
-  --color-navy-500: #64748b; /* Midnight Slate 500 */
-  --color-navy-600: #475569; /* Midnight Slate 600 */
-  --color-navy-700: #334155; /* Midnight Slate 700 */
-  --color-navy-800: #1f2937; /* Midnight Slate 800 */
-  --color-navy-900: #0f172a; /* Midnight Slate 900 */
+  /* BURGUNDY (Crimson Rose) */
+  --color-burgundy-50: #fff1f2; /* Crimson Rose 50 */
+  --color-burgundy-100: #ffe4e6; /* Crimson Rose 100 */
+  --color-burgundy-200: #fecdd3; /* Crimson Rose 200 */
+  --color-burgundy-300: #fda4af; /* Crimson Rose 300 */
+  --color-burgundy-400: #fb7185; /* Crimson Rose 400 */
+  --color-burgundy-500: #f43f5e; /* Crimson Rose 500 */
+  --color-burgundy-600: #e11d48; /* Crimson Rose 600 */
+  --color-burgundy-700: #be123c; /* Crimson Rose 700 */
+  --color-burgundy-800: #9f1239; /* Crimson Rose 800 */
+  --color-burgundy-900: #881337; /* Crimson Rose 900 */
 
-  /* BURGUNDY (Wine Rose) */
-  --color-burgundy-50: #fff1f2; /* Wine Rose 50 */
-  --color-burgundy-100: #ffe4e6; /* Wine Rose 100 */
-  --color-burgundy-200: #fecdd3; /* Wine Rose 200 */
-  --color-burgundy-300: #fda4af; /* Wine Rose 300 */
-  --color-burgundy-400: #fb7185; /* Wine Rose 400 */
-  --color-burgundy-500: #f43f5e; /* Wine Rose 500 */
-  --color-burgundy-600: #e11d48; /* Wine Rose 600 */
-  --color-burgundy-700: #be123c; /* Wine Rose 700 */
-  --color-burgundy-800: #9f1239; /* Wine Rose 800 */
-  --color-burgundy-900: #881337; /* Wine Rose 900 */
+  /* GOLD (Dark Rum Amber) */
+  --color-gold-50: #fffbeb; /* Dark Rum Amber 50 */
+  --color-gold-100: #fef3c7; /* Dark Rum Amber 100 */
+  --color-gold-200: #fde68a; /* Dark Rum Amber 200 */
+  --color-gold-300: #fcd34d; /* Dark Rum Amber 300 */
+  --color-gold-400: #fbbf24; /* Dark Rum Amber 400 */
+  --color-gold-500: #f59e0b; /* Dark Rum Amber 500 */
+  --color-gold-600: #d97706; /* Dark Rum Amber 600 */
+  --color-gold-700: #b45309; /* Dark Rum Amber 700 */
+  --color-gold-800: #92400e; /* Dark Rum Amber 800 */
+  --color-gold-900: #78350f; /* Dark Rum Amber 900 */
 
-  /* GOLD (Antique Amber) */
-  --color-gold-50: #fffbeb; /* Antique Amber 50 */
-  --color-gold-100: #fef3c7; /* Antique Amber 100 */
-  --color-gold-200: #fde68a; /* Antique Amber 200 */
-  --color-gold-300: #fcd34d; /* Antique Amber 300 */
-  --color-gold-400: #fbbf24; /* Antique Amber 400 */
-  --color-gold-500: #f59e0b; /* Antique Amber 500 */
-  --color-gold-600: #d97706; /* Antique Amber 600 */
-  --color-gold-700: #b45309; /* Antique Amber 700 */
-  --color-gold-800: #92400e; /* Antique Amber 800 */
-  --color-gold-900: #78350f; /* Antique Amber 900 */
+  /* TORCH (Blazing Torch) */
+  --color-torch-50: #fff7ed; /* Blazing Torch 50 */
+  --color-torch-100: #ffedd5; /* Blazing Torch 100 */
+  --color-torch-200: #fed7aa; /* Blazing Torch 200 */
+  --color-torch-300: #fdba74; /* Blazing Torch 300 */
+  --color-torch-400: #fb923c; /* Blazing Torch 400 */
+  --color-torch-500: #ffa123; /* Blazing Torch 500 (brand primary) */
+  --color-torch-600: #ea580c; /* Blazing Torch 600 */
+  --color-torch-700: #c2410c; /* Blazing Torch 700 */
+  --color-torch-800: #9a3412; /* Blazing Torch 800 */
+  --color-torch-900: #7c2d12; /* Blazing Torch 900 */
 
-  /* TORCH (Brand Flame) — primary brand hue */
-  --color-torch-50: #fff7ed; /* Brand Flame 50 */
-  --color-torch-100: #ffedd5; /* Brand Flame 100 */
-  --color-torch-200: #fed7aa; /* Brand Flame 200 */
-  --color-torch-300: #fdba74; /* Brand Flame 300 */
-  --color-torch-400: #fb923c; /* Brand Flame 400 */
-  --color-torch-500: #ffa123; /* Brand Flame 500 (brand primary) */
-  --color-torch-600: #ea580c; /* Brand Flame 600 */
-  --color-torch-700: #c2410c; /* Brand Flame 700 */
-  --color-torch-800: #9a3412; /* Brand Flame 800 */
-  --color-torch-900: #7c2d12; /* Brand Flame 900 */
+  /* Typography preferences for this theme */
+  --h1-size: clamp(3rem, 2.3rem + 2.6vw, 3.75rem);
+  --h2-size: clamp(2.125rem, 1.7rem + 1.3vw, 2.375rem);
+  --h3-size: clamp(1.375rem, 1.1rem + 0.6vw, 1.625rem);
+  --lead-size: 1.125rem;
+  --eyebrow-tracking: 0.16em;
 
   /* FONTS — keep brand fonts; Mallica for logo/wordmark only */
   --font-display: "Mallica Fairytale", "Halyard Display", system-ui, sans-serif;

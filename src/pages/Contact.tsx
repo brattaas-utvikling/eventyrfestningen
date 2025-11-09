@@ -1,165 +1,160 @@
-// src/routes/Contact.tsx
-import { SEOHead } from '@/components/SEOHead'
-import { Container } from '@/components/layout/Container'
-import { Section } from '@/components/layout/Section'
-import { ContactForm } from '@/components/features/ContactForm'
-import { Card, CardContent } from '@/components/ui/Card'
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Facebook,
-  Instagram,
-  Clock,
-} from 'lucide-react'
+import { motion } from "framer-motion";
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
+import { Container } from "@/components/layout/Container";
+import { ContactForm } from "@/components/features/ContactForm";
+import { PageHero } from "@/components/layout/PageHero";
 
-export function Contact() {
+
+const CONTACT_INFO = {
+  title: "Eventyrfestningen",
+  intro:
+    "Spørsmål om billetter, medvirkning eller samarbeid? Send oss en melding, så svarer vi så fort vi kan.",
+  address: { line1: "Kongsvinger Festning", line2: "2226 Kongsvinger" },
+  phone: "+47 12 34 56 78",
+  email: "post@eventyrfestningen.no",
+  hours: "Vi svarer normalt innen 1–2 virkedager.",
+  socials: {
+    facebook: "https://facebook.com",
+    instagram: "https://instagram.com",
+  },
+};
+
+export default function Contact() {
   return (
     <>
-      <SEOHead
-        title="Kontakt oss"
-        description="Ta kontakt med Kongsvinger Festningsteater. Vi svarer på alle henvendelser om forestillinger, sponsing og samarbeid."
+      <PageHero
+        title="Kontakt Eventyrfestningen"
+        subtitle={CONTACT_INFO.intro}
+        ctaHref="#kontakt-skjema"
       />
 
-      <section className="py-20 sm:py-28 bg-gradient-to-br from-navy-900 to-burgundy-900 text-white">
-        <Container>
-          <div className="max-w-3xl">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold mb-6">
-              Kontakt oss
-            </h1>
-            <p className="text-xl text-gray-200">
-              Har du spørsmål om forestillinger, billetter, sponsing eller noe
-              annet? Vi hører gjerne fra deg!
-            </p>
+      {/* Innhold */}
+      <section className="relative py-16 lg:py-20 bg-navy-900">
+        {/* bakgrunnsglow */}
+        <div className="pointer-events-none absolute inset-0 opacity-30">
+          <div className="absolute -top-10 -right-10 h-56 w-56 rounded-full bg-torch-500/30 blur-3xl" />
+          <div className="absolute -bottom-10 -left-10 h-56 w-56 rounded-full bg-gold-400/20 blur-3xl" />
+        </div>
+
+        <Container className="relative z-10">
+          <div className="grid gap-8 lg:grid-cols-2 items-start">
+            {/* venstre kolonne: info */}
+            <motion.div
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="rounded-2xl bg-navy-800/50 border border-navy-700/70 backdrop-blur p-6 sm:p-8 space-y-6"
+              whileHover={{ y: -2 }}
+            >
+              <div>
+                <h2 className="text-2xl font-display text-white mb-2">
+                  {CONTACT_INFO.title}
+                </h2>
+                <p className="text-navy-100/70 text-sm">
+                  Opplysninger, grupper, presse eller samarbeid – vi vil gjerne høre fra deg.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-navy-100/60">Adresse</p>
+                    <p className="text-white">
+                      {CONTACT_INFO.address.line1}
+                      <br />
+                      {CONTACT_INFO.address.line2}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-navy-100/60">Telefon</p>
+                    <a
+                      href={`tel:${CONTACT_INFO.phone.replace(/\s+/g, "")}`}
+                      className="text-white hover:text-gold-200 transition-colors"
+                    >
+                      {CONTACT_INFO.phone}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-navy-100/60">E-post</p>
+                    <a
+                      href={`mailto:${CONTACT_INFO.email}`}
+                      className="text-white break-all hover:text-gold-200 transition-colors"
+                    >
+                      {CONTACT_INFO.email}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200">
+                    <Clock className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-navy-100/60">Svartid</p>
+                    <p className="text-white">{CONTACT_INFO.hours}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* sosiale medier */}
+              <div className="pt-4 border-t border-navy-700/60">
+                <p className="text-sm text-navy-100/60 mb-3">Følg oss i sosiale medier</p>
+                <div className="flex gap-3">
+                  <motion.a
+                    href={CONTACT_INFO.socials.facebook}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white hover:bg-gold-400/80 hover:text-navy-900 transition"
+                    aria-label="Facebook"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Facebook className="h-5 w-5" />
+                  </motion.a>
+                  <motion.a
+                    href={CONTACT_INFO.socials.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white hover:bg-gold-400/80 hover:text-navy-900 transition"
+                    aria-label="Instagram"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Instagram className="h-5 w-5" />
+                  </motion.a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* høyre kolonne: skjema */}
+            <motion.div
+              id="kontakt-skjema"
+              initial={{ opacity: 0, x: 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="rounded-2xl bg-navy-800/30 border border-navy-700/50 backdrop-blur p-6 sm:p-8"
+              whileHover={{ y: -2 }}
+            >
+              <ContactForm />
+            </motion.div>
           </div>
         </Container>
       </section>
-
-      <Section background="white">
-        <Container>
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* Info */}
-            <div className="space-y-8">
-              <h2 className="text-3xl font-display font-bold text-navy-900 mb-6">
-                Kontaktinformasjon
-              </h2>
-              <div className="space-y-6">
-                {/* Email */}
-                <Card>
-                  <CardContent className="p-6 flex items-start gap-4">
-                    <div className="w-12 h-12 bg-torch-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-6 w-6 text-torch-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-navy-900 mb-1">E-post</h3>
-                      <a
-                        href="mailto:post@festningsteater.no"
-                        className="text-torch-600 hover:text-torch-700 transition-colors"
-                      >
-                        post@festningsteater.no
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Phone */}
-                <Card>
-                  <CardContent className="p-6 flex items-start gap-4">
-                    <div className="w-12 h-12 bg-torch-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-6 w-6 text-torch-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-navy-900 mb-1">Telefon</h3>
-                      <a
-                        href="tel:+4712345678"
-                        className="text-torch-600 hover:text-torch-700 transition-colors"
-                      >
-                        +47 123 45 678
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Address */}
-                <Card>
-                  <CardContent className="p-6 flex items-start gap-4">
-                    <div className="w-12 h-12 bg-torch-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-6 w-6 text-torch-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-navy-900 mb-1">Adresse</h3>
-                      <p className="text-gray-700">
-                        Kongsvinger Festning
-                        <br />
-                        2226 Kongsvinger
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Hours */}
-                <Card>
-                  <CardContent className="p-6 flex items-start gap-4">
-                    <div className="w-12 h-12 bg-torch-100 rounded-full flex items-center justify-center flex-shrink-0">
-                      <Clock className="h-6 w-6 text-torch-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-navy-900 mb-1">
-                        Kontortider
-                      </h3>
-                      <p className="text-gray-700">
-                        Man–fre: 10–16
-                        <br />
-                        Helg: stengt
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Socials */}
-              <div>
-                <h3 className="text-xl font-display font-bold text-navy-900 mb-4">
-                  Følg oss
-                </h3>
-                <div className="flex gap-4">
-                  <a
-                    href="https://facebook.com/festningsteater"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-navy-100 rounded-full flex items-center justify-center hover:bg-torch-100 transition-colors group"
-                  >
-                    <Facebook className="h-6 w-6 text-navy-700 group-hover:text-torch-600 transition-colors" />
-                  </a>
-                  <a
-                    href="https://instagram.com/festningsteater"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-navy-100 rounded-full flex items-center justify-center hover:bg-torch-100 transition-colors group"
-                  >
-                    <Instagram className="h-6 w-6 text-navy-700 group-hover:text-torch-600 transition-colors" />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Form */}
-            <div>
-              <Card className="border-2 border-navy-100">
-                <CardContent className="p-8">
-                  <h2 className="text-3xl font-display font-bold text-navy-900 mb-2">
-                    Send oss en melding
-                  </h2>
-                  <p className="text-gray-600 mb-8">
-                    Fyll ut skjemaet så svarer vi deg innen 1–2 virkedager.
-                  </p>
-                  <ContactForm />
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </Container>
-      </Section>
     </>
-  )
+  );
 }

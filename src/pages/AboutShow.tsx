@@ -46,7 +46,7 @@ export function AboutShow() {
   }))
 
   return (
-    <>
+    <div className='mb-16'>
       <SEOHead
         title={`Om ${show.title}`}
         description={
@@ -85,8 +85,9 @@ export function AboutShow() {
                   {show.title}
                 </h1>
                 <p className="text-xl sm:text-2xl text-gray-200">
-                  {show.type === 'main' ? 'Hovedforestilling' : 'Halloween-forestilling'} {show.year}
+                {show.type === 'halloween' ? 'Halloween-forestilling' : 'Hovedforestilling'} {show.year}
                 </p>
+
               </motion.div>
             </Container>
           </>
@@ -108,6 +109,6 @@ export function AboutShow() {
           onClose={() => setLightboxOpen(false)}
         />
       )}
-    </>
+    </div>
   )
 }

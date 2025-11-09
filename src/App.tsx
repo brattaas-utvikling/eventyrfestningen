@@ -4,16 +4,19 @@ import Home from "@/pages/Home";
 // import Calendar from "./components/Calendar";
 import { About } from "./pages/About";
 import { Sponsors } from "./pages/Sponsors";
-import { Contact } from "./pages/Contact";
+
 import { AboutShow } from "./pages/AboutShow";
 import { Archive } from "./pages/Archive";
 import { NewsList, NewsPost } from "./pages/News";
+import Contact from "./pages/Contact";
+import ScrollToTop from "./components/layout/SrollToTop";
 
 
 export default function App() {
   return (
       <BrowserRouter>
         <Layout>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/forestilling" element={<AboutShow />} />
