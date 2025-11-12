@@ -17,8 +17,9 @@ import {
   GlassGlowCard,
   DeckledPaperCard,
 } from "@/components/ui/ArchiveCards";
-import { Archive3DCard } from '@/components/ui/Archive3dCard'
+
 import { ShowFlipCard } from '@/components/ui/ShowFlipCard'
+import { Archive3DCard } from '@/components/ui/Archive3DCard'
 
 export function Archive() {
   const [selectedYear, setSelectedYear] = useState<string>('all')
