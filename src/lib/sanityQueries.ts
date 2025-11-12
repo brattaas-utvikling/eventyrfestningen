@@ -183,7 +183,7 @@ export const queries = {
     *[_type == "show"] | order(year desc) {
       _id,
       title,
-      "slug": slug.current,
+      slug { current },
       year,
       type,
       posterImage {

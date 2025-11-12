@@ -29,7 +29,7 @@ export default function Contact() {
       />
 
       {/* Innhold */}
-      <section className="relative py-16 lg:py-20 bg-navy-900">
+      <section className="relative py-16 lg:py-20 bg-navy-900 overflow-hidden">
         {/* bakgrunnsglow */}
         <div className="pointer-events-none absolute inset-0 opacity-30">
           <div className="absolute -top-10 -right-10 h-56 w-56 rounded-full bg-torch-500/30 blur-3xl" />

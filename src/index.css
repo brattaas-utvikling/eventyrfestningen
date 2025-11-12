@@ -174,3 +174,29 @@
   font-style: normal;
   font-display: swap;
 }
+
+@keyframes borderGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 200% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+}
+
+html,
+body {
+  overflow-x: hidden;
+  @apply bg-navy-900 text-white;
+}

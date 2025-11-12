@@ -26,6 +26,7 @@ export default function App() {
             <Route path="/om-oss" element={<About />} />
             <Route path="/sponsorer" element={<Sponsors />} />
             <Route path="/arkiv" element={<Archive />} />
+            <Route path="/arkiv/:slug" element={<AboutShow />} />
             <Route path="/kontakt" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

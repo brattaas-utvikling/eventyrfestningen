@@ -64,12 +64,17 @@ export interface Person {
 export interface Show {
   _id: string;
   title: string;
-  slug: string;
+  // 👇 endret fra string til SanitySlug
+  slug: {
+    _type: "slug";
+    current: string;
+  };
   year: number;
   type: "main" | "halloween";
-  story?: PortableText; // dette er Portable Text i Sanity
+  story?: PortableText;
   posterImage?: SanityImage;
   heroImage?: SanityImage;
+  logoImage?: SanityImage;
   cast?: Array<{
     role: string;
     actor: Person;
@@ -85,9 +90,37 @@ export interface Show {
   };
   ticketUrl?: string;
   galleryImages?: SanityImage[];
-  logoImage?: SanityImage;
   seo?: SEO;
 }
+
+// show (årets forestilling / tidligere)
+// export interface Show {
+//   _id: string;
+//   title: string;
+//   slug: string;
+//   year: number;
+//   type: "main" | "halloween";
+//   story?: PortableText; // dette er Portable Text i Sanity
+//   posterImage?: SanityImage;
+//   heroImage?: SanityImage;
+//   cast?: Array<{
+//     role: string;
+//     actor: Person;
+//   }>;
+//   crew?: Array<{
+//     role: string;
+//     person: Person;
+//   }>;
+//   practicalInfo?: {
+//     duration?: number | string;
+//     ageLimit?: string;
+//     accessibility?: string;
+//   };
+//   ticketUrl?: string;
+//   galleryImages?: SanityImage[];
+//   logoImage?: SanityImage;
+//   seo?: SEO;
+// }
 
 // forestillingskalender
 export interface Performance {
@@ -133,4 +166,6 @@ export interface Sponsor {
   url?: string;
   tier?: "main" | "gold" | "silver" | "partner" | string;
   order?: number;
+  needsLightBackground?: boolean; // 👈 legg til denne
 }
+
