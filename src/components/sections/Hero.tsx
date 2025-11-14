@@ -28,17 +28,15 @@ export function Hero({ show, nextPerformance }: HeroProps) {
     <section className="relative min-h-screen flex items-center overflow-hidden pb-16">
       {/* Background */}
       <div className="absolute inset-0">
-        {show.heroImage && (
-          <img
-            src={urlFor(show.heroImage)
-              .width(1920)
-              .height(1080)
-              .quality(80)
-              .url()}
-            alt={show.title}
-            className="w-full h-full object-cover"
-          />
-        )}
+             {/* VIDEO I STEDENFOR BILDE */}
+             <video
+          src="/media/heroVideo.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-fortress-overlay" />
 
         {/* fakkel-glow */}

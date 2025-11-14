@@ -74,6 +74,7 @@ export interface Show {
   story?: PortableText;
   posterImage?: SanityImage;
   heroImage?: SanityImage;
+  heroVideoUrl?: string;
   logoImage?: SanityImage;
   cast?: Array<{
     role: string;
