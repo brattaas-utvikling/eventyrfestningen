@@ -1,4 +1,10 @@
+// import { FaqSection } from "@/components/sections/FaqSection";
+import { FortressExperienceSection } from "@/components/sections/FortressExperienceSection";
 import { Hero } from "@/components/sections/Hero";
+// import { HighlightsSection } from "@/components/sections/HighlightsSection";
+import { QuickInfoSection } from "@/components/sections/QuickInfoSection";
+import { StorySection } from "@/components/sections/StorySection";
+// import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useSanityQuery } from "@/hooks/useSanityQuery";
 import { queries } from "@/lib/sanityQueries";
@@ -22,6 +28,10 @@ export default function Home() {
   return (
     <>
       <Hero show={show} nextPerformance={performances?.[0]} />
+      <QuickInfoSection />
+      <StorySection />
+      <FortressExperienceSection />
+      {/* <HighlightsSection /> */}
     </>
   );
 }

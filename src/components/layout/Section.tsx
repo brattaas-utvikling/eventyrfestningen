@@ -2,12 +2,14 @@
 import { cn } from "@/lib/utils";
 
 interface SectionProps {
+  id?: string;
   children: React.ReactNode;
   className?: string;
   background?: "navy" | "burgundy" | "white" | "paper";
 }
 
 export function Section({
+  id,
   children,
   className,
   background = "white",
@@ -21,6 +23,7 @@ export function Section({
 
   return (
     <section
+      id={id}
       className={cn("py-16 sm:py-20 lg:py-24", bgClasses[background], className)}
     >
       {children}
