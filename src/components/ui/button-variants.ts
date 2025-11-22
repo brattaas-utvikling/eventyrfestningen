@@ -17,6 +17,7 @@ export const buttonVariants = cva(
         outline:
           "border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white focus-visible:ring-navy-500",
         ghost: "text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",
+        whiteghost: "bg-white text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",
         link: "text-torch-600 underline-offset-4 hover:underline focus-visible:ring-torch-500",
       },
       size: {

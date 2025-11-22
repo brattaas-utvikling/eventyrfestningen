@@ -139,27 +139,37 @@ function SponsorLogo({
     <div
       className={clsx(
         "relative w-full",
-        bordered && "rounded-xl",
-
-        // base bakgrunn
-        "bg-white/5",
-
-        // glow + tint ved hover
-        "transition-all duration-500",
-        "hover:bg-white/10 hover:backdrop-blur-sm",
-
-        // subtil ytre glow
-        "before:pointer-events-none before:absolute before:inset-0 before:rounded-[18px] before:bg-transparent before:transition-all before:duration-500",
-        "hover:before:bg-gold-400/10",
-
-        // animert border rundt kortet
-        "after:pointer-events-none after:absolute after:inset-0 after:rounded-[18px] after:p-px after:bg-[linear-gradient(130deg,rgba(253,224,71,0.7),rgba(255,255,255,0.2),rgba(253,224,71,0.7))] after:bg-size-[250%_250%] after:opacity-0 hover:after:opacity-100",
-        "after:animate-[borderGlow_5s_linear_infinite]"
+        bordered && "group" // for hover på rammen
       )}
     >
-      {inner}
+      {bordered && (
+        <div
+          aria-hidden="true"
+          className={clsx(
+            // YTRE, ANIMERT GRADIENT-BORDER
+            "pointer-events-none absolute -inset-0.5 rounded-2xl",
+            // Torch-gradient med CSS-variabler fra @theme
+            "bg-[linear-gradient(130deg,var(--color-torch-500),var(--color-torch-100),var(--color-torch-500))]",
+            "bg-size-[250%_250%] animate-[borderGlow_5s_linear_infinite]",
+            "opacity-0 transition-opacity duration-500",
+            "group-hover:opacity-100"
+          )}
+        />
+      )}
+  
+      <div
+        className={clsx(
+          "relative w-full",
+          bordered && "rounded-xl",
+          "bg-white",
+          "transition-colors duration-300"
+        )}
+      >
+        {inner}
+      </div>
     </div>
   );
+  
 
   if (sponsor.url) {
     return (
@@ -222,21 +232,11 @@ function DesignSpotlight({
   // const MainIcon = TIER_META.main.icon;
 
   return (
-    <section className="rounded-2xl overflow-hidden border border-white/10 bg-linear-to-br from-navy-900 via-navy-900 to-burgundy-900">
+    <section className="overflow-hidden ">
       {/* HOVEDSPONSOR */}
       <div className="relative px-4 py-10 sm:px-8 flex justify-center">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(148,163,184,0.20),transparent_90%)]"/>
-        <div className="relative z-10 w-full max-w-5xl">
-        <RowHeading tier="main" />
-          {/* <div className="mb-6 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold-400/40 bg-black/40 px-4 py-1.5 text-gold-100 shadow-lg shadow-black/40">
-              <MainIcon className="h-4 w-4 text-gold-300" />
-              <span className="text-xs font-display font-semibold tracking-[0.12em] uppercase">
-                Hovedsponsor
-              </span>
-            </div>
-          </div> */}
-
+      <div className="pointer-events-none absolute"/>
+        <div className="relative z-10 w-full">
           <div className="grid grid-cols-1 gap-4">
             {main.map((sponsor) => (
               <SponsorLogo key={sponsor._id} sponsor={sponsor} size="xl" bordered />
@@ -246,11 +246,10 @@ function DesignSpotlight({
       </div>
 
       {/* ØVRIGE TIER */}
-      <div className="border-t border-white/10 bg-black/40 px-4 py-10 sm:px-8 space-y-10">
+      <div className="px-4 sm:px-8 space-y-10">
         {/* GOLD */}
         {gold.length > 0 && (
           <div className="max-w-6xl mx-auto w-full">
-            <RowHeading tier="gold" />
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {gold.map((sponsor) => (
                 <SponsorLogo key={sponsor._id} sponsor={sponsor} size="lg" bordered />
@@ -262,7 +261,6 @@ function DesignSpotlight({
         {/* SILVER */}
         {silver.length > 0 && (
           <div className="max-w-6xl mx-auto w-full">
-            <RowHeading tier="silver" />
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {silver.map((sponsor) => (
                 <SponsorLogo
@@ -270,7 +268,6 @@ function DesignSpotlight({
                   sponsor={sponsor}
                   size="md"
                   bordered
-                  subtle
                 />
               ))}
             </div>
@@ -349,24 +346,3 @@ function SkeletonBlock() {
     </div>
   );
 }
-
-// function DesignHeader({
-//   index,
-//   label,
-//   icon: Icon,
-// }: {
-//   index: number;
-//   label: string;
-//   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-// }) {
-//   return (
-//     <div className="mb-6 flex items-center gap-3">
-//       <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 border border-white/10">
-//         <Icon className="h-5 w-5 text-gold-300" />
-//       </div>
-//       <h2 className="text-2xl font-display font-bold text-white">
-//         {index}. {label}
-//       </h2>
-//     </div>
-//   );
-// }

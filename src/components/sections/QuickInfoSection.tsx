@@ -63,30 +63,30 @@ export function QuickInfoSection() {
             className="space-y-6"
           >
             <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300/80">
+              {/* <p className="text-xs font-semibold font-sans uppercase tracking-[0.18em] text-slate-300/80">
                 Hurtiginfo
-              </p>
-              <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              </p> */}
+              <h2 className="text-3xl font-semibold font-sans tracking-tight sm:text-4xl">
                 Alt du trenger å vite på 30 sekunder
               </h2>
-              <p className="text-sm leading-relaxed text-slate-200/90">
+              <p className="text-sm leading-relaxed font-sans text-slate-200/90">
                 Hva det er, hvor det skjer, når dere bør komme og hvem det passer
                 for. Sveip gjennom kortene for å få oversikten – før dere går
                 videre til billetter og praktisk info.
               </p>
             </div>
 
-            <div className="space-y-3 text-sm text-slate-200/90">
+            <div className="space-y-3 text-sm font-sans text-slate-200/90">
               <p>Perfekt å vise når noen spør «Hva er egentlig Eventyrfestningen?»</p>
               <p>Raskt overblikk for foreldre, lærere og gruppeledere.</p>
             </div>
 
-            <div className="flex flex-wrap gap-3 pt-1">
+            <div className="flex flex-wrap gap-3 pt-1 font-display">
             <Button asChild variant="torch">
   <a href="#billetter">Se spilledatoer</a>
 </Button>
 
-<Button asChild variant="link">
+<Button asChild variant="whiteghost">
   <a href="#prakrisk-info">Praktisk informasjonr</a>
 </Button>
 
@@ -105,7 +105,7 @@ export function QuickInfoSection() {
               {/* Glow / bakgrunn bak slideren */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute -inset-10 -z-10 bg-[radial-gradient(circle_at_top,_rgba(248,250,252,0.16),transparent_60%),_radial-gradient(circle_at_bottom,_rgba(251,191,36,0.22),transparent_60%)]"
+                className="pointer-events-none absolute -inset-10 -z-10"
               />
 
               <Swiper
@@ -131,31 +131,25 @@ export function QuickInfoSection() {
                     slidesPerView: 1.5,
                   },
                 }}
-                className="h-full"
+                className="h-80 lg:h-96"
               >
                 {quickInfoSlides.map((slide) => (
                   <SwiperSlide key={slide.id}>
-                    <article className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-white/5 px-5 py-6 shadow-xl shadow-black/40 backdrop-blur">
+                    <article className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-amber-50 px-5 py-6 shadow-xl shadow-black/40 backdrop-blur">
                       <div className="space-y-3">
-                        <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-slate-300/80">
-                          <span className="text-lg">{slide.icon}</span>
+                        <div className="flex items-center gap-2 text-[11px] uppercase font-sans tracking-[0.16em] text-navy-900">
                           <span>{slide.label}</span>
                         </div>
-                        <h3 className="text-base font-semibold text-white">
+                        <h3 className="text-xl font-display font-semibold text-navy-900">
                           {slide.title}
                         </h3>
-                        <p className="text-xs leading-relaxed text-slate-200">
+                        <p className="text-base leading-relaxed font-sans text-navy-700">
                           {slide.description}
                         </p>
                       </div>
 
-                      <div className="mt-4 flex items-center justify-between text-[11px] text-slate-300/80">
+                      <div className="mt-4 flex items-center justify-between text-[11px] text-navy-600 font-sans">
                         <span>Swipe for mer</span>
-                        <span className="flex items-center gap-1">
-                          <span className="h-1.5 w-1.5 rounded-full bg-amber-300" />
-                          <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
-                          <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
-                        </span>
                       </div>
                     </article>
                   </SwiperSlide>

@@ -23,10 +23,10 @@ export const FortressExperienceSection = () => {
           >
             <div className="relative">
               {/* Skrå bakplate for litt moderne vri */}
-              <div className="pointer-events-none absolute -inset-4 -z-10 -skew-y-3 rounded-3xl bg-burgundy-600/80 opacity-80 hidden sm:block" />
+              {/* <div className="pointer-events-none absolute -inset-4 -z-10 -skew-y-3 rounded-3xl bg-burgundy-600/80 opacity-80 hidden sm:block" /> */}
 
               {/* Hovedkortet / bilde-placeholder */}
-              <div className="aspect-4/3 w-full rounded-md border border-white/15 bg-burgundy-400/20 shadow-2xl shadow-black/40 flex items-center justify-center">
+              <div className="aspect-4/3 w-full rounded-md border border-white/15 shadow-2xl shadow-black/40 flex items-center justify-center">
                  <img
                       src="/media/krebs_rock.jpeg"
                       alt="Krebs Rock band opptrer på Kongsvinger festning"

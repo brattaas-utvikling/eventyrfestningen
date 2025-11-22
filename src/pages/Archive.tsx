@@ -12,14 +12,10 @@ import { SEOHead } from '@/components/SEOHead'
 import { queries } from '@/lib/sanityQueries'
 import {
   PosterSpotlightCard,
-  PolaroidCard,
   TicketStubCard,
-  GlassGlowCard,
-  DeckledPaperCard,
 } from "@/components/ui/ArchiveCards";
 
 import { ShowFlipCard } from '@/components/ui/ShowFlipCard'
-import { Archive3DCard } from '@/components/ui/Archive3DCard'
 
 export function Archive() {
   const [selectedYear, setSelectedYear] = useState<string>('all')
@@ -159,16 +155,6 @@ export function Archive() {
                   </div>
                 </div>
 
-                {/* Kortdesign 2 */}
-                <div>
-                  <h3 className="text-2xl font-display font-bold text-navy-900 mb-6">
-                    3D Hover Card
-                  </h3>
-                  
-                    <Archive3DCard show={show} />
-                  
-                </div>
-
                 {/* Kortdesign 3 */}
                 <div>
                   <h3 className="text-2xl font-display font-bold text-navy-900 mb-6">
@@ -179,15 +165,6 @@ export function Archive() {
                   </div>
                 </div>
 
-                {/* Kortdesign 4 */}
-                <div>
-                  <h3 className="text-2xl font-display font-bold text-navy-900 mb-6">
-                    Polaroid Card
-                  </h3>
-                  <div className="flex justify-center">
-                    <PolaroidCard show={show} />
-                  </div>
-                </div>
 
                 {/* Kortdesign 5 */}
                 <div>
@@ -199,25 +176,6 @@ export function Archive() {
                   </div>
                 </div>
 
-                {/* Kortdesign 6 */}
-                <div>
-                  <h3 className="text-2xl font-display font-bold text-navy-900 mb-6">
-                    Glass Glow Card
-                  </h3>
-                  <div className="flex justify-center">
-                    <GlassGlowCard show={show} />
-                  </div>
-                </div>
-
-                {/* Kortdesign 7 */}
-                <div>
-                  <h3 className="text-2xl font-display font-bold text-navy-900 mb-6">
-                    Deckled Paper Card
-                  </h3>
-                  <div className="flex justify-center">
-                    <DeckledPaperCard show={show} />
-                  </div>
-                </div>
               </motion.div>
             ))}
 
