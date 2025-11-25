@@ -5,7 +5,7 @@ interface SectionProps {
   id?: string;
   children: React.ReactNode;
   className?: string;
-  background?: "navy" | "burgundy" | "white" | "paper";
+  background?: "navy" | "burgundy" | "white" | "paper" | "amber";
 }
 
 export function Section({
@@ -19,6 +19,7 @@ export function Section({
     burgundy: "bg-burgundy-900 text-white",
     white: "bg-white",
     paper: "bg-amber-50",
+    amber: "bg-amber-900",
   };
 
   return (

@@ -11,7 +11,7 @@ export const queries = {
       year,
       story,
       posterImage {
-        asset,
+        asset{ _ref },
         alt,
         hotspot,
         crop

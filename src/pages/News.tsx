@@ -198,7 +198,7 @@ export function NewsList() {
         description="Les de siste nyhetene fra Kongsvinger Festningsteater."
       />
 
-      <section className="py-20 sm:py-28 bg-gradient-to-br from-navy-900 to-burgundy-900 text-white">
+      <section className="py-20 sm:py-28 bg-linear-to-br from-navy-900 to-burgundy-900 text-white">
         <Container>
           <div className="max-w-3xl">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold mb-6">

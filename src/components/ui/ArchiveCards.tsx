@@ -157,7 +157,7 @@ export function TicketStubCard({ show }: { show: Show }) {
 export function GlassGlowCard({ show }: { show: Show }) {
   return (
     <Link to={`/arkiv/${show.slug}`}>
-      <div className="group relative rounded-2xl bg-linear-to-br from-navy-900 to-burgundy-900 p-[1px] shadow-lg hover:shadow-2xl transition-shadow">
+      <div className="group relative rounded-2xl bg-linear-to-br from-navy-900 to-burgundy-900 p-px shadow-lg hover:shadow-2xl transition-shadow">
         {/* glow-kant */}
         <div className="absolute inset-0 rounded-2xl opacity-60 blur-xl bg-[radial-linear(60%_60%_at_80%_10%,var(--color-torch-500),transparent)] pointer-events-none" />
         <div className="relative rounded-2xl bg-white/80 backdrop-blur-xl ring-1 ring-black/10 overflow-hidden">

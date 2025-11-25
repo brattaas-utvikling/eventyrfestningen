@@ -26,7 +26,7 @@ export function About() {
       />
 
       {/* Hero */}
-      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-navy-900 to-burgundy-900 text-white overflow-hidden">
+      <section className="relative py-20 sm:py-28 bg-linear-to-br from-navy-900 to-burgundy-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -134,7 +134,7 @@ export function About() {
               {boardMembers.map((member) => (
                 <div key={member._id} className="group">
                   <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-2">
-                    <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-navy-900 to-burgundy-900">
+                    <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
                       {member.image ? (
                         <img
                           src={urlFor(member.image).width(400).height(533).url()}
