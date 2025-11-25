@@ -227,7 +227,8 @@ body {
 
 /* Bedre touch på mobil */
 .stf__wrapper {
-  touch-action: pan-y pinch-zoom;
+  /* touch-action: pan-y pinch-zoom; */
+  touch-action: none;
 }
 
 /* Slå av default side-bakgrunn i flipbook */
