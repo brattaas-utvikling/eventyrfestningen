@@ -1,7 +1,7 @@
 {
   "name": "eventyrfestningen",
   "private": true,
-  "version": "0.5.4",
+  "version": "0.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,6 +23,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.66.0",
+    "react-pageflip": "^2.0.3",
     "react-router-dom": "^7.9.5",
     "swiper": "^12.0.3",
     "tailwind-merge": "^3.3.1",

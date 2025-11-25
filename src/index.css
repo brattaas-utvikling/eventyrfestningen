@@ -200,3 +200,76 @@ body {
   overflow-x: hidden;
   @apply bg-navy-900 text-white;
 }
+
+/* In your global CSS file */
+/* .stf__wrapper {
+  touch-action: none;
+}
+
+.page {
+  background: linear-gradient(to bottom right, #fef3c7, #fef9c3, #fef3c7);
+} */
+
+/* 
+@keyframes goldPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(250, 204, 21, 0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(250, 204, 21, 0.45);
+  }
+}
+
+.gold-frame-glow {
+  animation: goldPulse 4s ease-in-out infinite;
+} */
+
+/* Bedre touch på mobil */
+.stf__wrapper {
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Slå av default side-bakgrunn i flipbook */
+.page {
+  background: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  box-shadow: none;
+}
+
+/* Alt inni archive-book skal være transparent,
+   vi styrer bakgrunnene selv i React-komponentene */
+.archive-book,
+.archive-book .stf__wrapper,
+.archive-book .stf__parent,
+.archive-book .stf__block,
+.archive-book .stf__item,
+.archive-book .page,
+.archive-book .page .page-content,
+.archive-book .hard {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* For sikkerhets skyld – "hard" cover-sider */
+.archive-book .page.hard {
+  background: transparent !important;
+}
+
+/* Grab-hånd kun for boka */
+.archive-book .stf__parent {
+  transition: transform 0.3s ease-out;
+}
+
+.archive-book .stf__parent:active {
+  cursor: grabbing;
+}
+
+@media (min-width: 768px) {
+  .archive-book .stf__parent {
+    cursor: grab;
+  }
+}
