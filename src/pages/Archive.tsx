@@ -11,6 +11,7 @@ import { SEOHead } from '@/components/SEOHead'
 // import { queries } from '@/lib/sanityQueries'
 // import { ShowFlipCard } from '@/components/ui/ShowFlipCard'
 import { ArchiveBook } from '@/components/sections/ArchiveBook'
+import { TrackSection } from '@/lib/Tracksection'
 
 
 export function Archive() {
@@ -60,7 +61,10 @@ export function Archive() {
         </Container>
       </section>
 <Section background="amber">
+<TrackSection page="archive" section="archive_book">
   <ArchiveBook />
+</TrackSection>
+
 </Section>
       {/* Filters & Content */}
       {/* <Section background="white">

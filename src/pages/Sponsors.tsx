@@ -9,7 +9,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { urlFor } from "@/lib/sanity";
 import type { Sponsor } from "@/types/sanity";
-
+import { trackEvent } from "@/lib/analytics";
 
 /* -------------------------------------------------------
  *  Tier-oppsett
@@ -75,13 +75,14 @@ function SponsorLogo({
   size = "md",
   subtle = false,
   bordered = false,
-  // hover = true, // behold prop-signatur selv om vi ikke bruker "hover" direkte
+  tier,
 }: {
   sponsor: Sponsor;
   size?: "xl" | "lg" | "md" | "sm";
   subtle?: boolean;
   bordered?: boolean;
   hover?: boolean;
+  tier: SponsorTier;
 }) {
   const box = {
     xl: "h-32",
@@ -178,11 +179,20 @@ function SponsorLogo({
         target="_blank"
         rel="noopener noreferrer"
         className="block w-full"
+        onClick={() =>
+          trackEvent("sponsor_click", {
+            sponsorId: sponsor._id,
+            sponsorName: sponsor.name,
+            tier,
+            page: "sponsors",
+          })
+        }
       >
         {content}
       </a>
     );
   }
+  
 
   return <div className="w-full">{content}</div>;
 }
@@ -239,7 +249,7 @@ function DesignSpotlight({
         <div className="relative z-10 w-full">
           <div className="grid grid-cols-1 gap-4">
             {main.map((sponsor) => (
-              <SponsorLogo key={sponsor._id} sponsor={sponsor} size="xl" bordered />
+              <SponsorLogo key={sponsor._id} sponsor={sponsor} size="xl" bordered tier="main"/>
             ))}
           </div>
         </div>
@@ -252,7 +262,7 @@ function DesignSpotlight({
           <div className="max-w-6xl mx-auto w-full">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {gold.map((sponsor) => (
-                <SponsorLogo key={sponsor._id} sponsor={sponsor} size="lg" bordered />
+                <SponsorLogo key={sponsor._id} sponsor={sponsor} size="lg" bordered tier="gold"/>
               ))}
             </div>
           </div>
@@ -268,6 +278,7 @@ function DesignSpotlight({
                   sponsor={sponsor}
                   size="md"
                   bordered
+                  tier="silver"
                 />
               ))}
             </div>
@@ -285,6 +296,7 @@ function DesignSpotlight({
                   sponsor={sponsor}
                   size="sm"
                   subtle
+                  tier="partner"
                 />
               ))}
             </div>

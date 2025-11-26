@@ -9,6 +9,7 @@ import { EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-coverflow";
+import { OldPaper } from "../ui/OldPaper";
 
 const quickInfoSlides = [
   {
@@ -17,7 +18,7 @@ const quickInfoSlides = [
     label: "Hva",
     title: "Utendørs familiemusikal",
     description:
-      "En original familiemusikal under åpen himmel – med sang, dans og humor midt inne på en ekte festning.",
+      "En original familiemusikal under åpen himmel – med sang, dans og humor midt inne på en ekte festning. Opplev historien om Oberst Krebs og de skotske spionene som levende eventyr!",
   },
   {
     id: "hvor",
@@ -25,7 +26,7 @@ const quickInfoSlides = [
     label: "Hvor",
     title: "Kongsvinger festning",
     description:
-      "Historiske murer, borggård og utsikt over byen. Selve stedet er like mye en del av opplevelsen som forestillingen.",
+      "Historiske murer, borggård og utsikt over byen. Selve stedet er like mye en del av opplevelsen som forestillingen. Scenografien ligger i forgrunnen og festningsmurene danner en majestetisk bakgrunn.",
   },
   {
     id: "når",
@@ -33,7 +34,7 @@ const quickInfoSlides = [
     label: "Når",
     title: "Sommeren 2025",
     description:
-      "Kveldsforestillinger i sommersesongen – når lyset, luften og stemningen gjør alt litt mer magisk.",
+      "Kveldsforestillinger i sommersesongen – når lyset, luften og stemningen gjør alt litt mer magisk. Eventyrlandsbyen åpner dørene klokken 20.00 hver forestillingsdag. Forestillingene starter klokken 22.00.",
   },
   {
     id: "hvem",
@@ -41,7 +42,7 @@ const quickInfoSlides = [
     label: "Passer for",
     title: "Hele familien",
     description:
-      "Barn fra ca. 5 år, foreldre, besteforeldre og vennegjenger som vil gjøre noe annerledes sammen.",
+      "Barn fra ca. 5 år, foreldre, besteforeldre og vennegjenger som vil ha en minneverdig kveld sammen. Selv om det er familieforestilling, er det veldig mye humor og sjarm for voksne også!",
   },
 ];
 
@@ -135,7 +136,7 @@ export function QuickInfoSection() {
               >
                 {quickInfoSlides.map((slide) => (
                   <SwiperSlide key={slide.id}>
-                    <article className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-amber-50 px-5 py-6 shadow-xl shadow-black/40 backdrop-blur">
+                    <OldPaper className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-linear-to-br from-amber-100 via-amber-50 to-amber-100 px-5 py-6 shadow-xl shadow-black/40 backdrop-blur">
                       <div className="space-y-3">
                         <div className="flex items-center gap-2 text-[11px] uppercase font-sans tracking-[0.16em] text-navy-900">
                           <span>{slide.label}</span>
@@ -151,7 +152,7 @@ export function QuickInfoSection() {
                       <div className="mt-4 flex items-center justify-between text-[11px] text-navy-600 font-sans">
                         <span>Swipe for mer</span>
                       </div>
-                    </article>
+                    </OldPaper>
                   </SwiperSlide>
                 ))}
               </Swiper>

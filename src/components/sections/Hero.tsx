@@ -6,17 +6,19 @@ import { Button } from "@/components/ui/Button";
 import { urlFor } from "@/lib/sanity";
 import type { Show, Performance, SanityImage } from "@/types/sanity";
 import { Countdown } from "@/components/ui/Countdown";
+import { trackEvent } from "@/lib/analytics";
 
 interface HeroProps {
   show: Show;
   nextPerformance?: Performance;
+  page?: string;
 }
 
 type ShowWithLogo = Show & {
   logoImage?: SanityImage;
 };
 
-export function Hero({ show, nextPerformance }: HeroProps) {
+export function Hero({ show, nextPerformance, page= "home" }: HeroProps) {
   const premiereDate = nextPerformance?.date
     ? new Date(nextPerformance.date)
     : null;
@@ -108,7 +110,17 @@ export function Hero({ show, nextPerformance }: HeroProps) {
               asChild
               className="shadow-torch"
             >
-              <a href={show.ticketUrl || "#"} target="_blank" rel="noopener">
+              <a
+                href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
+                target="_blank"
+                rel="noopener"
+                onClick={() =>
+                  trackEvent("ticket_click", {
+                    source: "hero_main",
+                    page,
+                  })
+                }
+              >
                 <Users className="mr-2 h-5 w-5" />
                 Kjøp billetter
               </a>
@@ -119,7 +131,17 @@ export function Hero({ show, nextPerformance }: HeroProps) {
               asChild
               className="border-gold-400 text-white hover:bg-gold-400/10"
             >
-              <a href="#om-forestillingen">Les mer om forestillingen</a>
+              <a
+                href="/om-forestillingen"
+                onClick={() =>
+                  trackEvent("ticket_click", {
+                    source: "hero_more_info",
+                    page,
+                  })
+                }
+              >
+                Les mer om forestillingen
+              </a>
             </Button>
           </motion.div>
 

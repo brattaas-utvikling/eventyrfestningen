@@ -11,7 +11,7 @@ import { NewsList, NewsPost } from "./pages/News";
 import Contact from "./pages/Contact";
 import ScrollToTop from "./components/layout/SrollToTop";
 import NotFound from "./pages/NotFound";
-
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   return (
@@ -20,7 +20,7 @@ export default function App() {
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/forestilling" element={<AboutShow />} />
+            <Route path="/om-forestillingen" element={<AboutShow />} />
             <Route path="/nyheter" element={<NewsList />} />
             <Route path="/nyheter/:slug" element={<NewsPost />} />
             <Route path="/om-oss" element={<About />} />
@@ -30,6 +30,7 @@ export default function App() {
             <Route path="/kontakt" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          <Analytics />
         </Layout>
       </BrowserRouter>
   );
