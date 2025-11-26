@@ -9,6 +9,8 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { useSanityQuery } from "@/hooks/useSanityQuery";
 import { queries } from "@/lib/sanityQueries";
 import type { Show, Performance } from "@/types/sanity";
+import { useScrollDepthTracking } from "@/lib/analytics";
+import { TrackSection } from "@/lib/Tracksection";
 
 export default function Home() {
   const { data: show, isLoading } = useSanityQuery<Show>(
@@ -21,16 +23,24 @@ export default function Home() {
     queries.upcomingPerformances
   );
 
+  useScrollDepthTracking("home");
+
   if (isLoading || !show) {
     return <Skeleton />;
   }
+
 
   return (
     <>
       <Hero show={show} nextPerformance={performances?.[0]} />
       {/* <StorySection /> */}
+      <TrackSection page="home" section="fortress_experience">
       <FortressExperienceSection />
+      </TrackSection>
+      
+      <TrackSection page="home" section="quick_info">
       <QuickInfoSection />
+      </TrackSection>
       {/* <HighlightsSection /> */}
     </>
   );

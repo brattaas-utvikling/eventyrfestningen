@@ -12,6 +12,9 @@ import { Menu, X } from "lucide-react";
 import { Container } from "./Container";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
+
+
 
 // liten throttle for scroll
 function throttle<T extends (...args: unknown[]) => void>(
@@ -48,7 +51,7 @@ export function Header() {
   const navigation: NavigationItem[] = useMemo(
     () => [
       { name: "Hjem", href: "/" },
-      { name: "Om forestillingen", href: "/forestilling" },
+      { name: "Om forestillingen", href: "/om-forestillingen" },
       { name: "Nyheter", href: "/nyheter" },
       { name: "Om oss", href: "/om-oss" },
       { name: "Arkiv", href: "/arkiv" },
@@ -247,18 +250,24 @@ export function Header() {
 
           {/* desktop CTA */}
           <div className="hidden lg:flex">
-            <motion.div whileTap={{ scale: 0.98 }}>
-              <Button variant="torch" size="lg" asChild>
-                <a
-                  href="https://ticketco.events/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display"
-                >
-                  Kjøp billetter
-                </a>
-              </Button>
-            </motion.div>
+          <motion.div whileTap={{ scale: 0.98 }}>
+            <Button variant="torch" size="lg" asChild>
+              <a
+                href="https://eventyrfestningen.ticketco.events/no/nb"
+                target="_blank"
+                rel="noreferrer"
+                className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display"
+                onClick={() =>
+                  trackEvent("ticket_click", {
+                    source: "header_desktop",
+                    page: location.pathname,
+                  })
+                }
+              >
+                Kjøp billetter
+              </a>
+            </Button>
+          </motion.div>
           </div>
 
           {/* mobile toggle */}
@@ -266,7 +275,17 @@ export function Header() {
             <button
               type="button"
               className="lg:hidden text-white hover:text-gold-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-full p-2"
-              onClick={() => setMobileMenuOpen((p) => !p)}
+              // onClick={() => setMobileMenuOpen((p) => !p)}
+              onClick={() =>
+                setMobileMenuOpen((prev) => {
+                  const next = !prev;
+                  trackEvent("nav_menu_toggle", {
+                    open: next,
+                    device: window.innerWidth < 1024 ? "mobile" : "desktop",
+                  });
+                  return next;
+                })
+              }
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               aria-label={mobileMenuOpen ? "Lukk meny" : "Åpne meny"}
@@ -336,10 +355,16 @@ export function Header() {
                   >
                     <Button variant="torch" className="w-full" asChild>
                       <a
-                        href="https://ticketco.events/"
+                        href="https://eventyrfestningen.ticketco.events/no/nb"
                         target="_blank"
                         rel="noreferrer"
                         className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display"
+                        onClick={() =>
+                          trackEvent("ticket_click", {
+                            source: "header_mobile",
+                            page: location.pathname,
+                          })
+                        }
                       >
                         Kjøp billetter
                       </a>
