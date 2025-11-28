@@ -58,15 +58,15 @@ export const ShowPageRight = forwardRef<HTMLDivElement, ShowPageRightProps>(
           </div>
 
           <div className="mt-6 pt-4 border-t border-amber-900/10 flex justify-end">
-            <Link
-              to={`/forestilling/${show.slug.current}`}
-              className="inline-flex items-center text-sm md:text-base font-semibold text-torch-600 hover:text-torch-500 transition-colors group"
-            >
-              Les mer om forestillingen
-              <span aria-hidden className="ml-2 group-hover:translate-x-1 transition-transform">
-                →
-              </span>
-            </Link>
+          <Link
+            to={`/arkiv/${show.slug.current}`}
+            className="inline-flex items-center text-sm md:text-base font-semibold text-torch-600 hover:text-torch-500 transition-colors group"
+          >
+            Les mer om forestillingen
+            <span aria-hidden className="ml-2 group-hover:translate-x-1 transition-transform">
+              →
+            </span>
+          </Link>
           </div>
         </OldPaper>
       </div>

@@ -1,147 +1,323 @@
-// schemas/documents/show.ts
-export const show = {
-  name: 'show',
-  title: 'Forestilling',
-  type: 'document',
-  fields: [
-    {
-      name: 'title',
-      title: 'Tittel',
-      type: 'string',
-      validation: (Rule: any) => Rule.required()
-    },
-    {
-      name: 'slug',
-      title: 'URL-slug',
-      type: 'slug',
-      options: { source: 'title', maxLength: 96 }
-    },
-    {
-      name: 'year',
-      title: 'År',
-      type: 'number',
-      validation: (Rule: any) => Rule.required().min(2000).max(2100)
-    },
-    {
-      name: 'type',
-      title: 'Type',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Hovedforestilling', value: 'main' },
-          { title: 'Halloween', value: 'halloween' }
-        ]
-      }
-    },
-    {
-      name: 'story',
-      title: 'Historien',
-      type: 'array',
-      of: [{ type: 'block' }],
-      description: 'Ca 300 ord om handlingen'
-    },
-    {
-      name: 'posterImage',
-      title: 'Plakat',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        { name: 'alt', type: 'string', title: 'Alt-tekst' }
-      ]
-    },
-    {
-      name: 'heroImage',
-      title: 'Hero-bilde',
-      type: 'image',
-      options: { hotspot: true },
-      fields: [
-        { name: 'alt', type: 'string', title: 'Alt-tekst' }
-      ]
-    },
-    {
-      name: "logoImage",
-      title: "Forestillingslogo",
-      type: "image",
-      options: {
-        hotspot: true,
+// src/lib/sanityQueries.ts
+
+// Alle GROQ-spørringene samlet på ett sted
+export const queries = {
+  // 1. Årets hovedforestilling (brukes på /om-forestillingen)
+  currentShow: `
+    *[_type == "show" && type == "main"] | order(year desc)[0] {
+      _id,
+      title,
+      slug { current },
+      year,
+      type,
+      story,
+      posterImage {
+        asset,
+        alt,
+        hotspot,
+        crop
       },
-    },    
-    {
-      name: 'cast',
-      title: 'Rollebesetning',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            { name: 'role', type: 'string', title: 'Rolle' },
-            { name: 'actor', type: 'reference', to: [{ type: 'person' }] }
-          ]
+      heroImage {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      logoImage {
+        asset,
+        hotspot,
+        crop
+      },
+      "cast": cast[] {
+        role,
+        "actor": actor-> {
+          _id,
+          name,
+          image {
+            asset,
+            alt,
+            hotspot,
+            crop
+          },
+          bio
         }
-      ]
-    },
-    {
-      name: 'crew',
-      title: 'Produksjonsteam',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            { name: 'role', type: 'string', title: 'Rolle (f.eks. Regissør)' },
-            { name: 'person', type: 'reference', to: [{ type: 'person' }] }
-          ]
+      },
+      "crew": crew[] {
+        role,
+        "person": person-> {
+          _id,
+          name,
+          image {
+            asset,
+            alt,
+            hotspot,
+            crop
+          }
         }
-      ]
-    },
-    {
-      name: 'practicalInfo',
-      title: 'Praktisk informasjon',
-      type: 'object',
-      fields: [
-        { name: 'duration', type: 'number', title: 'Varighet (minutter)' },
-        { name: 'ageLimit', type: 'string', title: 'Aldersgrense (f.eks. "Alle aldre")' },
-        { name: 'accessibility', type: 'text', title: 'Tilgjengelighet' }
-      ]
-    },
-    {
-      name: 'ticketUrl',
-      title: 'Billett-URL',
-      type: 'url',
-      description: 'Link til ekstern billettpartner'
-    },
-    {
-      name: 'galleryImages',
-      title: 'Bildegalleri',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: { hotspot: true },
-          fields: [
-            { name: 'alt', type: 'string', title: 'Alt-tekst' },
-            { name: 'caption', type: 'string', title: 'Bildetekst' }
-          ]
+      },
+      practicalInfo {
+        duration,
+        ageLimit,
+        accessibility
+      },
+      ticketUrl,
+      galleryImages[] {
+        asset,
+        alt,
+        caption,
+        hotspot,
+        crop
+      },
+      seo {
+        title,
+        description,
+        keywords,
+        ogImage {
+          asset,
+          alt
         }
-      ]
-    },
-    {
-      name: 'seo',
-      title: 'SEO',
-      type: 'seo'
-    }
-  ],
-  preview: {
-    select: {
-      title: 'title',
-      year: 'year',
-      media: 'posterImage'
-    },
-    prepare({ title, year, media }: any) {
-      return {
-        title: `${title} (${year})`,
-        media
       }
     }
-  }
-}
+  `,
+
+  // 1b. Forestilling via slug (brukes på /arkiv/:slug)
+  showBySlug: (slug: string) => `
+    *[_type == "show" && slug.current == "${slug}"][0] {
+      _id,
+      title,
+      slug { current },
+      year,
+      type,
+      story,
+      posterImage {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      heroImage {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      logoImage {
+        asset,
+        hotspot,
+        crop
+      },
+      "cast": cast[] {
+        role,
+        "actor": actor-> {
+          _id,
+          name,
+          image {
+            asset,
+            alt,
+            hotspot,
+            crop
+          },
+          bio
+        }
+      },
+      "crew": crew[] {
+        role,
+        "person": person-> {
+          _id,
+          name,
+          image {
+            asset,
+            alt,
+            hotspot,
+            crop
+          }
+        }
+      },
+      practicalInfo {
+        duration,
+        ageLimit,
+        accessibility
+      },
+      ticketUrl,
+      galleryImages[] {
+        asset,
+        alt,
+        caption,
+        hotspot,
+        crop
+      },
+      seo {
+        title,
+        description,
+        keywords,
+        ogImage {
+          asset,
+          alt
+        }
+      }
+    }
+  `,
+
+  // 2. Forestillingskalender (kommende)
+  upcomingPerformances: `
+    *[_type == "performance" && date > now()] | order(date asc) {
+      _id,
+      date,
+      status,
+      venue,
+      "show": show-> {
+        _id,
+        title,
+        "slug": slug.current,
+        type,
+        posterImage {
+          asset,
+          alt,
+          hotspot,
+          crop
+        }
+      }
+    }
+  `,
+
+  // 3. Forestillinger for en bestemt forestilling (bruk på /forestilling/:slug hvis du vil)
+  performancesByShow: (slug: string) => `
+    *[_type == "performance" && show->slug.current == "${slug}"] | order(date asc) {
+      _id,
+      date,
+      status,
+      venue
+    }
+  `,
+
+  // 4. Tidslinje (Om oss)
+  milestones: `
+    *[_type == "milestone"] | order(year desc) {
+      _id,
+      year,
+      title,
+      description,
+      image {
+        asset,
+        alt,
+        hotspot,
+        crop
+      }
+    }
+  `,
+
+  // 5. Personer / styre
+  boardMembers: `
+    *[_type == "person" && defined(role)] | order(name asc) {
+      _id,
+      name,
+      image {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      bio,
+      role
+    }
+  `,
+
+  // 6. Nyeste poster (til forsiden / nyhetsseksjon)
+  recentPosts: (limit = 6) => `
+    *[_type == "post"] | order(publishedAt desc) [0...${limit}] {
+      _id,
+      title,
+      "slug": slug.current,
+      publishedAt,
+      excerpt,
+      mainImage {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      "author": author->name
+    }
+  `,
+
+  // 7. Enkel post (brukes på /nyheter/:slug)
+  postBySlug: (slug: string) => `
+    *[_type == "post" && slug.current == "${slug}"][0] {
+      _id,
+      title,
+      publishedAt,
+      mainImage {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      body,
+      seo {
+        title,
+        description,
+        keywords,
+        ogImage {
+          asset,
+          alt
+        }
+      }
+    }
+  `,
+
+  // 8. Arkiv – tidligere forestillinger (til HTMLFlipBook)
+  archivedShows: `
+    *[_type == "show"] | order(year asc) {
+      _id,
+      title,
+      slug { current },
+      year,
+      type,
+      posterImage {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      // kort utdrag av historien (kan også gjøre full story og lage excerpt i frontend)
+      story
+    }
+  `,
+
+  // 9. Sponsorer
+  sponsors: `
+    *[_type == "sponsor"] | order(order asc) {
+      _id,
+      name,
+      logo {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      url,
+      tier
+    }
+  `,
+
+  // 10. Site settings (footer, kontakt, sosiale medier osv)
+  siteSettings: `
+    *[_type == "settings"][0] {
+      title,
+      description,
+      logo {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
+      email,
+      phone,
+      address,
+      socialLinks,
+      sponsorPackagePdf {
+        asset
+      }
+    }
+  `
+};

@@ -6,7 +6,7 @@ import { Container } from '@/components/layout/Container'
 import { Section } from '@/components/layout/Section'
 import { Timeline } from '@/components/sections/Timeline'
 import { Button } from '@/components/ui/Button'
-import { Mail, Users, Heart } from 'lucide-react'
+import { Mail } from 'lucide-react'
 import { Skeleton } from '@/components/ui/Skeleton'
 import type { Milestone, Person } from '@/types/sanity'
 import { SEOHead } from '@/components/SEOHead'
@@ -44,8 +44,7 @@ export function About() {
               Vår historie
             </h1>
             <p className="text-xl sm:text-2xl text-gray-200 leading-relaxed">
-              Fra en liten gruppe entusiaster til Norges mest ambisiøse lokale
-              teaterforening. Dette er historien om hvordan vi bringer liv til
+              Fra en liten gruppe entusiaster samlet i Kongsvinger til å øke ambisjonene og skape store familieforestillinger for hele Kongsvingerregionen. Dette er historien om hvordan vi bringer liv til
               Kongsvinger Festning.
             </p>
           </div>
@@ -57,24 +56,17 @@ export function About() {
         <Container>
           <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
             <div>
-              <div className="w-16 h-16 bg-gold-100 rounded-2xl flex items-center justify-center mb-6">
-                <Heart className="h-8 w-8 text-gold-600" />
-              </div>
               <h2 className="text-3xl font-display font-bold text-navy-900 mb-4">
                 Vår visjon
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed">
                 Vi ønsker å bli Norges fremste lokale teaterforening, kjent for
                 storslåtte familieforestillinger som kombinerer historisk
-                autentisitet med moderne teaterkunst. Målet er å nå Kaptein
-                Sabeltann-nivå i kvalitet og publikumsoppslutning.
+                autentisitet med moderne teaterkunst.
               </p>
             </div>
 
             <div>
-              <div className="w-16 h-16 bg-torch-100 rounded-2xl flex items-center justify-center mb-6">
-                <Users className="h-8 w-8 text-torch-600" />
-              </div>
               <h2 className="text-3xl font-display font-bold text-navy-900 mb-4">
                 Vårt oppdrag
               </h2>
@@ -91,7 +83,7 @@ export function About() {
 
       {/* Timeline */}
       {milestonesLoading ? (
-        <Section background="paper">
+        <Section background="white">
           <Container>
             <div className="space-y-8">
               {Array.from({ length: 3 }).map((_, i) => (
@@ -101,7 +93,7 @@ export function About() {
           </Container>
         </Section>
       ) : milestones && milestones.length > 0 ? (
-        <Section background="paper">
+        <Section background="white">
           <Timeline milestones={milestones} />
         </Section>
       ) : null}

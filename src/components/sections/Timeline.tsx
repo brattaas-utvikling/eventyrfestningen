@@ -4,6 +4,7 @@ import { motion, useScroll, useInView } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { urlFor } from "@/lib/sanity";
 import type { Milestone } from "@/types/sanity";
+import { OldPaper } from "../ui/OldPaper";
 
 /** Minimal bilde-type for Sanity uten å bruke any */
 type SanityImageLike =
@@ -81,10 +82,10 @@ export function Timeline({ milestones }: TimelineProps) {
   const sorted = [...milestones].sort((a, b) => getTime(a) - getTime(b)); 
 
   return (
-    <div ref={containerRef} className="relative">
+    <OldPaper ref={containerRef} className="relative">
       <Container size="lg">
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center py-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -141,7 +142,7 @@ export function Timeline({ milestones }: TimelineProps) {
                   </div>
 
                   {/* VENSTRE sidekort (skjult på mobil) */}
-                  <div className="hidden sm:block sm:col-start-1">
+                  <div className="hidden sm:block sm:col-start-1 pb-16">
                     {!isRight && (
                       <Card side="left" title={title} desc={desc} image={image} index={i} />
                     )}
@@ -155,7 +156,7 @@ export function Timeline({ milestones }: TimelineProps) {
                   </div>
 
                   {/* MOBIL: én kolonne med innrykk fra venstre linje */}
-                  <div className="sm:hidden col-span-1">
+                  <div className="sm:hidden col-span-1 pb-16">
                     <Card side="mobile" title={title} desc={desc} image={image} index={i} />
                   </div>
                 </li>
@@ -164,7 +165,7 @@ export function Timeline({ milestones }: TimelineProps) {
           </ol>
         </div>
       </Container>
-    </div>
+    </OldPaper>
   );
 }
 

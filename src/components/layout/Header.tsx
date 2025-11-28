@@ -191,7 +191,7 @@ export function Header() {
       <Link
         to={item.href}
         className={cn(
-          "transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-md",
+          "transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-sm font-sans text-nowrap",
           active
             ? "text-gold-400 font-semibold"
             : "text-white hover:text-gold-400",
@@ -230,7 +230,7 @@ export function Header() {
           </motion.button>
 
           {/* desktop nav */}
-          <div className="hidden lg:flex lg:gap-x-8">
+          <div className="hidden lg:flex lg:gap-x-6">
             {navigation.map((item, index) => (
               <motion.div
                 key={item.name}
@@ -256,7 +256,7 @@ export function Header() {
                 href="https://eventyrfestningen.ticketco.events/no/nb"
                 target="_blank"
                 rel="noreferrer"
-                className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display"
+                className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display text-nowrap"
                 onClick={() =>
                   trackEvent("ticket_click", {
                     source: "header_desktop",
