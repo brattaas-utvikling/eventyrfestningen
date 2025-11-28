@@ -10,7 +10,7 @@ interface BentoGalleryProps {
 
 export function BentoGallery({ 
   images, 
-  title = "Bak kulissene",
+  title,
   onImageClick 
 }: BentoGalleryProps) {
   if (!images || images.length === 0) return null;
@@ -77,85 +77,91 @@ export function BentoGallery({
 
       {/* Bento Grid - Fixed height rows for proper layout */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 auto-rows-[180px] sm:auto-rows-[200px] md:auto-rows-[220px] gap-3 md:gap-4 max-w-7xl mx-auto">
-        {images.map((img, index) => {
-          const { width, height } = getImageSize(index);
-          const gridClass = getGridClass(index);
+      {images.map((img, index) => {
+  const { width, height } = getImageSize(index);
+  const gridClass = getGridClass(index);
 
-          return (
-            <motion.button
-              key={img._key ?? index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ 
-                duration: 0.5, 
-                delay: Math.min(index * 0.05, 0.5),
-                ease: "easeOut"
-              }}
-              whileHover={{ scale: 1.02, zIndex: 10 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => onImageClick?.(index)}
-              className={`
-                ${gridClass}
-                group relative overflow-hidden rounded-xl
-                bg-navy-800/20 border border-white/10
-                hover:border-gold-400/60 hover:shadow-2xl
-                transition-all duration-300
-                focus:outline-none focus:ring-2 focus:ring-gold-400
-              `}
-              aria-label={`Se bilde ${index + 1}: ${img.alt || "Galleri bilde"}`}
-            >
-              {/* Image */}
-              <img
-                src={urlFor(img)
-                  .width(width)
-                  .height(height)
-                  .quality(85)
-                  .auto("format")
-                  .url()}
-                alt={img.alt || `Galleri bilde ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading={index < 6 ? "eager" : "lazy"}
-              />
+  const label =
+    img.caption ||
+    img.alt ||
+    `Galleri bilde ${index + 1}`;
 
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-900/90 via-navy-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  return (
+    <motion.button
+      key={img._key ?? index}
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.5,
+        delay: Math.min(index * 0.05, 0.5),
+        ease: "easeOut",
+      }}
+      whileHover={{ scale: 1.02, zIndex: 10 }}
+      whileTap={{ scale: 0.98 }}
+      onClick={() => onImageClick?.(index)}
+      className={`
+        ${gridClass}
+        group relative overflow-hidden rounded-xl
+        bg-navy-800/20 border border-white/10
+        hover:border-gold-400/60 hover:shadow-2xl
+        transition-all duration-300
+        focus:outline-none focus:ring-2 focus:ring-gold-400
+      `}
+      aria-label={label}
+    >
+      {/* Image */}
+      <img
+        src={urlFor(img)
+          .width(width)
+          .height(height)
+          .quality(85)
+          .auto("format")
+          .url()}
+        alt={label}
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        loading={index < 6 ? "eager" : "lazy"}
+      />
 
-              {/* Hover icon */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform group-hover:scale-110 transition-transform">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-                    />
-                  </svg>
-                </div>
-              </div>
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-linear-to-t from-navy-900/90 via-navy-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              {/* Caption on hover (only for larger images) */}
-              {img.caption && (index % 6 === 0 || index % 6 === 1 || index % 6 === 4) && (
-                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <p className="text-white text-xs md:text-sm font-medium line-clamp-2 drop-shadow-lg">
-                    {img.caption}
-                  </p>
-                </div>
-              )}
+      {/* Hover icon */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transform group-hover:scale-110 transition-transform">
+          <svg
+            className="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+            />
+          </svg>
+        </div>
+      </div>
 
-              {/* Index number */}
-              <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-navy-900/80 backdrop-blur-sm flex items-center justify-center text-white/70 text-xs font-bold opacity-60 group-hover:opacity-100 transition-opacity">
-                {index + 1}
-              </div>
-            </motion.button>
-          );
-        })}
+      {/* Caption på hover */}
+      {img.caption && (
+        <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <p className="text-white text-xs md:text-sm font-medium line-clamp-2 drop-shadow-lg">
+            {img.caption}
+          </p>
+        </div>
+      )}
+
+      {/* Index number */}
+      <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-navy-900/80 backdrop-blur-sm flex items-center justify-center text-white/70 text-xs font-bold opacity-60 group-hover:opacity-100 transition-opacity">
+        {index + 1}
+      </div>
+    </motion.button>
+  );
+})}
+
       </div>
 
       {/* Image count */}

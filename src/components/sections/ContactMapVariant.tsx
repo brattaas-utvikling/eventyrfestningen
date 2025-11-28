@@ -58,7 +58,7 @@ export function ContactMapVariant() {
           className="flex gap-4 p-4 rounded-xl bg-navy-900/40 border border-navy-700/30 hover:border-gold-400/30 transition-colors"
           whileHover={{ x: 4 }}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 flex-shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 shrink-0">
             <Car className="h-5 w-5" />
           </div>
           <div>
@@ -74,7 +74,7 @@ export function ContactMapVariant() {
           className="flex gap-4 p-4 rounded-xl bg-navy-900/40 border border-navy-700/30 hover:border-gold-400/30 transition-colors"
           whileHover={{ x: 4 }}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 flex-shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 shrink-0">
             <Train className="h-5 w-5" />
           </div>
           <div>
@@ -90,7 +90,7 @@ export function ContactMapVariant() {
           className="flex gap-4 p-4 rounded-xl bg-navy-900/40 border border-navy-700/30 hover:border-gold-400/30 transition-colors"
           whileHover={{ x: 4 }}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 flex-shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 shrink-0">
             <Bus className="h-5 w-5" />
           </div>
           <div>

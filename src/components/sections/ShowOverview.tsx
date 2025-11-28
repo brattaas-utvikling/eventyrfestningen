@@ -120,7 +120,7 @@ export function ShowOverview({ show, onImageClick }: ShowOverviewProps) {
         {/* galleri */}
         {gallery.length > 0 ? (
           <div>
-            <h3 className="text-xl font-display text-white mb-4">Bak kulissene</h3>
+            <h3 className="text-xl font-display text-white mb-4">Fra forestillingen</h3>
 
             {/* MOBIL: Swiper */}
             <div className="md:hidden">

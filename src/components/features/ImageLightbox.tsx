@@ -179,14 +179,11 @@ export function ImageLightbox({
               />
 
               {currentCaption ? (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                <div
                   className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/80 to-transparent text-white text-center rounded-b-lg"
                 >
                   <p className="text-sm sm:text-base">{currentCaption}</p>
-                </motion.div>
+                </div>
               ) : null}
             </motion.div>
           </div>

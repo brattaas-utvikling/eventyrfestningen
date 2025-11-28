@@ -62,7 +62,7 @@ export function ContactGalleryVariant() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-            className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+            className="group relative aspect-4/3 rounded-xl overflow-hidden cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
             <img
@@ -71,7 +71,7 @@ export function ContactGalleryVariant() {
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-900/80 via-navy-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-linear-to-t from-navy-900/80 via-navy-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute bottom-3 left-3 right-3">
                 <p className="text-white text-sm font-medium">
                   {image.caption}
@@ -131,7 +131,7 @@ export function ContactGalleryVariant() {
         </p>
         <a
           href="mailto:post@eventyrfestningen.no"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-gold-400 to-gold-500 text-navy-900 font-medium hover:from-gold-500 hover:to-gold-600 transition-all shadow-lg hover:shadow-xl"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-gold-400 to-gold-500 text-navy-900 font-medium hover:from-gold-500 hover:to-gold-600 transition-all shadow-lg hover:shadow-xl"
         >
           Send oss en melding
         </a>

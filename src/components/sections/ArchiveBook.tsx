@@ -71,7 +71,7 @@ export function ArchiveBook() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Bakgrunn: IMPORTANT -> pointer-events-none */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#0b0a09] via-[#1a120f] to-[#0b0a09]" />
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-[#0b0a09] via-[#1a120f] to-[#0b0a09]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,180,60,0.08),transparent_60%)]" />
 
       {/* Innholdslag – ligger over bakgrunnen */}

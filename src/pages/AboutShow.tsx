@@ -39,7 +39,7 @@ export function AboutShow() {
       <div className="min-h-screen flex items-center justify-center bg-navy-900">
         <p className="text-xl text-gray-200">
           Ingen forestilling funnet
-          {slug ? ` for slug "${slug}"` : ""}.
+          {slug ? ` for "${slug}"` : ""}.
         </p>
       </div>
     );
@@ -54,7 +54,7 @@ export function AboutShow() {
   const lightboxImages = (show.galleryImages ?? []).map((img) => ({
     url: urlFor(img).width(1400).url(),
     alt: img.alt ?? show.title,
-    caption: "Bak kulissene",
+    caption: img.caption ?? undefined,  
   }));
 
   return (

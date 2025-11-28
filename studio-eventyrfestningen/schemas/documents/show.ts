@@ -17,6 +17,12 @@ export const queries = {
         hotspot,
         crop
       },
+      bookImage {
+        asset,
+        alt,
+        hotspot,
+        crop
+      },
       heroImage {
         asset,
         alt,

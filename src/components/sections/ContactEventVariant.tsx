@@ -63,13 +63,13 @@ export function ContactEventVariant() {
       whileHover={{ y: -2 }}
     >
       {/* Event Poster */}
-      <div className="relative aspect-[3/4] sm:aspect-video overflow-hidden">
+      <div className="relative aspect-3/4 sm:aspect-video overflow-hidden">
         <img
           src={NEXT_EVENT.posterUrl}
           alt={NEXT_EVENT.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-navy-900/60 to-transparent" />
         
         {/* Badge */}
         <div className="absolute top-4 right-4">
@@ -116,7 +116,7 @@ export function ContactEventVariant() {
         {/* Event Details */}
         <div className="space-y-3">
           <div className="flex items-center gap-3 text-sm">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400/10 text-gold-400 flex-shrink-0">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400/10 text-gold-400 shrink-0">
               <Calendar className="h-4 w-4" />
             </div>
             <span className="text-white">
@@ -130,7 +130,7 @@ export function ContactEventVariant() {
           </div>
 
           <div className="flex items-center gap-3 text-sm">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400/10 text-gold-400 flex-shrink-0">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400/10 text-gold-400 shrink-0">
               <Clock className="h-4 w-4" />
             </div>
             <span className="text-white">
@@ -142,14 +142,14 @@ export function ContactEventVariant() {
           </div>
 
           <div className="flex items-center gap-3 text-sm">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400/10 text-gold-400 flex-shrink-0">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400/10 text-gold-400 shrink-0">
               <MapPin className="h-4 w-4" />
             </div>
             <span className="text-white">{NEXT_EVENT.venue}</span>
           </div>
 
           <div className="flex items-center gap-3 text-sm">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400/10 text-gold-400 flex-shrink-0">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gold-400/10 text-gold-400 shrink-0">
               <Users className="h-4 w-4" />
             </div>
             <span className="text-white">{NEXT_EVENT.ageLimit}</span>
@@ -181,7 +181,7 @@ export function ContactEventVariant() {
             href="https://billetter.no"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-gradient-to-r from-torch-500 to-torch-600 text-white font-semibold shadow-lg hover:from-torch-600 hover:to-torch-700 transition-all"
+            className="flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-linear-to-r from-torch-500 to-torch-600 text-white font-semibold shadow-lg hover:from-torch-600 hover:to-torch-700 transition-all"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

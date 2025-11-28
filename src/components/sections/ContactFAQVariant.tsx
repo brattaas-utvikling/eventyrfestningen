@@ -76,8 +76,9 @@ export function ContactFAQVariant() {
               <button
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 className="w-full flex items-center gap-4 p-4 text-left hover:bg-navy-900/60 transition-colors"
+                aria-expanded={isOpen}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 flex-shrink-0">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 shrink-0">
                   <Icon className="h-5 w-5" />
                 </div>
                 <span className="flex-1 text-white font-medium">

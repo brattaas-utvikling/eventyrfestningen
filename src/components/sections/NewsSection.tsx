@@ -54,7 +54,7 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
                 <Card className="h-full overflow-hidden group hover:shadow-2xl transition-all duration-300">
                   {/* Image */}
                   {post.mainImage && (
-                    <div className="aspect-video overflow-hidden bg-gradient-to-br from-navy-900 to-burgundy-900">
+                    <div className="aspect-video overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
                       <img
                         src={urlFor(post.mainImage)
                           .width(800)

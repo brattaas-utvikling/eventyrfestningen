@@ -123,10 +123,10 @@ export function ContactActionsVariant() {
               whileHover={{ y: -4, scale: 1.02 }}
             >
               {/* Gradient background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${action.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
+              <div className={`absolute inset-0 bg-linear-to-br ${action.color} opacity-0 group-hover:opacity-10 transition-opacity`} />
               
               <div className="relative space-y-3">
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${action.color} ${action.textColor} shadow-lg`}>
+                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-linear-to-br ${action.color} ${action.textColor} shadow-lg`}>
                   <Icon className="h-6 w-6" />
                 </div>
                 
@@ -175,7 +175,7 @@ export function ContactActionsVariant() {
               className="flex items-center gap-4 p-4 rounded-xl bg-navy-900/40 border border-navy-700/30 hover:border-gold-400/30 hover:bg-navy-900/60 transition-all group"
               whileHover={{ x: 4 }}
             >
-              <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-white/5 ${method.color} flex-shrink-0`}>
+              <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-white/5 ${method.color} shrink-0`}>
                 <Icon className="h-5 w-5" />
               </div>
               <div className="flex-1 min-w-0">
