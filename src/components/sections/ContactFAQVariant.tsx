@@ -17,7 +17,7 @@ const FAQ_ITEMS = [
   {
     icon: MapPin,
     question: "Hva skjer hvis det regner?",
-    answer: "Forestillingen spilles utendørs, og vi gjennomfører så lenge det er forsvarlig. Ta gjerne med regnjakke og evt. regnponcho. Ved kraftig uvær kan forestillingen bli forsinket, avbrutt eller flyttet – informasjon gis da via e-post/SMS og i våre kanaler."
+    answer: "Forestillingen spilles utendørs, og vi gjennomfører så lenge det er forsvarlig. Ta gjerne med regnjakke og evt. regnponcho, paraply er ikke tillat. Ved kraftig uvær kan forestillingen bli forsinket, avbrutt eller flyttet – informasjon gis da via e-post/SMS og i våre kanaler."
   },
   {
     icon: Users,
@@ -46,7 +46,6 @@ export function ContactFAQVariant() {
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
       className="rounded-2xl bg-navy-800/30 border border-navy-700/50 backdrop-blur p-6 sm:p-8"
-      whileHover={{ y: -2 }}
     >
       {/* Header */}
       <div className="text-center mb-6">

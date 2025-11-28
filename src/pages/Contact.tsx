@@ -1,14 +1,8 @@
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Facebook, Instagram } from "lucide-react";
 import { Container } from "@/components/layout/Container";
-// import { ContactForm } from "@/components/features/ContactForm";
 import { PageHero } from "@/components/layout/PageHero";
-// import { ContactMapVariant } from "@/components/sections/ContactMapVariant";
 import { ContactFAQVariant } from "@/components/sections/ContactFAQVariant";
-// import { ContactGalleryVariant } from "@/components/sections/ContactGalleryVariant";
-// import { ContactActionsVariant } from "@/components/sections/ContactActionsVariant";
-// import { ContactEventVariant } from "@/components/sections/ContactEventVariant";
-
 
 const CONTACT_INFO = {
   title: "Eventyrfestningen",
@@ -21,7 +15,7 @@ const CONTACT_INFO = {
   hours: "Vi svarer normalt innen 1–2 virkedager.",
   socials: {
     facebook: "https://www.facebook.com/eventyrfestningen",
-    instagram: "https://www.instagram.com/eventyrfestningen/?igsh=MWtiamp2YjZpcnpq",
+    instagram: "https://www.instagram.com/eventyrfestningen/",
   },
 };
 
@@ -34,7 +28,6 @@ export default function Contact() {
         ctaHref="#kontakt-skjema"
       />
 
-      {/* Innhold */}
       <section className="relative py-16 lg:py-20 bg-navy-900 overflow-hidden">
         {/* bakgrunnsglow */}
         <div className="pointer-events-none absolute inset-0 opacity-30">
@@ -43,14 +36,14 @@ export default function Contact() {
         </div>
 
         <Container className="relative z-10">
-          <div className="grid gap-8 lg:grid-cols-2 items-start">
+          <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch">
             {/* venstre kolonne: info */}
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.05 }}
               className="rounded-2xl bg-navy-800/50 border border-navy-700/70 backdrop-blur p-6 sm:p-8 space-y-6"
-              whileHover={{ y: -2 }}
+              // whileHover fjernet for å unngå y-bevegelse
             >
               <div>
                 <h2 className="text-2xl font-display text-white mb-2">
@@ -58,10 +51,10 @@ export default function Contact() {
                 </h2>
                 <p className="text-navy-100/70 text-sm leading-relaxed">
                   Eventyrfestningen drives av frivillige som brenner for
-                  scenekunst, historie og magiske sommerkvelder på
-                  Kongsvinger festning. Ta kontakt om du lurer på billetter,
-                  grupper, frivillighet, samarbeid eller presse – vi hjelper
-                  deg gjerne å planlegge besøket.
+                  scenekunst, historie og magiske sommerkvelder på Kongsvinger
+                  festning. Ta kontakt om du lurer på billetter,
+                  frivillighet, samarbeid eller presse – vi hjelper deg gjerne å
+                  planlegge besøket.
                 </p>
               </div>
 
@@ -114,18 +107,16 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Hva kan vi hjelpe deg med? */}
-              <div className="pt-4 border-t border-navy-700/60">
-                <p className="text-sm text-navy-100/60 mb-3">
-                  Hva kan vi hjelpe deg med?
-                </p>
-                <ul className="grid gap-2 text-sm text-navy-100/80 sm:grid-cols-2">
-                  <li>• Billetter</li>
-                  <li>• Presse og foto/film</li>
-                  <li>• Samarbeid og sponsorer</li>
-                  <li>• Frivillighet og medvirkning</li>
-                </ul>
-              </div>
+                {/* Vil du være med? */}
+                <div className="pt-4 border-t border-navy-700/60">
+                  <p className="text-sm text-navy-100/60 mb-3">Vil du være med i Eventyrfestningen?</p>
+                  <ul className="grid gap-2 text-sm text-navy-100/80 sm:grid-cols-2">
+                    <li>• Rigge opp eller ned scenografien</li>
+                    <li>• Hjelpe til i Festningslandsbyen</li>
+                    <li>• Vertskap og publikumsservice</li>
+                    <li>• Parkeringsvakter</li>
+                  </ul>
+                </div>
 
               {/* sosiale medier */}
               <div className="pt-4 border-t border-navy-700/60">
@@ -139,8 +130,7 @@ export default function Contact() {
                     rel="noreferrer"
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white hover:bg-gold-400/80 hover:text-navy-900 transition"
                     aria-label="Facebook"
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileTap={{ scale: 0.97 }}
                   >
                     <Facebook className="h-5 w-5" />
                   </motion.a>
@@ -150,8 +140,7 @@ export default function Contact() {
                     rel="noreferrer"
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white hover:bg-gold-400/80 hover:text-navy-900 transition"
                     aria-label="Instagram"
-                    whileHover={{ y: -2 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileTap={{ scale: 0.97 }}
                   >
                     <Instagram className="h-5 w-5" />
                   </motion.a>
@@ -159,28 +148,28 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* <ContactMapVariant /> */}
+            {/* høyre kolonne – ContactFAQVariant har ingen y-hover her */}
             <ContactFAQVariant />
-            {/* <ContactGalleryVariant /> */}
-            {/* <ContactActionsVariant /> */}
-            {/* <ContactEventVariant /> */}
-            {/* høyre kolonne: skjema */}
-            {/* <motion.div
+
+            {/* Hvis du skrur på skjema igjen senere, fjern også whileHover der: */}
+            {/*
+            <motion.div
               id="kontakt-skjema"
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="rounded-2xl bg-navy-800/30 border border-navy-700/50 backdrop-blur p-6 sm:p-8"
-              whileHover={{ y: -2 }}
             >
               <ContactForm />
-            </motion.div> */}
+            </motion.div>
+            */}
           </div>
         </Container>
       </section>
     </>
   );
 }
+
 
    {/*
 

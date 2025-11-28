@@ -199,6 +199,7 @@ html,
 body {
   overflow-x: hidden;
   @apply bg-navy-900 text-white;
+  scroll-behavior: smooth;
 }
 
 /* In your global CSS file */
