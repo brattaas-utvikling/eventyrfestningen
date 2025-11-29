@@ -1,4 +1,4 @@
-// src/lib/sanityQueries.ts
+// src/studio-eventyrfestningen/schemas/documents/show.ts
 
 // Alle GROQ-spørringene samlet på ett sted
 export const queries = {
@@ -326,4 +326,14 @@ export const queries = {
       }
     }
   `
+  ,
+    // 11. Foreningen / organization
+    organization: `
+    *[_type == "organization"][0] {
+      _id,
+      title,
+      body,
+      volunteering
+    }
+  `,
 };

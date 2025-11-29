@@ -1,22 +1,70 @@
-// src/routes/About.tsx
-import { useSanityQuery } from '@/hooks/useSanityQuery'
-import { queries } from '@/lib/sanityQueries'
-import { urlFor } from '@/lib/sanity'
-import { Container } from '@/components/layout/Container'
-import { Section } from '@/components/layout/Section'
-import { Timeline } from '@/components/sections/Timeline'
-import { Button } from '@/components/ui/Button'
-import { Mail } from 'lucide-react'
-import { Skeleton } from '@/components/ui/Skeleton'
-import type { Milestone, Person } from '@/types/sanity'
-import { SEOHead } from '@/components/SEOHead'
+// src/pages/About.tsx
+import { useSanityQuery } from "@/hooks/useSanityQuery";
+import { queries } from "@/lib/sanityQueries";
+import { urlFor } from "@/lib/sanity";
+import { Container } from "@/components/layout/Container";
+import { Section } from "@/components/layout/Section";
+import { Timeline } from "@/components/sections/Timeline";
+import { Button } from "@/components/ui/Button";
+import { Mail } from "lucide-react";
+import { Skeleton } from "@/components/ui/Skeleton";
+import type { Milestone, Person, PortableText as PortableTextValue } from "@/types/sanity";
+import { SEOHead } from "@/components/SEOHead";
+import type { PortableText as PortableTextType } from '@/types/sanity'
+
+type Organization = {
+  _id: string;
+  title?: string;
+  body?: PortableTextValue;
+  volunteering?: PortableTextValue;
+};
+
+// liten, lokal renderer for Sanity Portable Text
+function RenderPortableText({ value }: { value?: PortableTextType }) {
+  if (!value) return null
+
+  return (
+    <>
+      {value.map((block) => {
+        if (block._type !== 'block') return null
+
+        const text =
+          block.children?.map((child) => child.text).join('') ?? ''
+
+        switch (block.style) {
+          case 'h2':
+            return (
+              <h2 key={block._key} className="mt-6 mb-3 text-3xl font-display">
+                {text}
+              </h2>
+            )
+          case 'h3':
+            return (
+              <h3 key={block._key} className="mt-5 mb-2 text-2xl font-display">
+                {text}
+              </h3>
+            )
+          default:
+            return (
+              <p key={block._key} className="mb-4 leading-relaxed text-gray-700">
+                {text}
+              </p>
+            )
+        }
+      })}
+    </>
+  )
+}
 
 export function About() {
   const { data: milestones, isLoading: milestonesLoading } =
-    useSanityQuery<Milestone[]>('milestones', queries.milestones)
+    useSanityQuery<Milestone[]>("milestones", queries.milestones);
 
   const { data: boardMembers, isLoading: boardLoading } =
-    useSanityQuery<Person[]>('board-members', queries.boardMembers)
+    useSanityQuery<Person[]>("board-members", queries.boardMembers);
+
+  const { data: organization, isLoading: organizationLoading } =
+    useSanityQuery<Organization>("organization", queries.organization);
 
   return (
     <>
@@ -32,8 +80,8 @@ export function About() {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
-              backgroundSize: '40px 40px',
+                "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+              backgroundSize: "40px 40px",
             }}
           />
         </div>
@@ -44,40 +92,71 @@ export function About() {
               Vår historie
             </h1>
             <p className="text-xl sm:text-2xl text-gray-200 leading-relaxed">
-              Fra en liten gruppe entusiaster samlet i Kongsvinger til å øke ambisjonene og skape store familieforestillinger for hele Kongsvingerregionen. Dette er historien om hvordan vi bringer liv til
-              Kongsvinger Festning.
+              Fra en liten gruppe entusiaster samlet i Kongsvinger til å øke
+              ambisjonene og skape store familieforestillinger for hele
+              Kongsvingerregionen. Dette er historien om hvordan vi bringer liv
+              til Kongsvinger Festning.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* Vision & Mission */}
+      {/* Om foreningen / frivillighet – fra Sanity: organization */}
       <Section background="white">
         <Container>
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-            <div>
-              <h2 className="text-3xl font-display font-bold text-navy-900 mb-4">
-                Vår visjon
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Vi ønsker å bli Norges fremste lokale teaterforening, kjent for
-                storslåtte familieforestillinger som kombinerer historisk
-                autentisitet med moderne teaterkunst.
-              </p>
+          {organizationLoading ? (
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
+              <div className="space-y-4">
+                <Skeleton className="h-8 w-48" />
+                <Skeleton className="h-24 w-full" />
+                <Skeleton className="h-24 w-5/6" />
+              </div>
+              <div className="space-y-4">
+                <Skeleton className="h-8 w-40" />
+                <Skeleton className="h-24 w-full" />
+                <Skeleton className="h-24 w-4/5" />
+              </div>
             </div>
+          ) : organization ? (
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
+              {/* Om foreningen */}
+              <div>
+                <h2 className="text-3xl font-display font-bold text-navy-900 mb-4">
+                  {organization.title ?? "Om Eventyrfestningen"}
+                </h2>
 
-            <div>
-              <h2 className="text-3xl font-display font-bold text-navy-900 mb-4">
-                Vårt oppdrag
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Å skape uforglemmelige kulturopplevelser for hele familien ved å
-                bringe Kongsvinger Festnings rike historie til live. Vi engasjerer
-                lokalsamfunnet, utvikler lokale talenter, og gjør teater
-                tilgjengelig for alle.
-              </p>
+                {organization.body ? (
+                  <div className="prose prose-lg max-w-none text-gray-700">
+                    <RenderPortableText value={organization.body} />
+                  </div>
+                ) : (
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Eventyrfestningen er en frivillig teaterforening som skaper
+                    familieforestillinger på Kongsvinger Festning.
+                  </p>
+                )}
+              </div>
+
+              {/* Frivillighet */}
+              <div>
+                <h2 className="text-3xl font-display font-bold text-navy-900 mb-4">
+                  Frivillighet
+                </h2>
+
+                {organization.volunteering ? (
+                  <div className="prose prose-lg max-w-none text-gray-700">
+                    <RenderPortableText value={organization.volunteering} />
+                  </div>
+                ) : (
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    Vi er avhengige av frivillige for å skape magiske
+                    teateropplevelser. Enten du vil stå på scenen, jobbe bak
+                    kulissene eller bidra praktisk, finnes det en plass til deg.
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
+          ) : null}
         </Container>
       </Section>
 
@@ -129,7 +208,10 @@ export function About() {
                     <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
                       {member.image ? (
                         <img
-                          src={urlFor(member.image).width(400).height(533).url()}
+                          src={urlFor(member.image)
+                            .width(400)
+                            .height(533)
+                            .url()}
                           alt={member.name}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
@@ -140,7 +222,9 @@ export function About() {
                         {member.name}
                       </h3>
                       {member.role ? (
-                        <p className="text-sm text-gray-500">{member.role}</p>
+                        <p className="text-sm text-gray-500">
+                          {member.role}
+                        </p>
                       ) : null}
                     </div>
                   </div>
@@ -169,5 +253,5 @@ export function About() {
         </Container>
       </Section>
     </>
-  )
+  );
 }

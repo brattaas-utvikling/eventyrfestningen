@@ -319,4 +319,13 @@ export const queries = {
       }
     }
   `
+,
+organization: `
+*[_type == "organization"][0] {
+  _id,
+  title,
+  body,
+  volunteering
+}
+`
 };
