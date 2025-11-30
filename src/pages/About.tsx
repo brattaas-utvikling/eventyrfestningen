@@ -6,12 +6,17 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Timeline } from "@/components/sections/Timeline";
 import { Button } from "@/components/ui/Button";
-import { Mail } from "lucide-react";
 import { Skeleton } from "@/components/ui/Skeleton";
-import type { Milestone, Person, PortableText as PortableTextValue } from "@/types/sanity";
+import type {
+  Milestone,
+  Person,
+  PortableText as PortableTextValue,
+  PortableText as PortableTextType,
+} from "@/types/sanity";
 import { SEOHead } from "@/components/SEOHead";
-import type { PortableText as PortableTextType } from '@/types/sanity'
+import { CurtainSection } from "@/components/layout/CurtainSection";
 
+// ---- Types ----
 type Organization = {
   _id: string;
   title?: string;
@@ -19,41 +24,50 @@ type Organization = {
   volunteering?: PortableTextValue;
 };
 
-// liten, lokal renderer for Sanity Portable Text
+// ---- Lokal Portable Text-renderer ----
 function RenderPortableText({ value }: { value?: PortableTextType }) {
-  if (!value) return null
+  if (!value) return null;
 
   return (
     <>
       {value.map((block) => {
-        if (block._type !== 'block') return null
+        if (block._type !== "block") return null;
 
         const text =
-          block.children?.map((child) => child.text).join('') ?? ''
+          block.children?.map((child) => child.text).join("") ?? "";
 
         switch (block.style) {
-          case 'h2':
+          case "h2":
             return (
-              <h2 key={block._key} className="mt-6 mb-3 text-3xl font-display">
+              <h2
+                key={block._key}
+                className="mt-6 mb-3 text-3xl font-display text-white"
+              >
                 {text}
               </h2>
-            )
-          case 'h3':
+            );
+          case "h3":
             return (
-              <h3 key={block._key} className="mt-5 mb-2 text-2xl font-display">
+              <h3
+                key={block._key}
+                className="mt-5 mb-2 text-2xl font-display text-white"
+              >
                 {text}
               </h3>
-            )
+            );
           default:
             return (
-              <p key={block._key} className="mb-4 leading-relaxed text-gray-700">
+              <p
+                key={block._key}
+                className="mb-4 leading-relaxed text-gray-100"
+              >
                 {text}
               </p>
-            )
+            );
         }
       })}
     </>
-  )
+  );
 }
 
 export function About() {
@@ -101,68 +115,260 @@ export function About() {
         </Container>
       </section>
 
-      {/* Om foreningen / frivillighet – fra Sanity: organization */}
-      <Section background="white">
-        <Container>
-          {organizationLoading ? (
-            <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-              <div className="space-y-4">
-                <Skeleton className="h-8 w-48" />
-                <Skeleton className="h-24 w-full" />
-                <Skeleton className="h-24 w-5/6" />
-              </div>
-              <div className="space-y-4">
-                <Skeleton className="h-8 w-40" />
-                <Skeleton className="h-24 w-full" />
-                <Skeleton className="h-24 w-4/5" />
-              </div>
-            </div>
-          ) : organization ? (
-            <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-              {/* Om foreningen */}
-              <div>
-                <h2 className="text-3xl font-display font-bold text-navy-900 mb-4">
+      {/* Om foreningen / frivillighet – sentrert tekst + polaroid-bilder */}
+      <CurtainSection id="foreningen">
+        {organizationLoading ? (
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <Skeleton className="h-6 w-48 mx-auto" />
+            <Skeleton className="h-8 w-64 mx-auto" />
+            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-24 w-5/6 mx-auto" />
+          </div>
+        ) : organization ? (
+          <div className="relative max-w-4xl mx-auto">
+            {/* SECTION LABEL */}
+            <p className="text-center text-xs uppercase tracking-[0.2em] text-torch-500 mb-3">
+              Foreningen & frivilligheten
+            </p>
+
+            {/* OM FORENINGEN */}
+            <div className="relative mb-20">
+              {/* Sentrert tittel */}
+              <div className="text-center mb-8">
+                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
                   {organization.title ?? "Om Eventyrfestningen"}
                 </h2>
+              </div>
 
+              {/* Venstrestilt tekst, sentrert på skjermen */}
+              <div className="max-w-2xl mx-auto">
                 {organization.body ? (
-                  <div className="prose prose-lg max-w-none text-gray-700">
+                  <div className="prose prose-lg prose-invert max-w-none text-gray-100">
                     <RenderPortableText value={organization.body} />
                   </div>
                 ) : (
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    Eventyrfestningen er en frivillig teaterforening som skaper
-                    familieforestillinger på Kongsvinger Festning.
+                  <p className="text-lg text-gray-100 leading-relaxed">
+                    Eventyrfestningen er en frivillig teaterforening som
+                    skaper familieforestillinger på Kongsvinger Festning.
                   </p>
                 )}
+
+                {/* MOBIL: Horisontal scroll-galleri */}
+                <div className="mt-8 md:hidden">
+                  <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scrollbar-hide">
+                    {[
+                      { src: "/media/festningslandsbyen1.jpg", caption: "Sommerkveld i Festningslandsbyen" },
+                      { src: "/media/frivillig3.jpg", caption: "Frivillige i sving" },
+                      { src: "/media/frivillig2.jpg", caption: "Moro bak kulissene" }
+                    ].map((img, index) => (
+                      <div 
+                        key={index} 
+                        className="shrink-0 w-[70vw] max-w-[280px] snap-center"
+                      >
+                        <div 
+                          className="bg-white rounded-lg shadow-xl overflow-hidden transform transition-transform hover:scale-105" 
+                          style={{ rotate: `${[-2, 2, -1][index]}deg` }}
+                        >
+                          <div className="aspect-4/5">
+                            <img
+                              src={img.src}
+                              alt={img.caption}
+                              className="w-full h-full object-cover sepia-[0.15] brightness-105"
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="px-4 py-3">
+                            <p className="text-xs font-display text-navy-900 tracking-wide">
+                              {img.caption}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-amber-300/70 text-center mt-2">
+                    👆 Sveip for å se flere bilder
+                  </p>
+                </div>
               </div>
 
-              {/* Frivillighet */}
-              <div>
-                <h2 className="text-3xl font-display font-bold text-navy-900 mb-4">
+              {/* DESKTOP: Polaroid-bilder rundt OM FORENINGEN */}
+              <div className="pointer-events-none hidden md:block">
+                {/* Høyre øverst */}
+                <div className="absolute -right-24 top-3/12 w-40 lg:w-48 rotate-10">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-navy-900/5">
+                      <img
+                        src="/media/festningslandsbyen1.jpg"
+                        alt="Stemning på festningen"
+                        className="w-full h-full object-cover sepia-50 brightness-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="px-3 py-2">
+                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                        Sommerkveld i Festningslandsbyen
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Høyre litt lenger ned */}
+                <div className="absolute -right-32 top-9/12 w-36 lg:w-44 rotate-25">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-navy-900/5">
+                      <img
+                        src="/media/frivillig3.jpg"
+                        alt="Frivillige i arbeid"
+                        className="w-full h-full object-cover sepia-50 brightness-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="px-3 py-2">
+                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                        Frivillige i sving
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Venstre */}
+                <div className="absolute -left-28 top-5/12 w-40 lg:w-48 -rotate-12">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-navy-900/5">
+                      <img
+                        src="/media/frivillig2.jpg"
+                        alt="Bak kulissene"
+                        className="w-full h-full object-cover sepia-50 brightness-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="px-3 py-2">
+                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                        Moro bak kulissene
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FRIVILLIGHET */}
+            <div className="relative mt-16">
+              {/* Sentrert tittel */}
+              <div className="text-center mb-8">
+                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
                   Frivillighet
                 </h2>
+              </div>
 
+              {/* Venstrestilt tekst, sentrert på skjermen */}
+              <div className="max-w-2xl mx-auto">
                 {organization.volunteering ? (
-                  <div className="prose prose-lg max-w-none text-gray-700">
+                  <div className="prose prose-lg prose-invert max-w-none text-gray-100">
                     <RenderPortableText value={organization.volunteering} />
                   </div>
                 ) : (
-                  <p className="text-lg text-gray-700 leading-relaxed">
+                  <p className="text-lg text-gray-100 leading-relaxed">
                     Vi er avhengige av frivillige for å skape magiske
                     teateropplevelser. Enten du vil stå på scenen, jobbe bak
                     kulissene eller bidra praktisk, finnes det en plass til deg.
                   </p>
                 )}
+
+                {/* MOBIL: Horisontal scroll-galleri */}
+                <div className="mt-8 md:hidden">
+                  <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 scrollbar-hide">
+                    {[
+                      { src: "/media/frivillig1.jpg", caption: "Publikumsvert på jobb" },
+                      { src: "/media/festningslandsbyen2.jpg", caption: "Festningslandsbyen" }
+                    ].map((img, index) => (
+                      <div 
+                        key={index} 
+                        className="shrink-0 w-[70vw] max-w-[280px] snap-center"
+                      >
+                        <div 
+                          className="bg-white rounded-lg shadow-xl overflow-hidden transform transition-transform hover:scale-105" 
+                          style={{ rotate: `${[2, -2][index]}deg` }}
+                        >
+                          <div className="aspect-4/5">
+                            <img
+                              src={img.src}
+                              alt={img.caption}
+                              className="w-full h-full object-cover sepia-[0.15] brightness-105"
+                              loading="lazy"
+                            />
+                          </div>
+                          <div className="px-4 py-3">
+                            <p className="text-xs font-display text-navy-900 tracking-wide">
+                              {img.caption}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-amber-300/70 text-center mt-2">
+                    👆 Sveip for å se flere bilder
+                  </p>
+                </div>
+
+                {/* Sentrert CTA-knapp */}
+                <div className="mt-8 text-center">
+                  <Button variant="torch" asChild>
+                    <a href="/kontakt">Jeg vil bidra</a>
+                  </Button>
+                </div>
+              </div>
+
+              {/* DESKTOP: Polaroid-bilder rundt FRIVILLIGHET */}
+              <div className="pointer-events-none hidden md:block">
+                {/* Venstre nederst */}
+                <div className="absolute -left-24 top-14 w-36 lg:w-44 rotate-14">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-navy-900/5">
+                      <img
+                        src="/media/frivillig1.jpg"
+                        alt="Publikumsvert"
+                        className="w-full h-full object-cover sepia-50 brightness-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="px-3 py-2">
+                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                        Publikumsvert på jobb
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Høyre nederst */}
+                <div className="absolute -right-24 top-32 w-40 lg:w-48 rotate-[-18deg]">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-navy-900/5">
+                      <img
+                        src="/media/festningslandsbyen2.jpg"
+                        alt="Kostymer og rekvisitter"
+                        className="w-full h-full object-cover sepia-50 brightness-105"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="px-3 py-2">
+                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                        Festningslandsbyen
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          ) : null}
-        </Container>
-      </Section>
+          </div>
+        ) : null}
+      </CurtainSection>
 
       {/* Timeline */}
       {milestonesLoading ? (
-        <Section background="white">
+        <section>
           <Container>
             <div className="space-y-8">
               {Array.from({ length: 3 }).map((_, i) => (
@@ -170,7 +376,7 @@ export function About() {
               ))}
             </div>
           </Container>
-        </Section>
+        </section>
       ) : milestones && milestones.length > 0 ? (
         <Section background="white">
           <Timeline milestones={milestones} />
@@ -244,9 +450,8 @@ export function About() {
           <p className="text-gray-200 mb-6">
             Vi trenger alltid frivillige, sponsorer og medspillere.
           </p>
-          <Button variant="torch" asChild>
+          <Button variant="tourchoutline" size="lg" asChild>
             <a href="/kontakt">
-              <Mail className="h-4 w-4 mr-2" />
               Ta kontakt
             </a>
           </Button>

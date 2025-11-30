@@ -16,6 +16,8 @@ export const buttonVariants = cva(
           "bg-burgundy-900 text-white hover:bg-burgundy-800 focus-visible:ring-burgundy-500",
         outline:
           "border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white focus-visible:ring-navy-500",
+        tourchoutline:
+          "border-2 border-torch-500 text-torch-500 hover:text-torch-300  hover:border-torch-300 focus-visible:ring-navy-500 transition-colors transform duration-200",
         ghost: "text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",
         whiteghost: "bg-white text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",
         link: "text-torch-600 underline-offset-4 hover:underline focus-visible:ring-torch-500",

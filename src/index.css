@@ -201,7 +201,13 @@ body {
   @apply bg-navy-900 text-white;
   scroll-behavior: smooth;
 }
-
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 /* In your global CSS file */
 /* .stf__wrapper {
   touch-action: none;
