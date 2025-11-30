@@ -15,7 +15,7 @@ export const buttonVariants = cva(
         burgundy:
           "bg-burgundy-900 text-white hover:bg-burgundy-800 focus-visible:ring-burgundy-500",
         outline:
-          "border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white focus-visible:ring-navy-500",
+          "border-2 border-gold-400/80 text-white hover:bg-gold-400/10 backdrop-blur-sm",
         tourchoutline:
           "border-2 border-torch-500 text-torch-500 hover:text-torch-300  hover:border-torch-300 focus-visible:ring-navy-500 transition-colors transform duration-200",
         ghost: "text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",

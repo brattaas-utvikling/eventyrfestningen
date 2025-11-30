@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import Home from "@/pages/Home";
-// import Calendar from "./components/Calendar";
+
 import { About } from "./pages/About";
 import { Sponsors } from "./pages/Sponsors";
 
@@ -12,6 +12,8 @@ import Contact from "./pages/Contact";
 import ScrollToTop from "./components/layout/SrollToTop";
 import NotFound from "./pages/NotFound";
 import { Analytics } from "@vercel/analytics/react";
+import { Calendar } from "./pages/Calendar";
+import Privacy from "./pages/Privacy";
 
 export default function App() {
   return (
@@ -21,6 +23,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/om-forestillingen" element={<AboutShow />} />
+            <Route path="/kalender" element={<Calendar />} />
             <Route path="/nyheter" element={<NewsList />} />
             <Route path="/nyheter/:slug" element={<NewsPost />} />
             <Route path="/om-oss" element={<About />} />
@@ -28,6 +31,7 @@ export default function App() {
             <Route path="/arkiv" element={<Archive />} />
             <Route path="/arkiv/:slug" element={<AboutShow />} />
             <Route path="/kontakt" element={<Contact />} />
+            <Route path="/personvern" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Analytics />

@@ -7,32 +7,32 @@ const FAQ_ITEMS = [
   {
     icon: Ticket,
     question: "Hvordan kjøper jeg billetter?",
-    answer: "Billetter kjøpes enkelt via vår billettpartner TicketCo. Klikk på 'Kjøp billetter' i menyen, velg forestilling og antall billetter. Du får bekreftelse på e-post."
+    answer: "Billetter kjøpes enkelt via vår billettpartner TicketCo. Klikk på 'Kjøp billetter' i menyen eller på hovedsiden, velg forestilling og antall billetter. Du får bekreftelse på e-post."
   },
   {
     icon: Calendar,
     question: "Når går forestillingene?",
-    answer: "Hovedforestillingen går i juli med forestillinger onsdag-søndag. Halloween-forestilling i oktober. Se vår kalender for eksakte datoer og tidspunkter."
+    answer: "Hovedforestillingen går i starten av juli (2. - 4. juli og 8. - 11. juli). Halloween-forestilling i oktober. Følg med på vår nettside og sosiale medier for oppdateringer - og snart eget nyhetsbrev du kan melde deg på."
   },
   {
     icon: MapPin,
     question: "Hva skjer hvis det regner?",
-    answer: "Forestillingen spilles utendørs, og vi gjennomfører så lenge det er forsvarlig. Ta gjerne med regnjakke og evt. regnponcho, paraply er ikke tillat. Ved kraftig uvær kan forestillingen bli forsinket, avbrutt eller flyttet – informasjon gis da via e-post/SMS og i våre kanaler."
+    answer: "Forestillingen spilles utendørs, og vi gjennomfører så lenge det er forsvarlig. Ta gjerne med regnjakke evt. regnponcho - paraply er ikke tillat. Ved kraftig uvær kan forestillingen bli forsinket, avbrutt eller flyttet – informasjon gis da via e-post/SMS og i våre kanaler."
   },
   {
     icon: Users,
     question: "Er forestillingen egnet for små barn?",
-    answer: "Forestillingen er familievennlig og passer for barn fra 5 år. Det er action, humor og spenning. Varighet ca. 100 minutter."
+    answer: "Forestillingen er familievennlig og passer for barn fra 5 år. Det er action, humor og spenning. Varighet ca. 1 time eog 40 minutter."
   },
   {
     icon: HelpCircle,
     question: "Kan jeg bli frivillig?",
-    answer: "Ja! Vi trenger hjelp til alt fra parkeringsvakt, bidrag i eventyrlandsbyen, bak kulissene, rigging og nedrigg. Send e-post til kontakt@eventyrfestningen.no med 'Frivillig' i emnefeltet, så tar vi kontakt."
+    answer: "Ja! Vi trenger hjelp til alt fra parkeringsvakt, bidrag i festningslandsbyen, bak kulissene, rigging og nedrigg. Send e-post til kontakt@eventyrfestningen.no med 'Frivillig' i emnefeltet, så tar vi kontakt."
   },
   {
   icon: RockingChairIcon,
   question: "Trenger vi å ta med stol eller sitteunderlag?",
-  answer: "Det er benker/sitteplasser i evnetyrlandsbyen, men vi anbefaler et enkelt sitteunderlag for ekstra komfort – spesielt for barn. Egen campingstol kan ikke tas med siden det er eget amfi/tribune til publikum.",
+  answer: "Det er benker/sitteplasser i festningslandsbyen, men vi anbefaler et enkelt sitteunderlag for ekstra komfort – spesielt for barn og eldre. Egen campingstol kan ikke tas med siden det er eget amfi/tribune til publikum.",
   }
 ];
 

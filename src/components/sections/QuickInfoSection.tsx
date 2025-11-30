@@ -34,7 +34,7 @@ const quickInfoSlides = [
     label: "Når",
     title: "Sommeren 2025",
     description:
-      "Kveldsforestillinger i sommersesongen – når lyset, luften og stemningen gjør alt litt mer magisk. Eventyrlandsbyen åpner dørene klokken 20.00 hver forestillingsdag. Forestillingene starter klokken 22.00.",
+      "Kveldsforestillinger i sommersesongen – når lyset, luften og stemningen gjør alt litt mer magisk. Festningslandsbyen åpner dørene klokken 20.00 hver forestillingsdag. Forestillingene starter klokken 22.00.",
   },
   {
     id: "hvem",
@@ -70,27 +70,14 @@ export function QuickInfoSection() {
               <h2 className="text-3xl font-semibold font-sans tracking-tight sm:text-4xl">
                 Alt du trenger å vite på 30 sekunder
               </h2>
-              <p className="text-sm leading-relaxed font-sans text-slate-200/90">
-                Hva det er, hvor det skjer, når dere bør komme og hvem det passer
-                for. Sveip gjennom kortene for å få oversikten – før dere går
-                videre til billetter og praktisk info.
+              <p className="text-base leading-relaxed font-sans text-slate-200/90">
+              Kortene gir deg en rask oversikt over hele opplevelsen – hva forestillingen handler om, hvor den spilles, når dere bør møte opp og hvem den passer for. Perfekt for å få et kjapt inntrykk før dere går videre til billetter og praktisk informasjon.
               </p>
             </div>
-
-            <div className="space-y-3 text-sm font-sans text-slate-200/90">
-              <p>Perfekt å vise når noen spør «Hva er egentlig Eventyrfestningen?»</p>
-              <p>Raskt overblikk for foreldre, lærere og gruppeledere.</p>
-            </div>
-
-            <div className="flex flex-wrap gap-3 pt-1 font-display">
-            <Button asChild variant="torch">
-  <a href="#billetter">Se spilledatoer</a>
-</Button>
-
-<Button asChild variant="whiteghost">
-  <a href="#prakrisk-info">Praktisk informasjonr</a>
-</Button>
-
+            <div className="flex flex-wrap gap-3 pt-1">
+              <Button asChild variant="outline">
+                <a href="/om-forestillingen">Les mer om forestillingen</a>
+              </Button>
             </div>
           </motion.div>
 

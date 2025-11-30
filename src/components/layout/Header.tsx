@@ -52,7 +52,8 @@ export function Header() {
     () => [
       { name: "Hjem", href: "/" },
       { name: "Om forestillingen", href: "/om-forestillingen" },
-      { name: "Nyheter", href: "/nyheter" },
+      { name: "Kalender", href: "/kalender" },
+      // { name: "Nyheter", href: "/nyheter" },
       { name: "Om oss", href: "/om-oss" },
       { name: "Arkiv", href: "/arkiv" },
       { name: "Sponsorer", href: "/sponsorer" },
@@ -209,7 +210,7 @@ export function Header() {
     <header
       ref={headerRef}
       className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300 ease-in-out bg-navy-900/95 backdrop-blur-sm shadow-lg"
+        "fixed top-0 w-full z-50 transition-all duration-300 ease-in-out bg-navy-900/95 backdrop-blur-sm shadow-lg border-b border-white/20"
       )}
     >
       <Container>

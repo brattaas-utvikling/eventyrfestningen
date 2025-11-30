@@ -10,6 +10,7 @@ import { Section } from "@/components/layout/Section";
 import { urlFor } from "@/lib/sanity";
 import type { Sponsor } from "@/types/sanity";
 import { trackEvent } from "@/lib/analytics";
+import { Button } from "@/components/ui/Button";
 
 /* -------------------------------------------------------
  *  Tier-oppsett
@@ -337,6 +338,20 @@ export function Sponsors() {
         <Container>
           {/* <DesignHeader index={1} label="Spotlight-oppsett" icon={Sparkles} /> */}
           {isLoading ? <SkeletonBlock /> : <DesignSpotlight {...tiered} />}
+        </Container>
+      </Section>
+            {/* CTA */}
+            <Section background="navy">
+        <Container className="text-center">
+          <h2 className="text-3xl font-display font-bold text-white mb-4">
+            Vil du være sponsor?
+          </h2>
+          <p className="text-gray-200 mb-6">
+            Om du ønsker å bli med som sponsor, så ta gjerne kontakt med oss for en uforpliktende prat om muligheter og pakker.
+          </p>
+          <Button variant="torch" size="lg" asChild>
+            <a href="/kontakt">Ta kontakt</a>
+          </Button>
         </Container>
       </Section>
     </>

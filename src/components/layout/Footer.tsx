@@ -217,11 +217,6 @@ export function Footer({ variant = "dark" }: FooterProps) {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/cookies" className={link}>
-                    Informasjonskapsler
-                  </Link>
-                </li>
-                <li>
                   <Link to="/tilgjengelighet" className={link}>
                     Tilgjengelighet
                   </Link>

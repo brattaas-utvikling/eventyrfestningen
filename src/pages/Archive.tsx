@@ -49,7 +49,7 @@ export function Archive() {
             </h2>
             <p className="text-xl text-gray-200 mb-8">
               Gjennom 5 år har vi skapt uforglemmelige øyeblikk for over 
-              10,000 publikummere. Hver forestilling er et kapittel i vår historie, og hver 
+              11,000 publikummere. Hver forestilling er et kapittel i vår historie, og hver 
               opplevelse er et minne som varer livet ut.
             </p>
             <p className="text-lg text-gray-300">

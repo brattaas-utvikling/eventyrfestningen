@@ -139,6 +139,7 @@ export function About() {
 
       {/* Om foreningen / frivillighet – sentrert tekst + polaroid-bilder */}
       <Section background="navy">
+        <Container>
         {organizationLoading ? (
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <Skeleton className="h-6 w-48 mx-auto" />
@@ -386,6 +387,7 @@ export function About() {
             </div>
           </div>
         ) : null}
+        </Container>
       </Section>
 
       {/* Timeline */}
@@ -481,17 +483,6 @@ export function About() {
           </Button>
         </Container>
       </Section>
-
-      {/* Scrollbar Hide CSS */}
-      <style>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </>
   );
 }

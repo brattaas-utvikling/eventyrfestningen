@@ -181,7 +181,7 @@ export function HeroTicketLaunch({
                 <div className="transform skew-x-6 bg-linear-to-br from-amber-600 via-gold-500 to-amber-700 border border-gold-400 rounded-lg shadow-lg px-5 py-2 md:px-7 md:py-3 max-w-[95vw]">
                   <div className="-skew-x-6 flex items-center gap-2 text-white">
                     <GiftIcon className="w-4 h-4 opacity-80 shrink-0" />
-                    <span className="text-[10px] leading-snug md:text-xs md:leading-snug lg:text-sm font-display font-semibold uppercase tracking-[0.20em]">
+                    <span className="text-[10px] leading-snug md:text-xs md:leading-snug lg:text-sm font-sans font-semibold uppercase tracking-[0.20em]">
                       Kjøp årets beste julegave! En opplevelse for hele familien!
                     </span>
                     <Sparkles className="w-4 h-4 opacity-80 shrink-0" />

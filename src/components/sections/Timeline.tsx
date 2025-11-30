@@ -1,7 +1,14 @@
-
 // src/components/sections/Timeline.tsx
-import { useRef } from "react";
-import { motion, useScroll, useInView, useTransform } from "framer-motion";
+import { useRef, type MouseEvent } from "react";
+import {
+  motion,
+  useScroll,
+  useInView,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+
+
 import { Container } from "@/components/layout/Container";
 import { urlFor } from "@/lib/sanity";
 import type { Milestone } from "@/types/sanity";
@@ -158,7 +165,7 @@ export function Timeline({ milestones }: TimelineProps) {
                   {/* VENSTRE sidekort (>= sm) */}
                   <div className="hidden sm:block sm:col-start-1 pb-16">
                     {!isRight && (
-                      <Card
+                      <TimelineCard
                         side="left"
                         title={title}
                         desc={desc}
@@ -171,7 +178,7 @@ export function Timeline({ milestones }: TimelineProps) {
                   {/* HØYRE sidekort (>= sm) */}
                   <div className="hidden sm:block sm:col-start-2 pb-16">
                     {isRight && (
-                      <Card
+                      <TimelineCard
                         side="right"
                         title={title}
                         desc={desc}
@@ -183,7 +190,7 @@ export function Timeline({ milestones }: TimelineProps) {
 
                   {/* MOBIL: én kolonne */}
                   <div className="sm:hidden col-span-1 pb-16">
-                    <Card
+                    <TimelineCard
                       side="mobile"
                       title={title}
                       desc={desc}
@@ -200,7 +207,7 @@ export function Timeline({ milestones }: TimelineProps) {
     </OldPaper>
   );
 }
-function Card({
+function TimelineCard({
   side,
   title,
   desc,
@@ -215,7 +222,7 @@ function Card({
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
-  /** 1) POPPING-IN ANIMASJON (samme som du hadde før) */
+  /** 1) POP-IN ANIMASJON (samme feeling som du hadde før) */
   const inView = useInView(ref, {
     amount: 0.5,
     margin: "0px 0px -10% 0px",
@@ -236,19 +243,41 @@ function Card({
     },
   } as const;
 
-  /** 2) FLYTENDE PARALLAX-FØLELSE (SCROLL-LINKED FLOATING) */
+  /** 2) FLOATING-PARALLAX PÅ SCROLL */
   const { scrollYProgress: cardScroll } = useScroll({
     target: ref,
     offset: ["start 90%", "end 10%"],
   });
 
-  // Små endringer i y-posisjon → floating-følelse
   const floatY = useTransform(cardScroll, [0, 1], [15, -15]);
-
-  /** 3) SVAK ROTASJON FOR LITT MER LIV (SUBTIL!) */
   const floatRotate = useTransform(cardScroll, [0, 1], [-0.4, 0.4]);
 
-  /** 4) BEHOLDER DITT LILLE RANDOM-TILT (venstre/høyre) */
+  /** 3) 3D HOVER TILT (smooth spring) */
+  const rotateX = useSpring(0, { stiffness: 220, damping: 20, mass: 0.4 });
+  const rotateY = useSpring(0, { stiffness: 220, damping: 20, mass: 0.4 });
+  const maxTilt = 6; // prøv 4–8 for mer eller mindre vipp
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const midX = rect.width / 2;
+    const midY = rect.height / 2;
+
+    const tiltY = ((x - midX) / midX) * maxTilt; // venstre/høyre
+    const tiltX = -((y - midY) / midY) * maxTilt; // opp/ned
+
+    rotateX.set(tiltX);
+    rotateY.set(tiltY);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
+  /** 4) Litt skeiv rotasjon som før */
   const rotationClass =
     side === "left"
       ? "md:-rotate-[0.6deg]"
@@ -268,14 +297,14 @@ function Card({
       }}
       className={side === "mobile" ? "relative ml-20" : "relative"}
       style={{
-        // 🎉 Nå kombineres “popping in” + floating-coast scroll parallax
         y: floatY,
         rotate: floatRotate,
+        perspective: 1000,
         willChange: "transform, opacity",
         contain: "layout paint",
       }}
     >
-      {/* connector */}
+      {/* connector mot midtlinja (kun ≥ sm) */}
       {side !== "mobile" && (
         <span
           aria-hidden
@@ -286,15 +315,17 @@ function Card({
         />
       )}
 
-      {/* SELVE KORTET (din tidligere styling beholdt 100%) */}
-      <div
+      {/* SELVE KORTET – dette får hover tilt */}
+      <motion.div
+        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         className={[
           "group relative overflow-hidden rounded-[18px]",
           "bg-[#FAF7F1]",
-          "border border-amber-100/70",
-          "shadow-[0_20px_60px_rgba(15,23,42,0.45)]",
+          "border border-amber-100/70 rounded-2xl",
           "transition-all duration-300 ease-out",
-          "hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(15,23,42,0.65)]",
+          "hover:-translate-y-1",
           "hover:border-amber-200",
           rotationClass,
         ].join(" ")}
@@ -308,7 +339,7 @@ function Card({
           }}
         />
 
-        {/* Vignette / ramme */}
+        {/* Vignette / innramming */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -318,7 +349,7 @@ function Card({
           }}
         />
 
-        {/* Top light */}
+        {/* Top light / teaterlys */}
         <div
           className="pointer-events-none absolute inset-x-0 top-0 h-16"
           style={{
@@ -327,12 +358,12 @@ function Card({
           }}
         />
 
-        {/* Gullinje */}
-        <div className="absolute top-0 inset-x-6 h-[3px] rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 opacity-80" />
+        {/* Dekorativ gullinje øverst */}
+        <div className="absolute top-0 inset-x-6 h-[3px] rounded-full bg-linear-to-r from-amber-400 via-amber-300 to-amber-500 opacity-80" />
 
-        {/* Bilde */}
+        {/* Valgfritt bilde */}
         {image ? (
-          <div className="relative aspect-[16/9] overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
+          <div className="relative aspect-video overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
             <img
               src={urlFor(image)
                 .width(640)
@@ -344,8 +375,6 @@ function Card({
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
             />
-
-            {/* highlight stripe */}
             <div
               className="pointer-events-none absolute inset-x-0 top-0 h-10 opacity-60"
               style={{
@@ -356,7 +385,7 @@ function Card({
           </div>
         ) : null}
 
-        {/* Tekst */}
+        {/* Innhold */}
         <div className="relative p-6 sm:p-7">
           <h3 className="text-2xl font-display font-bold text-navy-900 mb-3 tracking-[0.03em]">
             {title}
@@ -368,13 +397,14 @@ function Card({
           ) : null}
         </div>
 
-        {/* Dekorhjørner */}
-        <div className="pointer-events-none absolute top-4 right-5 w-10 h-10 border-t border-r border-amber-400/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="pointer-events-none absolute bottom-4 left-5 w-10 h-10 border-b border-l border-amber-400/40 opacity-0 group-hover:opacity-100 transition-opacity" />
-      </div>
+        {/* Dekor-hjørner */}
+        <div className="pointer-events-none absolute top-4 right-5 w-10 h-10 border-t border-r border-amber-400/60 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="pointer-events-none absolute bottom-4 left-5 w-10 h-10 border-b border-l border-amber-400/60 opacity-0 group-hover:opacity-100 transition-opacity" />
+      </motion.div>
     </motion.article>
   );
 }
+
 
 
 

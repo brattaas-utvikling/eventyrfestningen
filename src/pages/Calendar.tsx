@@ -1,17 +1,9 @@
 // src/routes/Calendar.tsx
-import { useSanityQuery } from '@/hooks/useSanityQuery'
-import { queries } from '@/lib/sanityQueries'
 import { Container } from '@/components/layout/Container'
-import { CalendarGrid } from '@/components/sections/CalendarGrid'
-import { Skeleton } from '@/components/ui/Skeleton'
-import type { Performance } from '@/types/sanity'
 import { SEOHead } from '@/components/SEOHead'
+import { CalendarSection } from '@/components/sections/CalendarSection'
 
 export function Calendar() {
-  const { data: performances, isLoading } = useSanityQuery<Performance[]>(
-    'all-performances',
-    queries.upcomingPerformances
-  )
 
   return (
     <>
@@ -24,42 +16,17 @@ export function Calendar() {
         <Container>
           <div className="max-w-3xl">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold mb-6">
-              Forestillingskalender
+              Forestillinger 2026
             </h1>
             <p className="text-xl text-gray-200">
-              Velg din dato og sikre plasser til en uforglemmelig kveld
+            Her ser du alle planlagte kveldsforestillinger på Kongsvinger
+              Festning sommeren 2026. Forestillingen starter kl. 22.00, og
+              portene åpner kl. 20.00.
             </p>
           </div>
         </Container>
       </section>
-
-      {isLoading ? (
-        <section className="py-16 sm:py-20">
-          <Container>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="space-y-4">
-                  <Skeleton className="h-96 w-full" />
-                  <Skeleton className="h-4 w-3/4" />
-                  <Skeleton className="h-4 w-1/2" />
-                </div>
-              ))}
-            </div>
-          </Container>
-        </section>
-      ) : performances && performances.length > 0 ? (
-        <CalendarGrid performances={performances} />
-      ) : (
-        <section className="py-16 sm:py-20">
-          <Container>
-            <div className="text-center py-12">
-              <p className="text-xl text-gray-600">
-                Ingen forestillinger er planlagt ennå.
-              </p>
-            </div>
-          </Container>
-        </section>
-      )}
+      <CalendarSection />
     </>
   )
 }

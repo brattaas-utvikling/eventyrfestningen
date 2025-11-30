@@ -34,14 +34,20 @@ export default function NotFound() {
               "radial-gradient(60% 60% at 85% 10%, rgba(251,146,60,0.20), transparent 60%), radial-gradient(50% 50% at 20% 90%, rgba(245,158,11,0.15), transparent 60%)",
           }}
         />
-        <div className="absolute -top-16 -right-16 h-72 w-72 rounded-full bg-torch-500/25 blur-3xl" aria-hidden />
-        <div className="absolute -bottom-16 -left-16 h-72 w-72 rounded-full bg-gold-400/20 blur-3xl" aria-hidden />
+        <div
+          className="absolute -top-16 -right-16 h-72 w-72 rounded-full bg-torch-500/25 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="absolute -bottom-16 -left-16 h-72 w-72 rounded-full bg-gold-400/20 blur-3xl"
+          aria-hidden
+        />
 
         <Container className="relative z-10 py-20 sm:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gold-400/10 border border-gold-400/40 px-4 py-1 text-gold-50 text-sm">
               <Ghost className="h-4 w-4" />
-              Uff da, her var det tomt
+              Her gikk teppet ned litt for tidlig
             </div>
 
             {/* 404-tall med liten “bounce” */}
@@ -61,11 +67,12 @@ export default function NotFound() {
               tabIndex={-1}
               className="text-3xl sm:text-4xl font-display font-bold mb-4 focus:outline-none"
             >
-              Siden ble ikke funnet
+              Denne siden står ikke på programmet
             </h1>
 
             <p className="text-navy-100/80 mb-8">
-              Lenken kan være feil, eller siden er flyttet. Prøv disse veiene videre.
+              Enten har vi skrevet om manuset, eller så har du fulgt en gammel
+              rekvisitt av en lenke. Prøv en av disse scenene i stedet:
             </p>
 
             {/* actions */}
@@ -91,10 +98,25 @@ export default function NotFound() {
               </Link>
             </div>
 
-            {/* hint om URL-en */}
-            <p className="mt-6 text-xs text-navy-100/50 break-all">
-              URL: <span className="font-mono">{pathname}</span>
-            </p>
+            {/* Hilsen fra Eventyrfestningen */}
+            <div className="mt-10 inline-flex flex-col items-center gap-2 text-xs sm:text-sm text-navy-100/80">
+              <span className="uppercase tracking-[0.2em] text-gold-200 text-[0.7rem]">
+                Hilsen Eventyrfestningen
+              </span>
+              <p className="max-w-md leading-relaxed">
+                Har du egentlig lyst til å bli med bak scenen i stedet for å
+                lete etter denne siden? Hvis du ønsker å melde deg på som
+                frivillig, send en e-post til{" "}
+                <a
+                  href="mailto:kontak@eventyrfestningen.no"
+                  className="underline decoration-gold-400 decoration-1 underline-offset-2 hover:text-gold-200"
+                >
+                  kontak@eventyrfestningen.no
+                </a>
+                . Påmeldingsskjema kommer om ikke lenge – vi må bare skrive ferdig
+                eventyret først.
+              </p>
+            </div>
           </div>
         </Container>
       </section>
