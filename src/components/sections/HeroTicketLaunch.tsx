@@ -530,7 +530,7 @@ export function HeroTicketLaunch({
           </motion.div>
 
           {/* Praktisk info */}
-          {show.practicalInfo && (
+          {/* {show.practicalInfo && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -564,7 +564,7 @@ export function HeroTicketLaunch({
                 </div>
               )}
             </motion.div>
-          )}
+          )} */}
         </div>
       </Container>
     </section>
