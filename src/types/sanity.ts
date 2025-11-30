@@ -73,6 +73,7 @@ export interface Show {
   type: "main" | "halloween";
   story?: PortableText;
   posterImage?: SanityImage;
+  bookImage?: SanityImage;
   heroImage?: SanityImage;
   heroVideoUrl?: string;
   logoImage?: SanityImage;

@@ -14,7 +14,7 @@ import type {
   PortableText as PortableTextType,
 } from "@/types/sanity";
 import { SEOHead } from "@/components/SEOHead";
-import { CurtainSection } from "@/components/layout/CurtainSection";
+// import { CurtainSection } from "@/components/layout/CurtainSection";
 import { useMemo } from "react";
 
 // ---- Types ----
@@ -96,7 +96,8 @@ export function About() {
         roleLower.includes("nestleder") ||
         roleLower.includes("kontaktperson") ||
         roleLower.includes("styreleder") ||
-        roleLower.includes("styremedlem")
+        roleLower.includes("styremedlem") ||
+        roleLower.includes("dagligleder")
       );
     });
   }, [boardMembers]);
@@ -137,7 +138,7 @@ export function About() {
       </section>
 
       {/* Om foreningen / frivillighet – sentrert tekst + polaroid-bilder */}
-      <CurtainSection id="foreningen">
+      <Section background="navy">
         {organizationLoading ? (
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <Skeleton className="h-6 w-48 mx-auto" />
@@ -208,7 +209,7 @@ export function About() {
                     ))}
                   </div>
                   <p className="text-xs text-amber-300/70 text-center mt-2">
-                    👆 Sveip for å se flere bilder
+                    Sveip for å se flere bilder
                   </p>
                 </div>
               </div>
@@ -330,7 +331,7 @@ export function About() {
                     ))}
                   </div>
                   <p className="text-xs text-amber-300/70 text-center mt-2">
-                    👆 Sveip for å se flere bilder
+                    Sveip for å se flere bilder
                   </p>
                 </div>
 
@@ -385,7 +386,7 @@ export function About() {
             </div>
           </div>
         ) : null}
-      </CurtainSection>
+      </Section>
 
       {/* Timeline */}
       {milestonesLoading ? (
@@ -436,7 +437,7 @@ export function About() {
               {filteredBoardMembers.map((member) => (
                 <div key={member._id} className="group">
                   <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-2">
-                    <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-navy-900 to-burgundy-900">
+                    <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
                       {member.image ? (
                         <img
                           src={urlFor(member.image)
@@ -444,7 +445,7 @@ export function About() {
                             .height(533)
                             .url()}
                           alt={member.name}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 grayscale-100 brightness-90 group-hover:grayscale-0 group-hover:brightness-100"
                         />
                       ) : null}
                     </div>

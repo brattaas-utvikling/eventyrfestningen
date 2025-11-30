@@ -82,10 +82,10 @@ export function Footer({ variant = "dark" }: FooterProps) {
                       } shrink-0 mt-0.5`}
                     />
                     <a
-                      href="mailto:post@eventyrfestningen.no"
+                      href="mailto:kontakt@eventyrfestningen.no"
                       className={link}
                     >
-                      post@eventyrfestningen.no
+                      kontakt@eventyrfestningen.no
                     </a>
                   </p>
                   <p className="flex items-start gap-2">
@@ -94,8 +94,8 @@ export function Footer({ variant = "dark" }: FooterProps) {
                         isDark ? "text-gold-400" : "text-torch-600"
                       } shrink-0 mt-0.5`}
                     />
-                    <a href="tel:+4712345678" className={link}>
-                      +47 123 45 678
+                    <a href="tel:+4795903453" className={link}>
+                    +47 959 03 453
                     </a>
                   </p>
                   <p className="flex items-start gap-2">
@@ -105,9 +105,9 @@ export function Footer({ variant = "dark" }: FooterProps) {
                       } shrink-0 mt-0.5`}
                     />
                     <span>
-                      Kongsvinger Festning
+                      Kongsvinger Festning 2
                       <br />
-                      2226 Kongsvinger
+                      2213 Kongsvinger
                     </span>
                   </p>
                 </address>

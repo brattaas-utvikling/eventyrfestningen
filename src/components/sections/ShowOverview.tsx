@@ -110,7 +110,7 @@ export function ShowOverview({ show, onImageClick }: ShowOverviewProps) {
               {show.practicalInfo?.duration ? (
                 <p>
                   <span className="text-white font-medium">Varighet:</span>{" "}
-                  {show.practicalInfo.duration} min
+                  {show.practicalInfo.duration}
                 </p>
               ) : null}
             </div>
