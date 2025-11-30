@@ -18,213 +18,313 @@ export function CurtainSection({ id, children }: CurtainSectionProps) {
   });
 
   // Gardin-progress: åpner seg gradvis
+  // Raskere på mobil for bedre UX
   const curtainProgress = useTransform(
     scrollYProgress,
-    [0.2, 0.6],
+    [0.15, 0.55], // Litt raskere åpning
     [0, 1],
     { clamp: true }
   );
 
   // Bevegelse av gardiner
-  const leftX = useTransform(curtainProgress, [0, 1], ["0%", "-100%"]);
-  const rightX = useTransform(curtainProgress, [0, 1], ["0%", "100%"]);
+  const leftX = useTransform(curtainProgress, [0, 1], ["0%", "-102%"]);
+  const rightX = useTransform(curtainProgress, [0, 1], ["0%", "102%"]);
 
   return (
     <section
       id={id}
       ref={ref}
-      className="relative py-20 sm:py-24 bg-navy-950 overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 bg-navy-950 overflow-hidden"
     >
-      {/* Spotlight bak gardiner */}
+      {/* Dramatisk spotlight bak med ekstra stråler */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-40"
+        className="pointer-events-none absolute inset-0 opacity-50"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(234,179,8,0.15),rgba(15,23,42,1)_70%)]" />
+        {/* Hoved spotlight */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(234,179,8,0.25),rgba(15,23,42,0.9)_50%,rgba(15,23,42,1)_80%)]" />
+        
+        {/* Ekstra lys-stråler fra toppen */}
+        <div 
+          className="absolute inset-0 opacity-40"
+          style={{
+            background: `
+              conic-gradient(
+                from 180deg at 50% 0%, 
+                transparent 0deg,
+                rgba(234,179,8,0.08) 30deg,
+                transparent 60deg,
+                rgba(234,179,8,0.08) 90deg,
+                transparent 120deg,
+                rgba(234,179,8,0.08) 150deg,
+                transparent 180deg
+              )
+            `
+          }}
+        />
       </div>
 
-      {/* Venstre gardin */}
+      {/* VENSTRE GARDIN */}
       <motion.div
         style={{ x: leftX }}
-        className="pointer-events-none absolute inset-y-0 left-0 w-1/2 z-50"
+        className="pointer-events-none absolute inset-y-0 left-0 w-1/2 md:w-[52%] z-50 will-change-transform"
       >
-        {/* Gardin-tekstur med wavy kant */}
-        <div className="relative w-full h-full bg-gradient-to-r from-red-900 via-red-800 to-red-900">
-          {/* Vertikale folder/plisser */}
-          <div
-            className="absolute inset-0 opacity-60"
-            style={{
-              backgroundImage: `repeating-linear-gradient(
-                90deg,
-                rgba(0, 0, 0, 0.3) 0px,
-                transparent 2px,
-                transparent 8px,
-                rgba(255, 255, 255, 0.08) 10px,
-                rgba(255, 255, 255, 0.08) 12px,
-                transparent 14px,
-                transparent 20px,
-                rgba(0, 0, 0, 0.3) 22px,
-                rgba(0, 0, 0, 0.3) 24px
-              )`,
-            }}
-          />
-
-          {/* Skygge for dybde */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 0% 50%, rgba(0, 0, 0, 0.4), transparent 60%)",
-            }}
-          />
-
-          {/* Wavy høyre kant */}
-          <svg
-            className="absolute right-0 top-0 h-full w-8 text-red-900"
-            preserveAspectRatio="none"
-            viewBox="0 0 20 100"
-            fill="currentColor"
-          >
-            <path
-              d="M 0 0 
-                 Q 10 2, 15 5
-                 Q 20 8, 18 12
-                 Q 16 16, 18 20
-                 Q 20 24, 17 28
-                 Q 14 32, 17 36
-                 Q 20 40, 16 44
-                 Q 12 48, 16 52
-                 Q 20 56, 17 60
-                 Q 14 64, 18 68
-                 Q 22 72, 17 76
-                 Q 12 80, 16 84
-                 Q 20 88, 18 92
-                 Q 16 96, 20 100
-                 L 0 100 Z"
-              className="drop-shadow-[2px_0_8px_rgba(0,0,0,0.5)]"
-            />
-          </svg>
-
-          {/* Highlight på folder */}
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage: `repeating-linear-gradient(
-                90deg,
-                transparent 0px,
-                rgba(255, 255, 255, 0.1) 10px,
-                rgba(255, 255, 255, 0.15) 11px,
-                transparent 12px,
-                transparent 24px
-              )`,
-            }}
-          />
-
-          {/* Myk skygge på høyre side */}
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-black/40 to-transparent" />
-        </div>
-      </motion.div>
-
-      {/* Høyre gardin */}
-      <motion.div
-        style={{ x: rightX }}
-        className="pointer-events-none absolute inset-y-0 right-0 w-1/2 z-50"
-      >
-        {/* Gardin-tekstur med wavy kant */}
-        <div className="relative w-full h-full bg-gradient-to-l from-red-900 via-red-800 to-red-900">
-          {/* Vertikale folder/plisser */}
-          <div
-            className="absolute inset-0 opacity-60"
-            style={{
-              backgroundImage: `repeating-linear-gradient(
-                90deg,
-                rgba(0, 0, 0, 0.3) 0px,
-                transparent 2px,
-                transparent 8px,
-                rgba(255, 255, 255, 0.08) 10px,
-                rgba(255, 255, 255, 0.08) 12px,
-                transparent 14px,
-                transparent 20px,
-                rgba(0, 0, 0, 0.3) 22px,
-                rgba(0, 0, 0, 0.3) 24px
-              )`,
-            }}
-          />
-
-          {/* Skygge for dybde */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 100% 50%, rgba(0, 0, 0, 0.4), transparent 60%)",
-            }}
-          />
-
-          {/* Wavy venstre kant */}
-          <svg
-            className="absolute left-0 top-0 h-full w-8 text-red-900"
-            preserveAspectRatio="none"
-            viewBox="0 0 20 100"
-            fill="currentColor"
-          >
-            <path
-              d="M 20 0 
-                 Q 10 2, 5 5
-                 Q 0 8, 2 12
-                 Q 4 16, 2 20
-                 Q 0 24, 3 28
-                 Q 6 32, 3 36
-                 Q 0 40, 4 44
-                 Q 8 48, 4 52
-                 Q 0 56, 3 60
-                 Q 6 64, 2 68
-                 Q -2 72, 3 76
-                 Q 8 80, 4 84
-                 Q 0 88, 2 92
-                 Q 4 96, 0 100
-                 L 20 100 Z"
-              className="drop-shadow-[-2px_0_8px_rgba(0,0,0,0.5)]"
-            />
-          </svg>
-
-          {/* Highlight på folder */}
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage: `repeating-linear-gradient(
-                90deg,
-                transparent 0px,
-                rgba(255, 255, 255, 0.1) 10px,
-                rgba(255, 255, 255, 0.15) 11px,
-                transparent 12px,
-                transparent 24px
-              )`,
-            }}
-          />
-
-          {/* Myk skygge på venstre side */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black/40 to-transparent" />
-        </div>
-      </motion.div>
-
-      {/* Gardin-stang øverst */}
-      <div className="pointer-events-none absolute top-0 left-0 right-0 h-4 z-[60]">
-        <div className="relative w-full h-full">
-          {/* Stang */}
-          <div className="absolute inset-0 bg-gradient-to-b from-amber-700 via-amber-800 to-amber-900 shadow-lg" />
+        {/* Hovedgardin med forbedret tekstur */}
+        <div className="relative w-full h-full bg-gradient-to-r from-red-950 via-red-900 to-red-800">
           
-          {/* Metallisk glans */}
+          {/* FORBEDRET: Mer realistiske vertikale plisser */}
+          <div
+            className="absolute inset-0 opacity-70"
+            style={{
+              backgroundImage: `
+                repeating-linear-gradient(
+                  90deg,
+                  rgba(0, 0, 0, 0.4) 0px,
+                  rgba(0, 0, 0, 0.3) 1px,
+                  transparent 2px,
+                  transparent 6px,
+                  rgba(255, 255, 255, 0.06) 8px,
+                  rgba(255, 255, 255, 0.1) 9px,
+                  rgba(255, 255, 255, 0.06) 10px,
+                  transparent 12px,
+                  transparent 18px,
+                  rgba(0, 0, 0, 0.35) 20px,
+                  rgba(0, 0, 0, 0.4) 22px
+                )
+              `,
+            }}
+          />
+
+          {/* NYTT: Ekstra dybde med subtil gradient overlay */}
           <div
             className="absolute inset-0 opacity-40"
             style={{
-              background:
-                "linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.3) 100%)",
+              background: `
+                linear-gradient(
+                  90deg,
+                  rgba(0, 0, 0, 0.3) 0%,
+                  transparent 20%,
+                  transparent 80%,
+                  rgba(0, 0, 0, 0.2) 100%
+                )
+              `
             }}
           />
+
+          {/* Hovedskygge fra kanten */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 150% 100% at 0% 50%, rgba(0, 0, 0, 0.5), transparent 50%)",
+            }}
+          />
+
+          {/* OPTIMALISERT: Enklere SVG for bedre mobilytelse */}
+          <svg
+            className="absolute right-0 top-0 h-full w-6 md:w-10 text-red-900 drop-shadow-[3px_0_10px_rgba(0,0,0,0.6)]"
+            preserveAspectRatio="none"
+            viewBox="0 0 20 100"
+            fill="currentColor"
+          >
+            <path
+              d="M 0,0 
+                 Q 12,3 16,8
+                 Q 19,12 17,16
+                 Q 15,20 17,24
+                 Q 19,28 16,32
+                 Q 13,36 16,40
+                 Q 19,44 15,48
+                 Q 11,52 15,56
+                 Q 19,60 16,64
+                 Q 13,68 17,72
+                 Q 20,76 16,80
+                 Q 12,84 16,88
+                 Q 19,92 17,96
+                 Q 15,99 20,100
+                 L 0,100 Z"
+            />
+          </svg>
+
+          {/* FORBEDRET: Highlight med mer variasjon */}
+          <div
+            className="absolute inset-0 opacity-25"
+            style={{
+              backgroundImage: `
+                repeating-linear-gradient(
+                  90deg,
+                  transparent 0px,
+                  rgba(255, 255, 255, 0.08) 8px,
+                  rgba(255, 255, 255, 0.15) 9px,
+                  rgba(255, 255, 255, 0.08) 10px,
+                  transparent 12px,
+                  transparent 22px
+                )
+              `,
+            }}
+          />
+
+          {/* NYTT: Ekstra skygge på høyre kant for dybde */}
+          <div className="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-black/50 via-black/20 to-transparent" />
           
-          {/* Finials/endeknapper */}
-          <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-amber-600 to-amber-900 shadow-xl border-2 border-amber-700" />
-          <div className="absolute -right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-amber-600 to-amber-900 shadow-xl border-2 border-amber-700" />
+          {/* NYTT: Subtil ambient occlusion øverst og nederst */}
+          <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/30 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
+        </div>
+      </motion.div>
+
+      {/* HØYRE GARDIN */}
+      <motion.div
+        style={{ x: rightX }}
+        className="pointer-events-none absolute inset-y-0 right-0 w-1/2 md:w-[52%] z-50 will-change-transform"
+      >
+        {/* Hovedgardin med forbedret tekstur */}
+        <div className="relative w-full h-full bg-gradient-to-l from-red-950 via-red-900 to-red-800">
+          
+          {/* FORBEDRET: Mer realistiske vertikale plisser */}
+          <div
+            className="absolute inset-0 opacity-70"
+            style={{
+              backgroundImage: `
+                repeating-linear-gradient(
+                  90deg,
+                  rgba(0, 0, 0, 0.4) 0px,
+                  rgba(0, 0, 0, 0.3) 1px,
+                  transparent 2px,
+                  transparent 6px,
+                  rgba(255, 255, 255, 0.06) 8px,
+                  rgba(255, 255, 255, 0.1) 9px,
+                  rgba(255, 255, 255, 0.06) 10px,
+                  transparent 12px,
+                  transparent 18px,
+                  rgba(0, 0, 0, 0.35) 20px,
+                  rgba(0, 0, 0, 0.4) 22px
+                )
+              `,
+            }}
+          />
+
+          {/* NYTT: Ekstra dybde med subtil gradient overlay */}
+          <div
+            className="absolute inset-0 opacity-40"
+            style={{
+              background: `
+                linear-gradient(
+                  90deg,
+                  rgba(0, 0, 0, 0.2) 0%,
+                  transparent 20%,
+                  transparent 80%,
+                  rgba(0, 0, 0, 0.3) 100%
+                )
+              `
+            }}
+          />
+
+          {/* Hovedskygge fra kanten */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 150% 100% at 100% 50%, rgba(0, 0, 0, 0.5), transparent 50%)",
+            }}
+          />
+
+          {/* OPTIMALISERT: Enklere SVG for bedre mobilytelse */}
+          <svg
+            className="absolute left-0 top-0 h-full w-6 md:w-10 text-red-900 drop-shadow-[-3px_0_10px_rgba(0,0,0,0.6)]"
+            preserveAspectRatio="none"
+            viewBox="0 0 20 100"
+            fill="currentColor"
+          >
+            <path
+              d="M 20,0 
+                 Q 8,3 4,8
+                 Q 1,12 3,16
+                 Q 5,20 3,24
+                 Q 1,28 4,32
+                 Q 7,36 4,40
+                 Q 1,44 5,48
+                 Q 9,52 5,56
+                 Q 1,60 4,64
+                 Q 7,68 3,72
+                 Q 0,76 4,80
+                 Q 8,84 4,88
+                 Q 1,92 3,96
+                 Q 5,99 0,100
+                 L 20,100 Z"
+            />
+          </svg>
+
+          {/* FORBEDRET: Highlight med mer variasjon */}
+          <div
+            className="absolute inset-0 opacity-25"
+            style={{
+              backgroundImage: `
+                repeating-linear-gradient(
+                  90deg,
+                  transparent 0px,
+                  rgba(255, 255, 255, 0.08) 8px,
+                  rgba(255, 255, 255, 0.15) 9px,
+                  rgba(255, 255, 255, 0.08) 10px,
+                  transparent 12px,
+                  transparent 22px
+                )
+              `,
+            }}
+          />
+
+          {/* NYTT: Ekstra skygge på venstre kant for dybde */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
+          
+          {/* NYTT: Subtil ambient occlusion øverst og nederst */}
+          <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/30 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
+        </div>
+      </motion.div>
+
+      {/* FORBEDRET: Gardin-stang med mer detaljer */}
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-4 md:h-6 z-[60]">
+        <div className="relative w-full h-full">
+          {/* Stang med bedre gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-amber-600 via-amber-700 to-amber-900 shadow-2xl" />
+          
+          {/* Metallisk glans med mer kontrast */}
+          <div
+            className="absolute inset-0 opacity-60"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 20%, transparent 40%, transparent 60%, rgba(0,0,0,0.3) 80%, rgba(0,0,0,0.5) 100%)",
+            }}
+          />
+
+          {/* NYTT: Dekorativ textur på stangen */}
+          <div
+            className="absolute inset-0 opacity-15"
+            style={{
+              backgroundImage: `repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 15px,
+                rgba(0,0,0,0.4) 15px,
+                rgba(0,0,0,0.4) 17px,
+                transparent 17px,
+                transparent 30px
+              )`,
+            }}
+          />
+
+          {/* FORBEDRET: Større, mer detaljerte finials */}
+          <div className="absolute -left-2 md:-left-3 top-1/2 -translate-y-1/2 w-7 h-7 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-amber-500 via-amber-700 to-amber-950 shadow-2xl border-2 border-amber-600/50">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/40 via-transparent to-transparent" />
+            <div className="absolute inset-2 rounded-full bg-gradient-to-br from-transparent to-black/30" />
+          </div>
+          <div className="absolute -right-2 md:-right-3 top-1/2 -translate-y-1/2 w-7 h-7 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-amber-500 via-amber-700 to-amber-950 shadow-2xl border-2 border-amber-600/50">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/40 via-transparent to-transparent" />
+            <div className="absolute inset-2 rounded-full bg-gradient-to-br from-transparent to-black/30" />
+          </div>
+
+          {/* NYTT: Ekstra skygge under stangen */}
+          <div className="absolute -bottom-1 left-0 right-0 h-2 bg-gradient-to-b from-black/40 to-transparent blur-sm" />
         </div>
       </div>
 
@@ -235,6 +335,7 @@ export function CurtainSection({ id, children }: CurtainSectionProps) {
     </section>
   );
 }
+
 
 // import { useRef, type ReactNode } from "react";
 // import { motion, useScroll, useTransform } from "framer-motion";
