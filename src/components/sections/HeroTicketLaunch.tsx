@@ -135,7 +135,7 @@ export function HeroTicketLaunch({
       )}
 
       <Container className="relative z-10">
-        <div className="mx-auto flex max-w-4xl flex-col items-center text-center gap-5 md:gap-7">
+        <div className="mx-auto flex max-w-4xl flex-col items-center text-center gap-5 md:gap-8">
           {/* Logo / tittel – nå øverst i hero-innholdet */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 24 }}
@@ -146,7 +146,7 @@ export function HeroTicketLaunch({
               <img
                 src={urlFor(logoImage).width(900).url()}
                 alt={show.title}
-                className="max-h-52 md:max-h-64 lg:max-h-72 w-auto drop-shadow-[0_10px_60px_rgba(0,0,0,0.7)]"
+                className="max-h-64 md:max-h-72 lg:max-h-96 w-auto drop-shadow-[0_10px_60px_rgba(0,0,0,0.7)]"
               />
             ) : (
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-torch-100 drop-shadow-[0_6px_40px_rgba(0,0,0,0.9)]">
@@ -178,10 +178,10 @@ export function HeroTicketLaunch({
 
               {/* parallellogram-lapp */}
               <div className="relative inline-block">
-                <div className="transform skew-x-6 bg-linear-to-br from-navy-500/80 via-navy-600/80 to-navy-600/80 border border-gold-400/60 rounded-lg shadow-lg px-5 py-2 md:px-7 md:py-3 max-w-[95vw]">
+                <div className="transform skew-x-6 bg-linear-to-br from-navy-600/80 via-navy-800/90 to-navy-700/80 border border-gold-400/60 rounded-lg shadow-lg px-5 py-2 md:px-7 md:py-3 max-w-[95vw]">
                   <div className="-skew-x-6 flex items-center gap-2 text-white/90">
                     <Sparkles className="w-4 h-4 opacity-80 shrink-0" />
-                    <span className="text-[10px] leading-snug md:text-xs md:leading-snug lg:text-sm font-display font-semibold uppercase tracking-[0.20em]">
+                    <span className="text-[10px] leading-snug md:text-xs md:leading-snug lg:text-sm font-display font-medium uppercase tracking-[0.20em]">
                       Kjøp årets beste julegave! En opplevelse for hele familien!
                     </span>
                     <Sparkles className="w-4 h-4 opacity-80 shrink-0" />
@@ -199,9 +199,7 @@ export function HeroTicketLaunch({
               transition={{ duration: 0.6, delay: 0.4 }}
               className="w-full flex justify-center"
             >
-              <div className="inline-flex rounded-3xl bg-black/55 border border-gold-500/25 px-6 py-4 md:px-10 md:py-6 shadow-[0_18px_60px_rgba(0,0,0,0.8)]">
                 <Countdown targetDate={premiereDate} />
-              </div>
             </motion.div>
           )}
 
