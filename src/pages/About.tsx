@@ -15,6 +15,7 @@ import type {
 } from "@/types/sanity";
 import { SEOHead } from "@/components/SEOHead";
 import { CurtainSection } from "@/components/layout/CurtainSection";
+import { useMemo } from "react";
 
 // ---- Types ----
 type Organization = {
@@ -80,6 +81,26 @@ export function About() {
   const { data: organization, isLoading: organizationLoading } =
     useSanityQuery<Organization>("organization", queries.organization);
 
+  // Filter for kun styremedlemmer
+  const filteredBoardMembers = useMemo(() => {
+    if (!boardMembers) return [];
+    
+    return boardMembers.filter((member) => {
+      if (!member.role) return false;
+      
+      const roleLower = member.role.toLowerCase();
+      
+      // Sjekk om rollen inneholder "styre" eller er en av de spesifikke rollene
+      return (
+        roleLower.includes("styre") ||
+        roleLower.includes("nestleder") ||
+        roleLower.includes("kontaktperson") ||
+        roleLower.includes("styreleder") ||
+        roleLower.includes("styremedlem")
+      );
+    });
+  }, [boardMembers]);
+
   return (
     <>
       <SEOHead
@@ -88,7 +109,7 @@ export function About() {
       />
 
       {/* Hero */}
-      <section className="relative py-20 sm:py-28 bg-linear-to-br from-navy-900 to-burgundy-900 text-white overflow-hidden">
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-navy-900 to-burgundy-900 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -169,7 +190,7 @@ export function About() {
                           className="bg-white rounded-lg shadow-xl overflow-hidden transform transition-transform hover:scale-105" 
                           style={{ rotate: `${[-2, 2, -1][index]}deg` }}
                         >
-                          <div className="aspect-4/5">
+                          <div className="aspect-[4/5]">
                             <img
                               src={img.src}
                               alt={img.caption}
@@ -195,9 +216,9 @@ export function About() {
               {/* DESKTOP: Polaroid-bilder rundt OM FORENINGEN */}
               <div className="pointer-events-none hidden md:block">
                 {/* Høyre øverst */}
-                <div className="absolute -right-24 top-3/12 w-40 lg:w-48 rotate-10">
+                <div className="absolute -right-24 top-3/12 w-40 lg:w-48 rotate-[10deg]">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                    <div className="aspect-[4/5] bg-navy-900/5">
                       <img
                         src="/media/festningslandsbyen1.jpg"
                         alt="Stemning på festningen"
@@ -214,9 +235,9 @@ export function About() {
                 </div>
 
                 {/* Høyre litt lenger ned */}
-                <div className="absolute -right-32 top-9/12 w-36 lg:w-44 rotate-25">
+                <div className="absolute -right-32 top-9/12 w-36 lg:w-44 rotate-[25deg]">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                    <div className="aspect-[4/5] bg-navy-900/5">
                       <img
                         src="/media/frivillig3.jpg"
                         alt="Frivillige i arbeid"
@@ -233,9 +254,9 @@ export function About() {
                 </div>
 
                 {/* Venstre */}
-                <div className="absolute -left-28 top-5/12 w-40 lg:w-48 -rotate-12">
+                <div className="absolute -left-28 top-5/12 w-40 lg:w-48 rotate-[-12deg]">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                    <div className="aspect-[4/5] bg-navy-900/5">
                       <img
                         src="/media/frivillig2.jpg"
                         alt="Bak kulissene"
@@ -291,7 +312,7 @@ export function About() {
                           className="bg-white rounded-lg shadow-xl overflow-hidden transform transition-transform hover:scale-105" 
                           style={{ rotate: `${[2, -2][index]}deg` }}
                         >
-                          <div className="aspect-4/5">
+                          <div className="aspect-[4/5]">
                             <img
                               src={img.src}
                               alt={img.caption}
@@ -324,9 +345,9 @@ export function About() {
               {/* DESKTOP: Polaroid-bilder rundt FRIVILLIGHET */}
               <div className="pointer-events-none hidden md:block">
                 {/* Venstre nederst */}
-                <div className="absolute -left-24 top-14 w-36 lg:w-44 rotate-14">
+                <div className="absolute -left-24 top-14 w-36 lg:w-44 rotate-[14deg]">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                    <div className="aspect-[4/5] bg-navy-900/5">
                       <img
                         src="/media/frivillig1.jpg"
                         alt="Publikumsvert"
@@ -345,7 +366,7 @@ export function About() {
                 {/* Høyre nederst */}
                 <div className="absolute -right-24 top-32 w-40 lg:w-48 rotate-[-18deg]">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                    <div className="aspect-[4/5] bg-navy-900/5">
                       <img
                         src="/media/festningslandsbyen2.jpg"
                         alt="Kostymer og rekvisitter"
@@ -378,12 +399,16 @@ export function About() {
           </Container>
         </section>
       ) : milestones && milestones.length > 0 ? (
-        <Section background="white">
+        <Section
+          id="timeline"
+          background="paper"
+          paddingY="none"
+        >
           <Timeline milestones={milestones} />
         </Section>
       ) : null}
 
-      {/* Board Members */}
+      {/* Board Members - KUN STYRET */}
       {boardLoading ? (
         <Section background="white">
           <Container>
@@ -395,23 +420,23 @@ export function About() {
             </div>
           </Container>
         </Section>
-      ) : boardMembers && boardMembers.length > 0 ? (
+      ) : filteredBoardMembers.length > 0 ? (
         <Section background="white">
           <Container>
             <div className="text-center mb-12">
               <h2 className="text-4xl sm:text-5xl font-display font-bold text-navy-900 mb-4">
-                Styret og nøkkelpersoner
+                Styret
               </h2>
               <p className="text-lg text-gray-600">
-                Møt menneskene som driver foreningen fremover
+                Møt menneskene som leder foreningen
               </p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-              {boardMembers.map((member) => (
+              {filteredBoardMembers.map((member) => (
                 <div key={member._id} className="group">
                   <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-2">
-                    <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
+                    <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-navy-900 to-burgundy-900">
                       {member.image ? (
                         <img
                           src={urlFor(member.image)
@@ -450,13 +475,22 @@ export function About() {
           <p className="text-gray-200 mb-6">
             Vi trenger alltid frivillige, sponsorer og medspillere.
           </p>
-          <Button variant="tourchoutline" size="lg" asChild>
-            <a href="/kontakt">
-              Ta kontakt
-            </a>
+          <Button variant="torch" size="lg" asChild>
+            <a href="/kontakt">Ta kontakt</a>
           </Button>
         </Container>
       </Section>
+
+      {/* Scrollbar Hide CSS */}
+      <style>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </>
   );
 }
