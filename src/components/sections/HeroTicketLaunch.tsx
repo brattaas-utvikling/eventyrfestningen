@@ -1,7 +1,7 @@
 // src/components/sections/HeroTicketLaunch.tsx
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { Users, Sparkles, DramaIcon, Clock10 } from "lucide-react";
+import { Users, Sparkles, DramaIcon, Clock10, Ticket, GiftIcon } from "lucide-react";
 import Confetti from "react-confetti";
 
 import { Container } from "@/components/layout/Container";
@@ -178,10 +178,10 @@ export function HeroTicketLaunch({
 
               {/* parallellogram-lapp */}
               <div className="relative inline-block">
-                <div className="transform skew-x-6 bg-linear-to-br from-navy-600/80 via-navy-800/90 to-navy-700/80 border border-gold-400/60 rounded-lg shadow-lg px-5 py-2 md:px-7 md:py-3 max-w-[95vw]">
-                  <div className="-skew-x-6 flex items-center gap-2 text-white/90">
-                    <Sparkles className="w-4 h-4 opacity-80 shrink-0" />
-                    <span className="text-[10px] leading-snug md:text-xs md:leading-snug lg:text-sm font-display font-medium uppercase tracking-[0.20em]">
+                <div className="transform skew-x-6 bg-linear-to-br from-amber-600 via-gold-500 to-amber-700 border border-gold-400 rounded-lg shadow-lg px-5 py-2 md:px-7 md:py-3 max-w-[95vw]">
+                  <div className="-skew-x-6 flex items-center gap-2 text-white">
+                    <GiftIcon className="w-4 h-4 opacity-80 shrink-0" />
+                    <span className="text-[10px] leading-snug md:text-xs md:leading-snug lg:text-sm font-display font-semibold uppercase tracking-[0.20em]">
                       Kjøp årets beste julegave! En opplevelse for hele familien!
                     </span>
                     <Sparkles className="w-4 h-4 opacity-80 shrink-0" />
@@ -230,8 +230,8 @@ export function HeroTicketLaunch({
                   })
                 }
               >
-                <Users className="mr-2 h-5 w-5" />
-                Kjøp billetter nå
+                <Ticket className="mr-2 h-5 w-5" />
+                Biletter ute nå!
               </a>
             </Button>
 
