@@ -1,13 +1,13 @@
 {
   "name": "eventyrfestningen",
   "private": true,
-  "version": "0.7.13",
+  "version": "0.8.0",
   "type": "module",
   "scripts": {
-  "generate:sitemap": "tsx scripts/generate-sitemap.ts",
-  "build": "npm run generate:sitemap && vite build",
-  "dev": "vite",
-  "preview": "vite preview"
+    "generate:sitemap": "tsx scripts/generate-sitemap.ts",
+    "build": "npm run generate:sitemap && vite build",
+    "dev": "vite",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
