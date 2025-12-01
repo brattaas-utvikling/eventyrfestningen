@@ -176,7 +176,7 @@ export function About() {
                           className="bg-white rounded-lg shadow-xl overflow-hidden transform transition-transform hover:scale-105" 
                           style={{ rotate: `${[-2, 2, -1][index]}deg` }}
                         >
-                          <div className="aspect-[4/5]">
+                          <div className="aspect-4/5">
                             <img
                               src={img.src}
                               alt={img.caption}
@@ -202,9 +202,9 @@ export function About() {
               {/* DESKTOP: Polaroid-bilder rundt OM FORENINGEN */}
               <div className="pointer-events-none hidden md:block">
                 {/* Høyre øverst */}
-                <div className="absolute -right-24 top-3/12 w-40 lg:w-48 rotate-[10deg]">
+                <div className="absolute -right-24 top-3/12 w-40 lg:w-48 rotate-10">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-[4/5] bg-navy-900/5">
+                    <div className="aspect-4/5 bg-navy-900/5">
                       <img
                         src="/media/festningslandsbyen1.jpg"
                         alt="Stemning på festningen"
@@ -221,9 +221,9 @@ export function About() {
                 </div>
 
                 {/* Høyre litt lenger ned */}
-                <div className="absolute -right-32 top-9/12 w-36 lg:w-44 rotate-[25deg]">
+                <div className="absolute -right-32 top-9/12 w-36 lg:w-44 rotate-25">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-[4/5] bg-navy-900/5">
+                    <div className="aspect-4/5 bg-navy-900/5">
                       <img
                         src="/media/frivillig3.jpg"
                         alt="Frivillige i arbeid"
@@ -240,9 +240,9 @@ export function About() {
                 </div>
 
                 {/* Venstre */}
-                <div className="absolute -left-28 top-5/12 w-40 lg:w-48 rotate-[-12deg]">
+                <div className="absolute -left-28 top-5/12 w-40 lg:w-48 -rotate-12">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-[4/5] bg-navy-900/5">
+                    <div className="aspect-4/5 bg-navy-900/5">
                       <img
                         src="/media/frivillig2.jpg"
                         alt="Bak kulissene"
@@ -298,7 +298,7 @@ export function About() {
                           className="bg-white rounded-lg shadow-xl overflow-hidden transform transition-transform hover:scale-105" 
                           style={{ rotate: `${[2, -2][index]}deg` }}
                         >
-                          <div className="aspect-[4/5]">
+                          <div className="aspect-4/5">
                             <img
                               src={img.src}
                               alt={img.caption}
@@ -331,9 +331,9 @@ export function About() {
               {/* DESKTOP: Polaroid-bilder rundt FRIVILLIGHET */}
               <div className="pointer-events-none hidden md:block">
                 {/* Venstre nederst */}
-                <div className="absolute -left-24 top-14 w-36 lg:w-44 rotate-[14deg]">
+                <div className="absolute -left-24 top-14 w-36 lg:w-44 rotate-14">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-[4/5] bg-navy-900/5">
+                    <div className="aspect-4/5 bg-navy-900/5">
                       <img
                         src="/media/frivillig1.jpg"
                         alt="Publikumsvert"
@@ -352,7 +352,7 @@ export function About() {
                 {/* Høyre nederst */}
                 <div className="absolute -right-24 top-32 w-40 lg:w-48 rotate-[-18deg]">
                   <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-[4/5] bg-navy-900/5">
+                    <div className="aspect-4/5 bg-navy-900/5">
                       <img
                         src="/media/festningslandsbyen2.jpg"
                         alt="Kostymer og rekvisitter"
@@ -420,35 +420,56 @@ export function About() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-              {filteredBoardMembers.map((member) => (
-                <div key={member._id} className="group">
-                  <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1">
-                    <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
-                      {member.image ? (
-                        <img
-                          src={urlFor(member.image)
-                            .width(400)
-                            .height(533)
-                            .url()}
-                          alt={member.name}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 grayscale-100 brightness-90 group-hover:grayscale-0 group-hover:brightness-100"
-                        />
-                      ) : null}
-                    </div>
-                    <div className="p-4 text-center">
-                      <h3 className="font-semibold text-navy-900">
-                        {member.name}
-                      </h3>
-                      {member.role ? (
-                        <p className="text-sm text-gray-500">
-                          {member.role}
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
+  {filteredBoardMembers.map((member) => {
+    const imageUrl =
+      member.image?.asset
+        ? urlFor(member.image).width(400).height(533).url()
+        : null;
+
+    const initials =
+      member.name
+        ?.split(" ")
+        .map((part) => part[0])
+        .slice(0, 2)
+        .join("") ?? "";
+
+    return (
+      <div key={member._id} className="group">
+        <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1">
+          <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
+            {imageUrl ? (
+              <img
+                src={imageUrl}
+                alt={member.name}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 grayscale-100 brightness-90 group-hover:grayscale-0 group-hover:brightness-100"
+                loading="lazy"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/10 ring-2 ring-white/30">
+                  <span className="text-2xl font-semibold text-white">
+                    {initials}
+                  </span>
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
+          </div>
+          <div className="p-4 text-center">
+            <h3 className="font-semibold text-navy-900">
+              {member.name}
+            </h3>
+            {member.role ? (
+              <p className="text-sm text-gray-500">
+                {member.role}
+              </p>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
           </Container>
         </Section>
       ) : null}
