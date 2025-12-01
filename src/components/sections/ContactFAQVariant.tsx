@@ -120,7 +120,7 @@ export function ContactFAQVariant() {
         <p className="text-navy-100/70 text-sm">
           Send oss en e-post på{" "}
           <a 
-            href="mailto:post@eventyrfestningen.no" 
+            href="mailto:kontakt@eventyrfestningen.no" 
             className="text-gold-400 hover:text-gold-300 underline"
           >
             kontakt@eventyrfestningen.no
