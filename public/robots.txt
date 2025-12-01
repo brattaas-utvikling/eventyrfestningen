@@ -1,3 +1,13 @@
 User-agent: *
 Allow: /
-Sitemap: https://www.eventyrfestningen.no/sitemap.xml
+
+# Ikke nødvendige filer eller dev-artefakter
+Disallow: /admin/
+Disallow: /studio/
+Disallow: /api/
+
+# Crawle-delay brukes ikke av Google, men respekteres av noen roboter
+Crawl-delay: 2
+
+# Hvor sitemap ligger
+Sitemap: https://eventyrfestningen.no/sitemap.xml

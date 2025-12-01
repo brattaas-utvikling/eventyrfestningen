@@ -3,6 +3,7 @@ import { MapPin, Phone, Mail, Facebook, Instagram } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { PageHero } from "@/components/layout/PageHero";
 import { ContactFAQVariant } from "@/components/sections/ContactFAQVariant";
+import { SEOHead } from "@/components/SEOHead";
 
 const CONTACT_INFO = {
   title: "Eventyrfestningen",
@@ -22,11 +23,19 @@ const CONTACT_INFO = {
 export default function Contact() {
   return (
     <>
-      <PageHero
-        title="Kontakt Eventyrfestningen"
-        subtitle={CONTACT_INFO.intro}
-        ctaHref="#kontakt-skjema"
-      />
+    <SEOHead
+      title="Kontakt Eventyrfestningen"
+      description={CONTACT_INFO.intro}
+    />
+
+
+<PageHero
+  title="Kontakt Eventyrfestningen"
+  subtitle={CONTACT_INFO.intro}
+  backgroundImageUrl="/media/festningslandsbyen1.jpg"
+  backgroundImageAlt="Sommerkveld ved Kongsvinger festning"
+/>
+
 
       <section className="relative py-16 lg:py-20 bg-navy-900 overflow-hidden">
         {/* bakgrunnsglow */}

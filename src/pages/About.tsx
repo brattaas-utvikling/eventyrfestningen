@@ -16,6 +16,7 @@ import type {
 import { SEOHead } from "@/components/SEOHead";
 // import { CurtainSection } from "@/components/layout/CurtainSection";
 import { useMemo } from "react";
+import { PageHero } from "@/components/layout/PageHero";
 
 // ---- Types ----
 type Organization = {
@@ -109,33 +110,16 @@ export function About() {
         description="Lær om Kongsvinger Festningsteater - vår historie, visjon og de menneskene som gjør magien mulig."
       />
 
-      {/* Hero */}
-      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-navy-900 to-burgundy-900 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
 
-        <Container className="relative z-10">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold mb-6">
-              Vår historie
-            </h1>
-            <p className="text-xl sm:text-2xl text-gray-200 leading-relaxed">
-              Fra en liten gruppe entusiaster samlet i Kongsvinger til å øke
-              ambisjonene og skape store familieforestillinger for hele
-              Kongsvingerregionen. Dette er historien om hvordan vi bringer liv
-              til Kongsvinger Festning.
-            </p>
-          </div>
-        </Container>
-      </section>
+<PageHero
+        eyebrow="Om foreningen"
+        title="Vår historie"
+        subtitle="Fra en liten gruppe entusiaster samlet i Kongsvinger til å øke ambisjonene og skape store familieforestillinger for hele Kongsvingerregionen. Dette er historien om hvordan vi bringer liv til Kongsvinger Festning."
+        backgroundImageUrl="/media/bakgrunn.jpg"
+        backgroundImageAlt="Kongsvinger festning i kveldssol"
+        align="left"
+      />
+
 
       {/* Om foreningen / frivillighet – sentrert tekst + polaroid-bilder */}
       <Section background="navy">
@@ -438,7 +422,7 @@ export function About() {
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
               {filteredBoardMembers.map((member) => (
                 <div key={member._id} className="group">
-                  <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-2">
+                  <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1">
                     <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
                       {member.image ? (
                         <img

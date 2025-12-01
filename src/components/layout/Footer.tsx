@@ -217,11 +217,6 @@ export function Footer({ variant = "dark" }: FooterProps) {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/tilgjengelighet" className={link}>
-                    Tilgjengelighet
-                  </Link>
-                </li>
-                <li>
                   <a href="#top" className={link} aria-label="Til toppen">
                     Til toppen
                   </a>

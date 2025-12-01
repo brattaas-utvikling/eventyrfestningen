@@ -11,6 +11,8 @@ import { urlFor } from "@/lib/sanity";
 import type { Sponsor } from "@/types/sanity";
 import { trackEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/Button";
+import { SEOHead } from "@/components/SEOHead";
+import { PageHero } from "@/components/layout/PageHero";
 
 /* -------------------------------------------------------
  *  Tier-oppsett
@@ -320,19 +322,19 @@ export function Sponsors() {
 
   return (
     <>
-      <Section className="py-20 sm:py-28 bg-linear-to-br from-navy-900 to-burgundy-900 text-white">
-        <Container>
-          <div className="max-w-3xl">
-            <h1 className="mb-4 text-5xl sm:text-6xl font-display font-bold text-white">
-              Sponsorer
-            </h1>
-            <p className="text-lg text-white/80">
-              Uten våre samarbeidspartnere hadde forestillingen på Kongsvinger
-              Festning ikke vært mulig. Deres støtte bidrar til å skape en unik forestilling til barn og boksne i alle aldre. Vi er dypt takknemlige for deres engasjement for kultur og lokalsamfunn. Ta gjerne en titt på våre sponsorer og oppdag de fantastiske virksomhetene som står bak denne magiske opplevelsen.
-            </p>
-          </div>
-        </Container>
-      </Section>
+    <SEOHead
+        title="Sponsorer"
+        description="Uten våre samarbeidspartnere hadde forestillingen på Kongsvinger Festning ikke vært mulig. Deres støtte bidrar til å skape en unik forestilling til barn og boksne i alle aldre. Vi er dypt takknemlige for deres engasjement for kultur og lokalsamfunn. Ta gjerne en titt på våre sponsorer og oppdag de fantastiske virksomhetene som står bak denne magiske opplevelsen."
+      />
+      <PageHero
+        eyebrow="Samarbeidspartnere"
+        title="Sponsorer"
+        subtitle=" Uten våre samarbeidspartnere hadde forestillingen på Kongsvinger
+              Festning ikke vært mulig. Deres støtte bidrar til å skape en unik forestilling til barn og boksne i alle aldre. Vi er dypt takknemlige for deres engasjement for kultur og lokalsamfunn. Ta gjerne en titt på våre sponsorer og oppdag de fantastiske virksomhetene som står bak denne magiske opplevelsen."
+        backgroundImageUrl="/media/bakgrunn.jpg"
+        backgroundImageAlt="Logoer og lyssetting på Kongsvinger Festning"
+        align="left"
+      />
 
       <Section background="navy">
         <Container>

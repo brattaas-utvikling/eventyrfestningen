@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ShieldCheck, Eye, UserX, Database, Lock } from "lucide-react";
 import { Section } from "@/components/layout/Section";
 import { Container } from "@/components/layout/Container";
+import { SEOHead } from "@/components/SEOHead";
 
 const fadeParent = {
   hidden: { opacity: 0 },
@@ -22,17 +23,11 @@ const fadeItem = {
 export default function Privacy() {
   return (
     <>
-      {/* SEO – React 19 metadata */}
-      <title>Personvernerklæring – Eventyrfestningen</title>
-      <meta
-        name="description"
-        content="Les hvordan Eventyrfestningen behandler anonym brukstatistikk på nettsiden. Ingen cookies til sporing, ingen IP-lagring og ingen deling med tredjepart for markedsføring."
-      />
-      <meta name="robots" content="index,follow" />
-      <meta property="og:title" content="Personvernerklæring – Eventyrfestningen" />
-      <meta
-        property="og:description"
-        content="Informasjon om hvordan Eventyrfestningen håndterer personvern, anonym statistikk og bruk av analyseverktøy på nettsiden."
+      {/* SEO*/}
+      <SEOHead
+        title="Personvernerklæring"
+        description="Les hvordan Eventyrfestningen behandler anonym brukstatistikk på nettsiden. Ingen cookies til sporing, ingen IP-lagring og ingen deling med tredjepart for markedsføring."
+        type="website"
       />
 
       {/* HERO */}

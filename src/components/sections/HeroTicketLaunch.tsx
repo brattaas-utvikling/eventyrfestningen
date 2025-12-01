@@ -1,14 +1,22 @@
 // src/components/sections/HeroTicketLaunch.tsx
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { Users, Sparkles, DramaIcon, Clock10, Ticket, GiftIcon } from "lucide-react";
+import {
+  Users,
+  Sparkles,
+  DramaIcon,
+  Clock10,
+  Ticket,
+  GiftIcon,
+  Snowflake,
+} from "lucide-react";
 import Confetti from "react-confetti";
 
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { urlFor } from "@/lib/sanity";
 import type { Show, Performance, SanityImage } from "@/types/sanity";
-import { Countdown } from "@/components/ui/Countdown";
+// import { Countdown } from "@/components/ui/Countdown";
 import { trackEvent } from "@/lib/analytics";
 import heroBg from "@/assets/plakat_oberst.jpg";
 
@@ -56,16 +64,12 @@ export function HeroTicketLaunch({
   // Sekvens: konfettismell → logo + badge mens konfetti fortsatt holder på
   useEffect(() => {
     const sequence = async () => {
-      // liten pause etter load
       await new Promise((resolve) => setTimeout(resolve, 800));
 
-      // start stort smell fra bunnen
       setShowConfetti(true);
 
-      // la konfettien "eie" scenen bittelitt alene
       await new Promise((resolve) => setTimeout(resolve, 300));
 
-      // logo fader inn mens konfettien fortsatt pågår
       logoControls
         .start({
           opacity: 1,
@@ -75,7 +79,6 @@ export function HeroTicketLaunch({
         })
         .catch(() => {});
 
-      // litt etter logoen kommer badge inn – også mens konfetti er der
       await new Promise((resolve) => setTimeout(resolve, 400));
       badgeControls
         .start({
@@ -89,7 +92,6 @@ export function HeroTicketLaunch({
         })
         .catch(() => {});
 
-      // la konfettien leve litt til før den forsvinner
       await new Promise((resolve) => setTimeout(resolve, 2200));
       setShowConfetti(false);
     };
@@ -120,15 +122,15 @@ export function HeroTicketLaunch({
           width={windowSize.width}
           height={windowSize.height}
           numberOfPieces={windowSize.width < 768 ? 220 : 420}
-          gravity={-0.18} // NEGATIV = dras oppover
+          gravity={-0.18}
           wind={0}
           confettiSource={{
             x: 0,
-            y: windowSize.height - 10, // helt nederst
+            y: windowSize.height - 10,
             w: windowSize.width,
             h: 10,
           }}
-          recycle={false} // ett smell
+          recycle={false}
           colors={confettiColors}
           className="pointer-events-none fixed inset-0 z-20"
         />
@@ -136,7 +138,7 @@ export function HeroTicketLaunch({
 
       <Container className="relative z-10">
         <div className="mx-auto flex max-w-4xl flex-col items-center text-center gap-5 md:gap-8">
-          {/* Logo / tittel – nå øverst i hero-innholdet */}
+          {/* Logo / tittel */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 24 }}
             animate={logoControls}
@@ -155,14 +157,13 @@ export function HeroTicketLaunch({
             )}
           </motion.div>
 
-          {/* Badge – lagt UNDER logo, med ny tekst */}
+          {/* Skrå jule-banner */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, rotate: -15 }}
             animate={badgeControls}
             className="flex justify-center"
           >
             <div className="relative">
-              {/* subtil glow */}
               <motion.div
                 className="absolute inset-0 rounded-2xl bg-torch-500/30 blur-lg"
                 animate={{
@@ -175,8 +176,6 @@ export function HeroTicketLaunch({
                   ease: "easeInOut",
                 }}
               />
-
-              {/* parallellogram-lapp */}
               <div className="relative inline-block">
                 <div className="transform skew-x-6 bg-linear-to-br from-amber-600 via-gold-500 to-amber-700 border border-gold-400 rounded-lg shadow-lg px-5 py-2 md:px-7 md:py-3 max-w-[95vw]">
                   <div className="-skew-x-6 flex items-center gap-2 text-white">
@@ -191,19 +190,45 @@ export function HeroTicketLaunch({
             </div>
           </motion.div>
 
-          {/* Nedtelling – tydelig men under logo/badge */}
+          {/* Juletilbud-kort (erstatter nedtelling) */}
           {premiereDate && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="w-full flex justify-center"
-            >
-                <Countdown targetDate={premiereDate} />
-            </motion.div>
-          )}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay: 0.4 }}
+    className="w-full flex justify-center"
+  >
+    <div className="relative max-w-xl w-full px-4 sm:px-0">
+      {/* Tynn, subtil gradient-border */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+      />
 
-          {/* CTA-knapper – tydeligste klikkmål */}
+      <div className="relative ">
+        {/* snøfnugg – mindre og svakere */}
+        <Snowflake className="absolute top-20 -left-2 h-5 w-5 text-burgundy-100/70" />
+        <Snowflake className="absolute -bottom-5 -right-2 h-6 w-6 text-gold-200/70" />
+
+        <div className="text-center">
+          {/* hovedtekst */}
+          <div>
+            <h2 className="text-3xl sm:text-[2.1rem] lg:text-6xl font-display font-bold text-white leading-tight">
+              2025-pris
+              <br />
+              <span className="text-white">
+                ut året!
+              </span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+)}
+
+
+          {/* CTA-knapper */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -255,7 +280,7 @@ export function HeroTicketLaunch({
             </Button>
           </motion.div>
 
-          {/* Praktisk info – lavere i hierarkiet */}
+          {/* Praktisk info */}
           {show.practicalInfo && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -265,7 +290,7 @@ export function HeroTicketLaunch({
             >
               {show.practicalInfo.duration && (
                 <div className="flex items-center gap-2 bg-navy-900/70 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-400/20">
-                <Clock10 className="text-gold-400" />
+                  <Clock10 className="text-gold-400" />
                   <span>{show.practicalInfo.duration}</span>
                 </div>
               )}

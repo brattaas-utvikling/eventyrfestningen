@@ -1,4 +1,4 @@
-
+// src/lib/TrackSection.tsx
 import { useEffect, useRef, type ReactNode } from "react";
 import { trackEvent } from "./analytics";
 

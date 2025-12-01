@@ -32,7 +32,7 @@ const quickInfoSlides = [
     id: "når",
     icon: "🗓️",
     label: "Når",
-    title: "Sommeren 2025",
+    title: "Sommeren 2026",
     description:
       "Kveldsforestillinger i sommersesongen – når lyset, luften og stemningen gjør alt litt mer magisk. Festningslandsbyen åpner dørene klokken 20.00 hver forestillingsdag. Forestillingene starter klokken 22.00.",
   },

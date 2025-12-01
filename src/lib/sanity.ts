@@ -5,11 +5,12 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const projectId = import.meta.env.VITE_SANITY_PROJECT_ID;
 const dataset = import.meta.env.VITE_SANITY_DATASET || "production";
+const apiVersion = import.meta.env.VITE_SANITY_API_VERSION || "2024-01-01";
 
 export const sanityClient = createClient({
   projectId,
   dataset,
-  apiVersion: import.meta.env.VITE_SANITY_API_VERSION || "2024-01-01",
+  apiVersion,
   useCdn: import.meta.env.PROD,
 });
 

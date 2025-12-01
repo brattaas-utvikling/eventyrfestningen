@@ -14,12 +14,14 @@ import NotFound from "./pages/NotFound";
 import { Analytics } from "@vercel/analytics/react";
 import { Calendar } from "./pages/Calendar";
 import Privacy from "./pages/Privacy";
+import { PageViewTracker } from "./components/analytics/PageViewTracker";
 
 export default function App() {
   return (
       <BrowserRouter>
         <Layout>
           <ScrollToTop />
+          <PageViewTracker />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/om-forestillingen" element={<AboutShow />} />

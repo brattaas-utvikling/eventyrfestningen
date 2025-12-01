@@ -1,10 +1,11 @@
-// src/lib/analytics.tsx
+// src/lib/analytics.ts
 import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics/react";
 
 const isProd = import.meta.env.PROD;
 
 type AnalyticsEventName =
+  | "page_view"
   | "nav_menu_toggle"
   | "ticket_click"
   | "scroll_depth"
@@ -12,6 +13,9 @@ type AnalyticsEventName =
   | "sponsor_click";
 
 type AnalyticsEventPayloads = {
+  page_view: {
+    page: string;
+  };
   nav_menu_toggle: {
     open: boolean;
     device: "mobile" | "desktop";
@@ -47,6 +51,13 @@ export function trackEvent<N extends AnalyticsEventName>(
 ) {
   if (!isProd) return;
   track(name, payload);
+}
+
+// Valgfri hook – fin hvis du vil bruke manuelt i enkelte sider
+export function usePageView(page: string) {
+  useEffect(() => {
+    trackEvent("page_view", { page });
+  }, [page]);
 }
 
 export function useScrollDepthTracking(page: string) {
