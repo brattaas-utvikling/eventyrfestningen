@@ -12,6 +12,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { urlFor } from "@/lib/sanity";
 import { defaultSEO } from "@/config/seo";
 import { HeroTicketLaunch } from "@/components/sections/HeroTicketLaunch";
+import LandingPage from "./landing/LandingPage";
 
 export default function Home() {
   const { data: show, isLoading } = useSanityQuery<Show>(
@@ -53,7 +54,7 @@ export default function Home() {
         description={seoDescription}
         image={seoImage}
       />
-
+<LandingPage />
       {/* <Hero show={show} nextPerformance={performances?.[0]} /> */}
       <TrackSection page="home" section="hero_ticket_launch">
     <HeroTicketLaunch show={show} nextPerformance={performances?.[0]} />
