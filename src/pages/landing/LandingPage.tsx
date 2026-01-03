@@ -12,6 +12,7 @@ import HistoryScene from './sections/HistoryScene'
 import ArchiveTeaser from './sections/ArchiveTeaser'
 import PracticalScene from './sections/PracticalScene'
 import CTAScene from './sections/CTAScene'
+import CharacterCarousel from './sections/CharacterCarousel'
 
 export default function LandingPage() {
   const prefersReducedMotion = useReducedMotion()
@@ -47,6 +48,7 @@ export default function LandingPage() {
       <ExperienceScene data={landingData.experience} />
       <HistoryScene data={landingData.history} />
       <ArchiveTeaser data={landingData.archive} />
+      <CharacterCarousel data={landingData.characters} />
       <PracticalScene data={landingData.practical} />
       <CTAScene data={landingData.finalCTA} />
     </main>

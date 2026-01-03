@@ -4,9 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion'
 import { Link } from 'react-router-dom'
 import { ChevronDown } from 'lucide-react'
-// import AnimatedCurtain from '../components/AnimatedCurtain'
-
-import WavyCurtain from '../components/WavyCurtain' // Alternativ 2
+import SimpleCurtain from '../components/SimpleCurtain'
 
 interface HeroData {
   headline: string
@@ -43,6 +41,9 @@ export default function HeroScene({ data }: Props) {
     prefersReducedMotion ? ["0%", "0%"] : ["0%", "30%"]
   )
 
+  // Move this hook OUTSIDE the conditional - hooks must always be called
+  // const centerGlowOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.5], [0, 1, 0])
+
   return (
     <section
       ref={sectionRef}
@@ -59,39 +60,30 @@ export default function HeroScene({ data }: Props) {
           className="w-full h-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-900/70 via-navy-900/50 to-navy-900" />
+        <div className="absolute inset-0 bg-linear-to-b from-navy-900/70 via-navy-900/50 to-navy-900" />
       </motion.div>
 
-      {/* Animated Curtains */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        {/* ALTERNATIV 1: CSS/SVG-basert animert gardin */}
-        {/* <AnimatedCurtain side="left" scrollProgress={scrollYProgress} />
-        <AnimatedCurtain side="right" scrollProgress={scrollYProgress} /> */}
+      {/* Simple Curtains - NO wavy animation */}
+      {data.curtainOverlay && (
+        <div className="absolute inset-0 z-10 pointer-events-none">
+          <SimpleCurtain 
+            side="left" 
+            imageSrc={data.curtainOverlay} 
+            scrollProgress={scrollYProgress} 
+          />
+          <SimpleCurtain 
+            side="right" 
+            imageSrc={data.curtainOverlay} 
+            scrollProgress={scrollYProgress} 
+          />
 
-        {/* ALTERNATIV 2: Image-basert med wave (kommenter ut hvis du bruker dette) */}
-        {data.curtainOverlay && (
-          <>
-            <WavyCurtain 
-              side="left" 
-              imageSrc={data.curtainOverlay} 
-              scrollProgress={scrollYProgress} 
-            />
-            <WavyCurtain 
-              side="right" 
-              imageSrc={data.curtainOverlay} 
-              scrollProgress={scrollYProgress} 
-            />
-          </>
-        )}
-
-        {/* Center golden glow as curtains open */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-gold-500/20 to-transparent pointer-events-none"
-          style={{ 
-            opacity: useTransform(scrollYProgress, [0.1, 0.3, 0.5], [0, 1, 0])
-          }}
-        />
-      </div>
+          {/* Center golden glow as curtains open */}
+          {/* <motion.div
+            className="absolute inset-0 bg-linear-to-r from-transparent via-gold-500/20 to-transparent pointer-events-none"
+            style={{ opacity: centerGlowOpacity }}
+          /> */}
+        </div>
+      )}
 
       {/* Content */}
       <motion.div

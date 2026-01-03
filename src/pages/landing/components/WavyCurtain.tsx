@@ -15,20 +15,21 @@ export default function WavyCurtain({ side, imageSrc, scrollProgress }: Props) {
     scrollProgress,
     [0, 0.5],
     side === 'left' 
-      ? prefersReducedMotion ? ["0%", "0%"] : ["0%", "-100%"]
-      : prefersReducedMotion ? ["0%", "0%"] : ["0%", "100%"]
+      ? prefersReducedMotion ? ["0%", "0%"] : ["0%", "-110%"]  // Changed: -110% instead of -100%
+      : prefersReducedMotion ? ["0%", "0%"] : ["0%", "110%"]   // Changed: 110% instead of 100%
   )
 
   const curtainOpacity = useTransform(scrollProgress, [0, 0.3, 0.5], [1, 0.8, 0])
 
   return (
     <motion.div
-      className="absolute inset-y-0 w-1/2"
+      className="absolute inset-y-0 w-[55%]"  // Changed: 55% instead of 50% (10% overlap)
       style={{
         [side]: 0,
         x: curtainX,
         opacity: curtainOpacity,
-        transformOrigin: side === 'left' ? 'right' : 'left'
+        transformOrigin: side === 'left' ? 'right' : 'left',
+        zIndex: side === 'left' ? 11 : 10  // Left curtain on top for realistic overlap
       }}
     >
       {/* Main curtain image with wave effect */}
@@ -98,6 +99,7 @@ export default function WavyCurtain({ side, imageSrc, scrollProgress }: Props) {
           />
         ))}
       </div>
+
     </motion.div>
   )
 }

@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion'
 import { Link } from 'react-router-dom'
-import { BookOpen, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 interface ArchiveData {
   title: string
@@ -54,9 +54,8 @@ export default function ArchiveTeaser({ data }: Props) {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-gold-500/10 border border-gold-500/30 rounded-full mb-6">
-            <BookOpen className="w-5 h-5 text-gold-400" />
-            <span className="text-gold-400 font-sans font-semibold uppercase tracking-wider text-sm">
+          <div className="">
+            <span className="inline-block text-torch-400 font-sans text-sm uppercase tracking-widest mb-4">
               {data.subtitle}
             </span>
           </div>
