@@ -3,7 +3,7 @@ export const landingData = {
   hero: {
     headline: "Velkommen til Eventyrfestningen",
     subheadline: "Der historien blir levende og magien aldri slutter",
-    backgroundImage: "/assets/landing/hero-image.jpg",
+    backgroundImage: "/assets/landing/hero-image.jpeg",
     curtainOverlay: "/assets/landing/hero-curtain.jpeg",
     ctaText: "Kjøp billetter",
     ctaLink: "/billetter"
