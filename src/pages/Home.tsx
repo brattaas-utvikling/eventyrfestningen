@@ -1,17 +1,17 @@
 // src/routes/Home.tsx
 // import { FortressExperienceSection } from "@/components/sections/FortressExperienceSection";
 // import { Hero } from "@/components/sections/Hero";
-import { QuickInfoSection } from "@/components/sections/QuickInfoSection";
+// import { QuickInfoSection } from "@/components/sections/QuickInfoSection";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useSanityQuery } from "@/hooks/useSanityQuery";
 import { queries } from "@/lib/sanityQueries";
-import type { Show, Performance } from "@/types/sanity";
+import type { Show } from "@/types/sanity";
 import { useScrollDepthTracking } from "@/lib/analytics";
 import { TrackSection } from "@/lib/Tracksection";
 import { SEOHead } from "@/components/SEOHead";
 import { urlFor } from "@/lib/sanity";
 import { defaultSEO } from "@/config/seo";
-import { HeroTicketLaunch } from "@/components/sections/HeroTicketLaunch";
+// import { HeroTicketLaunch } from "@/components/sections/HeroTicketLaunch";
 import LandingPage from "./landing/LandingPage";
 
 export default function Home() {
@@ -20,10 +20,10 @@ export default function Home() {
     queries.currentShow
   );
 
-  const { data: performances } = useSanityQuery<Performance[]>(
-    "upcoming-performances",
-    queries.upcomingPerformances
-  );
+  // const { data: performances } = useSanityQuery<Performance[]>(
+  //   "upcoming-performances",
+  //   queries.upcomingPerformances
+  // );
 
   useScrollDepthTracking("home");
 
@@ -54,19 +54,22 @@ export default function Home() {
         description={seoDescription}
         image={seoImage}
       />
-<LandingPage />
-      {/* <Hero show={show} nextPerformance={performances?.[0]} /> */}
-      <TrackSection page="home" section="hero_ticket_launch">
-    <HeroTicketLaunch show={show} nextPerformance={performances?.[0]} />
+      <TrackSection page="home" section="landing_page">
+      <LandingPage />
       </TrackSection>
+      
+      {/* <Hero show={show} nextPerformance={performances?.[0]} /> */}
+      {/* <TrackSection page="home" section="hero_ticket_launch">
+    <HeroTicketLaunch show={show} nextPerformance={performances?.[0]} />
+      </TrackSection> */}
 
       {/* <TrackSection page="home" section="fortress_experience">
         <FortressExperienceSection />
       </TrackSection> */}
 
-      <TrackSection page="home" section="quick_info">
+      {/* <TrackSection page="home" section="quick_info">
         <QuickInfoSection />
-      </TrackSection>
+      </TrackSection> */}
     </>
   );
 }

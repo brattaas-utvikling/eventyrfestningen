@@ -289,33 +289,3 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
-.character-swiper {
-  padding: 20px 0 60px;
-}
-
-.character-swiper .swiper-slide {
-  transition: all 0.3s ease;
-}
-
-.character-swiper .swiper-slide-active {
-  z-index: 10;
-}
-
-.character-swiper .swiper-pagination {
-  bottom: 0 !important;
-}
-
-.character-swiper .swiper-pagination-bullet {
-  width: 10px;
-  height: 10px;
-  background: rgba(251, 191, 36, 0.3);
-  opacity: 1;
-  transition: all 0.3s;
-}
-
-.character-swiper .swiper-pagination-bullet-active-custom {
-  background: rgb(251, 191, 36);
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
-  width: 12px;
-  height: 12px;
-}

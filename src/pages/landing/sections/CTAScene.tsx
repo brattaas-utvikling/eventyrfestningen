@@ -1,7 +1,9 @@
 // routes/landing/sections/CTAScene.tsx
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Ticket, ArrowRight } from 'lucide-react'
+import { Ticket, Calendar } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/components/ui/button-variants'
 
 interface CTAData {
   headline: string
@@ -46,16 +48,6 @@ export default function CTAScene({ data }: Props) {
           transition={{ duration: 0.8 }}
           className="space-y-8"
         >
-          {/* Icon */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-flex items-center justify-center w-20 h-20 bg-gold-500/20 backdrop-blur-sm border-2 border-gold-500/50 rounded-full"
-          >
-            <Ticket className="w-10 h-10 text-gold-400" />
-          </motion.div>
 
           {/* Headline */}
           <motion.h2
@@ -92,22 +84,31 @@ export default function CTAScene({ data }: Props) {
           >
             {/* Primary CTA */}
             <Link
+                            className={cn(
+                              buttonVariants({ variant: "torch", size: "xl" }),
+                              "group relative overflow-hidden"  // Added 'relative' to contain the shine
+                            )}
               to={data.ctaLink}
-              className="inline-flex items-center gap-3 px-10 py-5 bg-torch-500 text-navy-900 font-sans font-bold text-lg rounded-lg
-                         hover:bg-torch-400 transition-all duration-300 transform hover:scale-105 group
-                         shadow-[0_0_30px_rgba(255,161,35,0.6)] hover:shadow-[0_0_40px_rgba(255,161,35,0.8)]"
+
             >
-              <Ticket className="w-6 h-6" />
-              {data.ctaText}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                {/* Button shine effect - now contained within button */}
+                <Ticket className="w-6 h-6 me-3" />
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                              translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
+                <span className="relative drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">{data.ctaText}</span>
+              
             </Link>
+
 
             {/* Secondary CTA */}
             <Link
               to={data.secondaryCTA.link}
-              className="inline-flex items-center gap-2 px-8 py-5 border-2 border-gold-500 text-gold-400 font-sans font-semibold text-lg rounded-lg
-                         hover:bg-gold-500/10 transition-colors"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "xl" }),
+                "group relative overflow-hidden"  // Added 'relative' to contain the shine
+              )}
             >
+               <Calendar className="w-6 h-6 me-3" />
               {data.secondaryCTA.text}
             </Link>
           </motion.div>

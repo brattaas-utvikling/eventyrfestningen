@@ -83,7 +83,7 @@ export const landingData = {
     title: "Arkivet",
     subtitle: "Utforsk våre tidligere produksjoner",
     description: "Ta en titt tilbake på 5+ år med magiske forestillinger",
-    previewImage: "/assets/landing/archive-preview.jpg",
+    previewImage: "/assets/landing/plakat_bakgrunn.jpeg",
     ctaText: "Utforsk arkivet",
     ctaLink: "/arkiv",
     highlightYears: ["2024", "2023", "2022", "2021", "2020", "2019"]
@@ -119,13 +119,13 @@ export const landingData = {
       {
         name: "Oberst Krebs",
         role: "Kommandant",
-        description: "Den tyske obersten som har tatt kontroll over Kongsvinger Festning. Streng, men kanskje ikke så slem som han først virker?",
+        description: "Oberst Krebs er en stolt og sta militær leder som er fast bestemt på å beskytte festningen og dens hemmeligheter for enhver pris.",
         image: "/assets/landing/oberst-karusell.png"
       },
       {
         name: "Sadolin",
         role: "Oberst Krebs' høyre hånd",
-        description: "En modig ",
+        description: "En modig og lojal soldat som følger obersten i tykt og tynt. Han er også en stor klossmajor!",
         image: "/assets/landing/sadolin-karusell.png"
       },
       {
@@ -157,12 +157,12 @@ export const landingData = {
 
   finalCTA: {
     headline: "Klar for eventyret?",
-    subheadline: "Billettene går raskt - sikre dine plasser i dag!",
+    subheadline: "Sikre dine billetter til vår neste forestilling i dag!",
     ctaText: "Kjøp billetter nå",
-    ctaLink: "/billetter",
+    ctaLink: "https://eventyrfestningen.ticketco.events/no/nb",
     secondaryCTA: {
       text: "Se alle forestillinger",
-      link: "/forestillinger"
+      link: "/kalender"
     }
   }
 }

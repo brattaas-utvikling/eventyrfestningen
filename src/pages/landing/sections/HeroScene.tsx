@@ -1,10 +1,9 @@
-// routes/landing/sections/HeroScene.tsx
+// routes/landing/sections/HeroScene.tsx (With theatrical indicator)
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion'
-import { Link } from 'react-router-dom'
-import { ChevronDown } from 'lucide-react'
 import SimpleCurtain from '../components/SimpleCurtain'
+import ScrollIndicator from '../components/ScrollIndicator'
 
 interface HeroData {
   headline: string
@@ -34,20 +33,17 @@ export default function HeroScene({ data }: Props) {
     prefersReducedMotion ? ["0%", "0%"] : ["0%", "50%"]
   )
   
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7], [1, 1, 0])
-  const contentY = useTransform(
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const contentScale = useTransform(
     scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? ["0%", "0%"] : ["0%", "30%"]
+    [0, 0.5],
+    prefersReducedMotion ? [1, 1] : [1, 0.98]
   )
-
-  // Move this hook OUTSIDE the conditional - hooks must always be called
-  // const centerGlowOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.5], [0, 1, 0])
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-[150vh] bg-navy-900"
+      className="relative h-screen bg-navy-950"
     >
       {/* Background - festningen */}
       <motion.div
@@ -60,10 +56,10 @@ export default function HeroScene({ data }: Props) {
           className="w-full h-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-linear-to-b from-navy-900/70 via-navy-900/50 to-navy-900" />
+        <div className="absolute inset-0 bg-linear-to-b from-navy-950/40 via-navy-950/60 to-navy-950/90" />
       </motion.div>
 
-      {/* Simple Curtains - NO wavy animation */}
+      {/* Simple Curtains */}
       {data.curtainOverlay && (
         <div className="absolute inset-0 z-10 pointer-events-none">
           <SimpleCurtain 
@@ -76,74 +72,43 @@ export default function HeroScene({ data }: Props) {
             imageSrc={data.curtainOverlay} 
             scrollProgress={scrollYProgress} 
           />
-
-          {/* Center golden glow as curtains open */}
-          {/* <motion.div
-            className="absolute inset-0 bg-linear-to-r from-transparent via-gold-500/20 to-transparent pointer-events-none"
-            style={{ opacity: centerGlowOpacity }}
-          /> */}
         </div>
       )}
 
-      {/* Content */}
+      {/* Content - Just headline and scroll indicator */}
       <motion.div
-        className="relative z-20 flex flex-col items-center justify-center min-h-screen px-4 text-center"
-        style={{ opacity: contentOpacity, y: contentY }}
+        className="relative z-20 flex flex-col items-center justify-center h-full px-4 text-center"
+        style={{ opacity: contentOpacity, scale: contentScale }}
       >
-        <motion.h1
+        {/* Main headline */}
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-gold-400 mb-6 px-4"
-          style={{
-            textShadow: "0 0 30px rgba(251, 191, 36, 0.6), 0 0 60px rgba(251, 191, 36, 0.3)"
-          }}
+          transition={{ delay: 0.8, duration: 1.2, ease: "easeOut" }}
+          className="mb-24"
         >
-          {data.headline}
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-base sm:text-lg md:text-xl lg:text-2xl text-navy-200 max-w-2xl mb-12 font-sans font-light px-4"
-        >
-          {data.subheadline}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-        >
-          <Link
-            to={data.ctaLink}
-            className="inline-block px-8 py-4 bg-torch-500 text-navy-900 font-sans font-semibold text-lg rounded-md
-                       hover:bg-torch-400 transition-all duration-300 transform hover:scale-105
-                       shadow-[0_0_20px_rgba(255,161,35,0.5)] hover:shadow-[0_0_30px_rgba(255,161,35,0.7)]"
+          <h1
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-gold-400
+                     leading-tight px-4 max-w-5xl mx-auto font-normal"
+            style={{
+              textShadow: "0 0 40px rgba(251, 191, 36, 0.5), 0 0 80px rgba(251, 191, 36, 0.2)"
+            }}
           >
-            {data.ctaText}
-          </Link>
+            {data.headline}
+          </h1>
+
+          {/* Decorative underline */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 1.4, duration: 1, ease: "easeOut" }}
+            className="h-px w-32 sm:w-48 md:w-64 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mt-8 sm:mt-12"
+          />
         </motion.div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 sm:bottom-12">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span className="text-gold-400 text-xs sm:text-sm font-sans uppercase tracking-wider">
-              Scroll for å utforske
-            </span>
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            >
-              <ChevronDown className="w-6 h-6 text-gold-400" />
-            </motion.div>
-          </motion.div>
+        {/* Theatrical scroll indicator */}
+        <div className="absolute bottom-16 sm:bottom-20 md:bottom-24">
+          <ScrollIndicator variant="spotlight" />
         </div>
       </motion.div>
     </section>

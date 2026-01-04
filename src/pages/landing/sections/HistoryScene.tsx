@@ -1,4 +1,4 @@
-// routes/landing/sections/HistoryScene.tsx
+// routes/landing/sections/HistoryScene.tsx (Optimized)
 import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import { useReducedMotion } from '@/lib/hooks/useReducedMotion'
@@ -87,44 +87,26 @@ export default function HistoryScene({ data }: Props) {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Vintage image */}
+          {/* Left: Content */}
           <motion.div
-            style={{ scale: imageScale, opacity: imageOpacity }}
-            className="relative order-2 lg:order-1"
-          >
-            <div className="relative aspect-square max-w-lg mx-auto rounded-lg overflow-hidden border-4 border-gold-500/50 shadow-2xl">
-              <img
-                src={data.vintageImage}
-                alt="Eventyrfestningen historie"
-                className="w-full h-full object-cover sepia"
-                loading="lazy"
-                style={{ filter: 'sepia(0.6) contrast(1.1)' }}
-              />
-            </div>
-
-            {/* Corner ornaments */}
-            <div className="absolute -top-4 -left-4 w-16 h-16 border-t-4 border-l-4 border-gold-500 rounded-tl-lg" />
-            <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b-4 border-r-4 border-gold-500 rounded-br-lg" />
-          </motion.div>
-
-          {/* Right: Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8 order-1 lg:order-2"
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="space-y-8"
           >
             <div>
               <span className="text-torch-400 font-sans text-sm uppercase tracking-widest">
                 {data.title}
               </span>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-gold-400 mt-2">
-                {data.yearsActive} med magi
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-gold-400 mt-2
+                           drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+                {data.yearsActive}
               </h2>
             </div>
 
-            <p className="text-navy-200 text-base md:text-lg font-sans font-light leading-relaxed">
+            <p className="text-navy-50 text-base md:text-lg font-sans font-light leading-relaxed
+                        drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
               {data.summary}
             </p>
 
@@ -137,17 +119,21 @@ export default function HistoryScene({ data }: Props) {
                 return (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1, duration: 0.6 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ 
+                      delay: 0.8 + idx * 0.15, 
+                      duration: 0.8,
+                      ease: "easeOut"
+                    }}
                     className="text-center p-4 md:p-6 bg-navy-800/50 backdrop-blur-sm rounded-lg border border-gold-500/20
-                               hover:border-gold-500/40 transition-all duration-300"
+                               hover:border-gold-500/40 hover:bg-navy-800/70 transition-all duration-300"
                   >
-                    <div className="font-display text-3xl md:text-4xl lg:text-5xl text-gold-400 mb-2">
+                    <div className="font-display text-3xl md:text-4xl lg:text-5xl text-gold-400 mb-2
+                                  drop-shadow-[0_0_15px_rgba(251,191,36,0.3)]">
                       <CountUp end={numValue} suffix={hasPlusSign ? "+" : ""} />
                     </div>
-                    <div className="text-navy-300 text-xs md:text-sm font-sans uppercase tracking-wide">
+                    <div className="text-gold-300 text-xs md:text-sm font-sans uppercase tracking-wide">
                       {stat.label}
                     </div>
                   </motion.div>
@@ -155,14 +141,66 @@ export default function HistoryScene({ data }: Props) {
               })}
             </div>
 
-            {/* CTA */}
-            <Link
-              to={data.ctaLink}
-              className="inline-flex items-center gap-2 text-gold-400 font-sans font-semibold hover:text-gold-300 transition-colors group"
+            {/* CTA - Moved to right side */}
+            <div className="flex justify-end pt-4">
+              <Link
+                to={data.ctaLink}
+                className="group inline-flex items-center gap-2 
+                         text-gold-300 hover:text-gold-200 font-sans font-medium text-base md:text-lg
+                         transition-colors duration-200"
+              >
+                <span className="border-b-2 border-gold-500/30 group-hover:border-gold-400/60 transition-colors">
+                  {data.ctaText}
+                </span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* Right: Vintage image with corners INSIDE */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+            className="relative"
+          >
+            <motion.div
+              style={{ scale: imageScale, opacity: imageOpacity }}
+              className="relative aspect-square max-w-lg mx-auto rounded-xl overflow-hidden 
+                       border-4 border-gold-500/40 shadow-[0_0_60px_rgba(251,191,36,0.25)]
+                       hover:border-gold-500/60 hover:shadow-[0_0_80px_rgba(251,191,36,0.35)] 
+                       transition-all duration-500"
             >
-              {data.ctaText}
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+              <img
+                src={data.vintageImage}
+                alt="Eventyrfestningen historie"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                style={{ filter: 'sepia(0.6) contrast(1.1)' }}
+              />
+              
+              {/* Vintage vignette overlay */}
+              <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-navy-900/40 pointer-events-none" />
+              
+              {/* Corner ornaments - INSIDE the frame */}
+              <div className="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-gold-500 rounded-tl-lg" />
+              <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-gold-500 rounded-br-lg" />
+            </motion.div>
+
+            {/* Pulsing glow effect behind image */}
+            <motion.div
+              animate={{
+                scale: [1, 1.05, 1],
+                opacity: [0.3, 0.5, 0.3]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute inset-0 -z-10 bg-gold-500/20 blur-3xl rounded-xl"
+            />
           </motion.div>
         </div>
       </div>
