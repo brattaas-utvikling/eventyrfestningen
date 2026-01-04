@@ -30,28 +30,28 @@
   --color-burgundy-900: #881337; /* Crimson Rose 900 */
 
   /* GOLD (Dark Rum Amber) */
-  --color-gold-50: #fffbeb; /* Dark Rum Amber 50 */
-  --color-gold-100: #fef3c7; /* Dark Rum Amber 100 */
-  --color-gold-200: #fde68a; /* Dark Rum Amber 200 */
-  --color-gold-300: #fcd34d; /* Dark Rum Amber 300 */
-  --color-gold-400: #fbbf24; /* Dark Rum Amber 400 */
-  --color-gold-500: #f59e0b; /* Dark Rum Amber 500 */
-  --color-gold-600: #d97706; /* Dark Rum Amber 600 */
-  --color-gold-700: #b45309; /* Dark Rum Amber 700 */
-  --color-gold-800: #92400e; /* Dark Rum Amber 800 */
-  --color-gold-900: #78350f; /* Dark Rum Amber 900 */
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+  --color-gold-800: #92400e;
+  --color-gold-900: #78350f;
 
   /* TORCH (Blazing Torch) */
-  --color-torch-50: #fff7ed; /* Blazing Torch 50 */
-  --color-torch-100: #ffedd5; /* Blazing Torch 100 */
-  --color-torch-200: #fed7aa; /* Blazing Torch 200 */
-  --color-torch-300: #fdba74; /* Blazing Torch 300 */
-  --color-torch-400: #fb923c; /* Blazing Torch 400 */
-  --color-torch-500: #ffa123; /* Blazing Torch 500 (brand primary) */
-  --color-torch-600: #ea580c; /* Blazing Torch 600 */
-  --color-torch-700: #c2410c; /* Blazing Torch 700 */
-  --color-torch-800: #9a3412; /* Blazing Torch 800 */
-  --color-torch-900: #7c2d12; /* Blazing Torch 900 */
+  --color-torch-50: #fff7ed;
+  --color-torch-100: #ffedd5;
+  --color-torch-200: #fed7aa;
+  --color-torch-300: #fdba74;
+  --color-torch-400: #fb923c;
+  --color-torch-500: #ffa123;
+  --color-torch-600: #ea580c;
+  --color-torch-700: #c2410c;
+  --color-torch-800: #9a3412;
+  --color-torch-900: #7c2d12;
 
   /* Typography preferences for this theme */
   --h1-size: clamp(3rem, 2.3rem + 2.6vw, 3.75rem);
@@ -288,4 +288,34 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+.character-swiper {
+  padding: 20px 0 60px;
+}
+
+.character-swiper .swiper-slide {
+  transition: all 0.3s ease;
+}
+
+.character-swiper .swiper-slide-active {
+  z-index: 10;
+}
+
+.character-swiper .swiper-pagination {
+  bottom: 0 !important;
+}
+
+.character-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: rgba(251, 191, 36, 0.3);
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.character-swiper .swiper-pagination-bullet-active-custom {
+  background: rgb(251, 191, 36);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+  width: 12px;
+  height: 12px;
 }

@@ -118,39 +118,39 @@ export const landingData = {
     characters: [
       {
         name: "Oberst Krebs",
-        role: "Hovedkarakter",
+        role: "Kommandant",
         description: "Den tyske obersten som har tatt kontroll over Kongsvinger Festning. Streng, men kanskje ikke så slem som han først virker?",
-        image: "/assets/landing/character-oberst.jpg"
+        image: "/assets/landing/oberst-karusell.png"
       },
       {
-        name: "Kapteinen",
-        role: "Norsk offiser",
-        description: "En modig norsk kaptein som ikke gir seg uten kamp. Full av mot og listeaktighet.",
-        image: "/assets/landing/character-kaptein.jpg"
+        name: "Sadolin",
+        role: "Oberst Krebs' høyre hånd",
+        description: "En modig ",
+        image: "/assets/landing/sadolin-karusell.png"
       },
       {
-        name: "Spionen",
-        role: "Mysterium",
-        description: "Hvem er egentlig spionen? Denne karakteren holder alle på tå hev med sine hemmelige oppdrag.",
-        image: "/assets/landing/character-spion.jpg"
+        name: "Duff",
+        role: "Mathesonskattens arving",
+        description: "Arvingen av Mathesonskaten - en hevnlysten skotte som er fast bestemt på å gjenerobre det som rettmessig tilhører henne.",
+        image: "/assets/landing/duff-karusell.png"
       },
       {
-        name: "Kokken",
-        role: "Komediant",
-        description: "Festningens kokk som lager mer kaos enn mat. Alltid god for en latter!",
-        image: "/assets/landing/character-kokk.jpg"
+        name: "Duncan",
+        role: "Teatersjef",
+        description: "Duffs trofaste mann og teatersjef. En karismatisk leder med en skjult agenda.",
+        image: "/assets/landing/duncan-karusell.jpeg"
       },
       {
-        name: "Generalen",
-        role: "Autoritet",
-        description: "Den høyeste sjefen med stor makt og større ego. Tar seg selv veldig alvorlig - kanskje litt for alvorlig?",
-        image: "/assets/landing/character-general.jpg"
+        name: "Aggie",
+        role: "Spionen",
+        description: "En ung eventyrer på jakt etter den legendariske masken. Full av pågangsmot og nysgjerrighet.",
+        image: "/assets/landing/aggie-karusell.png"
       },
       {
-        name: "Tjenestepiken",
-        role: "Den kloke",
-        description: "Hun ser alt og hører alt. Kanskje vet hun mer enn hun gir inntrykk av?",
-        image: "/assets/landing/character-tjenestepike.jpg"
+        name: "Klara",
+        role: "Tjenestepike",
+        description: "En lojal tjenestepike ved festningen som kjenner alle hemmelighetene. Hun er modig og smart, og spiller en nøkkelrolle i historien.",
+        image: "/assets/landing/klara-karusell.jpeg"
       }
     ]
   },
