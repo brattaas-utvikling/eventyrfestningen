@@ -1,7 +1,6 @@
 // src/routes/Home.tsx
 // import { FortressExperienceSection } from "@/components/sections/FortressExperienceSection";
-// import { Hero } from "@/components/sections/Hero";
-import { QuickInfoSection } from "@/components/sections/QuickInfoSection";
+import { Hero } from "@/components/sections/Hero";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useSanityQuery } from "@/hooks/useSanityQuery";
 import { queries } from "@/lib/sanityQueries";
@@ -11,7 +10,8 @@ import { TrackSection } from "@/lib/Tracksection";
 import { SEOHead } from "@/components/SEOHead";
 import { urlFor } from "@/lib/sanity";
 import { defaultSEO } from "@/config/seo";
-import { HeroTicketLaunch } from "@/components/sections/HeroTicketLaunch";
+import UpcomingShowScene from "@/components/sections/UpcomingShowScene";
+
 
 export default function Home() {
   const { data: show, isLoading } = useSanityQuery<Show>(
@@ -54,17 +54,17 @@ export default function Home() {
         image={seoImage}
       />
 
-      {/* <Hero show={show} nextPerformance={performances?.[0]} /> */}
+      
       <TrackSection page="home" section="hero_ticket_launch">
-    <HeroTicketLaunch show={show} nextPerformance={performances?.[0]} />
+      <Hero show={show} nextPerformance={performances?.[0]} />
       </TrackSection>
 
       {/* <TrackSection page="home" section="fortress_experience">
         <FortressExperienceSection />
       </TrackSection> */}
 
-      <TrackSection page="home" section="quick_info">
-        <QuickInfoSection />
+      <TrackSection page="home" section="upcoming-event">
+        <UpcomingShowScene />
       </TrackSection>
     </>
   );
