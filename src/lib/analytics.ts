@@ -10,8 +10,7 @@ type AnalyticsEventName =
   | "ticket_click"
   | "scroll_depth"
   | "section_view"
-  | "sponsor_click"
-  | "upcoming-event";
+  | "sponsor_click";
 
 type AnalyticsEventPayloads = {
   page_view: {
