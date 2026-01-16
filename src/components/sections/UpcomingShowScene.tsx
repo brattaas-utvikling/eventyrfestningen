@@ -18,7 +18,7 @@ const upcomingShowData = {
   ctaLink: "https://eventyrfestningen.ticketco.events/no/nb",
   highlights: [
     "Kveld med gåsehud",
-    "30+ skuespillere",
+    "30+ skuespillere og dansere",
     "Spektakulært scenografi",
     "Humor for alle",
   ],

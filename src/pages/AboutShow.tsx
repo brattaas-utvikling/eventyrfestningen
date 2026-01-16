@@ -57,6 +57,8 @@ export function AboutShow() {
     caption: img.caption ?? undefined,  
   }));
 
+
+
   return (
     <div className="mb-16 bg-navy-900 min-h-screen">
       <SEOHead
@@ -78,15 +80,43 @@ export function AboutShow() {
           <>
             <img
               src={urlFor(show.heroImage)
-                .width(1920)
+                .width(2400)
                 .height(1080)
                 .quality(85)
+                .format("webp")
                 .url()}
               alt={show.title}
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-navy-900/50 to-transparent" />
-
+      {/* Logo i øvre høyre hjørne */}
+      {show.logoImage && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="absolute top-8 right-8 
+                          sm:top-10 sm:right-10
+                          md:top-12 md:right-12
+                          lg:top-16 lg:right-16
+                          z-20"
+              >
+                <img
+                  src={urlFor(show.logoImage)
+                    .width(400)
+                    .quality(90)
+                    .url()}
+                  alt={`${show.title} logo`}
+                  className="w-auto h-auto
+                            max-w-[120px] max-h-20
+                            sm:max-w-40 sm:max-h-[100px]
+                            md:max-w-[200px] md:max-h-[120px]
+                            lg:max-w-60 lg:max-h-[140px]
+                            drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]
+                            filter brightness-105"
+                />
+              </motion.div>
+            )}
             <Container className="absolute bottom-0 left-0 right-0 pb-12">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
