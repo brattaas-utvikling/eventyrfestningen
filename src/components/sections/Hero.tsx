@@ -103,11 +103,10 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
                 alt={show.title}
                 className="w-full h-auto
                           max-w-[95%]
-                          sm:max-w-2xl
-                          md:max-w-2xl
-                          lg:max-w-3xl
-                          xl:max-w-5xl
-                          2xl:max-w-6xl
+                          md:max-w-lg
+                          lg:max-w-xl
+                          xl:max-w-2xl
+                          2xl:max-w-63l
                           max-h-[42vh] sm:max-h-[46vh] md:max-h-[44vh] lg:max-h-[50vh] xl:max-h-[54vh]
                           object-contain
                           drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] 
