@@ -17,7 +17,7 @@ const upcomingShowData = {
   dates: "Juli 2026",
   ctaLink: "https://eventyrfestningen.ticketco.events/no/nb",
   highlights: [
-    "450 publikummere",
+    "Kveld med gåsehud",
     "30+ skuespillere",
     "Spektakulært scenografi",
     "Humor for alle",
