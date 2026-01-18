@@ -1,7 +1,4 @@
-// src/routes/Home.tsx
-// import { FortressExperienceSection } from "@/components/sections/FortressExperienceSection";
-// import { Hero } from "@/components/sections/Hero";
-import { QuickInfoSection } from "@/components/sections/QuickInfoSection";
+import { Hero } from "@/components/sections/Hero";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useSanityQuery } from "@/hooks/useSanityQuery";
 import { queries } from "@/lib/sanityQueries";
@@ -11,7 +8,10 @@ import { TrackSection } from "@/lib/Tracksection";
 import { SEOHead } from "@/components/SEOHead";
 import { urlFor } from "@/lib/sanity";
 import { defaultSEO } from "@/config/seo";
-import { HeroTicketLaunch } from "@/components/sections/HeroTicketLaunch";
+import UpcomingShowScene from "@/components/sections/UpcomingShowScene";
+import HistoryScene from "@/components/sections/HistoryScene";
+import ArchiveTeaser from "@/components/sections/ArchiveTeaser";
+import { landingData } from "@/components/sections/data/landingData";
 
 export default function Home() {
   const { data: show, isLoading } = useSanityQuery<Show>(
@@ -28,43 +28,37 @@ export default function Home() {
 
   if (isLoading || !show) return <Skeleton />;
 
-  // -------------------------------
-  // SEO FRA SANITY (+ fallbacks)
-  // -------------------------------
-  const seoTitle =
-    show.seo?.title ??
-    `${show.title} – ${defaultSEO.siteName}`;
-
-  const seoDescription =
-    show.seo?.description ??
-    defaultSEO.defaultDescription;
-
-  const seoImage =
-    show.seo?.ogImage
-      ? urlFor(show.seo.ogImage).width(1200).height(630).url()
-      : show.heroImage
-      ? urlFor(show.heroImage).width(1200).height(630).url()
-      : `${defaultSEO.siteUrl}/og-image.jpg`;
+  const seoTitle = show.seo?.title ?? `${show.title} – ${defaultSEO.siteName}`;
+  const seoDescription = show.seo?.description ?? defaultSEO.defaultDescription;
+  const seoImage = show.seo?.ogImage
+    ? urlFor(show.seo.ogImage).width(1200).height(630).url()
+    : show.heroImage
+    ? urlFor(show.heroImage).width(1200).height(630).url()
+    : `${defaultSEO.siteUrl}/og-image.jpg`;
 
   return (
     <>
-      <SEOHead
-        title={seoTitle}
-        description={seoDescription}
+      <SEOHead 
+        title={seoTitle} 
+        description={seoDescription} 
         image={seoImage}
+        // preloadVideo="/assets/landing/heroVideo.mp4"
       />
 
-      {/* <Hero show={show} nextPerformance={performances?.[0]} /> */}
       <TrackSection page="home" section="hero_ticket_launch">
-    <HeroTicketLaunch show={show} nextPerformance={performances?.[0]} />
+        <Hero show={show} nextPerformance={performances?.[0]} />
       </TrackSection>
 
-      {/* <TrackSection page="home" section="fortress_experience">
-        <FortressExperienceSection />
-      </TrackSection> */}
+      <TrackSection page="home" section="upcoming-event">
+        <UpcomingShowScene />
+      </TrackSection>
 
-      <TrackSection page="home" section="quick_info">
-        <QuickInfoSection />
+      <TrackSection page="home" section="history">
+        <HistoryScene data={landingData.history} />
+      </TrackSection>
+
+      <TrackSection page="home" section="archive_teaser">
+        <ArchiveTeaser data={landingData.archive} />
       </TrackSection>
     </>
   );

@@ -34,7 +34,7 @@ export const ShowPageLeft = forwardRef<HTMLDivElement, ShowPageLeftProps>(
                   loading="lazy"
                 />
               ) : (
-                <div className="aspect-3/4 bg-linear-to-br from-amber-200 to-amber-300 flex items-center justify-center">
+                <div className="aspect-4/5 bg-linear-to-br from-amber-200 to-amber-300 flex items-center justify-center">
                   <div className="text-center text-amber-900/60">
                     <div className="text-6xl mb-2">🎭</div>
                     <p className="text-sm italic">Plakat</p>

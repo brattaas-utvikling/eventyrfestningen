@@ -1,4 +1,4 @@
-// src/components/ui/Countdown.tsx
+// src/components/ui/Countdown.tsx (ENKEL VERSJON - OPTIMALISERT)
 import { useEffect, useState } from "react";
 
 interface CountdownProps {
@@ -14,7 +14,7 @@ interface TimeLeft {
 
 function calculateTimeLeft(targetDate: Date): TimeLeft {
   const difference = targetDate.getTime() - new Date().getTime();
-
+  
   if (difference <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0 };
   }
@@ -48,13 +48,41 @@ export function Countdown({ targetDate }: CountdownProps) {
   ];
 
   return (
-    <div className="inline-flex items-center gap-4 sm:gap-6 bg-navy-900/60 backdrop-blur-md border border-gold-400/20 rounded-2xl px-6 py-4 sm:px-8 sm:py-6">
+    <div 
+      className="inline-flex items-center 
+                 gap-3 sm:gap-4 md:gap-4 lg:gap-5 xl:gap-6
+                 bg-navy-900/60 backdrop-blur-md 
+                 border border-gold-400/20 
+                 rounded-xl sm:rounded-2xl
+                 px-4 py-3
+                 sm:px-6 sm:py-4
+                 md:px-5 md:py-4
+                 lg:px-6 lg:py-5
+                 xl:px-8 xl:py-6
+                 shadow-[0_0_30px_rgba(251,191,36,0.15)]
+                 hover:shadow-[0_0_40px_rgba(251,191,36,0.2)]
+                 transition-shadow duration-300"
+    >
       {units.map((unit) => (
         <div key={unit.label} className="flex flex-col items-center">
-          <div className="text-3xl sm:text-5xl font-display font-bold text-gold-400 tabular-nums">
+          {/* Number - Større på mobil, balansert på desktop */}
+          <div 
+            className="font-display font-bold text-gold-400 tabular-nums leading-none
+                       text-3xl
+                       sm:text-4xl
+                       md:text-3xl
+                       lg:text-4xl
+                       xl:text-5xl"
+          >
             {unit.value.toString().padStart(2, "0")}
           </div>
-          <div className="text-xs sm:text-sm text-gray-400 mt-1 uppercase tracking-wider">
+          
+          {/* Label */}
+          <div 
+            className="text-gray-400 uppercase tracking-wider leading-none
+                       mt-1 sm:mt-1.5
+                       text-[10px] sm:text-xs md:text-[11px] lg:text-sm"
+          >
             {unit.label}
           </div>
         </div>

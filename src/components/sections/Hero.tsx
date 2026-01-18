@@ -1,12 +1,13 @@
-// src/components/sections/Hero.tsx
-import { motion } from "framer-motion";
-import { Calendar, Clock, Users } from "lucide-react";
-import { Container } from "@/components/layout/Container";
+// SRC/components/sections/Hero.tsx
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { Ticket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { urlFor } from "@/lib/sanity";
 import type { Show, Performance, SanityImage } from "@/types/sanity";
 import { Countdown } from "@/components/ui/Countdown";
 import { trackEvent } from "@/lib/analytics";
+import { useRef } from "react";
+import { useReducedMotion } from "@/hooks/useRedusedMotion";
 
 interface HeroProps {
   show: Show;
@@ -18,187 +19,999 @@ type ShowWithLogo = Show & {
   logoImage?: SanityImage;
 };
 
-export function Hero({ show, nextPerformance, page= "home" }: HeroProps) {
-  const premiereDate = nextPerformance?.date
-    ? new Date(nextPerformance.date)
-    : null;
+export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.4,
+  });
+
+  const bgY = useTransform(
+    smooth,
+    [0, 1],
+    prefersReducedMotion ? ["0%", "0%"] : ["0%", "18%"]
+  );
+
+  const bgScale = useTransform(
+    smooth,
+    [0, 1],
+    prefersReducedMotion ? [1, 1] : [1.06, 1.14]
+  );
+
+  const premiereDate = nextPerformance?.date ? new Date(nextPerformance.date) : null;
   const showWithLogo = show as ShowWithLogo;
   const logoImage = showWithLogo.logoImage;
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pb-16">
-      {/* Background */}
-      <div className="absolute inset-0">
-             {/* VIDEO I STEDENFOR BILDE */}
-             <video
-          src="/media/heroVideo.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
+    <section ref={sectionRef} className="relative h-screen flex items-center overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 bg-navy-950">
+        <motion.img
+          src="/assets/landing/plakat_bakgrunn.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          decoding="async"
+          style={{
+            y: bgY,
+            scale: bgScale,
+            transform: "translateZ(0)",
+            willChange: "transform",
+          }}
         />
-        <div className="absolute inset-0 bg-fortress-overlay" />
 
-        {/* fakkel-glow */}
-        <motion.div
-          className="absolute top-0 left-0 w-32 h-32 bg-torch-500/20 blur-3xl rounded-full"
-          animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-0 right-0 w-32 h-32 bg-torch-500/20 blur-3xl rounded-full"
-          animate={{ opacity: [0.6, 0.3, 0.6], scale: [1.2, 1, 1.2] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/30 via-navy-950/50 to-navy-950/70" />
       </div>
 
-      <Container className="relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* KUN logo */}
+      {/* Content */}
+      <div className="relative z-10 w-full h-full">
+        <div className="flex flex-col h-full">
+          
+          <div className="flex-shrink-0 
+                        h-[10vh]
+                        sm:h-[11vh] 
+                        md:h-[12vh] 
+                        lg:h-[13vh] 
+                        xl:h-[14vh]" 
+          />
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6 flex justify-center"
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="w-full flex justify-center px-4 flex-shrink-0"
           >
             {logoImage ? (
               <img
-                src={urlFor(logoImage).width(900).url()}
+                src={urlFor(logoImage).width(1400).quality(90).url()}
                 alt={show.title}
-                className="max-h-96 w-auto drop-shadow-[0_10px_40px_rgba(0,0,0,0.45)]"
+                className="w-full h-auto
+                          max-w-[95%]
+                          md:max-w-lg
+                          lg:max-w-xl
+                          xl:max-w-2xl
+                          2xl:max-w-63l
+                          max-h-[42vh] sm:max-h-[46vh] md:max-h-[44vh] lg:max-h-[50vh] xl:max-h-[54vh]
+                          object-contain
+                          drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] 
+                          filter brightness-105"
               />
             ) : (
-              // hvis ingen logo er lagt inn enda, behold litt plass så layouten ikke hopper
               <div className="h-16" />
             )}
           </motion.div>
 
-          {/* Tagline */}
-          {/* <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl sm:text-2xl text-gray-200 mb-8 font-light"
-          >
-            En storslått familieforestilling på Kongsvinger Festning
-          </motion.p> */}
+          <div className="flex-grow min-h-[2vh]" />
 
-          {/* Countdown */}
-          {premiereDate && (
+          <div className="flex flex-col items-center flex-shrink-0
+                        gap-5 sm:gap-6 md:gap-7 lg:gap-8">
+            
+            {premiereDate && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+                className="w-full flex justify-center px-4"
+              >
+                <Countdown targetDate={premiereDate} />
+              </motion.div>
+            )}
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mb-8 flex justify-center"
+              transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+              className="w-full flex justify-center px-4"
             >
-              <Countdown targetDate={premiereDate} />
-            </motion.div>
-          )}
-
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button
-              size="xl"
-              variant="torch"
-              asChild
-              className="shadow-torch"
-            >
-              <a
-                href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
-                target="_blank"
-                rel="noopener"
-                onClick={() =>
-                  trackEvent("ticket_click", {
-                    source: "hero_main",
-                    page,
-                  })
-                }
+              <Button
+                size="xl"
+                variant="torch"
+                asChild
+                className="w-full max-w-xs sm:w-auto
+                          sm:min-w-[280px]
+                          md:min-w-[300px]
+                          lg:min-w-[320px]
+                          lg:text-lg
+                          lg:py-5
+                          active:scale-95"
               >
-                <Users className="mr-2 h-5 w-5" />
-                Kjøp billetter
-              </a>
-            </Button>
-            <Button
-              size="xl"
-              variant="outline"
-              asChild
-              className="border-gold-400 text-white hover:bg-gold-400/10"
-            >
-              <a
-                href="/om-forestillingen"
-                onClick={() =>
-                  trackEvent("ticket_click", {
-                    source: "hero_more_info",
-                    page,
-                  })
-                }
-              >
-                Les mer om forestillingen
-              </a>
-            </Button>
-          </motion.div>
-
-          {/* Praktisk info */}
-          {show.practicalInfo && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="mt-12 flex flex-wrap justify-center gap-6 text-sm text-gray-300"
-            >
-              {show.practicalInfo.duration && (
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-gold-400" />
-                  <span>{show.practicalInfo.duration} minutter</span>
-                </div>
-              )}
-              {show.practicalInfo.ageLimit && (
-                <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-gold-400" />
-                  <span>{show.practicalInfo.ageLimit}</span>
-                </div>
-              )}
-              {nextPerformance && (
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-gold-400" />
-                  <span>
-                    Premiere{" "}
-                    {new Date(nextPerformance.date).toLocaleDateString(
-                      "nb-NO",
-                      {
-                        day: "numeric",
-                        month: "long",
-                      }
-                    )}
+               <a 
+                  href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative overflow-hidden inline-flex items-center justify-center"
+                  onClick={() =>
+                    trackEvent("ticket_click", {
+                      source: "hero_main",
+                      page,
+                    })
+                  }
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+                               translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
+                  
+                  <span className="relative inline-flex items-center justify-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+                    <Ticket className="mr-4 h-5 w-5 lg:h-6 lg:w-6" />
+                    Kjøp billetter
                   </span>
-                </div>
-              )}
+                </a>
+              </Button>
             </motion.div>
-          )}
-        </div>
-      </Container>
+          </div>
 
-      {/* Scroll indicator
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-gold-400/50 rounded-full flex items-start justify-center p-2">
-          <motion.div
-            className="w-1.5 h-1.5 bg-gold-400 rounded-full"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+          <div className="flex-shrink-0 
+                        h-[8vh] 
+                        sm:h-[10vh] 
+                        md:h-[10vh] 
+                        lg:h-[12vh] 
+                        xl:h-[14vh]" 
           />
         </div>
-      </motion.div> */}
+      </div>
     </section>
   );
 }
+
+// // src/components/sections/Hero.tsx
+// // kodem med video og fallback bilde!
+// import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+// import { Ticket } from "lucide-react";
+// import { Button } from "@/components/ui/Button";
+// import { urlFor } from "@/lib/sanity";
+// import type { Show, Performance, SanityImage } from "@/types/sanity";
+// import { Countdown } from "@/components/ui/Countdown";
+// import { trackEvent } from "@/lib/analytics";
+// import { useState, useRef, useEffect } from "react";
+// import { useReducedMotion } from "@/hooks/useRedusedMotion";
+
+// interface HeroProps {
+//   show: Show;
+//   nextPerformance?: Performance;
+//   page?: string;
+// }
+
+// type ShowWithLogo = Show & {
+//   logoImage?: SanityImage;
+// };
+
+// export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
+//   const [videoLoaded, setVideoLoaded] = useState(false);
+//   const [videoFailed, setVideoFailed] = useState(false);
+//   const sectionRef = useRef<HTMLElement>(null);
+//   const videoRef = useRef<HTMLVideoElement>(null);
+//   const prefersReducedMotion = useReducedMotion();
+
+//   const { scrollYProgress } = useScroll({
+//     target: sectionRef,
+//     offset: ["start start", "end start"],
+//   });
+
+//   const smooth = useSpring(scrollYProgress, {
+//     stiffness: 120,
+//     damping: 30,
+//     mass: 0.4,
+//   });
+
+//   const bgY = useTransform(
+//     smooth,
+//     [0, 1],
+//     prefersReducedMotion ? ["0%", "0%"] : ["0%", "18%"]
+//   );
+
+//   const bgScale = useTransform(
+//     smooth,
+//     [0, 1],
+//     prefersReducedMotion ? [1, 1] : [1.06, 1.14]
+//   );
+
+//   // Video lifecycle management
+//   useEffect(() => {
+//     const video = videoRef.current;
+//     if (!video) return;
+
+//     video.muted = true;
+
+//     const handleCanPlay = () => {
+//       video.play()
+//         .then(() => {
+//           setVideoLoaded(true);
+//         })
+//         .catch(() => {
+//           setVideoFailed(true);
+//         });
+//     };
+
+//     const handleError = () => {
+//       setVideoFailed(true);
+//     };
+
+//     video.addEventListener("canplay", handleCanPlay);
+//     video.addEventListener("error", handleError);
+    
+//     video.load();
+
+//     return () => {
+//       video.removeEventListener("canplay", handleCanPlay);
+//       video.removeEventListener("error", handleError);
+//     };
+//   }, []);
+
+//   const premiereDate = nextPerformance?.date ? new Date(nextPerformance.date) : null;
+//   const showWithLogo = show as ShowWithLogo;
+//   const logoImage = showWithLogo.logoImage;
+
+//   return (
+//     <section ref={sectionRef} className="relative h-screen flex items-center overflow-hidden">
+//       {/* Background */}
+//       <div className="absolute inset-0 bg-navy-950">
+//         {/* Video layer */}
+//         <video
+//           ref={videoRef}
+//           className="absolute inset-0 w-full h-full object-cover"
+//           loop={true}
+//           muted={true}
+//           playsInline={true}
+//           preload="auto"
+//           style={{
+//             opacity: videoLoaded ? 1 : 0,
+//             transition: "opacity 0.8s ease-in-out",
+//             zIndex: videoLoaded ? 2 : 1,
+//           }}
+//         >
+//           <source src="/assets/landing/heroVideo.mp4" type="video/mp4" />
+//         </video>
+
+//         {/* Fallback image - vises kun hvis video feiler */}
+//         {videoFailed && (
+//           <motion.div
+//             className="absolute inset-0"
+//             style={{
+//               y: bgY,
+//               scale: bgScale,
+//               zIndex: 1,
+//             }}
+//           >
+//             <img
+//               src="/assets/landing/plakat_bakgrunn.png"
+//               alt=""
+//               aria-hidden="true"
+//               className="absolute inset-0 w-full h-full object-cover"
+//               loading="lazy"
+//               decoding="async"
+//             />
+//           </motion.div>
+//         )}
+
+//         {/* Gradient overlay */}
+//         <div className="absolute inset-0 bg-linear-to-b from-navy-950/30 via-navy-950/50 to-navy-950/70" style={{ zIndex: 3 }} />
+//       </div>
+
+//       {/* Content */}
+//       <div className="relative z-10 w-full h-full">
+//         <div className="flex flex-col h-full">
+          
+//           <div className="shrink-0 
+//                         h-[10vh]
+//                         sm:h-[11vh] 
+//                         md:h-[12vh] 
+//                         lg:h-[13vh] 
+//                         xl:h-[14vh]" 
+//           />
+          
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+//             className="w-full flex justify-center px-4 shrink-0"
+//           >
+//             {logoImage ? (
+//               <img
+//                 src={urlFor(logoImage).width(1400).quality(90).url()}
+//                 alt={show.title}
+//                 className="w-full h-auto
+//                           max-w-[95%]
+//                           md:max-w-lg
+//                           lg:max-w-xl
+//                           xl:max-w-2xl
+//                           2xl:max-w-63l
+//                           max-h-[42vh] sm:max-h-[46vh] md:max-h-[44vh] lg:max-h-[50vh] xl:max-h-[54vh]
+//                           object-contain
+//                           drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] 
+//                           filter brightness-105"
+//               />
+//             ) : (
+//               <div className="h-16" />
+//             )}
+//           </motion.div>
+
+//           <div className="grow min-h-[2vh]" />
+
+//           <div className="flex flex-col items-center shrink-0
+//                         gap-5 sm:gap-6 md:gap-7 lg:gap-8">
+            
+//             {premiereDate && (
+//               <motion.div
+//                 initial={{ opacity: 0, y: 20 }}
+//                 animate={{ opacity: 1, y: 0 }}
+//                 transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+//                 className="w-full flex justify-center px-4"
+//               >
+//                 <Countdown targetDate={premiereDate} />
+//               </motion.div>
+//             )}
+
+//             <motion.div
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+//               className="w-full flex justify-center px-4"
+//             >
+//               <Button
+//                 size="xl"
+//                 variant="torch"
+//                 asChild
+//                 className="w-full max-w-xs sm:w-auto
+//                           sm:min-w-[280px]
+//                           md:min-w-[300px]
+//                           lg:min-w-[320px]
+//                           lg:text-lg
+//                           lg:py-5
+//                           active:scale-95"
+//               >
+//                <a 
+//                   href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="group relative overflow-hidden inline-flex items-center justify-center"
+//                   onClick={() =>
+//                     trackEvent("ticket_click", {
+//                       source: "hero_main",
+//                       page,
+//                     })
+//                   }
+//                 >
+//                   <span className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent 
+//                                -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+                  
+//                   <span className="relative inline-flex items-center justify-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+//                     <Ticket className="mr-4 h-5 w-5 lg:h-6 lg:w-6" />
+//                     Kjøp billetter
+//                   </span>
+//                 </a>
+//               </Button>
+//             </motion.div>
+//           </div>
+
+//           <div className="shrink-0 
+//                         h-[8vh] 
+//                         sm:h-[10vh] 
+//                         md:h-[10vh] 
+//                         lg:h-[12vh] 
+//                         xl:h-[14vh]" 
+//           />
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+// // src/components/sections/Hero.tsx (Best of both)
+// // Fin versjon med bakgrunnsbilde!!
+// import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+// import { Ticket } from "lucide-react";
+// import { Button } from "@/components/ui/Button";
+// import { urlFor } from "@/lib/sanity";
+// import type { Show, Performance, SanityImage } from "@/types/sanity";
+// import { Countdown } from "@/components/ui/Countdown";
+// import { trackEvent } from "@/lib/analytics";
+// import { useState, useRef } from "react";
+// import { useReducedMotion } from "@/hooks/useRedusedMotion";
+
+// interface HeroProps {
+//   show: Show;
+//   nextPerformance?: Performance;
+//   page?: string;
+// }
+
+// type ShowWithLogo = Show & {
+//   logoImage?: SanityImage;
+// };
+
+// export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
+//   const [videoLoaded] = useState(true);
+//   const sectionRef = useRef<HTMLElement>(null);
+//   const prefersReducedMotion = useReducedMotion();
+
+//   const { scrollYProgress } = useScroll({
+//     target: sectionRef,
+//     offset: ["start start", "end start"],
+//   });
+
+//   const smooth = useSpring(scrollYProgress, {
+//     stiffness: 120,
+//     damping: 30,
+//     mass: 0.4,
+//   });
+
+//   const bgY = useTransform(
+//     smooth,
+//     [0, 1],
+//     prefersReducedMotion ? ["0%", "0%"] : ["0%", "18%"]
+//   );
+
+//   const bgScale = useTransform(
+//     smooth,
+//     [0, 1],
+//     prefersReducedMotion ? [1, 1] : [1.06, 1.14]
+//   );
+
+//   const premiereDate = nextPerformance?.date ? new Date(nextPerformance.date) : null;
+//   const showWithLogo = show as ShowWithLogo;
+//   const logoImage = showWithLogo.logoImage;
+
+//   return (
+//     <section ref={sectionRef} className="relative h-screen flex items-center overflow-hidden">
+//       {/* Background Image */}
+//       <div className="absolute inset-0 bg-navy-950">
+//         <motion.img
+//           src="/assets/landing/plakat_bakgrunn.png"
+//           alt=""
+//           aria-hidden="true"
+//           className="absolute inset-0 w-full h-full object-cover"
+//           loading="eager"
+//           decoding="async"
+//           style={{
+//             y: bgY,
+//             scale: bgScale,
+//             transform: "translateZ(0)",
+//             willChange: "transform",
+//           }}
+//         />
+
+//         {!videoLoaded && (
+//           <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-950 to-navy-900" />
+//         )}
+
+//         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/30 via-navy-950/50 to-navy-950/70" />
+//       </div>
+
+//       {/* Content - Using spacer method */}
+//       <div className="relative z-10 w-full h-full">
+//         <div className="flex flex-col h-full">
+          
+//           {/* Top spacer */}
+//           <div className="flex-shrink-0 
+//                         h-[10vh]
+//                         sm:h-[11vh] 
+//                         md:h-[12vh] 
+//                         lg:h-[13vh] 
+//                         xl:h-[14vh]" 
+//           />
+          
+//           {/* Logo */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+//             className="w-full flex justify-center px-4 flex-shrink-0"
+//           >
+//             {logoImage ? (
+//               <img
+//                 src={urlFor(logoImage).width(1400).quality(90).url()}
+//                 alt={show.title}
+//                 className="w-full h-auto
+//                           max-w-[95%]
+//                           md:max-w-lg
+//                           lg:max-w-xl
+//                           xl:max-w-2xl
+//                           2xl:max-w-63l
+//                           max-h-[42vh] sm:max-h-[46vh] md:max-h-[44vh] lg:max-h-[50vh] xl:max-h-[54vh]
+//                           object-contain
+//                           drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] 
+//                           filter brightness-105"
+//               />
+//             ) : (
+//               <div className="h-16" />
+//             )}
+//           </motion.div>
+
+//           {/* Middle spacer - flex-grow pushes content apart */}
+//           <div className="flex-grow min-h-[2vh]" />
+
+//           {/* Countdown + CTA */}
+//           <div className="flex flex-col items-center flex-shrink-0
+//                         gap-5 sm:gap-6 md:gap-7 lg:gap-8">
+            
+//             {premiereDate && (
+//               <motion.div
+//                 initial={{ opacity: 0, y: 20 }}
+//                 animate={{ opacity: 1, y: 0 }}
+//                 transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+//                 className="w-full flex justify-center px-4"
+//               >
+//                 <Countdown targetDate={premiereDate} />
+//               </motion.div>
+//             )}
+
+//             <motion.div
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+//               className="w-full flex justify-center px-4"
+//             >
+//               <Button
+//                 size="xl"
+//                 variant="torch"
+//                 asChild
+//                 className="w-full max-w-xs sm:w-auto
+//                           sm:min-w-[280px]
+//                           md:min-w-[300px]
+//                           lg:min-w-[320px]
+//                           lg:text-lg
+//                           lg:py-5
+//                           active:scale-95"
+//               >
+//                 <a
+//                   href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="group relative overflow-hidden inline-flex items-center justify-center"
+//                   onClick={() =>
+//                     trackEvent("ticket_click", {
+//                       source: "hero_main",
+//                       page,
+//                     })
+//                   }
+//                 >
+//                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+//                                translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
+                  
+//                   <span className="relative inline-flex items-center justify-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+//                     <Ticket className="mr-4 h-5 w-5 lg:h-6 lg:w-6" />
+//                     Kjøp billetter
+//                   </span>
+//                 </a>
+//               </Button>
+//             </motion.div>
+//           </div>
+
+//           {/* Bottom spacer */}
+//           <div className="flex-shrink-0 
+//                         h-[8vh] 
+//                         sm:h-[10vh] 
+//                         md:h-[10vh] 
+//                         lg:h-[12vh] 
+//                         xl:h-[14vh]" 
+//           />
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// // src/components/sections/Hero.tsx
+// import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+// import { Ticket } from "lucide-react";
+// import { Container } from "@/components/layout/Container";
+// import { Button } from "@/components/ui/Button";
+// import { urlFor } from "@/lib/sanity";
+// import type { Show, Performance, SanityImage } from "@/types/sanity";
+// import { Countdown } from "@/components/ui/Countdown";
+// import { trackEvent } from "@/lib/analytics";
+// import { useState, useRef } from "react";
+// import { useReducedMotion } from "@/hooks/useRedusedMotion";
+
+// interface HeroProps {
+//   show: Show;
+//   nextPerformance?: Performance;
+//   page?: string;
+// }
+
+// type ShowWithLogo = Show & {
+//   logoImage?: SanityImage;
+// };
+
+// export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
+//   const [videoLoaded] = useState(true); // video disabled -> always "loaded" feel
+//   const sectionRef = useRef<HTMLElement>(null);
+//   const prefersReducedMotion = useReducedMotion();
+
+//   const { scrollYProgress } = useScroll({
+//     target: sectionRef,
+//     offset: ["start start", "end start"],
+//   });
+
+//   const smooth = useSpring(scrollYProgress, {
+//     stiffness: 120,
+//     damping: 30,
+//     mass: 0.4,
+//   });
+
+//   // ✅ ArchiveTeaser-ish: mild parallax + scale
+//   const bgY = useTransform(
+//     smooth,
+//     [0, 1],
+//     prefersReducedMotion ? ["0%", "0%"] : ["0%", "18%"]
+//   );
+
+//   const bgScale = useTransform(
+//     smooth,
+//     [0, 1],
+//     prefersReducedMotion ? [1, 1] : [1.06, 1.14]
+//   );
+
+//   const premiereDate = nextPerformance?.date ? new Date(nextPerformance.date) : null;
+
+//   const showWithLogo = show as ShowWithLogo;
+//   const logoImage = showWithLogo.logoImage;
+
+//   return (
+//     <section ref={sectionRef} className="relative min-h-[100svh] flex items-center overflow-hidden">
+//       {/* Background Image (parallax + scale) */}
+//       <div className="absolute inset-0 bg-navy-950">
+//         <motion.img
+//           src="/assets/landing/plakat_bakgrunn.png"
+//           alt=""
+//           aria-hidden="true"
+//           className="absolute inset-0 w-full h-full object-cover"
+//           loading="eager"
+//           decoding="async"
+//           style={{
+//             y: bgY,
+//             scale: bgScale,
+//             transform: "translateZ(0)",
+//             willChange: "transform",
+//           }}
+//         />
+
+//         {!videoLoaded && (
+//           <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-950 to-navy-900" />
+//         )}
+
+//         {/* Readability overlays */}
+//         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/35 via-navy-950/65 to-navy-950/85" />
+//         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_55%,rgba(3,7,18,0.75)_100%)]" />
+
+//         {/* Fakkel-glow effects */}
+//         <motion.div
+//           className="absolute top-0 left-0 w-32 h-32 md:w-40 md:h-40 bg-torch-500/20 blur-3xl rounded-full"
+//           animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.2, 1] }}
+//           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+//         />
+//         <motion.div
+//           className="absolute top-0 right-0 w-32 h-32 md:w-40 md:h-40 bg-torch-500/20 blur-3xl rounded-full"
+//           animate={{ opacity: [0.6, 0.3, 0.6], scale: [1.2, 1, 1.2] }}
+//           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+//         />
+
+//         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-navy-950/80 to-transparent" />
+//       </div>
+
+//       {/* Content */}
+//       <Container className="relative z-10 w-full h-full">
+//         <div className="flex flex-col h-full">
+//           {/* Top spacer */}
+//           <div
+//             className="flex-shrink-0 h-[10vh] sm:h-[11vh] md:h-[12vh] lg:h-[13vh] xl:h-[14vh]"
+//             aria-hidden="true"
+//           />
+
+//           {/* Logo */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+//             className="w-full flex justify-center px-4 flex-shrink-0"
+//           >
+//             {logoImage ? (
+//               <img
+//                 src={urlFor(logoImage).width(1400).quality(90).url()}
+//                 alt={show.title}
+//                 className="w-full h-auto max-w-[95%] sm:max-w-2xl md:max-w-2xl lg:max-w-3xl xl:max-w-5xl 2xl:max-w-6xl
+//                            max-h-[42vh] sm:max-h-[46vh] md:max-h-[44vh] lg:max-h-[50vh] xl:max-h-[54vh]
+//                            object-contain drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] filter brightness-105"
+//               />
+//             ) : (
+//               <div className="h-16" />
+//             )}
+//           </motion.div>
+
+//           <div className="flex-grow min-h-[2vh]" />
+
+//           {/* Countdown + CTA */}
+//           <div className="flex flex-col items-center flex-shrink-0 gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8">
+//             {premiereDate && (
+//               <motion.div
+//                 initial={{ opacity: 0, y: 20 }}
+//                 animate={{ opacity: 1, y: 0 }}
+//                 transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+//                 className="w-full flex justify-center px-4"
+//               >
+//                 <Countdown targetDate={premiereDate} />
+//               </motion.div>
+//             )}
+
+//             <motion.div
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+//               className="w-full flex justify-center px-4"
+//             >
+//               <Button
+//                 size="xl"
+//                 variant="torch"
+//                 asChild
+//                 className="w-full max-w-xs sm:w-auto sm:min-w-[280px] md:min-w-[300px] lg:min-w-[320px]
+//                            lg:text-lg lg:py-5 active:scale-95"
+//               >
+//                 <a
+//                   href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
+//                   target="_blank"
+//                   rel="noopener noreferrer"
+//                   className="group relative overflow-hidden inline-flex items-center justify-center"
+//                   onClick={() =>
+//                     trackEvent("ticket_click", { source: "hero_main", page })
+//                   }
+//                 >
+//                   <span
+//                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+//                                translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none"
+//                     aria-hidden="true"
+//                   />
+//                   <span className="relative inline-flex items-center justify-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+//                     <Ticket className="mr-4 h-5 w-5 lg:h-6 lg:w-6" />
+//                     Kjøp billetter
+//                   </span>
+//                 </a>
+//               </Button>
+//             </motion.div>
+//           </div>
+
+//           {/* Bottom spacer */}
+//           <div
+//             className="flex-shrink-0 h-[8vh] sm:h-[10vh] md:h-[10vh] lg:h-[12vh] xl:h-[14vh]"
+//             aria-hidden="true"
+//           />
+//         </div>
+//       </Container>
+//     </section>
+//   );
+// }
+
+
+// // src/components/sections/Hero.tsx (MINIMAL TOP SPACE)
+// import { motion } from "framer-motion";
+// import { Ticket } from "lucide-react";
+// import { Container } from "@/components/layout/Container";
+// import { Button } from "@/components/ui/Button";
+// import { urlFor } from "@/lib/sanity";
+// import type { Show, Performance, SanityImage } from "@/types/sanity";
+// import { Countdown } from "@/components/ui/Countdown";
+// import { trackEvent } from "@/lib/analytics";
+// import { useState } from "react";
+
+// interface HeroProps {
+//   show: Show;
+//   nextPerformance?: Performance;
+//   page?: string;
+// }
+
+// type ShowWithLogo = Show & {
+//   logoImage?: SanityImage;
+// };
+
+// export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
+//   const [videoLoaded, setVideoLoaded] = useState(false);
+
+//   const premiereDate = nextPerformance?.date
+//     ? new Date(nextPerformance.date)
+//     : null;
+
+//   const showWithLogo = show as ShowWithLogo;
+//   const logoImage = showWithLogo.logoImage;
+
+//   return (
+//     <section className="relative h-screen flex items-center overflow-hidden">
+//       {/* Background Video */}
+//       <div className="absolute inset-0 bg-navy-950">
+//         <video
+//           src="/assets/landing/heroVideo.mp4"
+//           autoPlay
+//           muted
+//           loop
+//           playsInline
+//           preload="auto"
+//           onLoadedData={() => setVideoLoaded(true)}
+//           className={`w-full h-full transition-opacity duration-1000 ${
+//             videoLoaded ? 'opacity-100' : 'opacity-0'
+//           }`}
+//           style={{
+//             objectFit: 'cover',
+//             objectPosition: 'center',
+//           }}
+//         />
+
+//         {!videoLoaded && (
+//           <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-950 to-navy-900" />
+//         )}
+        
+//         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/40 via-navy-950/60 to-navy-950/80" />
+
+//         {/* Fakkel-glow effects */}
+//         <motion.div
+//           className="absolute top-0 left-0 w-32 h-32 md:w-40 md:h-40 bg-torch-500/20 blur-3xl rounded-full"
+//           animate={{ 
+//             opacity: [0.3, 0.6, 0.3], 
+//             scale: [1, 1.2, 1] 
+//           }}
+//           transition={{ 
+//             duration: 3, 
+//             repeat: Infinity, 
+//             ease: "easeInOut" 
+//           }}
+//         />
+//         <motion.div
+//           className="absolute top-0 right-0 w-32 h-32 md:w-40 md:h-40 bg-torch-500/20 blur-3xl rounded-full"
+//           animate={{ 
+//             opacity: [0.6, 0.3, 0.6], 
+//             scale: [1.2, 1, 1.2] 
+//           }}
+//           transition={{ 
+//             duration: 3, 
+//             repeat: Infinity, 
+//             ease: "easeInOut" 
+//           }}
+//         />
+
+//         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-navy-950/80 to-transparent" />
+//       </div>
+
+//       {/* Content */}
+//       <Container className="relative z-10 w-full h-full">
+//         <div className="flex flex-col h-full">
+          
+//           {/* Top spacer - MYE MINDRE! Header er 72px ≈ 9vh på 800px */}
+//           <div className="flex-shrink-0 
+//                         h-[10vh]
+//                         sm:h-[11vh] 
+//                         md:h-[12vh] 
+//                         lg:h-[13vh] 
+//                         xl:h-[14vh]" 
+//           />
+          
+//           {/* Logo - Stor og nærmere toppen */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+//             className="w-full flex justify-center px-4 flex-shrink-0"
+//           >
+//             {logoImage ? (
+//               <img
+//                 src={urlFor(logoImage).width(1400).quality(90).url()}
+//                 alt={show.title}
+//                 className="w-full h-auto
+//                           max-w-[95%]
+//                           sm:max-w-2xl
+                          
+//                           xs:max-w-[80%]
+                          
+                          
+//                           md:max-w-2xl
+//                           lg:max-w-3xl
+//                           xl:max-w-5xl
+//                           2xl:max-w-6xl
+//                           max-h-[42vh] sm:max-h-[46vh] md:max-h-[44vh] lg:max-h-[50vh] xl:max-h-[54vh]
+//                           object-contain
+//                           drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] 
+//                           filter brightness-105"
+//               />
+//             ) : (
+//               <div className="h-16" />
+//             )}
+//           </motion.div>
+
+//           {/* Middle spacer */}
+//           <div className="flex-grow min-h-[2vh]" />
+
+//           {/* Countdown + CTA */}
+//           <div className="flex flex-col items-center flex-shrink-0
+//                         gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8">
+            
+//             {premiereDate && (
+//               <motion.div
+//                 initial={{ opacity: 0, y: 20 }}
+//                 animate={{ opacity: 1, y: 0 }}
+//                 transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+//                 className="w-full flex justify-center px-4"
+//               >
+//                 <Countdown targetDate={premiereDate} />
+//               </motion.div>
+//             )}
+
+// <motion.div
+//   initial={{ opacity: 0, y: 20 }}
+//   animate={{ opacity: 1, y: 0 }}
+//   transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+//   className="w-full flex justify-center px-4"
+// >
+//   <Button
+//     size="xl"
+//     variant="torch"
+//     asChild
+//     className="w-full max-w-xs sm:w-auto
+//               sm:min-w-[280px]
+//               md:min-w-[300px]
+//               lg:min-w-[320px]
+//               lg:text-lg
+//               lg:py-5
+//               active:scale-95"
+//   >
+//     <a
+//       href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
+//       target="_blank"
+//       rel="noopener noreferrer"
+//       className="group relative overflow-hidden inline-flex items-center justify-center"
+//       onClick={() =>
+//         trackEvent("ticket_click", {
+//           source: "hero_main",
+//           page,
+//         })
+//       }
+//     >
+//       {/* Shine effect direkte i <a> */}
+//       <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
+//                      translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
+      
+//       {/* Content med drop shadow */}
+//       <span className="relative inline-flex items-center justify-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+//         <Ticket className="mr-4 h-5 w-5 lg:h-6 lg:w-6" />
+//         Kjøp billetter
+//       </span>
+//     </a>
+//   </Button>
+// </motion.div>
+//           </div>
+
+//           {/* Bottom spacer */}
+//           <div className="flex-shrink-0 
+//                         h-[8vh] 
+//                         sm:h-[10vh] 
+//                         md:h-[10vh] 
+//                         lg:h-[12vh] 
+//                         xl:h-[14vh]" 
+//           />
+//         </div>
+//       </Container>
+//     </section>
+//   );
+// }
