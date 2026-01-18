@@ -8,11 +8,9 @@ import { TrackSection } from "@/lib/Tracksection";
 import { SEOHead } from "@/components/SEOHead";
 import { urlFor } from "@/lib/sanity";
 import { defaultSEO } from "@/config/seo";
-
 import UpcomingShowScene from "@/components/sections/UpcomingShowScene";
 import HistoryScene from "@/components/sections/HistoryScene";
 import ArchiveTeaser from "@/components/sections/ArchiveTeaser";
-
 import { landingData } from "@/components/sections/data/landingData";
 
 export default function Home() {
@@ -32,7 +30,6 @@ export default function Home() {
 
   const seoTitle = show.seo?.title ?? `${show.title} – ${defaultSEO.siteName}`;
   const seoDescription = show.seo?.description ?? defaultSEO.defaultDescription;
-
   const seoImage = show.seo?.ogImage
     ? urlFor(show.seo.ogImage).width(1200).height(630).url()
     : show.heroImage
@@ -41,7 +38,12 @@ export default function Home() {
 
   return (
     <>
-      <SEOHead title={seoTitle} description={seoDescription} image={seoImage} />
+      <SEOHead 
+        title={seoTitle} 
+        description={seoDescription} 
+        image={seoImage}
+        preloadVideo="/assets/landing/heroVideo.mp4"
+      />
 
       <TrackSection page="home" section="hero_ticket_launch">
         <Hero show={show} nextPerformance={performances?.[0]} />
