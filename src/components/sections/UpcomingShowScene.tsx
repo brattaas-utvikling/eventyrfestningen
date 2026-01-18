@@ -19,7 +19,7 @@ const upcomingShowData = {
   highlights: [
     "Kveld med gåsehud",
     "30+ skuespillere og dansere",
-    "Spektakulært scenografi",
+    "Spektakulær scenografi",
     "Humor for alle",
   ],
 } as const;

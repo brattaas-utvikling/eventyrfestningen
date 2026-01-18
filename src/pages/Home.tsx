@@ -42,7 +42,7 @@ export default function Home() {
         title={seoTitle} 
         description={seoDescription} 
         image={seoImage}
-        preloadVideo="/assets/landing/heroVideo.mp4"
+        // preloadVideo="/assets/landing/heroVideo.mp4"
       />
 
       <TrackSection page="home" section="hero_ticket_launch">
