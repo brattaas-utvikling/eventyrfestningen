@@ -1,16 +1,16 @@
 // src/components/SEOHead.tsx
 import { useEffect } from 'react'
 
-type __SeoType__ = 'website' | 'article'
+type SeoType = 'website' | 'article'
 
-interface __SEOHeadProps__ {
+interface SEOHeadProps {
   title?: string
   description?: string
   image?: string
   url?: string
-  type?: __SeoType__
+  type?: SeoType
   schema?: object | object[] | null
-  preloadVideo?: string // Ny prop
+  preloadVideo?: string
 }
 
 export function SEOHead({
@@ -20,8 +20,8 @@ export function SEOHead({
   url,
   type = 'website',
   schema,
-  preloadVideo, // Ny prop
-}: __SEOHeadProps__) {
+  preloadVideo,
+}: SEOHeadProps) {
   useEffect(() => {
     const siteName = 'Eventyrfestningen'
     const fullTitle = title ? `${title} | ${siteName}` : siteName
@@ -29,11 +29,11 @@ export function SEOHead({
     document.title = fullTitle
 
     // liten helper for å "upserte" meta-tags
-    const upsertMeta = (attrs: __Record__<string, string>) => {
+    const upsertMeta = (attrs: Record<string, string>) => {
       const selector = Object.entries(attrs)
         .map(([key, value]) => `[${key}="${value}"]`)
         .join('')
-      let el = document.head.querySelector<__HTMLMetaElement__>(selector)
+      let el = document.head.querySelector<HTMLMetaElement>(selector)
       if (!el) {
         el = document.createElement('meta')
         Object.entries(attrs).forEach(([k, v]) => el!.setAttribute(k, v))
@@ -44,7 +44,7 @@ export function SEOHead({
 
     // description
     if (description) {
-      let metaDesc = document.head.querySelector<__HTMLMetaElement__>(
+      let metaDesc = document.head.querySelector<HTMLMetaElement>(
         'meta[name="description"]'
       )
       if (!metaDesc) {
@@ -107,7 +107,7 @@ export function SEOHead({
       link.setAttribute('href', url)
     }
 
-    // Video preload (NY SEKSJON)
+    // Video preload
     if (preloadVideo) {
       let videoPreload = document.head.querySelector<HTMLLinkElement>(
         'link[rel="preload"][as="video"]'
