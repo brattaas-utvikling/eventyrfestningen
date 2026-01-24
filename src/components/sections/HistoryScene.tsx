@@ -195,7 +195,7 @@ export default function HistoryScene({ data }: Props) {
               </h2>
             </div>
 
-            <div className="prose prose-lg prose-invert max-w-none prose-p:text-white/80 prose-p:leading-relaxed">
+            <div className="prose lg:prose-lg xl:prose-xl prose-invert max-w-2xl prose-p:text-white/80 prose-p:leading-relaxed">
               <p>{data.summary}</p>
             </div>
 

@@ -89,16 +89,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <>
           {withPulse && (
             <style>{`
-              @keyframes border-pulse {
-                0%, 100% {
-                  border-color: rgba(251, 146, 60, 0.5);
-                  box-shadow: 0 0 20px rgba(255, 161, 35, 0.4);
-                }
-                50% {
-                  border-color: rgba(251, 146, 60, 0.9);
-                  box-shadow: 0 0 30px rgba(255, 161, 35, 0.6);
-                }
+            @keyframes border-pulse {
+              0%, 100% {
+                box-shadow: 0 0 18px rgba(255, 161, 35, 0.35), 0 10px 30px rgba(0,0,0,0.22);
               }
+              50% {
+                box-shadow: 0 0 34px rgba(255, 161, 35, 0.55), 0 14px 44px rgba(0,0,0,0.28);
+              }
+            }
             `}</style>
           )}
           
