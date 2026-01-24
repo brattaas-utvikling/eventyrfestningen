@@ -171,24 +171,24 @@ export default function UpcomingShowScene() {
             {/* Title */}
             <h2
               className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gold-400 leading-tight
-                         drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]"
+                        drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]"
             >
               {upcomingShowData.title}
             </h2>
 
             {/* Meta info */}
-            <div className="flex flex-wrap items-center gap-4 text-gold-200 font-sans text-sm">
-              <span className="px-3 py-1 bg-navy-800/60 md:backdrop-blur-sm rounded-full border border-gold-500/20">
+            <div className="flex flex-wrap items-center gap-4 text-white/80 font-sans text-sm">
+              <span>
                 {upcomingShowData.genre}
               </span>
-              <span className="px-3 py-1 bg-navy-800/60 md:backdrop-blur-sm rounded-full border border-gold-500/20">
+              <span>
                 {upcomingShowData.ageRating}
               </span>
-              <span className="font-sans text-sm">{upcomingShowData.dates}</span>
+              <span>{upcomingShowData.dates}</span>
             </div>
 
             {/* Description */}
-            <div className="prose prose-lg prose-invert max-w-none prose-p:text-white/80 prose-p:leading-relaxed">
+            <div className="prose lg:prose-lg xl:prose-xl prose-invert max-w-2xl prose-p:text-white/80 prose-p:leading-relaxed">
               <p>{upcomingShowData.description}</p>
             </div>
 

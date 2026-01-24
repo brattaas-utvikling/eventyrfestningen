@@ -24,6 +24,8 @@ type AnalyticsEventPayloads = {
     source:
       | "header_desktop"
       | "header_mobile"
+      | "header_desktop_nav"
+      | "header_mobile_nav"
       | "hero_main"
       | "hero_more_info"
       | "other";
