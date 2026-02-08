@@ -29,7 +29,7 @@ const QUICK_ACTIONS = [
     title: "Bli frivillig",
     description: "Bli med på produksjonen",
     color: "from-gold-400 to-gold-500",
-    textColor: "text-navy-900",
+    textColor: "text-cynical-900",
     action: {
       type: "email",
       url: "mailto:post@eventyrfestningen.no?subject=Frivillig",
@@ -93,7 +93,7 @@ export function ContactActionsVariant() {
       initial={{ opacity: 0, x: 16 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="rounded-2xl bg-navy-800/30 border border-navy-700/50 backdrop-blur p-6 sm:p-8 space-y-6"
+      className="rounded-2xl bg-cynical-800/30 border border-cynical-700/50 backdrop-blur p-6 sm:p-8 space-y-6"
       whileHover={{ y: -2 }}
     >
       {/* Header */}
@@ -101,7 +101,7 @@ export function ContactActionsVariant() {
         <h3 className="text-2xl font-display text-white mb-2">
           Hva kan vi hjelpe deg med?
         </h3>
-        <p className="text-navy-100/70 text-sm">
+        <p className="text-cynical-100/70 text-sm">
           Velg hva som passer deg best
         </p>
       </div>
@@ -119,7 +119,7 @@ export function ContactActionsVariant() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 + index * 0.05 }}
-              className="group relative overflow-hidden rounded-xl p-5 border border-navy-700/30 hover:border-gold-400/50 transition-all"
+              className="group relative overflow-hidden rounded-xl p-5 border border-cynical-700/30 hover:border-gold-400/50 transition-all"
               whileHover={{ y: -4, scale: 1.02 }}
             >
               {/* Gradient background */}
@@ -134,7 +134,7 @@ export function ContactActionsVariant() {
                   <h4 className="text-white font-display font-bold mb-1">
                     {action.title}
                   </h4>
-                  <p className="text-sm text-navy-100/70 mb-3">
+                  <p className="text-sm text-cynical-100/70 mb-3">
                     {action.description}
                   </p>
                 </div>
@@ -152,10 +152,10 @@ export function ContactActionsVariant() {
       {/* Divider */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-navy-700/50" />
+          <div className="w-full border-t border-cynical-700/50" />
         </div>
         <div className="relative flex justify-center text-sm">
-          <span className="px-4 bg-navy-800/30 text-navy-100/60">
+          <span className="px-4 bg-cynical-800/30 text-cynical-100/60">
             Eller kontakt oss direkte
           </span>
         </div>
@@ -172,14 +172,14 @@ export function ContactActionsVariant() {
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.4 + index * 0.1 }}
-              className="flex items-center gap-4 p-4 rounded-xl bg-navy-900/40 border border-navy-700/30 hover:border-gold-400/30 hover:bg-navy-900/60 transition-all group"
+              className="flex items-center gap-4 p-4 rounded-xl bg-cynical-900/40 border border-cynical-700/30 hover:border-gold-400/30 hover:bg-cynical-900/60 transition-all group"
               whileHover={{ x: 4 }}
             >
               <div className={`flex h-10 w-10 items-center justify-center rounded-full bg-white/5 ${method.color} shrink-0`}>
                 <Icon className="h-5 w-5" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-navy-100/60 mb-0.5">
+                <p className="text-sm text-cynical-100/60 mb-0.5">
                   {method.title}
                 </p>
                 <p className="text-white font-medium truncate">

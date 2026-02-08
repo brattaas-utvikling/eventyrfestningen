@@ -30,7 +30,7 @@ export const ShowPageLeft = forwardRef<HTMLDivElement, ShowPageLeftProps>(
                 <img
                   src={imageUrl}
                   alt={show.posterImage?.alt || show.title}
-                  className="w-full aspect-3/4 object-cover"
+                  className="w-full aspect-4/5 object-cover"
                   loading="lazy"
                 />
               ) : (

@@ -60,7 +60,7 @@ export function ShowFlipCard({ show, className }: ShowFlipCardProps) {
           className={cn(
             "absolute inset-0 h-full w-full",
             "backface-hidden", // viktig
-            "overflow-hidden rounded-2xl bg-navy-900/60 border border-navy-700/50 shadow-lg transition-all duration-500",
+            "overflow-hidden rounded-2xl bg-cynical-900/60 border border-cynical-700/50 shadow-lg transition-all duration-500",
             isFlipped ? "opacity-0 pointer-events-none" : "opacity-100 pointer-events-auto"
             // ↑ når snudd: ikke ta imot klikk
           )}
@@ -74,25 +74,25 @@ export function ShowFlipCard({ show, className }: ShowFlipCardProps) {
                 loading="lazy"
               />
             ) : (
-              <div className="h-full w-full bg-navy-800 flex items-center justify-center text-navy-100/60">
+              <div className="h-full w-full bg-cynical-800 flex items-center justify-center text-cynical-100/60">
                 {show.title}
               </div>
             )}
 
-            <div className="absolute inset-0 bg-linear-to-t from-navy-950/95 via-navy-950/20 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-cynical-950/95 via-cynical-950/20 to-transparent" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
               <div className="absolute -inset-6 bg-gold-400/10 blur-3xl" />
             </div>
 
             <div className="absolute inset-x-0 bottom-0 p-4">
-              <p className="inline-flex items-center gap-2 rounded-full bg-navy-950/60 border border-gold-400/30 px-3 py-1 text-xs text-gold-50 mb-2">
+              <p className="inline-flex items-center gap-2 rounded-full bg-cynical-950/60 border border-gold-400/30 px-3 py-1 text-xs text-gold-50 mb-2">
                 <Calendar className="h-3.5 w-3.5" />
                 {showTypeLabel} {show.year}
               </p>
               <h3 className="text-white text-lg font-display leading-tight drop-shadow">
                 {show.title}
               </h3>
-              <p className="text-navy-100/80 text-xs mt-1">Hold for info →</p>
+              <p className="text-cynical-100/80 text-xs mt-1">Hold for info →</p>
             </div>
           </div>
         </div>
@@ -101,13 +101,13 @@ export function ShowFlipCard({ show, className }: ShowFlipCardProps) {
         <div
           className={cn(
             "absolute inset-0 h-full w-full transform-[rotateY(180deg)] backface-hidden",
-            "rounded-2xl p-5 bg-navy-900/95 border border-gold-400/50 backdrop-blur-md",
+            "rounded-2xl p-5 bg-cynical-900/95 border border-gold-400/50 backdrop-blur-md",
             "flex flex-col gap-3 transition-all duration-500",
             isFlipped ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
             // ↑ når snudd: ta imot klikk
           )}
         >
-          <div className="inline-flex items-center gap-2 rounded-full bg-navy-900/60 border border-gold-400/20 px-3 py-1 text-xs text-gold-50 self-start">
+          <div className="inline-flex items-center gap-2 rounded-full bg-cynical-900/60 border border-gold-400/20 px-3 py-1 text-xs text-gold-50 self-start">
             {showTypeLabel}
             {show.year ? (
               <span className="text-gold-200/70">• {show.year}</span>
@@ -117,12 +117,12 @@ export function ShowFlipCard({ show, className }: ShowFlipCardProps) {
           <h3 className="text-white text-xl font-display leading-tight">
             {show.title}
           </h3>
-          <p className="text-navy-100/80 text-sm leading-relaxed flex-1">
+          <p className="text-cynical-100/80 text-sm leading-relaxed flex-1">
             {excerpt}
           </p>
 
           {show.practicalInfo?.duration ? (
-            <p className="text-xs text-navy-100/50">
+            <p className="text-xs text-cynical-100/50">
               Varighet: {show.practicalInfo.duration} min
             </p>
           ) : null}
@@ -132,7 +132,7 @@ export function ShowFlipCard({ show, className }: ShowFlipCardProps) {
               to={archiveHref}
               className={cn(
                 "inline-flex items-center gap-2 rounded-lg",
-                "bg-gold-400 text-navy-950 px-3 py-2 text-sm font-semibold",
+                "bg-gold-400 text-cynical-950 px-3 py-2 text-sm font-semibold",
                 "hover:bg-gold-300 transition-colors"
               )}
               onClick={(e) => {

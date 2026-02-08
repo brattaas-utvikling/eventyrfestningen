@@ -31,7 +31,7 @@ export default function Privacy() {
       />
 
       {/* HERO */}
-      <Section background="navy" paddingY="tight">
+      <Section background="cynical" paddingY="tight">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] items-center">
             {/* Tekst */}
@@ -107,7 +107,7 @@ export default function Privacy() {
       </Section>
 
       {/* INNHOLD */}
-      <Section background="navy">
+      <Section background="cynical">
         <Container>
           <motion.div
             variants={fadeParent}

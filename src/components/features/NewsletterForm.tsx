@@ -56,7 +56,7 @@ export function NewsletterForm() {
             type="email"
             {...register('email')}
             placeholder="din@epost.no"
-            className="w-full rounded-lg border border-navy-700 bg-navy-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
+            className="w-full rounded-lg border border-cynical-700 bg-cynical-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
           />
           {errors.email && <p className="text-sm text-red-300 mt-1">{errors.email.message}</p>}
         </div>
@@ -77,7 +77,7 @@ export function NewsletterForm() {
       {status === 'error' && (
         <p className="text-sm text-red-300">Noe gikk galt. Prøv igjen senere.</p>
       )}
-      <p className="text-xs text-navy-100/60">
+      <p className="text-xs text-cynical-100/60">
         Vi sender kun viktig informasjon om billettsalg. Ingen spam.
       </p>
     </form>

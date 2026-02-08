@@ -70,7 +70,7 @@ export function BentoGallery({
         <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-2">
           {title}
         </h3>
-        <p className="text-navy-100/70 text-sm">
+        <p className="text-cynical-100/70 text-sm">
           Klikk på bildene for større visning
         </p>
       </motion.div>
@@ -103,7 +103,7 @@ export function BentoGallery({
       className={`
         ${gridClass}
         group relative overflow-hidden rounded-xl
-        bg-navy-800/20 border border-white/10
+        bg-cynical-800/20 border border-white/10
         hover:border-gold-400/60 hover:shadow-2xl
         transition-all duration-300
         focus:outline-none focus:ring-2 focus:ring-gold-400
@@ -124,7 +124,7 @@ export function BentoGallery({
       />
 
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-linear-to-t from-navy-900/90 via-navy-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-linear-to-t from-cynical-900/90 via-cynical-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       {/* Hover icon */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -155,7 +155,7 @@ export function BentoGallery({
       )}
 
       {/* Index number */}
-      <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-navy-900/80 backdrop-blur-sm flex items-center justify-center text-white/70 text-xs font-bold opacity-60 group-hover:opacity-100 transition-opacity">
+      <div className="absolute top-2 left-2 w-6 h-6 rounded-full bg-cynical-900/80 backdrop-blur-sm flex items-center justify-center text-white/70 text-xs font-bold opacity-60 group-hover:opacity-100 transition-opacity">
         {index + 1}
       </div>
     </motion.button>
@@ -172,7 +172,7 @@ export function BentoGallery({
         transition={{ delay: 0.5 }}
         className="mt-8 text-center"
       >
-        <p className="text-sm text-navy-100/60">
+        <p className="text-sm text-cynical-100/60">
           {images.length} {images.length === 1 ? "bilde" : "bilder"} totalt
         </p>
       </motion.div>

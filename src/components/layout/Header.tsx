@@ -198,7 +198,7 @@ export function Header() {
     const active = isActiveRoute(item.href);
   
     const linkClasses = cn(
-      "transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-sm font-sans",
+      "transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-sm font-sans",
       active ? "text-gold-400 font-semibold" : "text-white hover:text-gold-400",
       className
     );
@@ -237,7 +237,7 @@ export function Header() {
   return (
     <header
       ref={headerRef}
-      className="fixed top-0 w-full z-50 transition-all duration-300 ease-in-out bg-navy-900/95 backdrop-blur-sm shadow-lg border-b border-white/20"
+      className="fixed top-0 w-full z-50 transition-all duration-300 ease-in-out bg-cynical-900/95 backdrop-blur-sm shadow-lg border-b border-white/20"
       role="banner"
     >
       <Container>
@@ -249,7 +249,7 @@ export function Header() {
           <Link
             to="/"
             onClick={() => handleNavClick({ name: "Hjem", href: "/" })}
-            className="flex items-center space-x-3 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-lg"
+            className="flex items-center space-x-3 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-lg"
             aria-label="Kongsvinger Festningsteater - Gå til forsiden"
           >
             <img
@@ -284,7 +284,7 @@ export function Header() {
           {/* Mobile menu toggle */}
           <motion.button
             type="button"
-            className="lg:hidden text-white hover:text-gold-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-full p-2"
+            className="lg:hidden text-white hover:text-gold-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-full p-2"
             onClick={() =>
               setMobileMenuOpen((prev) => {
                 const next = !prev;
@@ -346,7 +346,7 @@ export function Header() {
                       className={cn(
                         "block px-3 py-2.5 text-base font-medium rounded-md text-center w-full",
                         isActiveRoute(item.href) && "bg-gold-500/20",
-                        !isActiveRoute(item.href) && "hover:bg-navy-800"
+                        !isActiveRoute(item.href) && "hover:bg-cynical-800"
                       )}
                       onClick={() => handleNavClick(item)}
                       onMouseEnter={() => handleNavHover(item.href)}
@@ -556,7 +556,7 @@ export function Header() {
 //       <Link
 //         to={item.href}
 //         className={cn(
-//           "transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-sm font-sans text-nowrap",
+//           "transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-sm font-sans text-nowrap",
 //           active
 //             ? "text-gold-400 font-semibold"
 //             : "text-white hover:text-gold-400",
@@ -574,7 +574,7 @@ export function Header() {
 //     <header
 //       ref={headerRef}
 //       className={cn(
-//         "fixed top-0 w-full z-50 transition-all duration-300 ease-in-out bg-navy-900/95 backdrop-blur-sm shadow-lg border-b border-white/20"
+//         "fixed top-0 w-full z-50 transition-all duration-300 ease-in-out bg-cynical-900/95 backdrop-blur-sm shadow-lg border-b border-white/20"
 //       )}
 //     >
 //       <Container>
@@ -582,7 +582,7 @@ export function Header() {
 //           {/* logo */}
 //           <motion.button
 //             onClick={() => handleNavClick("/")}
-//             className="flex items-center space-x-3 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-lg"
+//             className="flex items-center space-x-3 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-lg"
 //             whileTap={{ scale: 0.98 }}
 //             aria-label="Kongsvinger Festningsteater - Gå til forsiden"
 //           >
@@ -621,7 +621,7 @@ export function Header() {
 //                 href="https://eventyrfestningen.ticketco.events/no/nb"
 //                 target="_blank"
 //                 rel="noreferrer"
-//                 className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display text-nowrap"
+//                 className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 font-display text-nowrap"
 //                 onClick={() =>
 //                   trackEvent("ticket_click", {
 //                     source: "header_desktop",
@@ -639,7 +639,7 @@ export function Header() {
 //           <motion.div whileTap={{ scale: 0.95 }}>
 //             <button
 //               type="button"
-//               className="lg:hidden text-white hover:text-gold-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 rounded-full p-2"
+//               className="lg:hidden text-white hover:text-gold-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-full p-2"
 //               // onClick={() => setMobileMenuOpen((p) => !p)}
 //               onClick={() =>
 //                 setMobileMenuOpen((prev) => {
@@ -702,7 +702,7 @@ export function Header() {
 //                         "block px-3 py-2 text-base font-medium rounded-md text-center",
 //                         isActiveRoute(item.href)
 //                           ? "bg-gold-500/20"
-//                           : "hover:bg-navy-800"
+//                           : "hover:bg-cynical-800"
 //                       )}
 //                       onClick={() => handleNavClick(item.href)}
 //                       onMouseEnter={() => handleNavHover(item.href)}
@@ -723,7 +723,7 @@ export function Header() {
 //                         href="https://eventyrfestningen.ticketco.events/no/nb"
 //                         target="_blank"
 //                         rel="noreferrer"
-//                         className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-navy-900 font-display"
+//                         className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 font-display"
 //                         onClick={() =>
 //                           trackEvent("ticket_click", {
 //                             source: "header_mobile",

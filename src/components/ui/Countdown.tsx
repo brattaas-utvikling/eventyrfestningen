@@ -51,7 +51,7 @@ export function Countdown({ targetDate }: CountdownProps) {
     <div 
       className="inline-flex items-center 
                  gap-3 sm:gap-4 md:gap-4 lg:gap-5 xl:gap-6
-                 bg-navy-900/60 backdrop-blur-md 
+                 bg-cynical-900/60 backdrop-blur-md 
                  border border-gold-400/20 
                  rounded-xl sm:rounded-2xl
                  px-4 py-3

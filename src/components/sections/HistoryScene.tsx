@@ -164,7 +164,7 @@ export default function HistoryScene({ data }: Props) {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-navy-900 py-16 sm:py-20 overflow-hidden"
+      className="relative bg-cynical-900 py-16 sm:py-20 overflow-hidden"
       aria-label="Historie"
     >
       {/* Texture overlay */}
@@ -204,8 +204,8 @@ export default function HistoryScene({ data }: Props) {
               {parsedStats.map((stat, idx) => (
                 <div
                   key={`${stat.label}-${idx}`}
-                  className="text-center p-4 sm:p-6 bg-navy-800/60 rounded-lg border border-gold-500/20
-                             hover:border-gold-500/35 hover:bg-navy-800/70 transition-all duration-300"
+                  className="text-center p-4 sm:p-6 bg-cynical-800/60 rounded-lg border border-gold-500/20
+                             hover:border-gold-500/35 hover:bg-cynical-800/70 transition-all duration-300"
                 >
                   <div className="font-display tabular-nums leading-none min-h-[1.1em] text-3xl sm:text-4xl lg:text-5xl text-gold-400 mb-2">
                     {prefersReducedMotion ? (
@@ -235,7 +235,7 @@ export default function HistoryScene({ data }: Props) {
               <Link
                 to={data.ctaLink}
                 className="group inline-flex items-center gap-2 text-gold-300 hover:text-gold-200 font-sans font-medium text-base transition-colors
-                           focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900 rounded-sm"
+                           focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900 rounded-sm"
               >
                 <span className="border-b-2 border-gold-500/30 group-hover:border-gold-400/60 transition-colors">
                   {data.ctaText}

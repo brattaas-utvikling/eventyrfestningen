@@ -11,7 +11,7 @@ export const BackCoverPage = forwardRef<HTMLDivElement>((_, ref) => (
 
       {/* Inner panel med OldPaper for subtil tekstur */}
       <div className="absolute inset-[18px] rounded-lg border border-gold-400/50 shadow-[inset_0_0_25px_rgba(0,0,0,0.8)] overflow-hidden">
-        <OldPaper className="w-full h-full bg-linear-to-br from-navy-900 via-navy-800 to-navy-900 text-gold-100 flex items-center justify-center">
+        <OldPaper className="w-full h-full bg-linear-to-br from-cynical-900 via-cynical-800 to-cynical-900 text-gold-100 flex items-center justify-center">
           <div className="px-8 md:px-12 py-10 text-center space-y-6">
             <p className="text-2xl md:text-3xl italic text-gold-50 font-sans">
               "Historiene lever videre..."
@@ -42,7 +42,7 @@ BackCoverPage.displayName = "BackCoverPage";
 // import { OldPaper } from "@/components/ui/OldPaper";
 
 // export const BackCoverPage = forwardRef<HTMLDivElement>((_, ref) => (
-//   <div ref={ref} className="w-full h-full bg-leather-cover text-yellow-100 flex items-center justify-center bg-navy-900 border-amber-200 border-2">
+//   <div ref={ref} className="w-full h-full bg-leather-cover text-yellow-100 flex items-center justify-center bg-cynical-900 border-amber-200 border-2">
 //     <OldPaper className="p-10 text-center space-y-4">
 //       <p className="text-xl italic">"Historiene lever videre..."</p>
 //       <hr className="border-yellow-100 w-1/2 mx-auto" />

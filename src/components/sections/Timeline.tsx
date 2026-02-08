@@ -100,7 +100,7 @@ export function Timeline({ milestones }: TimelineProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl sm:text-5xl font-display font-bold text-navy-900 mb-4"
+            className="text-4xl sm:text-5xl font-display font-bold text-cynical-900 mb-4"
           >
             Vår reise gjennom tid
           </motion.h2>
@@ -363,7 +363,7 @@ function TimelineCard({
 
         {/* Valgfritt bilde */}
         {image ? (
-          <div className="relative aspect-video overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
+          <div className="relative aspect-video overflow-hidden bg-linear-to-br from-cynical-900 to-burgundy-900">
             <img
               src={urlFor(image)
                 .width(640)
@@ -387,7 +387,7 @@ function TimelineCard({
 
         {/* Innhold */}
         <div className="relative p-6 sm:p-7">
-          <h3 className="text-2xl font-display font-bold text-navy-900 mb-3 tracking-[0.03em]">
+          <h3 className="text-2xl font-display font-bold text-cynical-900 mb-3 tracking-[0.03em]">
             {title}
           </h3>
           {desc ? (
@@ -503,7 +503,7 @@ function TimelineCard({
 //             initial={{ opacity: 0, y: 20 }}
 //             whileInView={{ opacity: 1, y: 0 }}
 //             viewport={{ once: true }}
-//             className="text-4xl sm:text-5xl font-display font-bold text-navy-900 mb-4"
+//             className="text-4xl sm:text-5xl font-display font-bold text-cynical-900 mb-4"
 //           >
 //             Vår reise gjennom tid
 //           </motion.h2>
@@ -719,7 +719,7 @@ function TimelineCard({
 
 //         {/* Valgfritt bilde */}
 //         {image ? (
-//           <div className="relative aspect-[16/9] overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
+//           <div className="relative aspect-[16/9] overflow-hidden bg-linear-to-br from-cynical-900 to-burgundy-900">
 //             <img
 //               src={urlFor(image)
 //                 .width(640)
@@ -745,7 +745,7 @@ function TimelineCard({
 
 //         {/* Innhold */}
 //         <div className="relative p-6 sm:p-7">
-//           <h3 className="text-2xl font-display font-bold text-navy-900 mb-3 tracking-[0.03em]">
+//           <h3 className="text-2xl font-display font-bold text-cynical-900 mb-3 tracking-[0.03em]">
 //             {title}
 //           </h3>
 //           {desc ? (

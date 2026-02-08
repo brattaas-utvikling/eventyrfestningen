@@ -7,7 +7,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-navy-900 text-white hover:bg-navy-800 focus-visible:ring-navy-500",
+          "bg-cynical-900 text-white hover:bg-cynical-800 focus-visible:ring-cynical-500",
         torch:
           [
             "relative overflow-hidden",
@@ -21,7 +21,7 @@ export const buttonVariants = cva(
             // micro-interaction
             "active:scale-[0.99]",
             // fokus (UU)
-            "focus-visible:ring-torch-300 focus-visible:ring-offset-navy-900",
+            "focus-visible:ring-torch-300 focus-visible:ring-offset-cynical-900",
             // “emboss” highlight på toppen (ser mer premium ut enn border)
             "before:content-[''] before:absolute before:inset-0",
             "before:bg-gradient-to-b before:from-white/22 before:via-white/10 before:to-transparent",
@@ -33,7 +33,7 @@ export const buttonVariants = cva(
           ].join(" "),
 
         gold:
-          "bg-gradient-to-r from-gold-500 to-gold-600 text-navy-900 hover:from-gold-600 hover:to-gold-700 shadow-lg focus-visible:ring-gold-500",
+          "bg-gradient-to-r from-gold-500 to-gold-600 text-cynical-900 hover:from-gold-600 hover:to-gold-700 shadow-lg focus-visible:ring-gold-500",
 
         burgundy:
           "bg-burgundy-900 text-white hover:bg-burgundy-800 focus-visible:ring-burgundy-500",
@@ -42,10 +42,10 @@ export const buttonVariants = cva(
           "border-2 border-gold-400/80 text-white hover:bg-gold-400/10 backdrop-blur-sm",
 
         torchoutline:
-          "border-2 border-torch-500 text-torch-500 hover:text-torch-300 hover:border-torch-300 focus-visible:ring-navy-500 transition-colors transform duration-200",
+          "border-2 border-torch-500 text-torch-500 hover:text-torch-300 hover:border-torch-300 focus-visible:ring-cynical-500 transition-colors transform duration-200",
 
-        ghost: "text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",
-        whiteghost: "bg-white text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",
+        ghost: "text-cynical-900 hover:bg-cynical-100 focus-visible:ring-cynical-500",
+        whiteghost: "bg-white text-cynical-900 hover:bg-cynical-100 focus-visible:ring-cynical-500",
         link: "text-torch-600 underline-offset-4 hover:underline focus-visible:ring-torch-500",
       },
       size: {
@@ -72,19 +72,19 @@ export const buttonVariants = cva(
 //     variants: {
 //       variant: {
 //         default:
-//           "bg-navy-900 text-white hover:bg-navy-800 focus-visible:ring-navy-500",
+//           "bg-cynical-900 text-white hover:bg-cynical-800 focus-visible:ring-cynical-500",
 //         torch:
 //           "bg-gradient-to-r from-torch-500 to-torch-600 text-white hover:from-torch-600 hover:to-torch-700 shadow-lg hover:shadow-torch focus-visible:ring-torch-500",
 //         gold:
-//           "bg-gradient-to-r from-gold-500 to-gold-600 text-navy-900 hover:from-gold-600 hover:to-gold-700 shadow-lg focus-visible:ring-gold-500",
+//           "bg-gradient-to-r from-gold-500 to-gold-600 text-cynical-900 hover:from-gold-600 hover:to-gold-700 shadow-lg focus-visible:ring-gold-500",
 //         burgundy:
 //           "bg-burgundy-900 text-white hover:bg-burgundy-800 focus-visible:ring-burgundy-500",
 //         outline:
 //           "border-2 border-gold-400/80 text-white hover:bg-gold-400/10 backdrop-blur-sm",
 //         tourchoutline:
-//           "border-2 border-torch-500 text-torch-500 hover:text-torch-300  hover:border-torch-300 focus-visible:ring-navy-500 transition-colors transform duration-200",
-//         ghost: "text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",
-//         whiteghost: "bg-white text-navy-900 hover:bg-navy-100 focus-visible:ring-navy-500",
+//           "border-2 border-torch-500 text-torch-500 hover:text-torch-300  hover:border-torch-300 focus-visible:ring-cynical-500 transition-colors transform duration-200",
+//         ghost: "text-cynical-900 hover:bg-cynical-100 focus-visible:ring-cynical-500",
+//         whiteghost: "bg-white text-cynical-900 hover:bg-cynical-100 focus-visible:ring-cynical-500",
 //         link: "text-torch-600 underline-offset-4 hover:underline focus-visible:ring-torch-500",
 //       },
 //       size: {

@@ -336,14 +336,14 @@ export function Sponsors() {
         align="left"
       />
 
-      <Section background="navy">
+      <Section background="cynical">
         <Container>
           {/* <DesignHeader index={1} label="Spotlight-oppsett" icon={Sparkles} /> */}
           {isLoading ? <SkeletonBlock /> : <DesignSpotlight {...tiered} />}
         </Container>
       </Section>
             {/* CTA */}
-            <Section background="navy">
+            <Section background="cynical">
         <Container className="text-center">
           <h2 className="text-3xl font-display font-bold text-white mb-4">
             Vil du være sponsor?
