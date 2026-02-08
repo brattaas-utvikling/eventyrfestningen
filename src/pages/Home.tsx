@@ -1,8 +1,8 @@
-import { Hero } from "@/components/sections/Hero";
+// import { Hero } from "@/components/sections/Hero";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useSanityQuery } from "@/hooks/useSanityQuery";
 import { queries } from "@/lib/sanityQueries";
-import type { Show, Performance } from "@/types/sanity";
+import type { Show } from "@/types/sanity";
 import { useScrollDepthTracking } from "@/lib/analytics";
 import { TrackSection } from "@/lib/Tracksection";
 import { SEOHead } from "@/components/SEOHead";
@@ -12,6 +12,7 @@ import UpcomingShowScene from "@/components/sections/UpcomingShowScene";
 import HistoryScene from "@/components/sections/HistoryScene";
 import ArchiveTeaser from "@/components/sections/ArchiveTeaser";
 import { landingData } from "@/components/sections/data/landingData";
+import AnnouncementSection from "@/components/sections/AnnouncementSection";
 
 export default function Home() {
   const { data: show, isLoading } = useSanityQuery<Show>(
@@ -19,10 +20,10 @@ export default function Home() {
     queries.currentShow
   );
 
-  const { data: performances } = useSanityQuery<Performance[]>(
-    "upcoming-performances",
-    queries.upcomingPerformances
-  );
+  // const { data: performances } = useSanityQuery<Performance[]>(
+  //   "upcoming-performances",
+  //   queries.upcomingPerformances
+  // );
 
   useScrollDepthTracking("home");
 
@@ -45,8 +46,12 @@ export default function Home() {
         // preloadVideo="/assets/landing/heroVideo.mp4"
       />
 
-      <TrackSection page="home" section="hero_ticket_launch">
+      {/* <TrackSection page="home" section="hero_ticket_launch">
         <Hero show={show} nextPerformance={performances?.[0]} />
+      </TrackSection> */}
+
+      <TrackSection page="home" section="announcment">
+        <AnnouncementSection />
       </TrackSection>
 
       <TrackSection page="home" section="upcoming-event">

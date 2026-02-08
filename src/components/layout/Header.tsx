@@ -48,12 +48,12 @@ export function Header() {
 
   const navigation: NavigationItem[] = useMemo(
     () => [
+      { name: "Hjem", href: "/" },
       { 
         name: "Kjøp billetter", 
         href: "https://eventyrfestningen.ticketco.events/no/nb",
         external: true,
       },
-      { name: "Hjem", href: "/" },
       { name: "Om forestillingen", href: "/om-forestillingen" },
       { name: "Kalender", href: "/kalender" },
       { name: "Om oss", href: "/om-oss" },
