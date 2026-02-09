@@ -13,7 +13,7 @@ const announcementData = {
   sections: [
     {
       paragraphs: [
-        "Jonas (33) fra Nord-Odal har vært fast ansatt på Nationaltheatret i flere år, og han har spilt alt fra Shakespeare til Thorbjørn Egner. Som Bakergutten i Dyrene i Hakkebakkeskogen hadde han barna i sin hule hånd. Som Ole i Reisen til julestjernen skapte han julefølelse selv midt på sommeren. Sist vi så han var Jonas aktuell som Audun i NRK-serien «Ølhunden Berit».",
+        "Jonas (34) fra Nord-Odal har vært fast ansatt på Nationaltheatret i flere år, og han har spilt alt fra Shakespeare til Thorbjørn Egner. Som Bakergutten i Dyrene i Hakkebakkeskogen hadde han barna i sin hule hånd. Som Ole i Reisen til julestjernen skapte han julefølelse selv midt på sommeren. Sist vi så han var Jonas aktuell som Audun i NRK-serien «Ølhunden Berit».",
         "Jonas har stor kapasitet med sterke lokale røtter. Han har evnen til å være både morsom og gripende, ofte i samme scene! Sommeren 2025 ble han kjent med Oberst Krebs univers, og sommeren 2026 skal han spille selveste Obersten selv!",
         "Nesten 11.000 har allerede sett Oberst Krebs-forestillingene de siste årene. Mange har vært der flere ganger - og det med god grunn!"
       ]
