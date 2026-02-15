@@ -9,7 +9,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { urlFor } from "@/lib/sanity";
 import type { Sponsor } from "@/types/sanity";
-import { trackEvent } from "@/lib/analytics";
+import { trackEvent, trackSponsorClick } from "@/lib/analytics";
 import { Button } from "@/components/ui/Button";
 import { SEOHead } from "@/components/SEOHead";
 import { PageHero } from "@/components/layout/PageHero";
@@ -182,14 +182,15 @@ function SponsorLogo({
         target="_blank"
         rel="noopener noreferrer"
         className="block w-full"
-        onClick={() =>
-          trackEvent("sponsor_click", {
-            sponsorId: sponsor._id,
-            sponsorName: sponsor.name,
-            tier,
-            page: "sponsors",
-          })
-        }
+        onClick={() => trackSponsorClick(s.id, s.name, s.tier)}
+        // onClick={() =>
+        //   trackEvent("sponsor_click", {
+        //     sponsorId: sponsor._id,
+        //     sponsorName: sponsor.name,
+        //     tier,
+        //     page: "sponsors",
+        //   })
+        // }
       >
         {content}
       </a>

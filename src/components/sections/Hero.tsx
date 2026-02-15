@@ -5,9 +5,10 @@ import { Button } from "@/components/ui/Button";
 import { urlFor } from "@/lib/sanity";
 import type { Show, Performance, SanityImage } from "@/types/sanity";
 import { Countdown } from "@/components/ui/Countdown";
-import { trackEvent } from "@/lib/analytics";
+import { trackTicketClick } from "@/lib/analytics";
 import { useRef } from "react";
 import { useReducedMotion } from "@/hooks/useRedusedMotion";
+import { useLocation } from "react-router-dom";
 
 interface HeroProps {
   show: Show;
@@ -19,10 +20,10 @@ type ShowWithLogo = Show & {
   logoImage?: SanityImage;
 };
 
-export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
+export function Hero({ show, nextPerformance }: HeroProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
-
+  const { pathname } = useLocation();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -150,12 +151,13 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative overflow-hidden inline-flex items-center justify-center"
-                  onClick={() =>
-                    trackEvent("ticket_click", {
-                      source: "hero_main",
-                      page,
-                    })
-                  }
+                  // onClick={() =>
+                  //   trackEvent("ticket_click", {
+                  //     source: "hero_main",
+                  //     page,
+                  //   })
+                  // }
+                  onClick={() => trackTicketClick("hero_main", pathname)}
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
                                translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
