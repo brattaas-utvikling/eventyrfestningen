@@ -234,7 +234,7 @@ export function NewsletterSignup({ variant = 'dark' }: NewsletterSignupProps) {
               variant: status === 'success' ? 'default' : 'outline', 
               size: 'md' 
             }),
-            "w-full h-12 sm:h-10",
+            "w-full h-12 sm:h-10 cursor-pointer",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             // SUCCESS STATE - Torch-farge (brand primary) i stedet for generisk grønn
             status === 'success' && "bg-torch-600 hover:bg-torch-600 border-torch-600 text-white"
