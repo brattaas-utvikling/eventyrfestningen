@@ -59,7 +59,7 @@ export function ContactEventVariant() {
       initial={{ opacity: 0, x: 16 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="rounded-2xl bg-navy-800/30 border border-navy-700/50 backdrop-blur overflow-hidden"
+      className="rounded-2xl bg-cynical-800/30 border border-cynical-700/50 backdrop-blur overflow-hidden"
       whileHover={{ y: -2 }}
     >
       {/* Event Poster */}
@@ -69,7 +69,7 @@ export function ContactEventVariant() {
           alt={NEXT_EVENT.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-navy-900/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-cynical-900 via-cynical-900/60 to-transparent" />
         
         {/* Badge */}
         <div className="absolute top-4 right-4">
@@ -93,19 +93,19 @@ export function ContactEventVariant() {
       <div className="p-6 space-y-6">
         {/* Countdown */}
         <div>
-          <p className="text-center text-sm text-navy-100/60 mb-3">
+          <p className="text-center text-sm text-cynical-100/60 mb-3">
             Premiere om
           </p>
           <div className="grid grid-cols-4 gap-3">
             {timeUnits.map((unit) => (
               <div
                 key={unit.label}
-                className="text-center p-3 rounded-xl bg-navy-900/60 border border-navy-700/30"
+                className="text-center p-3 rounded-xl bg-cynical-900/60 border border-cynical-700/30"
               >
                 <div className="text-2xl font-display font-bold text-gold-400 mb-1">
                   {unit.value.toString().padStart(2, "0")}
                 </div>
-                <div className="text-xs text-navy-100/60 uppercase">
+                <div className="text-xs text-cynical-100/60 uppercase">
                   {unit.label}
                 </div>
               </div>
@@ -157,7 +157,7 @@ export function ContactEventVariant() {
         </div>
 
         {/* Highlights */}
-        <div className="p-4 rounded-xl bg-navy-900/40 border border-navy-700/30">
+        <div className="p-4 rounded-xl bg-cynical-900/40 border border-cynical-700/30">
           <div className="flex items-center gap-2 mb-3">
             <Star className="h-4 w-4 text-gold-400" />
             <span className="text-sm font-medium text-white">Høydepunkter</span>
@@ -166,7 +166,7 @@ export function ContactEventVariant() {
             {NEXT_EVENT.highlights.map((highlight, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 text-xs text-navy-100/80"
+                className="flex items-center gap-2 text-xs text-cynical-100/80"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-gold-400" />
                 <span>{highlight}</span>
@@ -191,7 +191,7 @@ export function ContactEventVariant() {
 
           <motion.a
             href="/kalender"
-            className="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl bg-navy-900/60 border border-navy-700/50 text-white font-medium hover:bg-navy-900/80 hover:border-gold-400/50 transition-all"
+            className="flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl bg-cynical-900/60 border border-cynical-700/50 text-white font-medium hover:bg-cynical-900/80 hover:border-gold-400/50 transition-all"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -209,9 +209,9 @@ export function ContactEventVariant() {
             <input
               type="email"
               placeholder="din@epost.no"
-              className="flex-1 px-3 py-2 rounded-lg bg-navy-900/60 border border-navy-700/50 text-white text-sm placeholder:text-navy-100/40 focus:outline-none focus:border-gold-400/50"
+              className="flex-1 px-3 py-2 rounded-lg bg-cynical-900/60 border border-cynical-700/50 text-white text-sm placeholder:text-cynical-100/40 focus:outline-none focus:border-gold-400/50"
             />
-            <button className="px-4 py-2 rounded-lg bg-gold-400 text-navy-900 text-sm font-medium hover:bg-gold-500 transition-colors">
+            <button className="px-4 py-2 rounded-lg bg-gold-400 text-cynical-900 text-sm font-medium hover:bg-gold-500 transition-colors">
               Meld på
             </button>
           </div>

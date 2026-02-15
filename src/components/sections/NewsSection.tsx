@@ -18,13 +18,13 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
   const displayPosts = limit ? posts.slice(0, limit) : posts
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-navy-50">
+    <section className="py-16 sm:py-20 lg:py-24 bg-cynical-50">
       <Container>
         {/* Header */}
         {showTitle && (
           <div className="flex items-end justify-between mb-12">
             <div>
-              <h2 className="text-4xl sm:text-5xl font-display font-bold text-navy-900 mb-4">
+              <h2 className="text-4xl sm:text-5xl font-display font-bold text-cynical-900 mb-4">
                 Siste nytt
               </h2>
               <p className="text-lg text-gray-600">
@@ -54,7 +54,7 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
                 <Card className="h-full overflow-hidden group hover:shadow-2xl transition-all duration-300">
                   {/* Image */}
                   {post.mainImage && (
-                    <div className="aspect-video overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
+                    <div className="aspect-video overflow-hidden bg-linear-to-br from-cynical-900 to-burgundy-900">
                       <img
                         src={urlFor(post.mainImage)
                           .width(800)
@@ -82,7 +82,7 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-display font-bold text-navy-900 mb-3 group-hover:text-torch-600 transition-colors line-clamp-2">
+                    <h3 className="text-xl font-display font-bold text-cynical-900 mb-3 group-hover:text-torch-600 transition-colors line-clamp-2">
                       {post.title}
                     </h3>
 

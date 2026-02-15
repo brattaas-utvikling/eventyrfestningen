@@ -43,11 +43,11 @@ export function PageHero({
             className="absolute inset-0 h-full w-full object-cover"
           />
           {/* Mørk overlay for lesbarhet */}
-          <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/20 via-navy-900/40 to-navy-900" />
+          <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/20 via-cynical-900/40 to-cynical-900" />
         </>
       ) : (
         <>
-          <div className="absolute inset-0 bg-linear-to-br from-navy-900 to-burgundy-900" />
+          <div className="absolute inset-0 bg-linear-to-br from-cynical-900 to-burgundy-900" />
           {/* subtile aurora/spotlight – behold den visuelle stilen */}
           <motion.div
             aria-hidden

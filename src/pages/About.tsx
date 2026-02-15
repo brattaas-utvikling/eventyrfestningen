@@ -122,7 +122,7 @@ export function About() {
 
 
       {/* Om foreningen / frivillighet – sentrert tekst + polaroid-bilder */}
-      <Section background="navy">
+      <Section background="cynical">
         <Container>
         {organizationLoading ? (
           <div className="max-w-3xl mx-auto text-center space-y-6">
@@ -185,7 +185,7 @@ export function About() {
                             />
                           </div>
                           <div className="px-4 py-3">
-                            <p className="text-xs font-display text-navy-900 tracking-wide">
+                            <p className="text-xs font-display text-cynical-900 tracking-wide">
                               {img.caption}
                             </p>
                           </div>
@@ -203,8 +203,8 @@ export function About() {
               <div className="pointer-events-none hidden md:block">
                 {/* Høyre øverst */}
                 <div className="absolute -right-24 top-3/12 w-40 lg:w-48 rotate-10">
-                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-cynical-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-cynical-900/5">
                       <img
                         src="/media/festningslandsbyen1.jpg"
                         alt="Stemning på festningen"
@@ -213,7 +213,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
                         Sommerkveld i Festningslandsbyen
                       </p>
                     </div>
@@ -222,8 +222,8 @@ export function About() {
 
                 {/* Høyre litt lenger ned */}
                 <div className="absolute -right-32 top-9/12 w-36 lg:w-44 rotate-25">
-                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-cynical-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-cynical-900/5">
                       <img
                         src="/media/frivillig3.jpg"
                         alt="Frivillige i arbeid"
@@ -232,7 +232,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
                         Frivillige i sving
                       </p>
                     </div>
@@ -241,8 +241,8 @@ export function About() {
 
                 {/* Venstre */}
                 <div className="absolute -left-28 top-5/12 w-40 lg:w-48 -rotate-12">
-                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-cynical-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-cynical-900/5">
                       <img
                         src="/media/frivillig2.jpg"
                         alt="Bak kulissene"
@@ -251,7 +251,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
                         Moro bak kulissene
                       </p>
                     </div>
@@ -307,7 +307,7 @@ export function About() {
                             />
                           </div>
                           <div className="px-4 py-3">
-                            <p className="text-xs font-display text-navy-900 tracking-wide">
+                            <p className="text-xs font-display text-cynical-900 tracking-wide">
                               {img.caption}
                             </p>
                           </div>
@@ -332,8 +332,8 @@ export function About() {
               <div className="pointer-events-none hidden md:block">
                 {/* Venstre nederst */}
                 <div className="absolute -left-24 top-14 w-36 lg:w-44 rotate-14">
-                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-cynical-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-cynical-900/5">
                       <img
                         src="/media/frivillig1.jpg"
                         alt="Publikumsvert"
@@ -342,7 +342,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
                         Publikumsvert på jobb
                       </p>
                     </div>
@@ -351,8 +351,8 @@ export function About() {
 
                 {/* Høyre nederst */}
                 <div className="absolute -right-24 top-32 w-40 lg:w-48 rotate-[-18deg]">
-                  <div className="bg-white rounded-[18px] shadow-xl border border-navy-100 overflow-hidden">
-                    <div className="aspect-4/5 bg-navy-900/5">
+                  <div className="bg-white rounded-[18px] shadow-xl border border-cynical-100 overflow-hidden">
+                    <div className="aspect-4/5 bg-cynical-900/5">
                       <img
                         src="/media/festningslandsbyen2.jpg"
                         alt="Kostymer og rekvisitter"
@@ -361,7 +361,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-navy-900 tracking-wide">
+                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
                         Festningslandsbyen
                       </p>
                     </div>
@@ -411,7 +411,7 @@ export function About() {
         <Section background="white">
           <Container>
             <div className="text-center mb-12">
-              <h2 className="text-4xl sm:text-5xl font-display font-bold text-navy-900 mb-4">
+              <h2 className="text-4xl sm:text-5xl font-display font-bold text-cynical-900 mb-4">
                 Styret
               </h2>
               <p className="text-lg text-gray-600">
@@ -436,7 +436,7 @@ export function About() {
     return (
       <div key={member._id} className="group">
         <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1">
-          <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900">
+          <div className="aspect-3/4 overflow-hidden bg-linear-to-br from-cynical-900 to-burgundy-900">
             {imageUrl ? (
               <img
                 src={imageUrl}
@@ -455,7 +455,7 @@ export function About() {
             )}
           </div>
           <div className="p-4 text-center">
-            <h3 className="font-semibold text-navy-900">
+            <h3 className="font-semibold text-cynical-900">
               {member.name}
             </h3>
             {member.role ? (
@@ -475,7 +475,7 @@ export function About() {
       ) : null}
 
       {/* CTA */}
-      <Section background="navy">
+      <Section background="cynical">
         <Container className="text-center">
           <h2 className="text-3xl font-display font-bold text-white mb-4">
             Vil du være med?

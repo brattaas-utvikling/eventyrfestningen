@@ -6,7 +6,7 @@ export const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-transparent bg-navy-100 text-navy-900",
+        default: "border-transparent bg-cynical-100 text-cynical-900",
         gold: "border-transparent bg-gold-100 text-gold-900",
         torch: "border-transparent bg-torch-100 text-torch-900",
         burgundy: "border-transparent bg-burgundy-100 text-burgundy-900",

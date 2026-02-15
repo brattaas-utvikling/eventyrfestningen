@@ -94,7 +94,7 @@ export function NewsPost() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-display font-bold text-navy-900 mb-4">
+          <h1 className="text-4xl font-display font-bold text-cynical-900 mb-4">
             Artikkelen ble ikke funnet
           </h1>
           <Button asChild>
@@ -119,7 +119,7 @@ export function NewsPost() {
         schema={generateArticleSchema(post)}
       />
       
-      <section className="py-12 sm:py-16 bg-navy-50">
+      <section className="py-12 sm:py-16 bg-cynical-50">
         <Container size="md">
           <Button variant="ghost" className="mb-8" asChild>
             <Link to="/nyheter" className="inline-flex items-center gap-2">
@@ -128,7 +128,7 @@ export function NewsPost() {
             </Link>
           </Button>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy-900 mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-cynical-900 mb-6">
             {post.title}
           </h1>
 
@@ -198,7 +198,7 @@ export function NewsList() {
         description="Les de siste nyhetene fra Kongsvinger Festningsteater."
       />
 
-      <section className="py-20 sm:py-28 bg-linear-to-br from-navy-900 to-burgundy-900 text-white">
+      <section className="py-20 sm:py-28 bg-linear-to-br from-cynical-900 to-burgundy-900 text-white">
         <Container>
           <div className="max-w-3xl">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold mb-6">

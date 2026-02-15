@@ -53,7 +53,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
   return (
     <section ref={sectionRef} className="relative h-screen flex items-center overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 bg-navy-950">
+      <div className="absolute inset-0 bg-cynical-950">
         <motion.img
           src="/assets/landing/plakat_bakgrunn.png"
           alt=""
@@ -70,7 +70,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
         />
 
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/30 via-navy-950/50 to-navy-950/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-cynical-950/30 via-cynical-950/50 to-cynical-950/70" />
       </div>
 
       {/* Content */}
@@ -273,7 +273,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //   return (
 //     <section ref={sectionRef} className="relative h-screen flex items-center overflow-hidden">
 //       {/* Background */}
-//       <div className="absolute inset-0 bg-navy-950">
+//       <div className="absolute inset-0 bg-cynical-950">
 //         {/* Video layer */}
 //         <video
 //           ref={videoRef}
@@ -313,7 +313,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //         )}
 
 //         {/* Gradient overlay */}
-//         <div className="absolute inset-0 bg-linear-to-b from-navy-950/30 via-navy-950/50 to-navy-950/70" style={{ zIndex: 3 }} />
+//         <div className="absolute inset-0 bg-linear-to-b from-cynical-950/30 via-cynical-950/50 to-cynical-950/70" style={{ zIndex: 3 }} />
 //       </div>
 
 //       {/* Content */}
@@ -481,7 +481,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //   return (
 //     <section ref={sectionRef} className="relative h-screen flex items-center overflow-hidden">
 //       {/* Background Image */}
-//       <div className="absolute inset-0 bg-navy-950">
+//       <div className="absolute inset-0 bg-cynical-950">
 //         <motion.img
 //           src="/assets/landing/plakat_bakgrunn.png"
 //           alt=""
@@ -498,10 +498,10 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //         />
 
 //         {!videoLoaded && (
-//           <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-950 to-navy-900" />
+//           <div className="absolute inset-0 bg-gradient-to-br from-cynical-900 via-cynical-950 to-cynical-900" />
 //         )}
 
-//         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/30 via-navy-950/50 to-navy-950/70" />
+//         <div className="absolute inset-0 bg-gradient-to-b from-cynical-950/30 via-cynical-950/50 to-cynical-950/70" />
 //       </div>
 
 //       {/* Content - Using spacer method */}
@@ -677,7 +677,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //   return (
 //     <section ref={sectionRef} className="relative min-h-[100svh] flex items-center overflow-hidden">
 //       {/* Background Image (parallax + scale) */}
-//       <div className="absolute inset-0 bg-navy-950">
+//       <div className="absolute inset-0 bg-cynical-950">
 //         <motion.img
 //           src="/assets/landing/plakat_bakgrunn.png"
 //           alt=""
@@ -694,11 +694,11 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //         />
 
 //         {!videoLoaded && (
-//           <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-950 to-navy-900" />
+//           <div className="absolute inset-0 bg-gradient-to-br from-cynical-900 via-cynical-950 to-cynical-900" />
 //         )}
 
 //         {/* Readability overlays */}
-//         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/35 via-navy-950/65 to-navy-950/85" />
+//         <div className="absolute inset-0 bg-gradient-to-b from-cynical-950/35 via-cynical-950/65 to-cynical-950/85" />
 //         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_55%,rgba(3,7,18,0.75)_100%)]" />
 
 //         {/* Fakkel-glow effects */}
@@ -713,7 +713,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
 //         />
 
-//         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-navy-950/80 to-transparent" />
+//         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-cynical-950/80 to-transparent" />
 //       </div>
 
 //       {/* Content */}
@@ -842,7 +842,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //   return (
 //     <section className="relative h-screen flex items-center overflow-hidden">
 //       {/* Background Video */}
-//       <div className="absolute inset-0 bg-navy-950">
+//       <div className="absolute inset-0 bg-cynical-950">
 //         <video
 //           src="/assets/landing/heroVideo.mp4"
 //           autoPlay
@@ -861,10 +861,10 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //         />
 
 //         {!videoLoaded && (
-//           <div className="absolute inset-0 bg-gradient-to-br from-navy-900 via-navy-950 to-navy-900" />
+//           <div className="absolute inset-0 bg-gradient-to-br from-cynical-900 via-cynical-950 to-cynical-900" />
 //         )}
         
-//         <div className="absolute inset-0 bg-gradient-to-b from-navy-950/40 via-navy-950/60 to-navy-950/80" />
+//         <div className="absolute inset-0 bg-gradient-to-b from-cynical-950/40 via-cynical-950/60 to-cynical-950/80" />
 
 //         {/* Fakkel-glow effects */}
 //         <motion.div
@@ -892,7 +892,7 @@ export function Hero({ show, nextPerformance, page = "home" }: HeroProps) {
 //           }}
 //         />
 
-//         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-navy-950/80 to-transparent" />
+//         <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-cynical-950/80 to-transparent" />
 //       </div>
 
 //       {/* Content */}

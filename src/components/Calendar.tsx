@@ -20,13 +20,13 @@ export default function Calendar() {
       {data?.map((perf) => (
         <div
           key={perf._id}
-          className="bg-navy-800/40 border border-navy-700 rounded-lg p-4 flex items-center justify-between"
+          className="bg-cynical-800/40 border border-cynical-700 rounded-lg p-4 flex items-center justify-between"
         >
           <div>
             <p className="text-lg text-white">
               {formatDate(perf.date, { weekday: "long" })}
             </p>
-            <p className="text-sm text-navy-100/70">{perf.show.title}</p>
+            <p className="text-sm text-cynical-100/70">{perf.show.title}</p>
           </div>
           <Badge
             variant={

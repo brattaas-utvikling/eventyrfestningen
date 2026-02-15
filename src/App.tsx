@@ -15,6 +15,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Calendar } from "./pages/Calendar";
 import Privacy from "./pages/Privacy";
 import { PageViewTracker } from "./components/analytics/PageViewTracker";
+import Avmeld from "./pages/Avmeld";
 
 export default function App() {
   return (
@@ -34,6 +35,7 @@ export default function App() {
             <Route path="/arkiv/:slug" element={<AboutShow />} />
             <Route path="/kontakt" element={<Contact />} />
             <Route path="/personvern" element={<Privacy />} />
+            <Route path="/avmeld" element={<Avmeld />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Analytics />

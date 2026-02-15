@@ -49,7 +49,7 @@ export function ContactForm() {
         <input
           id="name"
           {...register('name')}
-          className="w-full rounded-lg border border-navy-700 bg-navy-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
+          className="w-full rounded-lg border border-cynical-700 bg-cynical-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
           placeholder="Ditt navn"
         />
         {errors.name && <p className="text-sm text-red-400 mt-1">{errors.name.message}</p>}
@@ -64,7 +64,7 @@ export function ContactForm() {
           id="email"
           type="email"
           {...register('email')}
-          className="w-full rounded-lg border border-navy-700 bg-navy-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
+          className="w-full rounded-lg border border-cynical-700 bg-cynical-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
           placeholder="din@epost.no"
         />
         {errors.email && <p className="text-sm text-red-400 mt-1">{errors.email.message}</p>}
@@ -78,7 +78,7 @@ export function ContactForm() {
         <input
           id="phone"
           {...register('phone')}
-          className="w-full rounded-lg border border-navy-700 bg-navy-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
+          className="w-full rounded-lg border border-cynical-700 bg-cynical-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
           placeholder="+47 123 45 678"
         />
       </div>
@@ -92,7 +92,7 @@ export function ContactForm() {
           id="message"
           rows={5}
           {...register('message')}
-          className="w-full rounded-lg border border-navy-700 bg-navy-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
+          className="w-full rounded-lg border border-cynical-700 bg-cynical-900/40 px-4 py-3 text-white focus:border-gold-400 focus:ring-gold-400"
           placeholder="Skriv meldingen din..."
         />
         {errors.message && <p className="text-sm text-red-400 mt-1">{errors.message.message}</p>}

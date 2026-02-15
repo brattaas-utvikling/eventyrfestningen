@@ -75,7 +75,7 @@ export default function UpcomingShowScene() {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden py-20 bg-navy-950"
+      className="relative min-h-screen flex items-center overflow-hidden py-20 bg-cynical-950"
       aria-label="Kommende forestilling"
     >
       {/* Background (statisk, stabil) */}
@@ -89,7 +89,7 @@ export default function UpcomingShowScene() {
         />
 
         {/* Dark overlays for readability */}
-        <div className="absolute inset-0 bg-navy-900/85" />
+        <div className="absolute inset-0 bg-cynical-900/85" />
         <div
           className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_60%,rgba(3,7,18,0.75)_100%)]"
           aria-hidden="true"
@@ -198,8 +198,8 @@ export default function UpcomingShowScene() {
                 <div
                   key={`${highlight}-${idx}`}
                   className="flex items-center gap-3 text-gold-300 font-sans font-medium text-sm sm:text-base
-                             p-3 bg-navy-800/50 md:backdrop-blur-sm rounded-lg border border-gold-500/20
-                             hover:bg-navy-800/70 hover:border-gold-500/30 transition-all"
+                             p-3 bg-cynical-800/50 md:backdrop-blur-sm rounded-lg border border-gold-500/20
+                             hover:bg-cynical-800/70 hover:border-gold-500/30 transition-all"
                 >
                   <div className="w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
                   <span>{highlight}</span>
@@ -232,7 +232,7 @@ export default function UpcomingShowScene() {
                 href="/om-forestillingen"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "xl" }),
-                  "border-2 border-gold-400/60 text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all md:backdrop-blur-sm bg-navy-900/20 w-full sm:w-auto"
+                  "border-2 border-gold-400/60 text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all md:backdrop-blur-sm bg-cynical-900/20 w-full sm:w-auto"
                 )}
               >
                 Les mer om forestillingen

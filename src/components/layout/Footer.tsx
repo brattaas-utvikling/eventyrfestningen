@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { Container } from "./Container";
 import { useMemo } from "react";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 type FooterProps = {
   /** Bruk "contrast" for lys footer som bryter fra mørke sider/seksjoner */
@@ -21,17 +22,18 @@ export function Footer({ variant = "dark" }: FooterProps) {
 
   const isDark = variant === "dark";
 
-  const wrap = isDark ? "bg-navy-900 text-white" : "bg-white text-navy-900";
+  const wrap = isDark ? "bg-cynical-900 text-white" : "bg-white text-cynical-900";
   const heading = isDark ? "text-gold-400" : "text-torch-600";
-  const subtext = isDark ? "text-gray-300" : "text-navy-700";
+  const subtext = isDark ? "text-gray-300" : "text-cynical-700";
   const link = isDark
     ? "hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/50"
     : "hover:text-torch-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-500/40";
-  const divider = isDark ? "border-navy-700" : "border-navy-200";
+  const divider = isDark ? "border-cynical-700" : "border-cynical-200";
 
-  const socialBtn = isDark
-    ? "bg-white/5 text-white hover:bg-gold-400/80 hover:text-navy-900"
-    : "bg-navy-100 text-navy-800 hover:bg-torch-500 hover:text-navy-900";
+    const socialLink = isDark
+    ? "text-gray-300 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/50 rounded-sm"
+    : "text-cynical-700 hover:text-torch-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-500/40 rounded-sm";
+
 
   return (
     <footer
@@ -160,68 +162,62 @@ export function Footer({ variant = "dark" }: FooterProps) {
                   </li>
                 </ul>
               </nav>
-
-              {/* Følg oss */}
-              <section aria-labelledby="footer-social" className="text-left">
-                <h3
-                  id="footer-social"
-                  className={`text-lg font-display font-semibold mb-4 ${heading}`}
-                >
-                  Følg oss
-                </h3>
-                <div className="flex gap-3">
-                  <a
-                    href="https://www.facebook.com/eventyrfestningen"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`group flex h-10 w-10 items-center justify-center rounded-full transition ${socialBtn} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                      isDark
-                        ? "focus-visible:ring-gold-400/50"
-                        : "focus-visible:ring-torch-500/40"
-                    }`}
-                    aria-label="Facebook"
-                  >
-                    <Facebook className="h-5 w-5 transition-transform group-hover:-rotate-3 group-active:scale-95" />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/eventyrfestningen/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`group flex h-10 w-10 items-center justify-center rounded-full transition ${socialBtn} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
-                      isDark
-                        ? "focus-visible:ring-gold-400/50"
-                        : "focus-visible:ring-torch-500/40"
-                    }`}
-                    aria-label="Instagram"
-                  >
-                    <Instagram className="h-5 w-5 transition-transform group-hover:rotate-3 group-active:scale-95" />
-                  </a>
-                </div>
-              </section>
+              <NewsletterSignup variant={variant} />
             </div>
 
-            {/* Bunnlinje */}
+           {/* Bunnlinje MED sosiale medier */}
             <div
-              className={`mt-12 pt-8 border-t ${divider} flex flex-col items-center gap-4 sm:flex-row sm:justify-between`}
+              className={`mt-12 pt-8 border-t ${divider} flex flex-col items-center gap-6 sm:flex-row sm:justify-between`}
             >
               <p className={`text-sm ${subtext}`}>
                 © {year} Eventyrfestningen. Alle rettigheter reservert.
               </p>
 
-              <ul
-                className={`flex flex-wrap items-center gap-4 text-sm ${subtext}`}
-              >
-                <li>
-                  <Link to="/personvern" className={link}>
-                    Personvern
-                  </Link>
-                </li>
-                <li>
-                  <a href="#top" className={link} aria-label="Til toppen">
-                    Til toppen
+              {/* Sosiale medier + Links kombinert */}
+              <div className="flex flex-wrap items-center gap-6">
+                {/* Sosiale medier */}
+                <div className="flex items-center gap-4" aria-label="Sosiale medier">
+                  <a
+                    href="https://www.facebook.com/eventyrfestningen"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`transition-all ${socialLink}`}
+                    aria-label="Besøk oss på Facebook"
+                  >
+                    <Facebook className="h-5 w-5" />
                   </a>
-                </li>
-              </ul>
+                  <a
+                    href="https://www.instagram.com/eventyrfestningen/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`transition-all ${socialLink}`}
+                    aria-label="Besøk oss på Instagram"
+                  >
+                    <Instagram className="h-5 w-5" />
+                  </a>
+                </div>
+
+                {/* Divider */}
+                <span className={`hidden sm:block w-px h-4 ${
+                  isDark ? "bg-gray-600" : "bg-cynical-300"
+                }`} aria-hidden="true" />
+
+                {/* Links */}
+                <ul
+                  className={`flex flex-wrap items-center gap-4 text-sm ${subtext}`}
+                >
+                  <li>
+                    <Link to="/personvern" className={link}>
+                      Personvern
+                    </Link>
+                  </li>
+                  <li>
+                    <a href="#top" className={link} aria-label="Til toppen">
+                      Til toppen
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* Kreditering nederst – sentrert */}

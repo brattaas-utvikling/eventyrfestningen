@@ -2,20 +2,19 @@
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 
-/* her definerer vi det du hadde i theme.extend */
 @theme {
   /* farger */
-  /* NAVY (Ink Neutral) */
-  --color-navy-50: #fafafa; /* Ink Neutral 50 */
-  --color-navy-100: #f5f5f5; /* Ink Neutral 100 */
-  --color-navy-200: #e5e5e5; /* Ink Neutral 200 */
-  --color-navy-300: #d4d4d4; /* Ink Neutral 300 */
-  --color-navy-400: #a3a3a3; /* Ink Neutral 400 */
-  --color-navy-500: #737373; /* Ink Neutral 500 */
-  --color-navy-600: #525252; /* Ink Neutral 600 */
-  --color-navy-700: #404040; /* Ink Neutral 700 */
-  --color-navy-800: #262626; /* Ink Neutral 800 */
-  --color-navy-900: #171717; /* Ink Neutral 900 */
+  /* Black (Cynical Black) */
+  --color-cynical-50: #fafafa; /* Cynical Black 50 */
+  --color-cynical-100: #f5f5f5; /* Cynical Black 100 */
+  --color-cynical-200: #e5e5e5; /* Cynical Black 200 */
+  --color-cynical-300: #d4d4d4; /* Cynical Black 300 */
+  --color-cynical-400: #a3a3a3; /* Cynical Black 400 */
+  --color-cynical-500: #737373; /* Cynical Black 500 */
+  --color-cynical-600: #525252; /* Cynical Black 600 */
+  --color-cynical-700: #404040; /* Cynical Black 700 */
+  --color-cynical-800: #262626; /* Cynical Black 800 */
+  --color-cynical-900: #171717; /* Cynical Black 900 */
 
   /* BURGUNDY (Crimson Rose) */
   --color-burgundy-50: #fff1f2; /* Crimson Rose 50 */
@@ -250,7 +249,7 @@
 html,
 body {
   overflow-x: hidden;
-  @apply bg-navy-900 text-white;
+  @apply bg-cynical-900 text-white;
   scroll-behavior: smooth;
 }
 .scrollbar-hide::-webkit-scrollbar {

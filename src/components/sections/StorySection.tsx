@@ -6,7 +6,7 @@ export const StorySection = () => {
   return (
     <Section
       id="historien"
-      background="navy"
+      background="cynical"
       className="min-h-screen flex items-center"
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">

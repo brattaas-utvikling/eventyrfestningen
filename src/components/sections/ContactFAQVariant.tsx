@@ -45,7 +45,7 @@ export function ContactFAQVariant() {
       initial={{ opacity: 0, x: 16 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="rounded-2xl bg-navy-800/30 border border-navy-700/50 backdrop-blur p-6 sm:p-8"
+      className="rounded-2xl bg-cynical-800/30 border border-cynical-700/50 backdrop-blur p-6 sm:p-8"
     >
       {/* Header */}
       <div className="text-center mb-6">
@@ -55,7 +55,7 @@ export function ContactFAQVariant() {
         <h3 className="text-2xl font-display text-white mb-2">
           Ofte stilte spørsmål
         </h3>
-        <p className="text-navy-100/70 text-sm">
+        <p className="text-cynical-100/70 text-sm">
           Finn raskt svar på vanlige spørsmål
         </p>
       </div>
@@ -69,12 +69,12 @@ export function ContactFAQVariant() {
           return (
             <motion.div
               key={index}
-              className="rounded-xl bg-navy-900/40 border border-navy-700/30 overflow-hidden"
+              className="rounded-xl bg-cynical-900/40 border border-cynical-700/30 overflow-hidden"
               initial={false}
             >
               <button
                 onClick={() => setOpenIndex(isOpen ? null : index)}
-                className="w-full flex items-center gap-4 p-4 text-left hover:bg-navy-900/60 transition-colors"
+                className="w-full flex items-center gap-4 p-4 text-left hover:bg-cynical-900/60 transition-colors"
                 aria-expanded={isOpen}
               >
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/10 text-gold-200 shrink-0">
@@ -100,7 +100,7 @@ export function ContactFAQVariant() {
                     transition={{ duration: 0.2 }}
                   >
                     <div className="px-4 pb-4 pl-[72px]">
-                      <p className="text-navy-100/80 text-sm leading-relaxed">
+                      <p className="text-cynical-100/80 text-sm leading-relaxed">
                         {item.answer}
                       </p>
                     </div>
@@ -117,7 +117,7 @@ export function ContactFAQVariant() {
         <p className="text-white text-sm mb-2">
           Fant du ikke svar på spørsmålet ditt?
         </p>
-        <p className="text-navy-100/70 text-sm">
+        <p className="text-cynical-100/70 text-sm">
           Send oss en e-post på{" "}
           <a 
             href="mailto:kontakt@eventyrfestningen.no" 

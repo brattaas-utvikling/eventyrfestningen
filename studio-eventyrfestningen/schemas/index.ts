@@ -1,5 +1,6 @@
 // schemas/index.ts
 import { milestone } from "./documents/milestone";
+import newsletter from "./documents/newsletter";
 import { organization } from "./documents/organization";
 import { performanceDoc } from "./documents/performance";
 import { person } from "./documents/person";
@@ -20,6 +21,7 @@ export const schemaTypes = [
   sponsor,
   siteSettings,
   organization,
+  newsletter,
   // Objects
   seo
 ]

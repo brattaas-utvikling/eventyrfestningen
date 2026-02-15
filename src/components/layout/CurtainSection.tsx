@@ -60,7 +60,7 @@ export function CurtainSection({ id, children }: CurtainSectionProps) {
     <section
       id={id}
       ref={ref}
-      className="relative py-16 sm:py-20 md:py-24 bg-navy-950 overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 bg-cynical-950 overflow-hidden"
     >
       {/* --- Spotlight bak --- */}
       <div className="pointer-events-none absolute inset-0 opacity-50">
@@ -374,14 +374,14 @@ export function CurtainSection({ id, children }: CurtainSectionProps) {
 //     <section
 //       id={id}
 //       ref={ref}
-//       className="relative py-20 sm:py-24 bg-navy-950 overflow-hidden"
+//       className="relative py-20 sm:py-24 bg-cynical-950 overflow-hidden"
 //     >
 //       {/* spotlight bak */}
 //       <div
 //         aria-hidden
 //         className="pointer-events-none absolute inset-0 opacity-40"
 //       >
-//         <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-gold-500/15 via-navy-900 to-navy-950" />
+//         <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-gold-500/15 via-cynical-900 to-cynical-950" />
 //       </div>
 
 //       {/* Gardiner */}
