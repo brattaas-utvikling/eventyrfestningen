@@ -1,15 +1,6 @@
 // src/lib/appwrite.ts
 import { Client, Functions, Databases, ID, Query } from 'appwrite';
 
-// DEBUG - FJERN ETTER TESTING
-console.log('=== APPWRITE CONFIG DEBUG ===');
-console.log('All env vars:', import.meta.env);
-console.log('Endpoint:', import.meta.env.VITE_APPWRITE_ENDPOINT);
-console.log('Project ID:', import.meta.env.VITE_APPWRITE_PROJECT_ID);
-console.log('Database ID:', import.meta.env.VITE_APPWRITE_DATABASE_ID);
-console.log('Collection ID:', import.meta.env.VITE_APPWRITE_SUBSCRIBERS_COLLECTION_ID);
-console.log('============================');
-
 // Environment variables
 const endpoint = import.meta.env.VITE_APPWRITE_ENDPOINT;
 const projectId = import.meta.env.VITE_APPWRITE_PROJECT_ID;
