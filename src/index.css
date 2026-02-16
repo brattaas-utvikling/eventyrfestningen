@@ -166,9 +166,9 @@
 /* Mallica Fairytale – displayfonten */
 @font-face {
   font-family: "Mallica Fairytale";
-  src: url("/fonts/Mallica-Fairytale.woff2") format("woff2"),
-    url("/fonts/Mallica-Fairytale.otf") format("opentype"),
-    url("/fonts/Mallica-Fairytale.ttf") format("truetype");
+  src: url("/fonts/mallica-fairytale.woff2") format("woff2"),
+    url("/fonts/mallica-fairytale.otf") format("opentype"),
+    url("/fonts/mallica-fairytale.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
