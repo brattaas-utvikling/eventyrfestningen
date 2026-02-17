@@ -1,20 +1,21 @@
 // routes/landing/sections/UpcomingShowScene.tsx
 import { useRef } from "react";
 import { motion, type Variants } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button-variants";
+import { Button } from "@/components/ui/Button";
 import { useReducedMotion } from "@/hooks/useRedusedMotion";
 
-// Embedded data
-const upcomingShowData = {
+// ─── Data ─────────────────────────────────────────────────────────────────────
+
+const d = {
+  eyebrow: "Kommende forestilling",
   title: "Oberst Krebs og de Skotske spionene",
   genre: "Familiemusikal",
   ageRating: "5+",
+  dates: "Juli 2026",
   description:
-    "En skotsk teatertrupp står utenfor festningsmurene, men de har ikke bare kommet den lange veien til Kongsvinger for å underholde… Du kan forvente en forestilling stappfull av av magi, spenning, humor, dans og fengende musikk når «Oberst Krebs og de skotske spionene» spilles 2. til 11. juli på Kongsvinger festning.",
+    "En skotsk teatertrupp står utenfor festningsmurene, men de har ikke bare kommet den lange veien til Kongsvinger for å underholde… Du kan forvente en forestilling stappfull av magi, spenning, humor, dans og fengende musikk når «Oberst Krebs og de skotske spionene» spilles 2. til 11. juli på Kongsvinger festning.",
   poster: "/assets/landing/show-poster.jpg",
   backgroundImage: "/assets/landing/festningskuliss.webp",
-  dates: "Juli 2026",
   ctaLink: "https://eventyrfestningen.ticketco.events/no/nb",
   highlights: [
     "Kveld med gåsehud",
@@ -24,219 +25,220 @@ const upcomingShowData = {
   ],
 } as const;
 
-const sectionReveal: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 220,
-      damping: 26,
-      mass: 0.9,
-    },
-  },
+// ─── Motion ───────────────────────────────────────────────────────────────────
+
+const spring = { type: "spring", stiffness: 220, damping: 26, mass: 0.9 } as const;
+
+const v = {
+  section: {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: spring },
+  } satisfies Variants,
+  poster: {
+    hidden: { opacity: 0, y: 22, scale: 0.985 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { ...spring, stiffness: 240, mass: 0.95 } },
+  } satisfies Variants,
+  content: {
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { ...spring, delay: 0.08 } },
+  } satisfies Variants,
 };
 
-const posterReveal: Variants = {
-  hidden: { opacity: 0, y: 22, scale: 0.985 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 240,
-      damping: 26,
-      mass: 0.95,
-    },
-  },
-};
-
-const infoReveal: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring",
-      stiffness: 220,
-      damping: 26,
-      mass: 0.9,
-      delay: 0.08, // ✅ “timing riktig” etter poster
-    },
-  },
-};
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function UpcomingShowScene() {
   const sectionRef = useRef<HTMLElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const reduced = useReducedMotion();
+
+  const mv = (variants: Variants, amount = 0.2) =>
+    reduced
+      ? {}
+      : { variants, initial: "hidden" as const, whileInView: "visible" as const, viewport: { once: true, amount } };
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen flex items-center overflow-hidden py-20 bg-cynical-950"
-      aria-label="Kommende forestilling"
+      className="relative flex items-center overflow-hidden py-16 sm:py-20"
+      aria-labelledby="show-heading"
     >
-      {/* Background (statisk, stabil) */}
-      <div className="absolute inset-0 z-0">
+      {/* ── Bakgrunn ─────────────────────────────────────────────────────── */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
         <img
-          src={upcomingShowData.backgroundImage}
+          src={d.backgroundImage}
           alt=""
           className="w-full h-full object-cover"
           loading="lazy"
           decoding="async"
+          width={1920}
+          height={1080}
         />
-
-        {/* Dark overlays for readability */}
-        <div className="absolute inset-0 bg-cynical-900/85" />
-        <div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_60%,rgba(3,7,18,0.75)_100%)]"
-          aria-hidden="true"
-        />
+        <div className="absolute inset-0 bg-cynical-900/88" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_60%,rgba(3,7,18,0.75)_100%)]" />
       </div>
 
-      {/* Content wrapper – one stable reveal */}
+      {/* ── Innhold ───────────────────────────────────────────────────────── */}
       <motion.div
-        variants={sectionReveal}
-        initial={prefersReducedMotion ? false : "hidden"}
-        whileInView={prefersReducedMotion ? undefined : "visible"}
-        viewport={{ once: true, amount: 0.25 }}
-        className="relative z-20 w-full max-w-7xl mx-auto px-4"
+        {...mv(v.section, 0.15)}
+        className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Poster – separate reveal (optional) */}
-          <motion.div
-            variants={posterReveal}
-            initial={prefersReducedMotion ? false : "hidden"}
-            whileInView={prefersReducedMotion ? undefined : "visible"}
-            viewport={{ once: true, amount: 0.25 }}
-            className="relative"
-          >
+        {/*
+          Mobil:  poster øverst, tekst under  (stack)
+          Desktop: poster venstre, tekst høyre  (grid)
+          NB: ingen lg:order-reverse-triks her — rekkefølgen i markup-en
+          er poster → tekst, som er riktig for skjermlesere og mobil.
+        */}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+          {/* ── Poster ───────────────────────────────────────────────────── */}
+          <motion.div {...mv(v.poster, 0.15)} className="relative">
             <div
-              className="relative aspect-[2/3] max-w-md mx-auto lg:mx-0 rounded-xl overflow-hidden 
-                         border-4 border-gold-500/40 shadow-[0_0_60px_rgba(251,191,36,0.25)]
-                         hover:border-gold-500/60 hover:shadow-[0_0_80px_rgba(251,191,36,0.35)]
-                         transition-all duration-500 transform-gpu"
+              className={[
+                // Mobil: litt smalere enn full bredde, sentrert
+                // Desktop: venstrejustert
+                "relative aspect-[2/3] max-w-[320px] sm:max-w-sm mx-auto lg:mx-0",
+                "rounded-xl overflow-hidden",
+                // Gull-border — forestillingens "farge" (vs torch for Jonas-seksjonen)
+                "border-4 border-gold-500/40",
+                "shadow-[0_0_60px_rgba(251,191,36,0.22)]",
+                "hover:border-gold-500/60 hover:shadow-[0_0_80px_rgba(251,191,36,0.32)]",
+                "motion-safe:transition-all motion-safe:duration-500",
+                "transform-gpu",
+              ].join(" ")}
             >
               <img
-                src={upcomingShowData.poster}
-                alt={`${upcomingShowData.title} plakat`}
+                src={d.poster}
+                alt={`${d.title} — plakat`}
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"
+                width={480}
+                height={720}
               />
 
+              {/* Gull-glow nedover */}
               <div
                 className="absolute inset-0 bg-gradient-to-t from-gold-500/10 via-transparent to-transparent pointer-events-none"
                 aria-hidden="true"
               />
 
+              {/* Dekorative hjørner — teatralsk plakatpreg */}
               <div
-                className="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-gold-500 rounded-tl-lg"
+                className="absolute top-0 left-0 w-14 h-14 border-t-[3px] border-l-[3px] border-gold-400/70 rounded-tl-lg"
                 aria-hidden="true"
               />
               <div
-                className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-gold-500 rounded-br-lg"
+                className="absolute bottom-0 right-0 w-14 h-14 border-b-[3px] border-r-[3px] border-gold-400/70 rounded-br-lg"
                 aria-hidden="true"
               />
             </div>
 
-            {/* Glow (disable for reduced motion / perf) */}
-            {!prefersReducedMotion && (
+            {/* Ambient glow bak posteren */}
+            {!reduced && (
               <motion.div
-                animate={{ scale: [1, 1.04, 1], opacity: [0.22, 0.38, 0.22] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute inset-0 -z-10 bg-gold-500/16 blur-3xl rounded-xl"
+                animate={{ scale: [1, 1.04, 1], opacity: [0.18, 0.32, 0.18] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-0 -z-10 bg-gold-500/12 blur-3xl rounded-xl"
                 aria-hidden="true"
               />
             )}
           </motion.div>
 
-          {/* Right: Info – one reveal, no per-item animations */}
+          {/* ── Tekst ────────────────────────────────────────────────────── */}
           <motion.div
-            variants={infoReveal}
-            initial={prefersReducedMotion ? false : "hidden"}
-            whileInView={prefersReducedMotion ? undefined : "visible"}
-            viewport={{ once: true, amount: 0.25 }}
-            className="space-y-6 lg:space-y-8"
+            {...mv(v.content, 0.15)}
+            className="space-y-5 lg:space-y-6"
           >
-            {/* Badge */}
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-block text-torch-300/90 font-sans text-sm uppercase tracking-widest">
-                Kommende forestilling
-              </span>
-            </div>
+            {/* Eyebrow */}
+            <p className="eyebrow text-gold-400/80 text-[0.7rem] sm:text-xs">
+              {d.eyebrow}
+            </p>
 
-            {/* Title */}
             <h2
-              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gold-400 leading-tight
-                        drop-shadow-[0_0_20px_rgba(251,191,36,0.3)]"
+              id="show-heading"
+              className={[
+                "h2 xl:text-[clamp(2.375rem,1.8rem+1.5vw,3rem)]",
+                "uppercase tracking-[0.05em]",
+                "text-white",
+                // Subtil gull-glow — antyder forestillingens farge uten å overdrive
+                "drop-shadow-[0_0_22px_rgba(251,191,36,0.18)]",
+              ].join(" ")}
             >
-              {upcomingShowData.title}
+              {d.title}
             </h2>
 
-            {/* Meta info */}
-            <div className="flex flex-wrap items-center gap-4 text-white/80 font-sans text-sm">
-              <span>
-                {upcomingShowData.genre}
+            {/* Meta — genre, aldersgrense, datoer */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              {/* Genre-badge */}
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-gold-500/12 border border-gold-500/25 text-gold-300 text-xs font-medium tracking-wide">
+                {d.genre}
               </span>
-              <span>
-                {upcomingShowData.ageRating}
+              {/* Aldersgrense */}
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md bg-white/6 border border-white/12 text-cynical-200 text-xs font-medium tracking-wide">
+                {d.ageRating}
               </span>
-              <span>{upcomingShowData.dates}</span>
+              {/* Separator */}
+              <span className="text-cynical-600 text-xs" aria-hidden="true">·</span>
+              {/* Datoer */}
+              <span className="text-cynical-300 text-sm font-medium">{d.dates}</span>
             </div>
 
-            {/* Description */}
-            <div className="prose lg:prose-lg xl:prose-xl prose-invert max-w-2xl prose-p:text-white/80 prose-p:leading-relaxed">
-              <p>{upcomingShowData.description}</p>
-            </div>
+            {/* Beskrivelse */}
+            <p className="text-cynical-100/85 text-[0.9375rem] lg:text-base leading-relaxed max-w-prose">
+              {d.description}
+            </p>
 
-            {/* Highlights – NO animation */}
-            <div className="grid sm:grid-cols-2 gap-3 pt-2">
-              {upcomingShowData.highlights.map((highlight, idx) => (
+            {/* Highlights-grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+              {d.highlights.map((highlight, idx) => (
                 <div
                   key={`${highlight}-${idx}`}
-                  className="flex items-center gap-3 text-gold-300 font-sans font-medium text-sm sm:text-base
-                             p-3 bg-cynical-800/50 md:backdrop-blur-sm rounded-lg border border-gold-500/20
-                             hover:bg-cynical-800/70 hover:border-gold-500/30 transition-all"
+                  className={[
+                    "flex items-center gap-3",
+                    "px-3 py-2.5 sm:p-3",
+                    "rounded-lg",
+                    "bg-cynical-800/50 border border-gold-500/15",
+                    "hover:bg-cynical-800/70 hover:border-gold-500/28",
+                    "motion-safe:transition-colors motion-safe:duration-200",
+                    "md:backdrop-blur-sm",
+                  ].join(" ")}
                 >
-                  <div className="w-2 h-2 bg-gold-400 rounded-full shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
-                  <span>{highlight}</span>
+                  {/* Gull-dot */}
+                  <div
+                    className="shrink-0 w-1.5 h-1.5 rounded-full bg-gold-400 shadow-[0_0_6px_rgba(251,191,36,0.55)]"
+                    aria-hidden="true"
+                  />
+                  <span className="text-gold-200 text-sm font-medium leading-snug">
+                    {highlight}
+                  </span>
                 </div>
               ))}
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <a
-                href={upcomingShowData.ctaLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ variant: "torch", size: "xl" }),
-                  "group relative overflow-hidden inline-flex w-full sm:w-auto"
-                )}
+            {/* CTA */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2 sm:pt-3">
+              {/* <Button
+                asChild
+                variant="torch"
+                size="lg"
+                withShine
+                withPulse={!reduced}
+                className="w-full sm:w-auto justify-center"
               >
-                <span
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                             translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none"
-                  aria-hidden="true"
-                />
-                <span className="relative drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+                <a href={d.ctaLink} target="_blank" rel="noopener noreferrer">
                   Kjøp billetter
-                </span>
-              </a>
+                </a>
+              </Button> */}
 
-              <a
-                href="/om-forestillingen"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "xl" }),
-                  "border-2 border-gold-400/60 text-white hover:bg-gold-400/10 hover:border-gold-400 transition-all md:backdrop-blur-sm bg-cynical-900/20 w-full sm:w-auto"
-                )}
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto justify-center bg-cynical-900/20"
               >
-                Les mer om forestillingen
-              </a>
+                <a href="/om-forestillingen">
+                  Les mer om forestillingen
+                </a>
+              </Button>
             </div>
           </motion.div>
         </div>

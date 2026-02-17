@@ -14,7 +14,7 @@ export function ContactMapVariant() {
     >
       {/* Header */}
       <div className="text-center">
-        <h3 className="text-2xl font-display text-white mb-2">
+        <h3 className="text-2xl font-sans text-white mb-2">
           Finn oss
         </h3>
         <p className="text-cynical-100/70 text-sm">
@@ -49,7 +49,7 @@ export function ContactMapVariant() {
 
       {/* Veibeskrivelse */}
       <div className="space-y-4">
-        <h4 className="text-lg font-display text-white mb-3">
+        <h4 className="text-lg font-sans text-white mb-3">
           Hvordan komme seg hit
         </h4>
 

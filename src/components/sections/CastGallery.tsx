@@ -141,7 +141,7 @@ export function CastGallery({ show }: CastGalleryProps) {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-10 pb-8 border-b border-white/10"
           >
-            <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-3">
+            <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white mb-3">
               Rollebesetning
             </h3>
             <p className="text-cynical-100/70 text-sm">
@@ -239,7 +239,7 @@ export function CastGallery({ show }: CastGalleryProps) {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-10"
           >
-            <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-3">
+            <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white mb-3">
               Produksjonsteam
             </h3>
             <p className="text-cynical-100/70 text-sm">
@@ -370,7 +370,7 @@ export function CastGallery({ show }: CastGalleryProps) {
 
             <h3
               id="modal-title"
-              className="text-3xl md:text-4xl font-display font-bold text-white mb-6"
+              className="text-3xl md:text-4xl font-sans font-bold text-white mb-6"
             >
               {selectedPerson.actor?.name ?? "Ukjent person"}
             </h3>

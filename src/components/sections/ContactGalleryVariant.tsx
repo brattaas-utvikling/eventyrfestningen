@@ -46,7 +46,7 @@ export function ContactGalleryVariant() {
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold-400/10 mb-4">
           <Camera className="h-6 w-6 text-gold-400" />
         </div>
-        <h3 className="text-2xl font-display text-white mb-2">
+        <h3 className="text-2xl font-sans text-white mb-2">
           Bli med på eventyret
         </h3>
         <p className="text-cynical-100/70 text-sm">
@@ -97,7 +97,7 @@ export function ContactGalleryVariant() {
               <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gold-400/10 mb-2">
                 <Icon className="h-5 w-5 text-gold-400" />
               </div>
-              <div className="text-2xl font-display font-bold text-white mb-1">
+              <div className="text-2xl font-sans font-bold text-white mb-1">
                 {stat.value}
               </div>
               <div className="text-xs text-cynical-100/60">

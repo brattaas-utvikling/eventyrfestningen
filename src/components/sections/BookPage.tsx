@@ -23,7 +23,7 @@
 //               <div className="border-4 border-amber-900/30 border-double p-6 md:p-8">
 //                 <BookOpen className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 text-amber-900" />
 //                 <h1 
-//                   className="text-4xl md:text-6xl font-bold text-amber-950 mb-4 font-display"
+//                   className="text-4xl md:text-6xl font-bold text-amber-950 mb-4 font-sans"
 //                 >
 //                   Eventyrfestningen
 //                 </h1>
@@ -116,7 +116,7 @@
 //                 </span>
 //                 <div className="w-8 h-px bg-amber-900/30" />
 //               </div>
-//               <h2 className="text-2xl md:text-3xl font-bold text-amber-950 font-display">
+//               <h2 className="text-2xl md:text-3xl font-bold text-amber-950 font-sans">
 //                 {show.title}
 //               </h2>
 //             </div>
@@ -172,7 +172,7 @@ export const CoverPage = forwardRef<HTMLDivElement, CoverPageProps>(
               <div className="border-4 border-amber-900/30 border-double p-6 md:p-8">
                 <BookOpen className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 text-amber-900" />
                 <h1 
-                  className="text-4xl md:text-6xl font-bold text-amber-950 mb-4 font-display"
+                  className="text-4xl md:text-6xl font-bold text-amber-950 mb-4 font-sans"
                 >
                   Eventyrfestningen
                 </h1>
@@ -281,7 +281,7 @@ export const ShowPage = forwardRef<HTMLDivElement, ShowPageProps>(
                 </span>
                 <div className="w-8 h-px bg-amber-900/30" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-amber-950 font-display">
+              <h2 className="text-2xl md:text-3xl font-bold text-amber-950 font-sans">
                 {show.title}
               </h2>
             </div>

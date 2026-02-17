@@ -24,13 +24,13 @@ function renderPortableText(blocks?: PT) {
     switch (block.style) {
       case "h2":
         return (
-          <h2 key={block._key} className="text-2xl font-display text-white mt-6 mb-2">
+          <h2 key={block._key} className="text-2xl font-sans text-white mt-6 mb-2">
             {text}
           </h2>
         );
       case "h3":
         return (
-          <h3 key={block._key} className="text-xl font-display text-white mt-4 mb-2">
+          <h3 key={block._key} className="text-xl font-sans text-white mt-4 mb-2">
             {text}
           </h3>
         );
@@ -86,7 +86,7 @@ export function ShowOverview({ show, onImageClick }: ShowOverviewProps) {
         {/* topp-del */}
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-start">
           <div>
-            <h2 className="text-3xl font-display text-white mb-4">Om forestillingen</h2>
+            <h2 className="text-3xl font-sans text-white mb-4">Om forestillingen</h2>
             {renderPortableText(show.story) || (
               <p className="text-cynical-100/70">Ingen tekst er lagt inn ennå.</p>
             )}
@@ -120,7 +120,7 @@ export function ShowOverview({ show, onImageClick }: ShowOverviewProps) {
         {/* galleri */}
         {gallery.length > 0 ? (
           <div>
-            <h3 className="text-xl font-display text-white mb-4">Fra forestillingen</h3>
+            <h3 className="text-xl font-sans text-white mb-4">Fra forestillingen</h3>
 
             {/* MOBIL: Swiper */}
             <div className="md:hidden">

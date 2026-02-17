@@ -14,7 +14,7 @@ export default function Calendar() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-4">
-      <h1 className="font-display text-3xl text-gold-300 mb-4">
+      <h1 className="font-sans text-3xl text-gold-300 mb-4">
         Forestillingskalender
       </h1>
       {data?.map((perf) => (

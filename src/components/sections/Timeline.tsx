@@ -100,7 +100,7 @@ export function Timeline({ milestones }: TimelineProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl sm:text-5xl font-display font-bold text-cynical-900 mb-4"
+            className="text-4xl sm:text-5xl font-sans font-bold text-cynical-900 mb-4"
           >
             Vår reise gjennom tid
           </motion.h2>
@@ -152,7 +152,7 @@ export function Timeline({ milestones }: TimelineProps) {
                       }}
                       className="relative flex h-14 w-14 items-center justify-center rounded-full border-[3px] border-[#FAF7F1] shadow-xl bg-linear-to-br from-gold-400 to-gold-600"
                     >
-                      <span className="text-white font-display font-bold text-sm leading-none">
+                      <span className="text-white font-sans font-bold text-sm leading-none">
                         {year}
                       </span>
                       <span
@@ -387,7 +387,7 @@ function TimelineCard({
 
         {/* Innhold */}
         <div className="relative p-6 sm:p-7">
-          <h3 className="text-2xl font-display font-bold text-cynical-900 mb-3 tracking-[0.03em]">
+          <h3 className="text-2xl font-sans font-bold text-cynical-900 mb-3 tracking-[0.03em]">
             {title}
           </h3>
           {desc ? (
@@ -503,7 +503,7 @@ function TimelineCard({
 //             initial={{ opacity: 0, y: 20 }}
 //             whileInView={{ opacity: 1, y: 0 }}
 //             viewport={{ once: true }}
-//             className="text-4xl sm:text-5xl font-display font-bold text-cynical-900 mb-4"
+//             className="text-4xl sm:text-5xl font-sans font-bold text-cynical-900 mb-4"
 //           >
 //             Vår reise gjennom tid
 //           </motion.h2>
@@ -555,7 +555,7 @@ function TimelineCard({
 //                       }}
 //                       className="relative flex h-14 w-14 items-center justify-center rounded-full border-[3px] border-[#FAF7F1] shadow-xl bg-linear-to-br from-gold-400 to-gold-600"
 //                     >
-//                       <span className="text-white font-display font-bold text-sm leading-none">
+//                       <span className="text-white font-sans font-bold text-sm leading-none">
 //                         {year}
 //                       </span>
 //                       <span
@@ -745,7 +745,7 @@ function TimelineCard({
 
 //         {/* Innhold */}
 //         <div className="relative p-6 sm:p-7">
-//           <h3 className="text-2xl font-display font-bold text-cynical-900 mb-3 tracking-[0.03em]">
+//           <h3 className="text-2xl font-sans font-bold text-cynical-900 mb-3 tracking-[0.03em]">
 //             {title}
 //           </h3>
 //           {desc ? (

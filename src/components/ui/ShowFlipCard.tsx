@@ -89,7 +89,7 @@ export function ShowFlipCard({ show, className }: ShowFlipCardProps) {
                 <Calendar className="h-3.5 w-3.5" />
                 {showTypeLabel} {show.year}
               </p>
-              <h3 className="text-white text-lg font-display leading-tight drop-shadow">
+              <h3 className="text-white text-lg font-sans leading-tight drop-shadow">
                 {show.title}
               </h3>
               <p className="text-cynical-100/80 text-xs mt-1">Hold for info →</p>
@@ -114,7 +114,7 @@ export function ShowFlipCard({ show, className }: ShowFlipCardProps) {
             ) : null}
           </div>
 
-          <h3 className="text-white text-xl font-display leading-tight">
+          <h3 className="text-white text-xl font-sans leading-tight">
             {show.title}
           </h3>
           <p className="text-cynical-100/80 text-sm leading-relaxed flex-1">

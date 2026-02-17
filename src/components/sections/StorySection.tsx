@@ -46,7 +46,7 @@ export const StorySection = () => {
             <p className="text-xs font-semibold font-sans uppercase tracking-[0.18em] text-slate-300/80">
               Historien
             </p>
-            <h2 className="text-3xl font-semibold font-display tracking-tight sm:text-4xl">
+            <h2 className="text-3xl font-semibold font-sans tracking-tight sm:text-4xl">
               De skotske spionene og jakten på Mattesonskatten
             </h2>
 

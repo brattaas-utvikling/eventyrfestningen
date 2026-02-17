@@ -52,7 +52,7 @@ export const ShowPageLeft = forwardRef<HTMLDivElement, ShowPageLeftProps>(
                 </span>
                 <div className="w-8 h-px bg-amber-900/30" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-amber-950 font-display">
+              <h2 className="text-2xl md:text-3xl font-bold text-amber-950 font-sans">
                 {show.title}
               </h2>
             </div> */}
@@ -128,7 +128,7 @@ ShowPageLeft.displayName = 'ShowPageLeft';
 //                 </span>
 //                 <div className="w-8 h-px bg-amber-900/30" />
 //               </div>
-//               <h2 className="text-2xl md:text-3xl font-bold text-amber-950 font-display">
+//               <h2 className="text-2xl md:text-3xl font-bold text-amber-950 font-sans">
 //                 {show.title}
 //               </h2>
 //             </div>

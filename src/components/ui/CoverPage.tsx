@@ -17,7 +17,7 @@ export const CoverPage = forwardRef<HTMLDivElement>((_, ref) => (
             <BookOpen className="mx-auto w-14 h-14 md:w-16 md:h-16 text-gold-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.6)]" />
             
             <h1 className="
-                font-display
+                font-spice
                 whitespace-nowrap
                 text-center
                 mx-auto
@@ -25,7 +25,7 @@ export const CoverPage = forwardRef<HTMLDivElement>((_, ref) => (
                 tracking-[0.18em]
                 font-bold
                 max-w-[90%]
-                text-[clamp(1.5rem,3vw,2.5rem)]
+                text-[clamp(1.2rem,3vw,2.5rem)]
                 -translate-x-3.5
     ">
               EVENTYRFESTNINGEN
@@ -63,7 +63,7 @@ CoverPage.displayName = "CoverPage";
 //   <OldPaper ref={ref} className="w-full h-full bg-leather-cover text-yellow-100 flex items-center justify-center bg-cynical-900/90 border-amber-300 border-2">
 //     <div className="p-10 text-center space-y-6">
 //       <BookOpen className="mx-auto w-16 h-16 text-yellow-300" />
-//       <h1 className="text-4xl font-display tracking-wider uppercase">Eventyrfestningen</h1>
+//       <h1 className="text-4xl font-sans tracking-wider uppercase">Eventyrfestningen</h1>
 //       <p className="italic text-yellow-200 text-lg">Bla i våre tidligere forestillinger</p>
 //     </div>
 //   </OldPaper>

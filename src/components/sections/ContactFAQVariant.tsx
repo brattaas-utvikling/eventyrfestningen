@@ -52,7 +52,7 @@ export function ContactFAQVariant() {
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold-400/10 mb-4">
           <HelpCircle className="h-6 w-6 text-gold-400" />
         </div>
-        <h3 className="text-2xl font-display text-white mb-2">
+        <h3 className="text-2xl font-sans text-white mb-2">
           Ofte stilte spørsmål
         </h3>
         <p className="text-cynical-100/70 text-sm">

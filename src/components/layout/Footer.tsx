@@ -58,7 +58,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
               <section aria-labelledby="footer-about" className="text-left">
                 <h3
                   id="footer-about"
-                  className={`text-lg font-display font-semibold mb-4 ${heading}`}
+                  className={`text-lg font-sans font-semibold mb-4 ${heading}`}
                 >
                   Om oss
                 </h3>
@@ -72,7 +72,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
               <section aria-labelledby="footer-contact" className="text-left">
                 <h3
                   id="footer-contact"
-                  className={`text-lg font-display font-semibold mb-4 ${heading}`}
+                  className={`text-lg font-sans font-semibold mb-4 ${heading}`}
                 >
                   Kontakt
                 </h3>
@@ -119,7 +119,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
               <nav aria-labelledby="footer-links" className="text-left">
                 <h3
                   id="footer-links"
-                  className={`text-lg font-display font-semibold mb-4 ${heading}`}
+                  className={`text-lg font-sans font-semibold mb-4 ${heading}`}
                 >
                   Snarveier
                 </h3>

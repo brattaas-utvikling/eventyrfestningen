@@ -162,7 +162,7 @@ export function NewsletterSignup({ variant = 'dark' }: NewsletterSignupProps) {
     <section aria-labelledby="footer-newsletter" className="text-left">
       <h3
         id="footer-newsletter"
-        className={`text-lg font-display font-semibold mb-3 ${heading}`}
+        className={`text-lg font-sans font-semibold mb-3 ${heading}`}
       >
         Nyhetsbrev
       </h3>

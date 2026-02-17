@@ -80,7 +80,7 @@ export function ContactEventVariant() {
 
         {/* Title */}
         <div className="absolute bottom-4 left-4 right-4">
-          <h3 className="text-2xl font-display font-bold text-white mb-1">
+          <h3 className="text-2xl font-sans font-bold text-white mb-1">
             {NEXT_EVENT.title}
           </h3>
           <p className="text-gold-400 text-sm font-medium">
@@ -102,7 +102,7 @@ export function ContactEventVariant() {
                 key={unit.label}
                 className="text-center p-3 rounded-xl bg-cynical-900/60 border border-cynical-700/30"
               >
-                <div className="text-2xl font-display font-bold text-gold-400 mb-1">
+                <div className="text-2xl font-sans font-bold text-gold-400 mb-1">
                   {unit.value.toString().padStart(2, "0")}
                 </div>
                 <div className="text-xs text-cynical-100/60 uppercase">

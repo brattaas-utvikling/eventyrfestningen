@@ -89,7 +89,7 @@ export default function PracticalScene({ data }: Props) {
           <span className="inline-block text-torch-400 font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4">
             Planlegg besøket
           </span>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-gold-400">
+          <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl text-gold-400">
             {data.title}
           </h2>
         </motion.div>

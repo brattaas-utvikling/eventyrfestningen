@@ -621,7 +621,7 @@ export function Header() {
 //                 href="https://eventyrfestningen.ticketco.events/no/nb"
 //                 target="_blank"
 //                 rel="noreferrer"
-//                 className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 font-display text-nowrap"
+//                 className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 font-sans text-nowrap"
 //                 onClick={() =>
 //                   trackEvent("ticket_click", {
 //                     source: "header_desktop",
@@ -723,7 +723,7 @@ export function Header() {
 //                         href="https://eventyrfestningen.ticketco.events/no/nb"
 //                         target="_blank"
 //                         rel="noreferrer"
-//                         className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 font-display"
+//                         className="focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 font-sans"
 //                         onClick={() =>
 //                           trackEvent("ticket_click", {
 //                             source: "header_mobile",

@@ -1,8 +1,11 @@
+// routes/landing/sections/HistoryScene.tsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useRedusedMotion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface Stat {
   number: string;
@@ -23,17 +26,14 @@ interface Props {
   data: HistoryData;
 }
 
-/**
- * CountUpPlain:
- * - No Framer Motion
- * - No React state updates per frame
- * - Updates textContent only (fast)
- * - Starts when startSignal flips > 0
- */
+// ─── CountUpPlain ─────────────────────────────────────────────────────────────
+// Beholdt 100% uendret — DOM-direkte oppdatering uten React state per frame.
+// Starter kun når startSignal > 0 (etter fade + inView).
+
 function CountUpPlain({
   end,
   suffix = "",
-  duration = 1200, // ms
+  duration = 1200,
   startSignal,
 }: {
   end: number;
@@ -52,18 +52,15 @@ function CountUpPlain({
     const el = elRef.current;
     if (!el) return;
 
-    // Initial paint
     el.textContent = `0${suffix}`;
-
     if (startSignal === 0) return;
 
-    const start = 0;
     const startTime = performance.now();
     let raf = 0;
 
     const tick = (t: number) => {
       const p = Math.min((t - startTime) / duration, 1);
-      const value = Math.round(start + (end - start) * p);
+      const value = Math.round(end * p);
       el.textContent = `${value}${suffix}`;
       if (p < 1) raf = requestAnimationFrame(tick);
     };
@@ -81,11 +78,13 @@ function CountUpPlain({
   );
 }
 
+// ─── Component ────────────────────────────────────────────────────────────────
+
 export default function HistoryScene({ data }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const reduced = useReducedMotion();
 
-  // ---- Sticky image parallax (kept, but smooth + disabled on reduced motion) ----
+  // ── Parallax på bilde (beholdt uendret) ──────────────────────────────────
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -97,121 +96,120 @@ export default function HistoryScene({ data }: Props) {
     mass: 0.4,
   });
 
-  const imageScale = useTransform(
-    smoothProgress,
-    [0, 1],
-    prefersReducedMotion ? [1, 1] : [1.02, 1.12]
-  );
+  const imageScale   = useTransform(smoothProgress, [0, 1], reduced ? [1, 1]             : [1.02, 1.12]);
+  const imageY       = useTransform(smoothProgress, [0, 1], reduced ? ["0%", "0%"]       : ["-2%", "2%"]);
+  const imageOpacity = useTransform(smoothProgress, [0, 0.5, 1], reduced ? [1, 1, 1]     : [0.92, 1, 0.92]);
 
-  const imageY = useTransform(
-    smoothProgress,
-    [0, 1],
-    prefersReducedMotion ? ["0%", "0%"] : ["-2%", "2%"]
-  );
-
-  const imageOpacity = useTransform(
-    smoothProgress,
-    [0, 0.5, 1],
-    prefersReducedMotion ? [1, 1, 1] : [0.92, 1, 0.92]
-  );
-
-  const parsedStats = useMemo(() => {
-    return data.stats.map((s) => {
+  // ── Stats parsing (beholdt uendret) ──────────────────────────────────────
+  const parsedStats = useMemo(() =>
+    data.stats.map((s) => {
       const raw = s.number ?? "";
       const numValue = parseInt(raw.replace(/\D/g, ""), 10) || 0;
       const hasPlus = raw.includes("+");
       return { ...s, numValue, hasPlus };
-    });
-  }, [data.stats]);
+    }),
+  [data.stats]);
 
-  // ---- Fade-in + inView gating for countups ----
-  const statsWrapRef = useRef<HTMLDivElement>(null);
-  const [fadeDone, setFadeDone] = useState(prefersReducedMotion);
-  const [statsInViewOnce, setStatsInViewOnce] = useState(false);
-  const [startSignal, setStartSignal] = useState(0);
+  // ── CountUp-gating (beholdt uendret) ─────────────────────────────────────
+  const statsWrapRef    = useRef<HTMLDivElement>(null);
+  const [fadeDone,      setFadeDone]      = useState(reduced);
+  const [statsInView,   setStatsInView]   = useState(false);
+  const [startSignal,   setStartSignal]   = useState(0);
 
-  // Observe stats wrapper (native IntersectionObserver, stable)
   useEffect(() => {
     const el = statsWrapRef.current;
     if (!el) return;
-
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStatsInViewOnce(true);
-          io.disconnect();
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) { setStatsInView(true); io.disconnect(); } },
       { threshold: 0.25 }
     );
-
     io.observe(el);
     return () => io.disconnect();
   }, []);
 
-  // Start countups only when:
-  // 1) content fade has finished
-  // 2) stats block is in view
-  // 3) reduced motion is off
   useEffect(() => {
-    if (prefersReducedMotion) return;
-    if (!fadeDone) return;
-    if (!statsInViewOnce) return;
-
-    setStartSignal(1); // fire once
-  }, [fadeDone, statsInViewOnce, prefersReducedMotion]);
+    if (reduced || !fadeDone || !statsInView) return;
+    setStartSignal(1);
+  }, [fadeDone, statsInView, reduced]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative bg-cynical-900 py-16 sm:py-20 overflow-hidden"
-      aria-label="Historie"
+      className="relative bg-cynical-900 py-16 sm:py-20 lg:py-24 overflow-hidden"
+      aria-labelledby="history-heading"
     >
-      {/* Texture overlay */}
+      {/* Papirtekstur-overlay */}
       <div
         className="absolute inset-0 opacity-[0.06] mix-blend-overlay pointer-events-none"
         aria-hidden="true"
       >
-        <div className="w-full h-full bg-[url('/textures/old-paper.png')] bg-repeat opacity-50" />
+        <div className="w-full h-full bg-[url('/textures/old-paper.png')] bg-repeat" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
-          {/* Content: one fade only (no y translate) */}
+
+          {/* ── Venstre: innhold ─────────────────────────────────────────── */}
           <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0 }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1 }}
+            initial={reduced ? false : { opacity: 0 }}
+            whileInView={reduced ? undefined : { opacity: 1 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.45, ease: "easeOut" }}
             onAnimationComplete={() => setFadeDone(true)}
-            className="space-y-7 lg:pt-6"
+            className="space-y-6 lg:space-y-7 lg:pt-6"
           >
+            {/* Eyebrow + "årstall" — bruker .eyebrow utility fra global.css */}
             <div>
-              <span className="text-torch-300/90 font-sans text-xs sm:text-sm uppercase tracking-widest">
+              <p className="eyebrow text-torch-300/90 text-[0.7rem] sm:text-xs mb-2">
                 {data.title}
-              </span>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-gold-400 mt-2 drop-shadow-[0_0_18px_rgba(251,191,36,0.25)]">
+              </p>
+
+              {/*
+                yearsActive (f.eks. "15 år") — dette er det visuelle ankeret i seksjonen.
+                Hvit med subtil gull-glow, konsistent med h2 i de foregående seksjonene.
+                font-heading = DM Serif Display fra global.css.
+              */}
+              <h2
+                id="history-heading"
+                className={[
+                  "font-heading",
+                  "text-4xl sm:text-5xl lg:text-6xl",
+                  "text-white",
+                  "leading-[1.05] tracking-[-0.01em]",
+                  "drop-shadow-[0_0_22px_rgba(251,191,36,0.2)]",
+                ].join(" ")}
+              >
                 {data.yearsActive}
               </h2>
             </div>
 
-            <div className="prose lg:prose-lg xl:prose-xl prose-invert max-w-2xl prose-p:text-white/80 prose-p:leading-relaxed">
-              <p>{data.summary}</p>
-            </div>
+            {/* Sammendrag */}
+            <p className="text-cynical-100/85 text-[0.9375rem] lg:text-base leading-relaxed max-w-prose">
+              {data.summary}
+            </p>
 
-            {/* Stats: NO motion, NO blur (perf). Starts after fade + inView */}
-            <div ref={statsWrapRef} className="grid grid-cols-2 gap-4 sm:gap-6 pt-2">
+            {/* Stats-grid — CountUp beholdt 100% */}
+            <div
+              ref={statsWrapRef}
+              className="grid grid-cols-2 gap-3 sm:gap-4 pt-1"
+            >
               {parsedStats.map((stat, idx) => (
                 <div
                   key={`${stat.label}-${idx}`}
-                  className="text-center p-4 sm:p-6 bg-cynical-800/60 rounded-lg border border-gold-500/20
-                             hover:border-gold-500/35 hover:bg-cynical-800/70 transition-all duration-300"
+                  className={[
+                    "flex flex-col items-center justify-center text-center",
+                    "p-4 sm:p-5",
+                    "bg-cynical-800/60 rounded-lg",
+                    "border border-gold-500/18",
+                    "hover:border-gold-500/35 hover:bg-cynical-800/75",
+                    "motion-safe:transition-colors motion-safe:duration-200",
+                  ].join(" ")}
                 >
-                  <div className="font-display tabular-nums leading-none min-h-[1.1em] text-3xl sm:text-4xl lg:text-5xl text-gold-400 mb-2">
-                    {prefersReducedMotion ? (
+                  {/* Tall */}
+                  <div className="font-heading tabular-nums leading-none text-3xl sm:text-4xl lg:text-5xl text-gold-400 mb-1.5">
+                    {reduced ? (
                       <span className="inline-block">
-                        {stat.numValue}
-                        {stat.hasPlus ? "+" : ""}
+                        {stat.numValue}{stat.hasPlus ? "+" : ""}
                       </span>
                     ) : (
                       <CountUpPlain
@@ -223,39 +221,52 @@ export default function HistoryScene({ data }: Props) {
                     )}
                   </div>
 
-                  <div className="text-white/60 text-[11px] sm:text-xs font-sans uppercase tracking-wide">
+                  {/* Label */}
+                  <div className="eyebrow text-cynical-400 text-[0.625rem] sm:text-[0.6875rem]">
                     {stat.label}
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* CTA */}
-            <div className="flex justify-end pt-2">
+            {/* CTA — tekstlenke med pil */}
+            <div className="flex justify-end pt-1">
               <Link
                 to={data.ctaLink}
-                className="group inline-flex items-center gap-2 text-gold-300 hover:text-gold-200 font-sans font-medium text-base transition-colors
-                           focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900 rounded-sm"
+                className={[
+                  "group inline-flex items-center gap-2",
+                  "text-gold-300 hover:text-gold-200",
+                  "font-body font-medium text-base",
+                  "motion-safe:transition-colors motion-safe:duration-200",
+                  // Focus-ring konsistent med design system
+                  "focus:outline-none focus-visible:ring-2",
+                  "focus-visible:ring-gold-400 focus-visible:ring-offset-2",
+                  "focus-visible:ring-offset-cynical-900 rounded-sm",
+                ].join(" ")}
               >
-                <span className="border-b-2 border-gold-500/30 group-hover:border-gold-400/60 transition-colors">
+                <span className="border-b-2 border-gold-500/30 group-hover:border-gold-400/60 motion-safe:transition-colors motion-safe:duration-200">
                   {data.ctaText}
                 </span>
                 <ArrowRight
-                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  className="w-4 h-4 motion-safe:group-hover:translate-x-1 motion-safe:transition-transform motion-safe:duration-200"
                   aria-hidden="true"
                 />
               </Link>
             </div>
           </motion.div>
 
-          {/* Sticky Image Column */}
+          {/* ── Høyre: sticky bilde med parallax ─────────────────────────── */}
           <div className="relative lg:sticky lg:top-24">
             <div className="relative">
               <div
-                className="relative aspect-square max-w-lg mx-auto rounded-xl overflow-hidden
-                           border-4 border-gold-500/40 shadow-[0_0_60px_rgba(251,191,36,0.22)]
-                           hover:border-gold-500/60 hover:shadow-[0_0_80px_rgba(251,191,36,0.3)]
-                           transition-all duration-500"
+                className={[
+                  "relative aspect-square max-w-lg mx-auto",
+                  "rounded-xl overflow-hidden",
+                  "border-4 border-gold-500/40",
+                  "shadow-[0_0_60px_rgba(251,191,36,0.22)]",
+                  "hover:border-gold-500/60 hover:shadow-[0_0_80px_rgba(251,191,36,0.30)]",
+                  "motion-safe:transition-all motion-safe:duration-500",
+                ].join(" ")}
                 style={{ transform: "translateZ(0)", willChange: "transform" }}
               >
                 <motion.img
@@ -264,35 +275,42 @@ export default function HistoryScene({ data }: Props) {
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
                   decoding="async"
+                  width={600}
+                  height={600}
                   style={{
                     scale: imageScale,
                     y: imageY,
                     opacity: imageOpacity,
+                    // Sepia + kontrast — vintage-preg
                     filter: "sepia(0.6) contrast(1.1)",
                     transform: "translateZ(0)",
                     willChange: "transform, opacity",
                   }}
                 />
 
+                {/* Vignett-overlay */}
                 <div
                   className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_55%,rgba(15,23,42,0.45)_100%)] pointer-events-none"
                   aria-hidden="true"
                 />
+
+                {/* Dekorative hjørner — gjenspeiler UpcomingShowScene */}
                 <div
-                  className="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-gold-500 rounded-tl-lg"
+                  className="absolute top-0 left-0 w-14 h-14 border-t-[3px] border-l-[3px] border-gold-400/70 rounded-tl-lg"
                   aria-hidden="true"
                 />
                 <div
-                  className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-gold-500 rounded-br-lg"
+                  className="absolute bottom-0 right-0 w-14 h-14 border-b-[3px] border-r-[3px] border-gold-400/70 rounded-br-lg"
                   aria-hidden="true"
                 />
               </div>
 
-              {!prefersReducedMotion && (
+              {/* Ambient glow bak bildet */}
+              {!reduced && (
                 <motion.div
                   animate={{ scale: [1, 1.05, 1], opacity: [0.22, 0.42, 0.22] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-0 -z-10 bg-gold-500/18 blur-3xl rounded-xl"
+                  className="absolute inset-0 -z-10 bg-gold-500/16 blur-3xl rounded-xl"
                   aria-hidden="true"
                 />
               )}
@@ -301,6 +319,7 @@ export default function HistoryScene({ data }: Props) {
         </div>
       </div>
 
+      {/* Desktop-scrollpuffer for sticky-kolonne */}
       <div className="hidden lg:block h-16" aria-hidden="true" />
     </section>
   );

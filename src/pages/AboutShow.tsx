@@ -123,7 +123,7 @@ export function AboutShow() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-white mb-4">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-spice font-bold text-white mb-4">
                   {show.title}
                 </h1>
                 <p className="text-xl sm:text-2xl text-gray-200">
@@ -243,7 +243,7 @@ export default AboutShow;
 //                 animate={{ opacity: 1, y: 0 }}
 //                 transition={{ duration: 0.8 }}
 //               >
-//                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-white mb-4">
+//                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-sans font-bold text-white mb-4">
 //                   {show.title}
 //                 </h1>
 //                 <p className="text-xl sm:text-2xl text-gray-200">

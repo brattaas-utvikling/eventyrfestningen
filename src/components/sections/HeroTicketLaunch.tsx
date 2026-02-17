@@ -151,7 +151,7 @@ export function HeroTicketLaunch({
                 className="max-h-64 md:max-h-72 lg:max-h-96 w-auto drop-shadow-[0_10px_60px_rgba(0,0,0,0.7)]"
               />
             ) : (
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-torch-100 drop-shadow-[0_6px_40px_rgba(0,0,0,0.9)]">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-sans font-bold text-torch-100 drop-shadow-[0_6px_40px_rgba(0,0,0,0.9)]">
                 {show.title}
               </h1>
             )}
@@ -213,7 +213,7 @@ export function HeroTicketLaunch({
         <div className="text-center">
           {/* hovedtekst */}
           <div>
-            <h2 className="text-3xl sm:text-[2.1rem] lg:text-6xl font-display font-bold text-white leading-tight">
+            <h2 className="text-3xl sm:text-[2.1rem] lg:text-6xl font-sans font-bold text-white leading-tight">
               2025-pris
               <br />
               <span className="text-white">

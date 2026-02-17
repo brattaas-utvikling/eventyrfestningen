@@ -128,7 +128,7 @@ export function QuickInfoSection() {
                         <div className="flex items-center gap-2 text-[11px] uppercase font-sans tracking-[0.16em] text-cynical-900">
                           <span>{slide.label}</span>
                         </div>
-                        <h3 className="text-xl font-display font-semibold text-cynical-900">
+                        <h3 className="text-xl font-sans font-semibold text-cynical-900">
                           {slide.title}
                         </h3>
                         <p className="text-base leading-relaxed font-sans text-cynical-700">

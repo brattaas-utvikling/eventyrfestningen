@@ -67,7 +67,7 @@ export function Countdown({ targetDate }: CountdownProps) {
         <div key={unit.label} className="flex flex-col items-center">
           {/* Number - Større på mobil, balansert på desktop */}
           <div 
-            className="font-display font-bold text-gold-400 tabular-nums leading-none
+            className="font-sans font-bold text-gold-400 tabular-nums leading-none
                        text-3xl
                        sm:text-4xl
                        md:text-3xl

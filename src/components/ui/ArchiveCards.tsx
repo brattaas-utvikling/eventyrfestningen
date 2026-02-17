@@ -24,7 +24,7 @@ export function PosterSpotlightCard({ show }: { show: Show }) {
         {/* year */}
         <div className="absolute top-4 right-4 z-10">
           <div className="rounded-full bg-gold-500 text-white px-3 py-1 shadow">
-            <span className="font-display font-bold">{show.year}</span>
+            <span className="font-sans font-bold">{show.year}</span>
           </div>
         </div>
 
@@ -47,7 +47,7 @@ export function PosterSpotlightCard({ show }: { show: Show }) {
             <div className="mb-2">
               <TypeBadge type={show.type} />
             </div>
-            <h3 className="text-2xl font-display font-bold text-cynical-900 group-hover:text-torch-600 transition-colors line-clamp-1">
+            <h3 className="text-2xl font-sans font-bold text-cynical-900 group-hover:text-torch-600 transition-colors line-clamp-1">
               {show.title}
             </h3>
             {show.story?.[0]?.children?.[0]?.text && (
@@ -93,7 +93,7 @@ export function PolaroidCard({ show }: { show: Show }) {
               )}
             </div>
             <div className="mt-3 flex items-center justify-between">
-              <h3 className="font-display text-xl font-bold text-cynical-900">{show.title}</h3>
+              <h3 className="font-sans text-xl font-bold text-cynical-900">{show.title}</h3>
               <span className="rounded bg-gold-500 px-2 py-0.5 text-xs font-semibold text-white">
                 {show.year}
               </span>
@@ -136,7 +136,7 @@ export function TicketStubCard({ show }: { show: Show }) {
           {/* infofelt */}
           <div className="p-6">
             <div className="mb-2"><TypeBadge type={show.type} /></div>
-            <h3 className="font-display text-2xl font-bold text-cynical-900 line-clamp-1">{show.title}</h3>
+            <h3 className="font-sans text-2xl font-bold text-cynical-900 line-clamp-1">{show.title}</h3>
             {show.story?.[0]?.children?.[0]?.text && (
               <p className="mt-2 text-sm text-gray-700 line-clamp-4">
                 {show.story[0].children[0].text}
@@ -173,7 +173,7 @@ export function GlassGlowCard({ show }: { show: Show }) {
           )}
           <div className="p-5">
             <div className="mb-2"><TypeBadge type={show.type} /></div>
-            <h3 className="font-display text-2xl font-bold text-cynical-900 line-clamp-1">{show.title}</h3>
+            <h3 className="font-sans text-2xl font-bold text-cynical-900 line-clamp-1">{show.title}</h3>
             <div className="mt-3 flex items-center gap-2 text-sm text-gray-700">
               <Calendar className="h-4 w-4" />
               {show.year}
@@ -204,7 +204,7 @@ export function DeckledPaperCard({ show }: { show: Show }) {
         )}
         <div className="p-5">
           <div className="mb-2"><TypeBadge type={show.type} /></div>
-          <h3 className="font-display text-2xl font-bold text-cynical-900">{show.title}</h3>
+          <h3 className="font-sans text-2xl font-bold text-cynical-900">{show.title}</h3>
           {show.story?.[0]?.children?.[0]?.text && (
             <p className="mt-2 text-sm text-gray-700 line-clamp-3">{show.story[0].children[0].text}</p>
           )}

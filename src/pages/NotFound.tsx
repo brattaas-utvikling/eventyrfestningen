@@ -57,7 +57,7 @@ export default function NotFound() {
               transition={{ duration: 0.5 }}
               className="mb-2"
             >
-              <span className="block text-7xl sm:text-8xl font-display font-black tracking-wider">
+              <span className="block text-7xl sm:text-8xl font-sans font-black tracking-wider">
                 404
               </span>
             </motion.div>
@@ -65,7 +65,7 @@ export default function NotFound() {
             <h1
               ref={h1Ref}
               tabIndex={-1}
-              className="text-3xl sm:text-4xl font-display font-bold mb-4 focus:outline-none"
+              className="text-3xl sm:text-4xl font-sans font-bold mb-4 focus:outline-none"
             >
               Denne siden står ikke på programmet
             </h1>

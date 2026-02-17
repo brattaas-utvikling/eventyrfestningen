@@ -55,7 +55,7 @@ export default function Contact() {
               // whileHover fjernet for å unngå y-bevegelse
             >
               <div>
-                <h2 className="text-2xl font-display text-white mb-2">
+                <h2 className="text-2xl md:text-3xl font-spice text-white mb-2">
                   {CONTACT_INFO.title}
                 </h2>
                 <p className="text-cynical-100/70 text-sm leading-relaxed">
@@ -200,7 +200,7 @@ export default function Contact() {
       whileHover={{ y: -2 }}
     >
       <div>
-        <h2 className="text-2xl font-display text-white mb-2">
+        <h2 className="text-2xl font-sans text-white mb-2">
           {CONTACT_INFO.title}
         </h2>
         <p className="text-cynical-100/70 text-sm">

@@ -98,7 +98,7 @@ export function ContactActionsVariant() {
     >
       {/* Header */}
       <div className="text-center">
-        <h3 className="text-2xl font-display text-white mb-2">
+        <h3 className="text-2xl font-sans text-white mb-2">
           Hva kan vi hjelpe deg med?
         </h3>
         <p className="text-cynical-100/70 text-sm">
@@ -131,7 +131,7 @@ export function ContactActionsVariant() {
                 </div>
                 
                 <div>
-                  <h4 className="text-white font-display font-bold mb-1">
+                  <h4 className="text-white font-sans font-bold mb-1">
                     {action.title}
                   </h4>
                   <p className="text-sm text-cynical-100/70 mb-3">

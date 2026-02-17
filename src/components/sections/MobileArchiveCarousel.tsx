@@ -102,7 +102,7 @@ export function MobileArchiveCarousel({ shows }: MobileArchiveCarouselProps) {
 
       {/* Header */}
       <div className="relative z-10 pt-6 pb-4 px-4 text-center bg-linear-to-b from-cynical-900/95 to-transparent">
-        <h2 className="font-display text-2xl text-gold-400 tracking-[0.15em] mb-2 uppercase">
+        <h2 className="font-sans text-2xl text-gold-400 tracking-[0.15em] mb-2 uppercase">
           Arkiv
         </h2>
         <p className="text-sm text-amber-100/70 italic">
@@ -279,7 +279,7 @@ function ShowCard({ show }: ShowCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="font-display text-3xl sm:text-4xl font-bold text-gold-400 mb-2 leading-tight drop-shadow-lg">
+        <h3 className="font-sans text-3xl sm:text-4xl font-bold text-gold-400 mb-2 leading-tight drop-shadow-lg">
           {show.title}
         </h3>
 

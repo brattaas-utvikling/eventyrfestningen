@@ -1,6 +1,7 @@
 // src/pages/Sponsors.tsx
 import React, { useMemo } from "react";
-import { Handshake, Medal, Gem, Crown } from "lucide-react";
+import { Crown, Gem, Medal, Handshake } from "lucide-react";
+import { motion } from "framer-motion";
 import clsx from "clsx";
 
 import { useSanityQuery } from "@/hooks/useSanityQuery";
@@ -13,43 +14,29 @@ import { trackEvent } from "@/lib/analytics";
 import { Button } from "@/components/ui/Button";
 import { SEOHead } from "@/components/SEOHead";
 import { PageHero } from "@/components/layout/PageHero";
+import { useReducedMotion } from "@/hooks/useRedusedMotion";
 
-/* -------------------------------------------------------
- *  Tier-oppsett
- * ------------------------------------------------------*/
+/* ── Tier-oppsett ────────────────────────────────────────────────────────── */
+
 const TIERS = ["main", "gold", "silver", "partner"] as const;
 type SponsorTier = (typeof TIERS)[number];
 
 const TIER_META: Record<
   SponsorTier,
-  { title: string; description: string; icon: React.ComponentType<React.SVGProps<SVGSVGElement>> }
+  {
+    label: string;
+    description: string;
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  }
 > = {
-  main: {
-    title: "Hovedsponsor",
-    description: "Vår viktigste støttespiller.",
-    icon: Crown,
-  },
-  gold: {
-    title: "Gullpartnere",
-    description: "Bidrar til å løfte produksjonen.",
-    icon: Gem,
-  },
-  silver: {
-    title: "Sølvpartnere",
-    description: "Støtter kulturen i regionen.",
-    icon: Medal,
-  },
-  partner: {
-    title: "Partnere",
-    description: "Samarbeid og lokal støtte.",
-    icon: Handshake,
-  },
+  main:    { label: "Hovedsponsor",  description: "Vår viktigste støttespiller",     icon: Crown    },
+  gold:    { label: "Gullpartnere",  description: "Store bidsagsytere", icon: Gem      },
+  silver:  { label: "Sølvpartnere",  description: "Samarbeid og lokal støtte",     icon: Medal    },
+  partner: { label: "Partnere",      description: "Samarbeid og lokal støtte",       icon: Handshake },
 };
 
 function normalizeTier(value?: string): SponsorTier {
-  if (value && (TIERS as readonly string[]).includes(value)) {
-    return value as SponsorTier;
-  }
+  if (value && (TIERS as readonly string[]).includes(value)) return value as SponsorTier;
   return "partner";
 }
 
@@ -60,64 +47,109 @@ function useTieredSponsors(sponsors?: Sponsor[]) {
       const tier = normalizeTier(s.tier);
       (grouped[tier] ||= []).push(s);
     });
-
     return {
-      main: grouped.main ?? [],
-      gold: grouped.gold ?? [],
-      silver: grouped.silver ?? [],
+      main:    grouped.main    ?? [],
+      gold:    grouped.gold    ?? [],
+      silver:  grouped.silver  ?? [],
       partner: grouped.partner ?? [],
     };
   }, [sponsors]);
 }
 
-/* -------------------------------------------------------
- *  Logo-komponent – med glow + animert border
- * ------------------------------------------------------*/
-function SponsorLogo({
+/* ── Ornament-skillelinje ────────────────────────────────────────────────── */
+
+function TierDivider({ tier }: { tier: SponsorTier }) {
+  const { description } = TIER_META[tier];
+  return (
+    <div className="relative flex items-center gap-4 py-2">
+      {/* Venstre linje */}
+      <div className="flex-1 h-px bg-gradient-to-r from-transparent to-gold-500/40" />
+
+      {/* Midtpunkt med ikon + label */}
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold-500/25 bg-cynical-800/60">
+
+        <span className="eyebrow text-gold-400/90 text-[0.6rem]">{description}</span>
+      </div>
+
+      {/* Høyre linje */}
+      <div className="flex-1 h-px bg-gradient-to-l from-transparent to-gold-500/40" />
+    </div>
+  );
+}
+
+/* ── SponsorLogo ─────────────────────────────────────────────────────────── */
+
+type LogoSize = "hero" | "xl" | "lg" | "md" | "sm";
+
+const SIZE_BOX: Record<LogoSize, string> = {
+  hero: "h-36 sm:h-44",
+  xl:   "h-28 sm:h-32",
+  lg:   "h-22 sm:h-24",
+  md:   "h-18 sm:h-20",
+  sm:   "h-14 sm:h-16",
+};
+
+const SIZE_IMG: Record<LogoSize, string> = {
+  hero: "max-h-28 sm:max-h-36",
+  xl:   "max-h-20 sm:max-h-24",
+  lg:   "max-h-16 sm:max-h-18",
+  md:   "max-h-12 sm:max-h-14",
+  sm:   "max-h-10 sm:max-h-12",
+};
+
+// Tier → glowfarge
+const TIER_GLOW: Record<SponsorTier, string> = {
+  main:    "hover:shadow-[0_0_48px_rgba(251,191,36,0.35)]  hover:border-gold-400/70",
+  gold:    "hover:shadow-[0_0_32px_rgba(251,191,36,0.25)]  hover:border-gold-400/55",
+  silver:  "hover:shadow-[0_0_20px_rgba(251,191,36,0.15)]  hover:border-gold-500/40",
+  partner: "hover:shadow-[0_0_12px_rgba(251,191,36,0.10)]  hover:border-gold-500/25",
+};
+
+const TIER_BORDER: Record<SponsorTier, string> = {
+  main:    "border-gold-500/35 shadow-[0_0_24px_rgba(251,191,36,0.12)]",
+  gold:    "border-gold-500/25",
+  silver:  "border-gold-500/15",
+  partner: "border-white/8",
+};
+
+function SponsorCard({
   sponsor,
   size = "md",
-  subtle = false,
-  bordered = false,
   tier,
 }: {
   sponsor: Sponsor;
-  size?: "xl" | "lg" | "md" | "sm";
-  subtle?: boolean;
-  bordered?: boolean;
-  hover?: boolean;
+  size?: LogoSize;
   tier: SponsorTier;
 }) {
-  const box = {
-    xl: "h-32",
-    lg: "h-24",
-    md: "h-20",
-    sm: "h-16",
-  }[size];
-
-  const imgH = {
-    xl: "max-h-24",
-    lg: "max-h-20",
-    md: "max-h-16",
-    sm: "max-h-14",
-  }[size];
-
+  const reduced = useReducedMotion();
   const needsLightBg = sponsor.needsLightBackground ?? true;
 
-  const inner = (
+  const card = (
     <div
       className={clsx(
         "relative w-full rounded-xl overflow-hidden",
         "flex items-center justify-center",
-        "transition-all duration-500",
-        subtle ? "opacity-80" : "opacity-100",
-        "hover:opacity-100",
-        box
+        "border",
+        "bg-cynical-800/40",
+        "motion-safe:transition-all motion-safe:duration-300",
+        TIER_BORDER[tier],
+        TIER_GLOW[tier],
+        SIZE_BOX[size]
       )}
       title={sponsor.name}
     >
-      {/* lys bakplate for mørke logoer */}
+      {/* Lys bakplate for mørke logoer */}
       {needsLightBg && (
-        <div className="absolute inset-[3px] rounded-lg bg-white/85 backdrop-blur-sm" />
+        <div className="absolute inset-[3px] rounded-lg bg-white/90" />
+      )}
+
+      {/* Subtil gull-shimmer i hjørnene for main/gold */}
+      {(tier === "main" || tier === "gold") && (
+        <div
+          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(251,191,36,0.06),transparent_50%)]
+                     pointer-events-none"
+          aria-hidden="true"
+        />
       )}
 
       {sponsor.logo ? (
@@ -125,194 +157,196 @@ function SponsorLogo({
           src={urlFor(sponsor.logo).width(600).url()}
           alt={sponsor.name}
           className={clsx(
-            "relative z-10 object-contain max-w-[90%]",
-            imgH,
+            "relative z-10 object-contain max-w-[82%]",
+            SIZE_IMG[size],
             needsLightBg ? "mix-blend-multiply" : "mix-blend-normal"
           )}
           loading="lazy"
         />
       ) : (
-        <span className="relative z-10 text-sm font-medium text-white/80">
+        <span className="relative z-10 text-sm font-medium text-white/70 px-4 text-center">
           {sponsor.name}
         </span>
       )}
     </div>
   );
 
-  const content = (
-    <div
-      className={clsx(
-        "relative w-full",
-        bordered && "group" // for hover på rammen
-      )}
+  const wrapped = sponsor.url ? (
+    <a
+      href={sponsor.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900 rounded-xl"
+      onClick={() =>
+        trackEvent("sponsor_click", {
+          sponsorId: sponsor._id,
+          sponsorName: sponsor.name,
+          tier,
+          page: "sponsors",
+        })
+      }
     >
-      {bordered && (
-        <div
-          aria-hidden="true"
-          className={clsx(
-            // YTRE, ANIMERT GRADIENT-BORDER
-            "pointer-events-none absolute -inset-0.5 rounded-2xl",
-            // Torch-gradient med CSS-variabler fra @theme
-            "bg-[linear-gradient(130deg,var(--color-torch-500),var(--color-torch-100),var(--color-torch-500))]",
-            "bg-size-[250%_250%] animate-[borderGlow_5s_linear_infinite]",
-            "opacity-0 transition-opacity duration-500",
-            "group-hover:opacity-100"
-          )}
-        />
-      )}
-  
-      <div
-        className={clsx(
-          "relative w-full",
-          bordered && "rounded-xl",
-          "bg-white",
-          "transition-colors duration-300"
-        )}
-      >
-        {inner}
-      </div>
-    </div>
+      {card}
+    </a>
+  ) : (
+    <div className="w-full">{card}</div>
   );
-  
 
-  if (sponsor.url) {
-    return (
-      <a
-        href={sponsor.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block w-full"
-        onClick={() =>
-          trackEvent("sponsor_click", {
-            sponsorId: sponsor._id,
-            sponsorName: sponsor.name,
-            tier,
-            page: "sponsors",
-          })
-        }
-      >
-        {content}
-      </a>
-    );
-  }
-  
+  if (reduced) return wrapped;
 
-  return <div className="w-full">{content}</div>;
-}
-
-/* -------------------------------------------------------
- *  Rad-heading per tier
- * ------------------------------------------------------*/
-function RowHeading({
-  tier,
-  className,
-}: {
-  tier: SponsorTier;
-  className?: string;
-}) {
-  const { title, description, icon: Icon } = TIER_META[tier];
   return (
-    <div className={clsx("flex items-center gap-3 mb-4", className)}>
-      <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 border border-white/10">
-        <Icon
-          className={clsx(
-            "h-5 w-5",
-            tier === "main" ? "text-gold-300" : "text-gold-400"
-          )}
-        />
-      </div>
-      <div>
-        <h3 className="font-display text-xl text-white">{title}</h3>
-        <p className="text-xs text-white/60">{description}</p>
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
+      {wrapped}
+    </motion.div>
   );
 }
 
-/* -------------------------------------------------------
- *  DESIGN: Spotlight-grid
- *  - Main: full bredde
- *  - Gold: 2 kolonner (md+)
- *  - Silver: 3 kolonner (md+)
- *  - Partner: grid, nedtonet
- * ------------------------------------------------------*/
-function DesignSpotlight({
+/* ── Festningsveggen ─────────────────────────────────────────────────────────
+   Konsept: sponsor-hierarkiet visualisert som arkitektoniske lag.
+   Størrelse og visuelle virkemidler (glow, border, spacing) kommuniserer rang.
+   Mobil: vertikal tårnstruktur. Desktop: bredt scenetablå.
+────────────────────────────────────────────────────────────────────────────── */
+
+function Festningsveggen({
   main,
   gold,
   silver,
   partner,
 }: ReturnType<typeof useTieredSponsors>) {
-  // const MainIcon = TIER_META.main.icon;
-
   return (
-    <section className="overflow-hidden ">
-      {/* HOVEDSPONSOR */}
-      <div className="relative px-4 py-10 sm:px-8 flex justify-center">
-      <div className="pointer-events-none absolute"/>
-        <div className="relative z-10 w-full">
-          <div className="grid grid-cols-1 gap-4">
-            {main.map((sponsor) => (
-              <SponsorLogo key={sponsor._id} sponsor={sponsor} size="xl" bordered tier="main"/>
+    <div className="space-y-10 sm:space-y-14">
+
+      {/* ── HOVEDSPONSOR — troner alene, full bredde, størst glow ───────── */}
+      {main.length > 0 && (
+        <div className="space-y-4">
+          <TierDivider tier="main" />
+
+          {/* Subtil ambient-glow bak kortet */}
+          <div className="relative">
+            <div
+              className="absolute inset-x-[10%] top-4 h-20 bg-gold-500/10 blur-3xl pointer-events-none"
+              aria-hidden="true"
+            />
+            <div className="relative grid grid-cols-1 gap-4 max-w-2xl mx-auto">
+              {main.map((s) => (
+                <SponsorCard key={s._id} sponsor={s} size="hero" tier="main" />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── GULL — prominente rektangler, 1 kol mobil / 2 kol desktop ────── */}
+      {gold.length > 0 && (
+        <div className="space-y-4">
+          <TierDivider tier="gold" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            {gold.map((s) => (
+              <SponsorCard key={s._id} sponsor={s} size="xl" tier="gold" />
             ))}
           </div>
         </div>
-      </div>
+      )}
 
-      {/* ØVRIGE TIER */}
-      <div className="px-4 sm:px-8 space-y-10">
-        {/* GOLD */}
-        {gold.length > 0 && (
-          <div className="max-w-6xl mx-auto w-full">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {gold.map((sponsor) => (
-                <SponsorLogo key={sponsor._id} sponsor={sponsor} size="lg" bordered tier="gold"/>
-              ))}
-            </div>
+      {/* ── SØLV — 2 kol mobil / 3 kol desktop ──────────────────────────── */}
+      {silver.length > 0 && (
+        <div className="space-y-4">
+          <TierDivider tier="silver" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {silver.map((s) => (
+              <SponsorCard key={s._id} sponsor={s} size="lg" tier="silver" />
+            ))}
           </div>
-        )}
+        </div>
+      )}
 
-        {/* SILVER */}
-        {silver.length > 0 && (
-          <div className="max-w-6xl mx-auto w-full">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {silver.map((sponsor) => (
-                <SponsorLogo
-                  key={sponsor._id}
-                  sponsor={sponsor}
-                  size="md"
-                  bordered
-                  tier="silver"
-                />
-              ))}
-            </div>
+      {/* ── PARTNER — tett mosaikk, 3 kol mobil / 4-5 kol desktop ────────── */}
+      {partner.length > 0 && (
+        <div className="space-y-4">
+          <TierDivider tier="partner" />
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
+            {partner.map((s) => (
+              <SponsorCard key={s._id} sponsor={s} size="sm" tier="partner" />
+            ))}
           </div>
-        )}
-
-        {/* PARTNER */}
-        {partner.length > 0 && (
-          <div className="max-w-6xl mx-auto w-full">
-            <RowHeading tier="partner" />
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-              {partner.map((sponsor) => (
-                <SponsorLogo
-                  key={sponsor._id}
-                  sponsor={sponsor}
-                  size="sm"
-                  subtle
-                  tier="partner"
-                />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </section>
+        </div>
+      )}
+    </div>
   );
 }
 
-/* -------------------------------------------------------
- *  Siden
- * ------------------------------------------------------*/
+/* ── CTA-seksjon ─────────────────────────────────────────────────────────── */
+
+function BecomeSponsorCTA() {
+  return (
+    <Section background="cynical">
+      <Container>
+        {/* Dekorativ linje øverst */}
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-gold-500/30 to-transparent mb-10 sm:mb-14" />
+
+        <div className="relative text-center max-w-xl mx-auto space-y-5">
+          {/* Ambient glow */}
+          <div
+            className="absolute inset-x-[15%] top-0 h-16 bg-gold-500/8 blur-3xl pointer-events-none"
+            aria-hidden="true"
+          />
+
+          <p className="eyebrow text-torch-300/80 text-[0.7rem] sm:text-xs">
+            Bli med
+          </p>
+
+          <h2 className="font-heading text-[clamp(1.75rem,1.4rem+1.5vw,2.5rem)] text-white leading-[1.1] tracking-[-0.01em]">
+            Vil du være sponsor?
+          </h2>
+
+          <p className="text-cynical-200/75 text-base leading-relaxed">
+            Om du ønsker å bli med som sponsor, ta gjerne kontakt for en uforpliktende prat om muligheter og pakker.
+          </p>
+
+          <div className="pt-2">
+            <Button variant="gold" size="lg" asChild>
+              <a href="/kontakt">Ta kontakt</a>
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </Section>
+  );
+}
+
+/* ── Skeleton ────────────────────────────────────────────────────────────── */
+
+function SkeletonBlock() {
+  return (
+    <div className="space-y-10">
+      {/* Simulerer tier-struktur */}
+      <div className="h-36 w-full max-w-2xl mx-auto rounded-xl bg-white/6 animate-pulse" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {[...Array(2)].map((_, i) => (
+          <div key={i} className="h-28 rounded-xl bg-white/5 animate-pulse" />
+        ))}
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {[...Array(3)].map((_, i) => (
+          <div key={i} className="h-20 rounded-xl bg-white/4 animate-pulse" />
+        ))}
+      </div>
+      <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="h-14 rounded-xl bg-white/3 animate-pulse" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Side ────────────────────────────────────────────────────────────────── */
+
 export function Sponsors() {
   const { data: sponsors, isLoading } = useSanityQuery<Sponsor[]>(
     "sponsors",
@@ -322,15 +356,15 @@ export function Sponsors() {
 
   return (
     <>
-    <SEOHead
+      <SEOHead
         title="Sponsorer"
-        description="Uten våre samarbeidspartnere hadde forestillingen på Kongsvinger Festning ikke vært mulig. Deres støtte bidrar til å skape en unik forestilling til barn og boksne i alle aldre. Vi er dypt takknemlige for deres engasjement for kultur og lokalsamfunn. Ta gjerne en titt på våre sponsorer og oppdag de fantastiske virksomhetene som står bak denne magiske opplevelsen."
+        description="Uten våre samarbeidspartnere hadde forestillingen på Kongsvinger Festning ikke vært mulig. Deres støtte bidrar til å skape en unik forestilling til barn og boksne i alle aldre."
       />
+
       <PageHero
         eyebrow="Samarbeidspartnere"
         title="Sponsorer"
-        subtitle=" Uten våre samarbeidspartnere hadde forestillingen på Kongsvinger
-              Festning ikke vært mulig. Deres støtte bidrar til å skape en unik forestilling til barn og boksne i alle aldre. Vi er dypt takknemlige for deres engasjement for kultur og lokalsamfunn. Ta gjerne en titt på våre sponsorer og oppdag de fantastiske virksomhetene som står bak denne magiske opplevelsen."
+        subtitle="Uten våre samarbeidspartnere hadde forestillingen på Kongsvinger Festning ikke vært mulig. Deres støtte bidrar til å skape en unik opplevelse for barn og voksne i alle aldre."
         backgroundImageUrl="/media/bakgrunn.jpg"
         backgroundImageAlt="Logoer og lyssetting på Kongsvinger Festning"
         align="left"
@@ -338,40 +372,11 @@ export function Sponsors() {
 
       <Section background="cynical">
         <Container>
-          {/* <DesignHeader index={1} label="Spotlight-oppsett" icon={Sparkles} /> */}
-          {isLoading ? <SkeletonBlock /> : <DesignSpotlight {...tiered} />}
+          {isLoading ? <SkeletonBlock /> : <Festningsveggen {...tiered} />}
         </Container>
       </Section>
-            {/* CTA */}
-            <Section background="cynical">
-        <Container className="text-center">
-          <h2 className="text-3xl font-display font-bold text-white mb-4">
-            Vil du være sponsor?
-          </h2>
-          <p className="text-gray-200 mb-6">
-            Om du ønsker å bli med som sponsor, så ta gjerne kontakt med oss for en uforpliktende prat om muligheter og pakker.
-          </p>
-          <Button variant="torch" size="lg" asChild>
-            <a href="/kontakt">Ta kontakt</a>
-          </Button>
-        </Container>
-      </Section>
-    </>
-  );
-}
 
-/* -------------------------------------------------------
- *  UI-helpers
- * ------------------------------------------------------*/
-function SkeletonBlock() {
-  return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <div
-          key={i}
-          className="h-24 w-full rounded-xl bg-white/10 animate-pulse"
-        />
-      ))}
-    </div>
+      <BecomeSponsorCTA />
+    </>
   );
 }

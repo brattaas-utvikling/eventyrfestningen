@@ -43,7 +43,7 @@ function RenderPortableText({ value }: { value?: PortableTextType }) {
             return (
               <h2
                 key={block._key}
-                className="mt-6 mb-3 text-3xl font-display text-white"
+                className="mt-6 mb-3 text-3xl font-sans text-white"
               >
                 {text}
               </h2>
@@ -52,7 +52,7 @@ function RenderPortableText({ value }: { value?: PortableTextType }) {
             return (
               <h3
                 key={block._key}
-                className="mt-5 mb-2 text-2xl font-display text-white"
+                className="mt-5 mb-2 text-2xl font-sans text-white"
               >
                 {text}
               </h3>
@@ -142,7 +142,7 @@ export function About() {
             <div className="relative mb-20">
               {/* Sentrert tittel */}
               <div className="text-center mb-8">
-                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
+                <h2 className="text-3xl sm:text-4xl font-sans font-bold text-white">
                   {organization.title ?? "Om Eventyrfestningen"}
                 </h2>
               </div>
@@ -185,7 +185,7 @@ export function About() {
                             />
                           </div>
                           <div className="px-4 py-3">
-                            <p className="text-xs font-display text-cynical-900 tracking-wide">
+                            <p className="text-xs font-sans text-cynical-900 tracking-wide">
                               {img.caption}
                             </p>
                           </div>
@@ -213,7 +213,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
+                      <p className="text-[11px] font-sans text-cynical-900 tracking-wide">
                         Sommerkveld i Festningslandsbyen
                       </p>
                     </div>
@@ -232,7 +232,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
+                      <p className="text-[11px] font-sans text-cynical-900 tracking-wide">
                         Frivillige i sving
                       </p>
                     </div>
@@ -251,7 +251,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
+                      <p className="text-[11px] font-sans text-cynical-900 tracking-wide">
                         Moro bak kulissene
                       </p>
                     </div>
@@ -264,7 +264,7 @@ export function About() {
             <div className="relative mt-16">
               {/* Sentrert tittel */}
               <div className="text-center mb-8">
-                <h2 className="text-3xl sm:text-4xl font-display font-bold text-white">
+                <h2 className="text-3xl sm:text-4xl font-sans font-bold text-white">
                   Frivillighet
                 </h2>
               </div>
@@ -307,7 +307,7 @@ export function About() {
                             />
                           </div>
                           <div className="px-4 py-3">
-                            <p className="text-xs font-display text-cynical-900 tracking-wide">
+                            <p className="text-xs font-sans text-cynical-900 tracking-wide">
                               {img.caption}
                             </p>
                           </div>
@@ -322,7 +322,7 @@ export function About() {
 
                 {/* Sentrert CTA-knapp */}
                 <div className="mt-8 text-center">
-                  <Button variant="torch" asChild>
+                  <Button variant="outline" size="md">
                     <a href="/kontakt">Jeg vil bidra</a>
                   </Button>
                 </div>
@@ -342,7 +342,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
+                      <p className="text-[11px] font-sans text-cynical-900 tracking-wide">
                         Publikumsvert på jobb
                       </p>
                     </div>
@@ -361,7 +361,7 @@ export function About() {
                       />
                     </div>
                     <div className="px-3 py-2">
-                      <p className="text-[11px] font-display text-cynical-900 tracking-wide">
+                      <p className="text-[11px] font-sans text-cynical-900 tracking-wide">
                         Festningslandsbyen
                       </p>
                     </div>
@@ -411,7 +411,7 @@ export function About() {
         <Section background="white">
           <Container>
             <div className="text-center mb-12">
-              <h2 className="text-4xl sm:text-5xl font-display font-bold text-cynical-900 mb-4">
+              <h2 className="text-4xl sm:text-5xl font-sans font-bold text-cynical-900 mb-4">
                 Styret
               </h2>
               <p className="text-lg text-gray-600">
@@ -473,21 +473,38 @@ export function About() {
           </Container>
         </Section>
       ) : null}
+    <Section background="cynical">
+      <Container>
+        {/* Dekorativ linje øverst */}
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-gold-500/30 to-transparent mb-10 sm:mb-14" />
 
-      {/* CTA */}
-      <Section background="cynical">
-        <Container className="text-center">
-          <h2 className="text-3xl font-display font-bold text-white mb-4">
-            Vil du være med?
-          </h2>
-          <p className="text-gray-200 mb-6">
-            Vi trenger alltid frivillige, sponsorer og medspillere.
+        <div className="relative text-center max-w-xl mx-auto space-y-5">
+          {/* Ambient glow */}
+          <div
+            className="absolute inset-x-[15%] top-0 h-16 bg-gold-500/8 blur-3xl pointer-events-none"
+            aria-hidden="true"
+          />
+
+          <p className="eyebrow text-torch-300/80 text-[0.7rem] sm:text-xs">
+            Bli med
           </p>
-          <Button variant="torch" size="lg" asChild>
-            <a href="/kontakt">Ta kontakt</a>
-          </Button>
-        </Container>
-      </Section>
+
+          <h2 className="font-heading text-[clamp(1.75rem,1.4rem+1.5vw,2.5rem)] text-white leading-[1.1] tracking-[-0.01em]">
+          Vil du være med?
+          </h2>
+
+          <p className="text-cynical-200/75 text-base leading-relaxed">
+          Vi trenger alltid frivillige, sponsorer og medspillere. Ta gjerne kontakt for å vite mer hva du kan bidra med!
+          </p>
+
+          <div className="pt-2">
+            <Button variant="gold" size="lg" asChild>
+              <a href="/kontakt">Ta kontakt</a>
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </Section>
     </>
   );
 }

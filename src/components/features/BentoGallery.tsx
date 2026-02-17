@@ -67,7 +67,7 @@ export function BentoGallery({
         transition={{ duration: 0.6 }}
         className="mb-8"
       >
-        <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-2">
+        <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white mb-2">
           {title}
         </h3>
         <p className="text-cynical-100/70 text-sm">

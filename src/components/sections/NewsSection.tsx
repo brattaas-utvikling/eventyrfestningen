@@ -24,7 +24,7 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
         {showTitle && (
           <div className="flex items-end justify-between mb-12">
             <div>
-              <h2 className="text-4xl sm:text-5xl font-display font-bold text-cynical-900 mb-4">
+              <h2 className="text-4xl sm:text-5xl font-sans font-bold text-cynical-900 mb-4">
                 Siste nytt
               </h2>
               <p className="text-lg text-gray-600">
@@ -82,7 +82,7 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-display font-bold text-cynical-900 mb-3 group-hover:text-torch-600 transition-colors line-clamp-2">
+                    <h3 className="text-xl font-sans font-bold text-cynical-900 mb-3 group-hover:text-torch-600 transition-colors line-clamp-2">
                       {post.title}
                     </h3>
 

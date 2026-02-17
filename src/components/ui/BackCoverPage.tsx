@@ -20,11 +20,11 @@ export const BackCoverPage = forwardRef<HTMLDivElement>((_, ref) => (
             <div className="w-24 md:w-32 h-0.5 bg-linear-to-r from-transparent via-gold-400 to-transparent mx-auto" />
 
             <div className="space-y-1">
-              <p className="text-base md:text-lg text-gold-200 font-display">
+              <p className="text-base md:text-lg text-gold-200 font-sans">
                 Kongsvinger Festning
               </p>
-              <p className="text-sm md:text-base text-gold-300/80 tracking-[0.18em] uppercase font-sans">
-                eventyrfestningen.no
+              <p className="text-sm md:text-base text-gold-300/80 tracking-[0.18em] uppercase font-spice">
+                eventyrfestningen
               </p>
             </div>
           </div>

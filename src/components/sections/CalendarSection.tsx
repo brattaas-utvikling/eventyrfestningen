@@ -149,7 +149,7 @@ export function CalendarSection() {
                 7 magiske sommerkvelder
               </span>
             </div>
-            <h1 className="flex items-center gap-3 text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-white mb-4">
+            <h1 className="flex items-center gap-3 text-3xl sm:text-4xl lg:text-5xl font-sans font-semibold text-white mb-4">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10">
                 <CalendarIcon className="w-5 h-5 text-gold-300" />
               </span>
@@ -203,7 +203,7 @@ export function CalendarSection() {
                       <div
                         className={`
                           flex-shrink-0 flex flex-col items-center justify-center rounded-2xl border-2 px-3 py-2
-                          font-display font-semibold
+                          font-sans font-semibold
                           transition-all duration-200
                           ${
                             isActive
@@ -288,7 +288,7 @@ export function CalendarSection() {
                     <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold-300/80">
                       KALENDER
                     </p>
-                    <h3 className="text-2xl sm:text-3xl font-display font-bold text-white">
+                    <h3 className="text-2xl sm:text-3xl font-sans font-bold text-white">
                       Juli 2026
                     </h3>
                   </div>
@@ -392,7 +392,7 @@ export function CalendarSection() {
                 variants={itemFade}
                 className="rounded-2xl border border-gold-500/30 bg-gradient-to-br from-gold-500/10 via-torch-500/5 to-burgundy-500/10 p-5 sm:p-6"
               >
-                <h3 className="flex items-center gap-2 text-base sm:text-lg font-display font-semibold text-white mb-2">
+                <h3 className="flex items-center gap-2 text-base sm:text-lg font-sans font-semibold text-white mb-2">
                   <Sparkles className="w-5 h-5 text-gold-300" />
                   Praktisk info i kortversjon
                 </h3>
