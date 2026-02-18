@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { Container } from "./Container";
 import { useMemo } from "react";
-import { NewsletterSignup } from "@/components/NewsletterSignup";
+// import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 type FooterProps = {
   /** Bruk "contrast" for lys footer som bryter fra mørke sider/seksjoner */
@@ -53,7 +53,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
 
 
             {/* Grid: 1 kolonne mobil, 2 tablet, 4 desktop */}
-            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 sm:gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-flow-col-dense sm:gap-8 lg:gap-12">
               {/* Om oss */}
               <section aria-labelledby="footer-about" className="text-left">
                 <h3
@@ -62,7 +62,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
                 >
                   Om oss
                 </h3>
-                <p className={`text-sm ${subtext}`}>
+                <p className={`text-sm max-w-54 ${subtext}`}>
                   Eventyrfestningen setter opp storslåtte familieforestillinger
                   med historie, dramatikk og lekenhet i hjertet.
                 </p>
@@ -162,7 +162,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
                   </li>
                 </ul>
               </nav>
-              <NewsletterSignup variant={variant} />
+              {/* <NewsletterSignup variant={variant} /> */}
             </div>
 
            {/* Bunnlinje MED sosiale medier */}
