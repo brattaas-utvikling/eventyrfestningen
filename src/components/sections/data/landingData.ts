@@ -4,7 +4,7 @@ export const landingData = {
     title: "Vår Historie",
     summary:
       "Siden 2020 har Eventyrfestningen skapt magiske øyeblikk for familier og teaterglade fra hele landet – med store opplevelser i historiske omgivelser. Med et dedikert kreativt team og en tydelig kjærlighet til scenekunst har vi vokst fra små oppsetninger til ambisiøse produksjoner med høy kvalitet i både musikk, scenografi og historiefortelling.",
-    vintageImage: "/assets/landing/oberst-skatt.webp",
+    vintageImage: "/assets/landing/oberst-skatt.avif",
     stats: [
       { number: "5", label: "År med teater" },
       { number: "450", label: "Plasser per show" },
