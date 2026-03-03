@@ -226,17 +226,17 @@ function flushGeoBuffer(useBeacon = false): void {
   }
 
   // sendBeacon overlever tab-close/navigering bort
-  if (useBeacon && typeof navigator.sendBeacon === "function") {
-    // sendBeacon kan ikke sette custom headers.
-    // Appwrite godtar ?project= som query param for autentisering.
-    // NB: dette kan feile med 401 — det er en kjent begrensning.
-    // Hovedflyten (fetch) håndterer de fleste events.
-    const blob = new Blob([
-      JSON.stringify({ body: eventsPayload, async: true })
-    ], { type: "application/json" });
-    navigator.sendBeacon(`${GEO_URL}?project=${PROJECT_ID}`, blob);
-    return;
-  }
+  // if (useBeacon && typeof navigator.sendBeacon === "function") {
+  //   // sendBeacon kan ikke sette custom headers.
+  //   // Appwrite godtar ?project= som query param for autentisering.
+  //   // NB: dette kan feile med 401 — det er en kjent begrensning.
+  //   // Hovedflyten (fetch) håndterer de fleste events.
+  //   const blob = new Blob([
+  //     JSON.stringify({ body: eventsPayload, async: true })
+  //   ], { type: "application/json" });
+  //   navigator.sendBeacon(`${GEO_URL}?project=${PROJECT_ID}`, blob);
+  //   return;
+  // }
 
   // Vanlig fetch — korrekt Appwrite execution format
   fetch(GEO_URL, {
