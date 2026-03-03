@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { motion, type Variants } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { useReducedMotion } from "@/hooks/useRedusedMotion";
-
+import { trackTicketClick } from "@/lib/analytics";
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const d = {
@@ -168,7 +168,7 @@ export default function AnnouncementSection() {
               withPulse={!reduced}
               className="w-full justify-center text-base"
             >
-              <a href={d.cta.href} target="_blank" rel="noopener noreferrer">
+              <a href={d.cta.href} target="_blank" rel="noopener noreferrer" onClick={() => trackTicketClick("hero_main", "home")}>
                 {d.cta.label}
               </a>
             </Button>
@@ -236,7 +236,7 @@ export default function AnnouncementSection() {
 
             <div className="flex gap-4 pt-2">
               <Button asChild variant="torch" size="xl" caps withShine withPulse={!reduced}>
-                <a href={d.cta.href} target="_blank" rel="noopener noreferrer">
+                <a href={d.cta.href} target="_blank" rel="noopener noreferrer" onClick={() => trackTicketClick("hero_main", "home")}>
                   {d.cta.label}
                 </a>
               </Button>

@@ -12,14 +12,14 @@ import { ImageLightbox } from "@/components/features/ImageLightbox";
 import { HeroSkeleton } from "@/components/ui/Skeleton";
 import type { Show } from "@/types/sanity";
 import { SEOHead } from "@/components/SEOHead";
-
+import { useScrollDepthTracking } from "@/lib/analytics";
 
 export function AboutShow() {
   const { slug } = useParams<{ slug?: string }>();
 
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-
+  useScrollDepthTracking(slug ? `arkiv/${slug}` : "om-forestillingen");
   // 👇 Dynamisk query: hvis vi har slug ( /arkiv/:slug ), bruk showBySlug
   // ellers bruk currentShow ( /om-forestillingen )
   const queryKey = slug ? `show-${slug}` : "current-show";

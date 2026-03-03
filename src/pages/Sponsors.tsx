@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/Button";
 import { SEOHead } from "@/components/SEOHead";
 import { PageHero } from "@/components/layout/PageHero";
 import { useReducedMotion } from "@/hooks/useRedusedMotion";
+import { useScrollDepthTracking } from "@/lib/analytics";
 
 /* ── Tier-oppsett ────────────────────────────────────────────────────────── */
 
@@ -348,7 +349,8 @@ export function Sponsors() {
     queries.sponsors
   );
   const tiered = useTieredSponsors(sponsors);
-
+  useScrollDepthTracking("sponsorer");
+  
   return (
     <>
       <SEOHead

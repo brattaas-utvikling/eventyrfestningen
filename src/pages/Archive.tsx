@@ -13,8 +13,10 @@ import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 // import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useScrollDepthTracking } from "@/lib/analytics";
 
 export function Archive() {
+  useScrollDepthTracking("arkiv");
   // Fetch shows data
   const { data: shows, isLoading, error } = useSanityQuery<Show[]>(
     'archived-shows',
@@ -79,6 +81,7 @@ export function Archive() {
       </>
     );
   }
+  
 
   return (
     <>

@@ -17,6 +17,7 @@ import { SEOHead } from "@/components/SEOHead";
 // import { CurtainSection } from "@/components/layout/CurtainSection";
 import { useMemo } from "react";
 import { PageHero } from "@/components/layout/PageHero";
+import { useScrollDepthTracking } from "@/lib/analytics";
 
 // ---- Types ----
 type Organization = {
@@ -81,6 +82,8 @@ export function About() {
 
   const { data: organization, isLoading: organizationLoading } =
     useSanityQuery<Organization>("organization", queries.organization);
+
+    useScrollDepthTracking("om-oss");
 
   // Filter for kun styremedlemmer
   const filteredBoardMembers = useMemo(() => {

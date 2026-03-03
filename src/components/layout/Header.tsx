@@ -12,6 +12,7 @@ import { Menu, X } from "lucide-react";
 import { Container } from "./Container";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
+import { trackTicketClick } from "@/lib/analytics";
 
 // Throttle helper for scroll performance
 function throttle<T extends (...args: unknown[]) => void>(
@@ -142,12 +143,18 @@ export function Header() {
       setMobileMenuOpen(false);
 
       // Tracking for billetter
-      if (item.name === "Kjøp billetter") {
-        trackEvent("ticket_click", {
-          source: window.innerWidth < 1024 ? "header_mobile_nav" : "header_desktop_nav",
-          page: location.pathname,
-        });
-      }
+    if (item.name === "Kjøp billetter") {
+      trackTicketClick(
+        window.innerWidth < 1024 ? "header_mobile_nav" : "header_desktop_nav",
+        location.pathname
+      );
+    }
+      // if (item.name === "Kjøp billetter") {
+      //   trackEvent("ticket_click", {
+      //     source: window.innerWidth < 1024 ? "header_mobile_nav" : "header_desktop_nav",
+      //     page: location.pathname,
+      //   });
+      // }
 
       // Ekstern lenke
       if (item.external) {
