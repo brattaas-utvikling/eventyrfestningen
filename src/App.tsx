@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import Home from "@/pages/Home";
-
 import { About } from "./pages/About";
 import { Sponsors } from "./pages/Sponsors";
-
 import { AboutShow } from "./pages/AboutShow";
 import { Archive } from "./pages/Archive";
 import { NewsList, NewsPost } from "./pages/News";
@@ -15,8 +13,15 @@ import { Analytics } from "@vercel/analytics/react";
 import { Calendar } from "./pages/Calendar";
 import Privacy from "./pages/Privacy";
 import { PageViewTracker } from "./components/analytics/PageViewTracker";
+import { initGeoAnalytics, destroyGeoAnalytics } from "./lib/analytics";
+import { useEffect } from "react";
 
 export default function App() {
+  useEffect(() => {
+    initGeoAnalytics();
+    return () => destroyGeoAnalytics();
+    }, []);
+
   return (
       <BrowserRouter>
         <Layout>
