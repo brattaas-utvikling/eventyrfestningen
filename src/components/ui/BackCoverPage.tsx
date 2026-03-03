@@ -24,7 +24,7 @@ export const BackCoverPage = forwardRef<HTMLDivElement>((_, ref) => (
                 Kongsvinger Festning
               </p>
               <p className="text-sm md:text-base text-gold-300/80 tracking-[0.18em] uppercase font-spice">
-                eventyrfestningen
+                Eventyrfestningen
               </p>
             </div>
           </div>

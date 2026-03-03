@@ -195,7 +195,7 @@ export function NewsList() {
     <>
       <SEOHead
         title="Nyheter"
-        description="Les de siste nyhetene fra Kongsvinger Festningsteater."
+        description="Les de siste nyhetene fra Eventyrfestningen."
       />
 
       <section className="py-20 sm:py-28 bg-linear-to-br from-cynical-900 to-burgundy-900 text-white">

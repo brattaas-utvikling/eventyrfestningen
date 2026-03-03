@@ -170,7 +170,7 @@ function ErrorState({ message }: { message: string }) {
           <Link to="/"><Home className="mr-2 h-4 w-4" />Til forsiden</Link>
         </Button>
         <Button asChild variant="default">
-          <a href="mailto:kontakt@eventyrfestningen.no?subject=Problem med avmelding">
+          <a href="mailto:teknisk@eventyrfestningen.no?subject=Problem med avmelding">
             <Mail className="mr-2 h-4 w-4" />Kontakt support
           </a>
         </Button>

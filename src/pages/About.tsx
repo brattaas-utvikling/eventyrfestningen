@@ -107,7 +107,7 @@ export function About() {
     <>
       <SEOHead
         title="Om oss"
-        description="Lær om Kongsvinger Festningsteater - vår historie, visjon og de menneskene som gjør magien mulig."
+        description="Lær om Eventyrfestningen - vår historie, visjon og de menneskene som gjør magien mulig."
       />
 
 

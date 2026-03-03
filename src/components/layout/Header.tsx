@@ -250,11 +250,11 @@ export function Header() {
             to="/"
             onClick={() => handleNavClick({ name: "Hjem", href: "/" })}
             className="flex items-center space-x-3 hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-lg"
-            aria-label="Kongsvinger Festningsteater - Gå til forsiden"
+            aria-label="Eventyrfestningen - Gå til forsiden"
           >
             <img
               src="/logo.svg"
-              alt="Kongsvinger Festningsteater logo"
+              alt="Eventyrfestingen logo"
               className="h-8 lg:h-9 xl:h-10" // Redusert fra h-10 til h8 på mobil og h-12 til h-10 på desktop
               loading="eager"
               width="auto"
