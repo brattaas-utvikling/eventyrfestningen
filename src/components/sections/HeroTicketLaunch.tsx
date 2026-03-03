@@ -114,7 +114,7 @@ export function HeroTicketLaunch({
       style={{ backgroundImage: `url(${heroBg})` }}
     >
       {/* gradient for kontrast, men lar plakaten leve */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-black/15 to-navy-950/85" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-black/15 to-cynical-950/85" />
 
       {/* Konfetti-overlay – skyter opp fra bunnen og svever */}
       {showConfetti && windowSize.width > 0 && (
@@ -151,7 +151,7 @@ export function HeroTicketLaunch({
                 className="max-h-64 md:max-h-72 lg:max-h-96 w-auto drop-shadow-[0_10px_60px_rgba(0,0,0,0.7)]"
               />
             ) : (
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-torch-100 drop-shadow-[0_6px_40px_rgba(0,0,0,0.9)]">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-sans font-bold text-torch-100 drop-shadow-[0_6px_40px_rgba(0,0,0,0.9)]">
                 {show.title}
               </h1>
             )}
@@ -213,7 +213,7 @@ export function HeroTicketLaunch({
         <div className="text-center">
           {/* hovedtekst */}
           <div>
-            <h2 className="text-3xl sm:text-[2.1rem] lg:text-6xl font-display font-bold text-white leading-tight">
+            <h2 className="text-3xl sm:text-[2.1rem] lg:text-6xl font-sans font-bold text-white leading-tight">
               2025-pris
               <br />
               <span className="text-white">
@@ -289,21 +289,21 @@ export function HeroTicketLaunch({
               className="mt-2 md:mt-4 flex flex-wrap justify-center gap-4 md:gap-6 text-xs md:text-sm text-gray-200"
             >
               {show.practicalInfo.duration && (
-                <div className="flex items-center gap-2 bg-navy-900/70 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-400/20">
+                <div className="flex items-center gap-2 bg-cynical-900/70 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-400/20">
                   <Clock10 className="text-gold-400" />
                   <span>{show.practicalInfo.duration}</span>
                 </div>
               )}
 
               {show.practicalInfo.ageLimit && (
-                <div className="flex items-center gap-2 bg-navy-900/70 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-400/20">
+                <div className="flex items-center gap-2 bg-cynical-900/70 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-400/20">
                   <Users className="h-4 w-4 text-gold-400" />
                   <span>{show.practicalInfo.ageLimit}</span>
                 </div>
               )}
 
               {nextPerformance && (
-                <div className="flex items-center gap-2 bg-navy-900/70 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-400/20">
+                <div className="flex items-center gap-2 bg-cynical-900/70 backdrop-blur-sm px-4 py-2 rounded-full border border-gold-400/20">
                   <DramaIcon className="text-gold-400" />
                   <span>
                     Premiere{" "}

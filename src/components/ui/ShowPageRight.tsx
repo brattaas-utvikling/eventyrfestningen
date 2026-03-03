@@ -43,7 +43,7 @@ export const ShowPageRight = forwardRef<HTMLDivElement, ShowPageRightProps>(
               </span>
             )}
             
-            <h2 className="text-xl md:text-2xl font-bold text-amber-900 leading-snug font-display">
+            <h2 className="text-xl md:text-2xl font-bold text-amber-900 leading-snug font-sans">
               {show.title}{" "}
               <span className="text-sm md:text-base font-normal text-amber-700">
                 ({show.year})
@@ -57,7 +57,7 @@ export const ShowPageRight = forwardRef<HTMLDivElement, ShowPageRightProps>(
             </p>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-amber-900/10 flex justify-end">
+          <div className="mt-6 pt-4 border-t border-amber-900/10 flex justify-start">
           <Link
             to={`/arkiv/${show.slug.current}`}
             className="inline-flex items-center text-sm md:text-base font-semibold text-torch-600 hover:text-torch-500 transition-colors group"

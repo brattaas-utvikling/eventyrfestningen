@@ -5,7 +5,7 @@ interface SectionProps {
   id?: string;
   children: React.ReactNode;
   className?: string;
-  background?: "navy" | "burgundy" | "white" | "paper" | "amber";
+  background?: "cynical" | "burgundy" | "white" | "paper" | "amber";
   /** Hvor mye vertikal padding seksjonen skal ha */
   paddingY?: "default" | "tight" | "none";
 }
@@ -18,7 +18,7 @@ export function Section({
   paddingY = "default",
 }: SectionProps) {
   const bgClasses = {
-    navy: "bg-navy-900 text-white",
+    cynical: "bg-cynical-900 text-white",
     burgundy: "bg-burgundy-900 text-white",
     white: "bg-white",
     paper: "bg-amber-50",

@@ -3,17 +3,17 @@
 @plugin "@tailwindcss/typography";
 
 /* Original fargepalett prosjket */
-/* NAVY (Forest Emerald) */
-/* --color-navy-50: #f0f4f8;
-  --color-navy-100: #d9e2ec;
-  --color-navy-200: #bcccdc;
-  --color-navy-300: #9fb3c8;
-  --color-navy-400: #829ab1;
-  --color-navy-500: #627d98;
-  --color-navy-600: #486581;
-  --color-navy-700: #334e68;
-  --color-navy-800: #243b53;
-  --color-navy-900: #102a43;
+/* cynical (Forest Emerald) */
+/* --color-cynical-50: #f0f4f8;
+  --color-cynical-100: #d9e2ec;
+  --color-cynical-200: #bcccdc;
+  --color-cynical-300: #9fb3c8;
+  --color-cynical-400: #829ab1;
+  --color-cynical-500: #627d98;
+  --color-cynical-600: #486581;
+  --color-cynical-700: #334e68;
+  --color-cynical-800: #243b53;
+  --color-cynical-900: #102a43;
 
   --color-burgundy-50: #fdf4f5;
   --color-burgundy-100: #fce8eb;
@@ -64,17 +64,17 @@
    PROPOSAL 1: "Fortress & Flame" (dramatic midnight + antique gold + burgundy + torch)
    --------------------------------------------- */
 .theme-fortress-flame {
-  /* NAVY (Midnight Slate) */
-  --color-navy-50: #f8fafc; /* Midnight Slate 50 */
-  --color-navy-100: #f1f5f9; /* Midnight Slate 100 */
-  --color-navy-200: #e2e8f0; /* Midnight Slate 200 */
-  --color-navy-300: #cbd5e1; /* Midnight Slate 300 */
-  --color-navy-400: #94a3b8; /* Midnight Slate 400 */
-  --color-navy-500: #64748b; /* Midnight Slate 500 */
-  --color-navy-600: #475569; /* Midnight Slate 600 */
-  --color-navy-700: #334155; /* Midnight Slate 700 */
-  --color-navy-800: #1f2937; /* Midnight Slate 800 */
-  --color-navy-900: #0f172a; /* Midnight Slate 900 */
+  /* cynical (Midnight Slate) */
+  --color-cynical-50: #f8fafc; /* Midnight Slate 50 */
+  --color-cynical-100: #f1f5f9; /* Midnight Slate 100 */
+  --color-cynical-200: #e2e8f0; /* Midnight Slate 200 */
+  --color-cynical-300: #cbd5e1; /* Midnight Slate 300 */
+  --color-cynical-400: #94a3b8; /* Midnight Slate 400 */
+  --color-cynical-500: #64748b; /* Midnight Slate 500 */
+  --color-cynical-600: #475569; /* Midnight Slate 600 */
+  --color-cynical-700: #334155; /* Midnight Slate 700 */
+  --color-cynical-800: #1f2937; /* Midnight Slate 800 */
+  --color-cynical-900: #0f172a; /* Midnight Slate 900 */
 
   /* BURGUNDY (Wine Rose) */
   --color-burgundy-50: #fff1f2; /* Wine Rose 50 */
@@ -124,17 +124,17 @@
    PROPOSAL 2: "Blood Moon at the Fortress" (charcoal + deep maroon + warm gold + ember)
    --------------------------------------------- */
 .theme-blood-moon {
-  /* NAVY (Charcoal Zinc) */
-  --color-navy-50: #fafafa; /* Charcoal Zinc 50 */
-  --color-navy-100: #f4f4f5; /* Charcoal Zinc 100 */
-  --color-navy-200: #e4e4e7; /* Charcoal Zinc 200 */
-  --color-navy-300: #d4d4d8; /* Charcoal Zinc 300 */
-  --color-navy-400: #a1a1aa; /* Charcoal Zinc 400 */
-  --color-navy-500: #71717a; /* Charcoal Zinc 500 */
-  --color-navy-600: #52525b; /* Charcoal Zinc 600 */
-  --color-navy-700: #3f3f46; /* Charcoal Zinc 700 */
-  --color-navy-800: #27272a; /* Charcoal Zinc 800 */
-  --color-navy-900: #18181b; /* Charcoal Zinc 900 */
+  /* cynical (Charcoal Zinc) */
+  --color-cynical-50: #fafafa; /* Charcoal Zinc 50 */
+  --color-cynical-100: #f4f4f5; /* Charcoal Zinc 100 */
+  --color-cynical-200: #e4e4e7; /* Charcoal Zinc 200 */
+  --color-cynical-300: #d4d4d8; /* Charcoal Zinc 300 */
+  --color-cynical-400: #a1a1aa; /* Charcoal Zinc 400 */
+  --color-cynical-500: #71717a; /* Charcoal Zinc 500 */
+  --color-cynical-600: #52525b; /* Charcoal Zinc 600 */
+  --color-cynical-700: #3f3f46; /* Charcoal Zinc 700 */
+  --color-cynical-800: #27272a; /* Charcoal Zinc 800 */
+  --color-cynical-900: #18181b; /* Charcoal Zinc 900 */
 
   /* BURGUNDY (Maroon Red) */
   --color-burgundy-50: #fef2f2; /* Maroon Red 50 */
@@ -184,17 +184,17 @@
    PROPOSAL 3: "Fjord & Steel" (indigo night + glacier teal + brass gold + clean torch)
    --------------------------------------------- */
 .theme-fjord-steel {
-  /* NAVY (Indigo Night) */
-  --color-navy-50: #eef2ff; /* Indigo Night 50 */
-  --color-navy-100: #e0e7ff; /* Indigo Night 100 */
-  --color-navy-200: #c7d2fe; /* Indigo Night 200 */
-  --color-navy-300: #a5b4fc; /* Indigo Night 300 */
-  --color-navy-400: #818cf8; /* Indigo Night 400 */
-  --color-navy-500: #6366f1; /* Indigo Night 500 */
-  --color-navy-600: #4f46e5; /* Indigo Night 600 */
-  --color-navy-700: #4338ca; /* Indigo Night 700 */
-  --color-navy-800: #3730a3; /* Indigo Night 800 */
-  --color-navy-900: #312e81; /* Indigo Night 900 */
+  /* cynical (Indigo Night) */
+  --color-cynical-50: #eef2ff; /* Indigo Night 50 */
+  --color-cynical-100: #e0e7ff; /* Indigo Night 100 */
+  --color-cynical-200: #c7d2fe; /* Indigo Night 200 */
+  --color-cynical-300: #a5b4fc; /* Indigo Night 300 */
+  --color-cynical-400: #818cf8; /* Indigo Night 400 */
+  --color-cynical-500: #6366f1; /* Indigo Night 500 */
+  --color-cynical-600: #4f46e5; /* Indigo Night 600 */
+  --color-cynical-700: #4338ca; /* Indigo Night 700 */
+  --color-cynical-800: #3730a3; /* Indigo Night 800 */
+  --color-cynical-900: #312e81; /* Indigo Night 900 */
 
   /* BURGUNDY (Glacier Teal) */
   --color-burgundy-50: #f0fdfa; /* Glacier Teal 50 */
@@ -244,17 +244,17 @@
    PROPOSAL 4: "Pirate Noir" (ink black + crimson + dark rum gold + blazing torch)
    --------------------------------------------- */
 .theme-pirate-noir {
-  /* NAVY (Ink Neutral) */
-  --color-navy-50: #fafafa; /* Ink Neutral 50 */
-  --color-navy-100: #f5f5f5; /* Ink Neutral 100 */
-  --color-navy-200: #e5e5e5; /* Ink Neutral 200 */
-  --color-navy-300: #d4d4d4; /* Ink Neutral 300 */
-  --color-navy-400: #a3a3a3; /* Ink Neutral 400 */
-  --color-navy-500: #737373; /* Ink Neutral 500 */
-  --color-navy-600: #525252; /* Ink Neutral 600 */
-  --color-navy-700: #404040; /* Ink Neutral 700 */
-  --color-navy-800: #262626; /* Ink Neutral 800 */
-  --color-navy-900: #171717; /* Ink Neutral 900 */
+  /* cynical (Ink Neutral) */
+  --color-cynical-50: #fafafa; /* Ink Neutral 50 */
+  --color-cynical-100: #f5f5f5; /* Ink Neutral 100 */
+  --color-cynical-200: #e5e5e5; /* Ink Neutral 200 */
+  --color-cynical-300: #d4d4d4; /* Ink Neutral 300 */
+  --color-cynical-400: #a3a3a3; /* Ink Neutral 400 */
+  --color-cynical-500: #737373; /* Ink Neutral 500 */
+  --color-cynical-600: #525252; /* Ink Neutral 600 */
+  --color-cynical-700: #404040; /* Ink Neutral 700 */
+  --color-cynical-800: #262626; /* Ink Neutral 800 */
+  --color-cynical-900: #171717; /* Ink Neutral 900 */
 
   /* BURGUNDY (Crimson Rose) */
   --color-burgundy-50: #fff1f2; /* Crimson Rose 50 */
@@ -304,17 +304,17 @@
    PROPOSAL 5: "Spring Premiere" (deep forest + coral + soft cream gold + bright torch)
    --------------------------------------------- */
 .theme-spring-premiere {
-  /* NAVY (Forest Emerald) */
-  --color-navy-50: #ecfdf5; /* Forest Emerald 50 */
-  --color-navy-100: #d1fae5; /* Forest Emerald 100 */
-  --color-navy-200: #a7f3d0; /* Forest Emerald 200 */
-  --color-navy-300: #6ee7b7; /* Forest Emerald 300 */
-  --color-navy-400: #34d399; /* Forest Emerald 400 */
-  --color-navy-500: #10b981; /* Forest Emerald 500 */
-  --color-navy-600: #059669; /* Forest Emerald 600 */
-  --color-navy-700: #047857; /* Forest Emerald 700 */
-  --color-navy-800: #065f46; /* Forest Emerald 800 */
-  --color-navy-900: #064e3b; /* Forest Emerald 900 */
+  /* cynical (Forest Emerald) */
+  --color-cynical-50: #ecfdf5; /* Forest Emerald 50 */
+  --color-cynical-100: #d1fae5; /* Forest Emerald 100 */
+  --color-cynical-200: #a7f3d0; /* Forest Emerald 200 */
+  --color-cynical-300: #6ee7b7; /* Forest Emerald 300 */
+  --color-cynical-400: #34d399; /* Forest Emerald 400 */
+  --color-cynical-500: #10b981; /* Forest Emerald 500 */
+  --color-cynical-600: #059669; /* Forest Emerald 600 */
+  --color-cynical-700: #047857; /* Forest Emerald 700 */
+  --color-cynical-800: #065f46; /* Forest Emerald 800 */
+  --color-cynical-900: #064e3b; /* Forest Emerald 900 */
 
   /* BURGUNDY (Coral Rose) */
   --color-burgundy-50: #fff1f2; /* Coral Rose 50 */
@@ -364,17 +364,17 @@
    BASE THEME (defaults) — matches "Fortress & Flame"
    ========================================================= */
 @theme {
-  /* NAVY (Midnight Slate) */
-  --color-navy-50: #f8fafc; /* Midnight Slate 50 */
-  --color-navy-100: #f1f5f9; /* Midnight Slate 100 */
-  --color-navy-200: #e2e8f0; /* Midnight Slate 200 */
-  --color-navy-300: #cbd5e1; /* Midnight Slate 300 */
-  --color-navy-400: #94a3b8; /* Midnight Slate 400 */
-  --color-navy-500: #64748b; /* Midnight Slate 500 */
-  --color-navy-600: #475569; /* Midnight Slate 600 */
-  --color-navy-700: #334155; /* Midnight Slate 700 */
-  --color-navy-800: #1f2937; /* Midnight Slate 800 */
-  --color-navy-900: #0f172a; /* Midnight Slate 900 */
+  /* cynical (Midnight Slate) */
+  --color-cynical-50: #f8fafc; /* Midnight Slate 50 */
+  --color-cynical-100: #f1f5f9; /* Midnight Slate 100 */
+  --color-cynical-200: #e2e8f0; /* Midnight Slate 200 */
+  --color-cynical-300: #cbd5e1; /* Midnight Slate 300 */
+  --color-cynical-400: #94a3b8; /* Midnight Slate 400 */
+  --color-cynical-500: #64748b; /* Midnight Slate 500 */
+  --color-cynical-600: #475569; /* Midnight Slate 600 */
+  --color-cynical-700: #334155; /* Midnight Slate 700 */
+  --color-cynical-800: #1f2937; /* Midnight Slate 800 */
+  --color-cynical-900: #0f172a; /* Midnight Slate 900 */
 
   /* BURGUNDY (Wine Rose) */
   --color-burgundy-50: #fff1f2; /* Wine Rose 50 */
@@ -484,8 +484,8 @@
   html,
   body {
     font-family: var(--font-sans);
-    color: var(--color-navy-900);
-    background-color: var(--color-navy-50);
+    color: var(--color-cynical-900);
+    background-color: var(--color-cynical-50);
   }
 
   h1,
@@ -566,16 +566,16 @@
   }
   .btn-ghost {
     background-color: transparent;
-    color: var(--color-navy-900);
-    border: 2px solid var(--color-navy-300);
+    color: var(--color-cynical-900);
+    border: 2px solid var(--color-cynical-300);
   }
   .btn-ghost:hover {
-    border-color: var(--color-navy-400);
+    border-color: var(--color-cynical-400);
   }
 
   .card {
     background: white;
-    border: 1px solid var(--color-navy-200);
+    border: 1px solid var(--color-cynical-200);
     border-radius: 0.75rem;
     box-shadow: var(--shadow-embossed);
   }
@@ -601,11 +601,11 @@
     letter-spacing: 0.08em;
     padding: 0.5rem 0.75rem;
     border-radius: 0.375rem;
-    color: var(--color-navy-800);
+    color: var(--color-cynical-800);
   }
   .nav-link:hover {
-    background-color: var(--color-navy-100);
-    color: var(--color-navy-900);
+    background-color: var(--color-cynical-100);
+    color: var(--color-cynical-900);
   }
 
   .hero {

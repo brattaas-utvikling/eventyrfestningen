@@ -21,13 +21,13 @@ function Skeleton({
 
 function HeroSkeleton() {
   return (
-    <div className="min-h-screen flex items-center bg-navy-900">
+    <div className="min-h-screen flex items-center bg-cynical-900">
       <Container>
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <Skeleton className="h-8 w-24 mx-auto bg-navy-700" />
-          <Skeleton className="h-16 w-3/4 mx-auto bg-navy-700" />
-          <Skeleton className="h-6 w-2/3 mx-auto bg-navy-700" />
-          <Skeleton className="h-32 w-96 mx-auto bg-navy-700" />
+          <Skeleton className="h-8 w-24 mx-auto bg-cynical-700" />
+          <Skeleton className="h-16 w-3/4 mx-auto bg-cynical-700" />
+          <Skeleton className="h-6 w-2/3 mx-auto bg-cynical-700" />
+          <Skeleton className="h-32 w-96 mx-auto bg-cynical-700" />
         </div>
       </Container>
     </div>

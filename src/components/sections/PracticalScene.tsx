@@ -74,7 +74,7 @@ export default function PracticalScene({ data }: Props) {
           loading="lazy"
           decoding="async"
         />
-        <motion.div className="absolute inset-0 bg-navy-900" style={{ opacity: overlayOpacity }} />
+        <motion.div className="absolute inset-0 bg-cynical-900" style={{ opacity: overlayOpacity }} />
       </motion.div>
 
       {/* Content */}
@@ -89,7 +89,7 @@ export default function PracticalScene({ data }: Props) {
           <span className="inline-block text-torch-400 font-sans text-xs sm:text-sm uppercase tracking-widest mb-3 sm:mb-4">
             Planlegg besøket
           </span>
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-gold-400">
+          <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl text-gold-400">
             {data.title}
           </h2>
         </motion.div>
@@ -105,8 +105,8 @@ export default function PracticalScene({ data }: Props) {
               className="relative group"
             >
               <div
-                className="bg-navy-800/70 backdrop-blur-sm border border-gold-500/20 rounded-lg p-6 h-full
-                           hover:border-gold-500/40 hover:bg-navy-800/80 transition-all duration-300
+                className="bg-cynical-800/70 backdrop-blur-sm border border-gold-500/20 rounded-lg p-6 h-full
+                           hover:border-gold-500/40 hover:bg-cynical-800/80 transition-all duration-300
                            focus-within:border-gold-500/45"
               >
                 <div className="mb-4 inline-flex p-3 bg-gold-500/10 rounded-lg group-hover:bg-gold-500/20 transition-colors">
@@ -117,7 +117,7 @@ export default function PracticalScene({ data }: Props) {
                   {item.title}
                 </h3>
 
-                <p className="text-navy-200 font-sans font-light leading-relaxed mb-4">
+                <p className="text-cynical-200 font-sans font-light leading-relaxed mb-4">
                   {item.description}
                 </p>
 
@@ -128,7 +128,7 @@ export default function PracticalScene({ data }: Props) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-torch-400 font-sans text-sm font-semibold
                                hover:text-torch-300 transition-colors
-                               focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900 rounded-sm"
+                               focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900 rounded-sm"
                     aria-label={`${item.linkText}: ${item.title}`}
                   >
                     {item.linkText}

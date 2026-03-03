@@ -2,69 +2,84 @@
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/typography";
 
-/* her definerer vi det du hadde i theme.extend */
+/* =========================================================
+   THEME TOKENS
+   ========================================================= */
 @theme {
-  /* farger */
-  /* NAVY (Ink Neutral) */
-  --color-navy-50: #fafafa; /* Ink Neutral 50 */
-  --color-navy-100: #f5f5f5; /* Ink Neutral 100 */
-  --color-navy-200: #e5e5e5; /* Ink Neutral 200 */
-  --color-navy-300: #d4d4d4; /* Ink Neutral 300 */
-  --color-navy-400: #a3a3a3; /* Ink Neutral 400 */
-  --color-navy-500: #737373; /* Ink Neutral 500 */
-  --color-navy-600: #525252; /* Ink Neutral 600 */
-  --color-navy-700: #404040; /* Ink Neutral 700 */
-  --color-navy-800: #262626; /* Ink Neutral 800 */
-  --color-navy-900: #171717; /* Ink Neutral 900 */
+  /* Colors */
+  --color-cynical-50: #fafafa;
+  --color-cynical-100: #f5f5f5;
+  --color-cynical-200: #e5e5e5;
+  --color-cynical-300: #d4d4d4;
+  --color-cynical-400: #a3a3a3;
+  --color-cynical-500: #737373;
+  --color-cynical-600: #525252;
+  --color-cynical-700: #404040;
+  --color-cynical-800: #262626;
+  --color-cynical-900: #171717;
 
-  /* BURGUNDY (Crimson Rose) */
-  --color-burgundy-50: #fff1f2; /* Crimson Rose 50 */
-  --color-burgundy-100: #ffe4e6; /* Crimson Rose 100 */
-  --color-burgundy-200: #fecdd3; /* Crimson Rose 200 */
-  --color-burgundy-300: #fda4af; /* Crimson Rose 300 */
-  --color-burgundy-400: #fb7185; /* Crimson Rose 400 */
-  --color-burgundy-500: #f43f5e; /* Crimson Rose 500 */
-  --color-burgundy-600: #e11d48; /* Crimson Rose 600 */
-  --color-burgundy-700: #be123c; /* Crimson Rose 700 */
-  --color-burgundy-800: #9f1239; /* Crimson Rose 800 */
-  --color-burgundy-900: #881337; /* Crimson Rose 900 */
+  --color-burgundy-50: #fff1f2;
+  --color-burgundy-100: #ffe4e6;
+  --color-burgundy-200: #fecdd3;
+  --color-burgundy-300: #fda4af;
+  --color-burgundy-400: #fb7185;
+  --color-burgundy-500: #f43f5e;
+  --color-burgundy-600: #e11d48;
+  --color-burgundy-700: #be123c;
+  --color-burgundy-800: #9f1239;
+  --color-burgundy-900: #881337;
 
-  /* GOLD (Dark Rum Amber) */
-  --color-gold-50: #fffbeb; /* Dark Rum Amber 50 */
-  --color-gold-100: #fef3c7; /* Dark Rum Amber 100 */
-  --color-gold-200: #fde68a; /* Dark Rum Amber 200 */
-  --color-gold-300: #fcd34d; /* Dark Rum Amber 300 */
-  --color-gold-400: #fbbf24; /* Dark Rum Amber 400 */
-  --color-gold-500: #f59e0b; /* Dark Rum Amber 500 */
-  --color-gold-600: #d97706; /* Dark Rum Amber 600 */
-  --color-gold-700: #b45309; /* Dark Rum Amber 700 */
-  --color-gold-800: #92400e; /* Dark Rum Amber 800 */
-  --color-gold-900: #78350f; /* Dark Rum Amber 900 */
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
+  --color-gold-800: #92400e;
+  --color-gold-900: #78350f;
 
-  /* TORCH (Blazing Torch) */
-  --color-torch-50: #fff7ed; /* Blazing Torch 50 */
-  --color-torch-100: #ffedd5; /* Blazing Torch 100 */
-  --color-torch-200: #fed7aa; /* Blazing Torch 200 */
-  --color-torch-300: #fdba74; /* Blazing Torch 300 */
-  --color-torch-400: #fb923c; /* Blazing Torch 400 */
-  --color-torch-500: #ffa123; /* Blazing Torch 500 (brand primary) */
-  --color-torch-600: #ea580c; /* Blazing Torch 600 */
-  --color-torch-700: #c2410c; /* Blazing Torch 700 */
-  --color-torch-800: #9a3412; /* Blazing Torch 800 */
-  --color-torch-900: #7c2d12; /* Blazing Torch 900 */
+  --color-torch-50: #fff7ed;
+  --color-torch-100: #ffedd5;
+  --color-torch-200: #fed7aa;
+  --color-torch-300: #fdba74;
+  --color-torch-400: #fb923c;
+  --color-torch-500: #ffa123;
+  --color-torch-600: #ea580c;
+  --color-torch-700: #c2410c;
+  --color-torch-800: #9a3412;
+  --color-torch-900: #7c2d12;
 
-  /* Typography preferences for this theme */
+  /* Type scale */
   --h1-size: clamp(3rem, 2.3rem + 2.6vw, 3.75rem);
   --h2-size: clamp(2.125rem, 1.7rem + 1.3vw, 2.375rem);
   --h3-size: clamp(1.375rem, 1.1rem + 0.6vw, 1.625rem);
   --lead-size: 1.125rem;
-  --eyebrow-tracking: 0.16em;
 
-  /* FONTS — keep brand fonts; Mallica for logo/wordmark only */
-  --font-display: "Mallica Fairytale", "Halyard Display", system-ui, sans-serif;
+  /* Letter spacing */
+  --eyebrow-tracking: 0.16em; /* small caps labels */
+  --ui-tracking: 0.02em; /* buttons/nav */
+  --ui-tracking-caps: 0.12em; /* uppercase buttons */
+  --heading-tracking: -0.01em; /* DM Serif */
+  --heading-tracking-tight: -0.02em;
+
+  /* Line-height */
+  --lh-heading-1: 1.05;
+  --lh-heading-2: 1.1;
+  --lh-heading-3: 1.2;
+  --lh-body: 1.75; /* readable on dark bg */
+  --lh-ui: 1.2;
+
+  /* Fonts */
+  --font-heading: "DM Serif Display", ui-serif, Georgia, serif;
   --font-sans: "Halyard Display", system-ui, -apple-system, sans-serif;
+  --font-spice: "Mallica Fairytale", cursive;
 
-  /* bakgrunner */
+  /* Keep old alias for safety */
+  --font-display: var(--font-heading);
+
+  /* Backgrounds */
   --background-image-paper-texture: url("/textures/old-paper.png");
   --background-image-fortress-overlay: linear-gradient(
     to bottom,
@@ -72,13 +87,13 @@
     rgba(23, 23, 23, 0.7)
   );
 
-  /* shadows */
+  /* Shadows */
   --shadow-torch: 0 0 20px rgba(249, 115, 22, 0.5),
     0 0 40px rgba(249, 115, 22, 0.3);
   --shadow-embossed: inset 0 1px 0 rgba(255, 255, 255, 0.15),
     0 1px 3px rgba(0, 0, 0, 0.2);
 
-  /* animations */
+  /* Anim tokens */
   --animate-flicker: flicker 3s ease-in-out infinite;
   --animate-fade-in: fadeIn 0.5s ease-in;
   --animate-slide-up: slideUp 0.6s ease-out;
@@ -92,7 +107,6 @@
       opacity: 0.8;
     }
   }
-
   @keyframes fadeIn {
     0% {
       opacity: 0;
@@ -101,7 +115,6 @@
       opacity: 1;
     }
   }
-
   @keyframes slideUp {
     0% {
       transform: translateY(20px);
@@ -114,7 +127,20 @@
   }
 }
 
-/* Halyard Display – Light (300) */
+/* =========================================================
+   FONT FACE DEFINITIONS
+   ========================================================= */
+
+/* DM Serif Display */
+@font-face {
+  font-family: "DM Serif Display";
+  src: url("/fonts/dm-serif-display.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Halyard Display */
 @font-face {
   font-family: "Halyard Display";
   src: url("/fonts/halyard-display-light.woff2") format("woff2"),
@@ -123,8 +149,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-/* Halyard Display – Book (vi bruker den som 400) */
 @font-face {
   font-family: "Halyard Display";
   src: url("/fonts/halyard-display-book.woff2") format("woff2"),
@@ -133,8 +157,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-/* Halyard Display – Medium (500) */
 @font-face {
   font-family: "Halyard Display";
   src: url("/fonts/halyard-display-medium.woff2") format("woff2"),
@@ -143,8 +165,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-/* Halyard Display – Semi Bold (600) */
 @font-face {
   font-family: "Halyard Display";
   src: url("/fonts/halyard-display-semi-bold.woff2") format("woff2"),
@@ -153,8 +173,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-/* Halyard Display – Bold (700) */
 @font-face {
   font-family: "Halyard Display";
   src: url("/fonts/halyard-display-bold.woff2") format("woff2"),
@@ -164,30 +182,36 @@
   font-display: swap;
 }
 
-/* Mallica Fairytale – displayfonten */
+/* Mallica Fairytale (accent) */
 @font-face {
   font-family: "Mallica Fairytale";
-  src: url("/fonts/Mallica-Fairytale.woff2") format("woff2"),
-    url("/fonts/Mallica-Fairytale.otf") format("opentype"),
-    url("/fonts/Mallica-Fairytale.ttf") format("truetype");
+  src: url("/fonts/mallica-fairytale.woff2") format("woff2"),
+    url("/fonts/mallica-fairytale.otf") format("opentype"),
+    url("/fonts/mallica-fairytale.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-@keyframes borderGlow {
-  0% {
-    background-position: 0% 50%;
+/* =========================================================
+   MOTION / ACCESSIBILITY
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .animate-border-pulse,
+  .animate-glow-pulse,
+  .hover-animate-glow-pulse:hover {
+    animation: none !important;
   }
-  50% {
-    background-position: 200% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+
+  /* optional: remove shine sweep */
+  .shine-sweep {
+    display: none !important;
   }
 }
 
-/* Border pulse animation */
+/* =========================================================
+   ANIMATIONS (global)
+   ========================================================= */
 @keyframes border-pulse {
   0%,
   100% {
@@ -199,8 +223,6 @@
     box-shadow: 0 0 30px rgba(255, 161, 35, 0.6);
   }
 }
-
-/* Glow pulse animation */
 @keyframes glow-pulse {
   0%,
   100% {
@@ -212,33 +234,19 @@
       inset 0 0 30px rgba(255, 161, 35, 0.2);
   }
 }
-
-/* Utility classes for animations */
 .animate-border-pulse {
   animation: border-pulse 2s ease-in-out infinite;
 }
-
 .animate-glow-pulse {
   animation: glow-pulse 3s ease-in-out infinite;
 }
-
-/* Hover variant - kun glow-pulse på hover */
 .hover-animate-glow-pulse:hover {
   animation: glow-pulse 3s ease-in-out infinite;
 }
 
-/* Combined class for button */
-.btn-dynamic-glow {
-  position: relative;
-  overflow: hidden;
-  border: 2px solid rgba(251, 146, 60, 0.5);
-  animation: border-pulse 2s ease-in-out infinite;
-}
-
-.btn-dynamic-glow:hover {
-  animation: glow-pulse 3s ease-in-out infinite;
-}
-
+/* =========================================================
+   BASE
+   ========================================================= */
 @layer base {
   html,
   body,
@@ -250,9 +258,17 @@
 html,
 body {
   overflow-x: hidden;
-  @apply bg-navy-900 text-white;
+  @apply bg-cynical-900 text-white;
   scroll-behavior: smooth;
+
+  font-family: var(--font-sans);
+  line-height: var(--lh-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Hide scrollbars helper */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -260,37 +276,111 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-/* In your global CSS file */
-/* .stf__wrapper {
-  touch-action: none;
+
+/* =========================================================
+   TYPO UTILITIES
+   ========================================================= */
+@layer utilities {
+  /* Roles */
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-body {
+    font-family: var(--font-sans);
+  }
+  .font-spice {
+    font-family: var(--font-spice);
+  }
+
+  /* Headings (DM Serif) */
+  .h1 {
+    font-family: var(--font-heading);
+    font-size: var(--h1-size);
+    line-height: var(--lh-heading-1);
+    letter-spacing: var(--heading-tracking-tight);
+    font-weight: 400;
+  }
+  .h2 {
+    font-family: var(--font-heading);
+    font-size: var(--h2-size);
+    line-height: var(--lh-heading-2);
+    letter-spacing: var(--heading-tracking);
+    font-weight: 400;
+  }
+  .h3 {
+    font-family: var(--font-heading);
+    font-size: var(--h3-size);
+    line-height: var(--lh-heading-3);
+    letter-spacing: var(--heading-tracking);
+    font-weight: 400;
+  }
+
+  /* Body */
+  .lead {
+    font-size: var(--lead-size);
+    line-height: var(--lh-body);
+    font-weight: 400;
+  }
+
+  /* Eyebrow / kicker */
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: var(--eyebrow-tracking);
+    font-weight: 600;
+    line-height: var(--lh-ui);
+  }
+
+  /* UI text */
+  .ui-text {
+    font-family: var(--font-sans);
+    letter-spacing: var(--ui-tracking);
+    line-height: var(--lh-ui);
+  }
+
+  /* Buttons (UI rules) */
+  .btn {
+    font-family: var(--font-sans);
+    letter-spacing: var(--ui-tracking);
+    line-height: var(--lh-ui);
+    font-weight: 600;
+  }
+  .btn-caps {
+    text-transform: uppercase;
+    letter-spacing: var(--ui-tracking-caps);
+  }
+
+  /* Accent “spice” (short only) */
+  .spice-mark {
+    font-family: var(--font-spice);
+    letter-spacing: 0.01em;
+    line-height: 1.1;
+  }
+
+  /* Shine helper class (for reduced motion targeting too) */
+  .shine-sweep {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transform: translateX(-120%);
+    transition: transform 1000ms ease-out;
+  }
+  .group:hover .shine-sweep {
+    transform: translateX(120%);
+  }
 }
 
-.page {
-  background: linear-gradient(to bottom right, #fef3c7, #fef9c3, #fef3c7);
-} */
-
-/* 
-@keyframes goldPulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 rgba(250, 204, 21, 0);
-  }
-  50% {
-    box-shadow: 0 0 18px rgba(250, 204, 21, 0.45);
-  }
-}
-
-.gold-frame-glow {
-  animation: goldPulse 4s ease-in-out infinite;
-} */
-
-/* Bedre touch på mobil */
+/* =========================================================
+   Flipbook (unchanged)
+   ========================================================= */
 .stf__wrapper {
-  /* touch-action: pan-y pinch-zoom; */
   touch-action: none;
 }
-
-/* Slå av default side-bakgrunn i flipbook */
 .page {
   background: transparent;
   user-select: none;
@@ -299,9 +389,6 @@ body {
   -ms-user-select: none;
   box-shadow: none;
 }
-
-/* Alt inni archive-book skal være transparent,
-   vi styrer bakgrunnene selv i React-komponentene */
 .archive-book,
 .archive-book .stf__wrapper,
 .archive-book .stf__parent,
@@ -313,21 +400,15 @@ body {
   background: transparent !important;
   box-shadow: none !important;
 }
-
-/* For sikkerhets skyld – "hard" cover-sider */
 .archive-book .page.hard {
   background: transparent !important;
 }
-
-/* Grab-hånd kun for boka */
 .archive-book .stf__parent {
   transition: transform 0.3s ease-out;
 }
-
 .archive-book .stf__parent:active {
   cursor: grabbing;
 }
-
 @media (min-width: 768px) {
   .archive-book .stf__parent {
     cursor: grab;

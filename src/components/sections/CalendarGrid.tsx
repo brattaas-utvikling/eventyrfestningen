@@ -9,7 +9,7 @@ interface CalendarGridProps {
 
 export function CalendarGrid({ performances }: CalendarGridProps) {
   if (!performances.length) {
-    return <p className="text-sm text-navy-100/70">Ingen kommende forestillinger lagt inn.</p>
+    return <p className="text-sm text-cynical-100/70">Ingen kommende forestillinger lagt inn.</p>
   }
 
   return (
@@ -17,13 +17,13 @@ export function CalendarGrid({ performances }: CalendarGridProps) {
       {performances.map((perf) => (
         <div
           key={perf._id}
-          className="flex items-center justify-between rounded-lg bg-navy-900/30 border border-navy-700 px-4 py-3"
+          className="flex items-center justify-between rounded-lg bg-cynical-900/30 border border-cynical-700 px-4 py-3"
         >
           <div>
             <p className="text-white text-base font-medium">
               {formatDate(perf.date, { weekday: 'long' })}
             </p>
-            <p className="text-navy-100/60 text-sm">
+            <p className="text-cynical-100/60 text-sm">
               {perf.show?.title} • {new Date(perf.date).toLocaleTimeString('nb-NO', { hour: '2-digit', minute: '2-digit' })}
             </p>
           </div>

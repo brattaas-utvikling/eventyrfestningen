@@ -36,7 +36,7 @@ export function AboutShow() {
 
   if (!show) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-navy-900">
+      <div className="min-h-screen flex items-center justify-center bg-cynical-900">
         <p className="text-xl text-gray-200">
           Ingen forestilling funnet
           {slug ? ` for "${slug}"` : ""}.
@@ -60,7 +60,7 @@ export function AboutShow() {
 
 
   return (
-    <div className="mb-16 bg-navy-900 min-h-screen">
+    <div className="mb-16 bg-cynical-900 min-h-screen">
       <SEOHead
         title={`Om ${show.title}`}
         description={
@@ -88,7 +88,7 @@ export function AboutShow() {
               alt={show.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-navy-900/50 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-cynical-900 via-cynical-900/50 to-transparent" />
       {/* Logo i øvre høyre hjørne */}
       {show.logoImage && (
               <motion.div
@@ -123,7 +123,7 @@ export function AboutShow() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-white mb-4">
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-spice font-bold text-white mb-4">
                   {show.title}
                 </h1>
                 <p className="text-xl sm:text-2xl text-gray-200">
@@ -235,7 +235,7 @@ export default AboutShow;
 //               alt={show.title}
 //               className="w-full h-full object-cover"
 //             />
-//             <div className="absolute inset-0 bg-linear-to-t from-navy-900 via-navy-900/50 to-transparent" />
+//             <div className="absolute inset-0 bg-linear-to-t from-cynical-900 via-cynical-900/50 to-transparent" />
 
 //             <Container className="absolute bottom-0 left-0 right-0 pb-12">
 //               <motion.div
@@ -243,7 +243,7 @@ export default AboutShow;
 //                 animate={{ opacity: 1, y: 0 }}
 //                 transition={{ duration: 0.8 }}
 //               >
-//                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-white mb-4">
+//                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-sans font-bold text-white mb-4">
 //                   {show.title}
 //                 </h1>
 //                 <p className="text-xl sm:text-2xl text-gray-200">

@@ -31,7 +31,7 @@ export default function Privacy() {
       />
 
       {/* HERO */}
-      <Section background="navy" paddingY="tight">
+      <Section background="cynical" paddingY="tight">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] items-center">
             {/* Tekst */}
@@ -41,7 +41,7 @@ export default function Privacy() {
               transition={{ duration: 0.6 }}
               className="max-w-2xl"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-4 text-white">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-bold mb-4 text-white">
                 Personvernerklæring
               </h1>
               <p className="text-base sm:text-lg text-white/80 leading-relaxed">
@@ -76,7 +76,7 @@ export default function Privacy() {
                     </span>
                   </div>
 
-                  <h2 className="text-xl sm:text-2xl font-display font-semibold text-white">
+                  <h2 className="text-xl sm:text-2xl font-sans font-semibold text-white">
                     Bygget for trygg og moderne analyse
                   </h2>
                   <p className="text-sm text-white/70">
@@ -107,7 +107,7 @@ export default function Privacy() {
       </Section>
 
       {/* INNHOLD */}
-      <Section background="navy">
+      <Section background="cynical">
         <Container>
           <motion.div
             variants={fadeParent}
@@ -125,7 +125,7 @@ export default function Privacy() {
                   <ShieldCheck className="h-6 w-6 text-gold-400" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-display text-white mb-2">
+                  <h2 className="text-2xl font-sans text-white mb-2">
                     Hvem er behandlingsansvarlig?
                   </h2>
                   <p className="text-white/70 leading-relaxed mb-3">
@@ -168,7 +168,7 @@ export default function Privacy() {
                   <Eye className="h-6 w-6 text-gold-400" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-display text-white mb-2">
+                  <h2 className="text-2xl font-sans text-white mb-2">
                     Hvilke opplysninger vi behandler
                   </h2>
                   <p className="text-white/70 leading-relaxed">
@@ -202,7 +202,7 @@ export default function Privacy() {
                   <Database className="h-6 w-6 text-gold-400" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-display text-white mb-2">
+                  <h2 className="text-2xl font-sans text-white mb-2">
                     Formål og rettslig grunnlag
                   </h2>
                   <p className="text-white/70 leading-relaxed mb-3">
@@ -234,7 +234,7 @@ export default function Privacy() {
                   <Lock className="h-6 w-6 text-gold-400" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-display text-white mb-2">
+                  <h2 className="text-2xl font-sans text-white mb-2">
                     Teknisk behandling, lagring og cookies
                   </h2>
                   <p className="text-white/70 leading-relaxed">
@@ -278,7 +278,7 @@ export default function Privacy() {
                   <UserX className="h-6 w-6 text-gold-400" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-display text-white mb-2">
+                  <h2 className="text-2xl font-sans text-white mb-2">
                     Deling av opplysninger og sikkerhet
                   </h2>
                   <p className="text-white/70 leading-relaxed mb-3">
@@ -313,7 +313,7 @@ export default function Privacy() {
                   <ShieldCheck className="h-6 w-6 text-gold-400" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-display text-white mb-2">
+                  <h2 className="text-2xl font-sans text-white mb-2">
                     Dine rettigheter og kontakt
                   </h2>
                   <p className="text-white/70 leading-relaxed mb-3">

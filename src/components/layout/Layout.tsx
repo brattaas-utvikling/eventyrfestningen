@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const isHome = location.pathname === "/";
   
   return (
-    <div className="min-h-screen flex flex-col bg-navy-900">
+    <div className="min-h-screen flex flex-col bg-cynical-900">
       <Header />
       {/* Conditional padding: kun på andre sider enn home */}
       <div className={`flex-1 ${!isHome ? 'pt-[72px]' : ''}`}>
@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 // export default function Layout({ children }: { children: React.ReactNode }) {
 //   return (
-//     <div className="min-h-screen flex flex-col bg-navy-900">
+//     <div className="min-h-screen flex flex-col bg-cynical-900">
 //       <Header />
 //       <div className="pt-[72px] flex-1">{children}</div>
 //       <Footer />

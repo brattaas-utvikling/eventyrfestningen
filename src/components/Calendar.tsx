@@ -14,19 +14,19 @@ export default function Calendar() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-4">
-      <h1 className="font-display text-3xl text-gold-300 mb-4">
+      <h1 className="font-sans text-3xl text-gold-300 mb-4">
         Forestillingskalender
       </h1>
       {data?.map((perf) => (
         <div
           key={perf._id}
-          className="bg-navy-800/40 border border-navy-700 rounded-lg p-4 flex items-center justify-between"
+          className="bg-cynical-800/40 border border-cynical-700 rounded-lg p-4 flex items-center justify-between"
         >
           <div>
             <p className="text-lg text-white">
               {formatDate(perf.date, { weekday: "long" })}
             </p>
-            <p className="text-sm text-navy-100/70">{perf.show.title}</p>
+            <p className="text-sm text-cynical-100/70">{perf.show.title}</p>
           </div>
           <Badge
             variant={

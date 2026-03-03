@@ -50,7 +50,7 @@ export function QuickInfoSection() {
   return (
     <Section
       id="info"
-      background="navy"
+      background="cynical"
       className="min-h-screen flex items-center"
     >
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -125,18 +125,18 @@ export function QuickInfoSection() {
                   <SwiperSlide key={slide.id}>
                     <OldPaper className="group flex h-full flex-col justify-between rounded-3xl border border-white/10 bg-linear-to-br from-amber-100 via-amber-50 to-amber-100 px-5 py-6 shadow-xl shadow-black/40 backdrop-blur">
                       <div className="space-y-3">
-                        <div className="flex items-center gap-2 text-[11px] uppercase font-sans tracking-[0.16em] text-navy-900">
+                        <div className="flex items-center gap-2 text-[11px] uppercase font-sans tracking-[0.16em] text-cynical-900">
                           <span>{slide.label}</span>
                         </div>
-                        <h3 className="text-xl font-display font-semibold text-navy-900">
+                        <h3 className="text-xl font-sans font-semibold text-cynical-900">
                           {slide.title}
                         </h3>
-                        <p className="text-base leading-relaxed font-sans text-navy-700">
+                        <p className="text-base leading-relaxed font-sans text-cynical-700">
                           {slide.description}
                         </p>
                       </div>
 
-                      <div className="mt-4 flex items-center justify-between text-[11px] text-navy-600 font-sans">
+                      <div className="mt-4 flex items-center justify-between text-[11px] text-cynical-600 font-sans">
                         <span>Swipe for mer</span>
                       </div>
                     </OldPaper>

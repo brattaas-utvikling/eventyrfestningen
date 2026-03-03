@@ -141,10 +141,10 @@ export function CastGallery({ show }: CastGalleryProps) {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-10 pb-8 border-b border-white/10"
           >
-            <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-3">
+            <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white mb-3">
               Rollebesetning
             </h3>
-            <p className="text-navy-100/70 text-sm">
+            <p className="text-cynical-100/70 text-sm">
               Møt de talentfulle skuespillerne som gir liv til historien
             </p>
           </motion.div>
@@ -173,7 +173,7 @@ export function CastGallery({ show }: CastGalleryProps) {
                   key={key}
                   type="button"
                   variants={cardVariants}
-                  className="group rounded-xl bg-white/5 backdrop-blur border border-white/10 p-4 text-center cursor-pointer hover:bg-white/10 hover:border-gold-400/30 transition-color transform-gpu focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900"
+                  className="group rounded-xl bg-white/5 backdrop-blur border border-white/10 p-4 text-center cursor-pointer hover:bg-white/10 hover:border-gold-400/30 transition-color transform-gpu focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900"
                   whileHover={
                     prefersReducedMotion
                       ? undefined
@@ -195,14 +195,14 @@ export function CastGallery({ show }: CastGalleryProps) {
                         loading="lazy"
                       />
                     ) : (
-                      <div className="h-full w-full bg-navy-900/30 flex items-center justify-center">
+                      <div className="h-full w-full bg-cynical-900/30 flex items-center justify-center">
                         <span className="text-gold-400/30 text-4xl font-bold">
                           {actor?.name?.charAt(0) ?? "?"}
                         </span>
                       </div>
                     )}
 
-                    <div className="absolute inset-0 bg-navy-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="absolute inset-0 bg-cynical-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="text-white text-xs font-semibold">
                         Les mer →
                       </span>
@@ -218,7 +218,7 @@ export function CastGallery({ show }: CastGalleryProps) {
                   )}
 
                   {actor?.bio && (
-                    <p className="text-xs text-navy-100/70 mt-3 line-clamp-2">
+                    <p className="text-xs text-cynical-100/70 mt-3 line-clamp-2">
                       {actor.bio}
                     </p>
                   )}
@@ -239,10 +239,10 @@ export function CastGallery({ show }: CastGalleryProps) {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-10"
           >
-            <h3 className="text-3xl sm:text-4xl font-display font-bold text-white mb-3">
+            <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white mb-3">
               Produksjonsteam
             </h3>
-            <p className="text-navy-100/70 text-sm">
+            <p className="text-cynical-100/70 text-sm">
               De kreative hodene bak kulissene
             </p>
           </motion.div>
@@ -266,7 +266,7 @@ export function CastGallery({ show }: CastGalleryProps) {
                   key={person?._id ?? `crew-${index}`}
                   type="button"
                   variants={crewCardVariants}
-                  className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur border border-white/10 rounded-lg hover:bg-white/10 hover:border-gold-400/30 transition-color group cursor-pointer transform-gpu focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-navy-900"
+                  className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur border border-white/10 rounded-lg hover:bg-white/10 hover:border-gold-400/30 transition-color group cursor-pointer transform-gpu focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900"
                   whileHover={
                     prefersReducedMotion
                       ? undefined
@@ -289,7 +289,7 @@ export function CastGallery({ show }: CastGalleryProps) {
                         loading="lazy"
                       />
                     ) : (
-                      <div className="w-14 h-14 rounded-full bg-navy-900/30 border-2 border-gold-400/40 group-hover:border-gold-400 flex items-center justify-center transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-cynical-900/30 border-2 border-gold-400/40 group-hover:border-gold-400 flex items-center justify-center transition-colors">
                         <span className="text-gold-400/60 text-xl font-bold">
                           {person?.name?.charAt(0) ?? "?"}
                         </span>
@@ -316,7 +316,7 @@ export function CastGallery({ show }: CastGalleryProps) {
       <AnimatePresence>
   {selectedPerson && (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-900/90 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cynical-900/90 backdrop-blur-md"
       onClick={handleClose}
       role="dialog"
       aria-modal="true"
@@ -356,7 +356,7 @@ export function CastGallery({ show }: CastGalleryProps) {
                   alt={selectedPerson.actor?.name ?? "Skuespiller"}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-linear-to-t from-navy-900/50 to-transparent md:bg-linear-to-r" />
+                <div className="absolute inset-0 bg-linear-to-t from-cynical-900/50 to-transparent md:bg-linear-to-r" />
               </div>
             </div>
           )}
@@ -370,19 +370,19 @@ export function CastGallery({ show }: CastGalleryProps) {
 
             <h3
               id="modal-title"
-              className="text-3xl md:text-4xl font-display font-bold text-white mb-6"
+              className="text-3xl md:text-4xl font-sans font-bold text-white mb-6"
             >
               {selectedPerson.actor?.name ?? "Ukjent person"}
             </h3>
 
             {selectedPerson.actor?.bio ? (
-              <div className="text-navy-100/90 leading-relaxed space-y-4">
+              <div className="text-cynical-100/90 leading-relaxed space-y-4">
                 {selectedPerson.actor.bio.split("\n\n").map((paragraph, i) => (
                   <p key={i}>{paragraph}</p>
                 ))}
               </div>
             ) : (
-              <p className="text-navy-100/70 italic">
+              <p className="text-cynical-100/70 italic">
                 Ingen biografi tilgjengelig.
               </p>
             )}

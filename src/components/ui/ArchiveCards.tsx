@@ -18,13 +18,13 @@ function TypeBadge({ type }: { type: Show["type"] }) {
 export function PosterSpotlightCard({ show }: { show: Show }) {
   return (
     <Link to={`/arkiv/${show.slug}`}>
-      <Card className="group relative overflow-hidden bg-navy-900/90 border-navy-800 hover:shadow-2xl transition-all duration-300">
+      <Card className="group relative overflow-hidden bg-cynical-900/90 border-cynical-800 hover:shadow-2xl transition-all duration-300">
         {/* spotlight / vignette */}
         <div className="absolute inset-0 bg-[radial-linear(80%_60%_at_50%_20%,rgba(251,146,60,.25),transparent_60%)] pointer-events-none" />
         {/* year */}
         <div className="absolute top-4 right-4 z-10">
           <div className="rounded-full bg-gold-500 text-white px-3 py-1 shadow">
-            <span className="font-display font-bold">{show.year}</span>
+            <span className="font-sans font-bold">{show.year}</span>
           </div>
         </div>
 
@@ -47,7 +47,7 @@ export function PosterSpotlightCard({ show }: { show: Show }) {
             <div className="mb-2">
               <TypeBadge type={show.type} />
             </div>
-            <h3 className="text-2xl font-display font-bold text-navy-900 group-hover:text-torch-600 transition-colors line-clamp-1">
+            <h3 className="text-2xl font-sans font-bold text-cynical-900 group-hover:text-torch-600 transition-colors line-clamp-1">
               {show.title}
             </h3>
             {show.story?.[0]?.children?.[0]?.text && (
@@ -93,7 +93,7 @@ export function PolaroidCard({ show }: { show: Show }) {
               )}
             </div>
             <div className="mt-3 flex items-center justify-between">
-              <h3 className="font-display text-xl font-bold text-navy-900">{show.title}</h3>
+              <h3 className="font-sans text-xl font-bold text-cynical-900">{show.title}</h3>
               <span className="rounded bg-gold-500 px-2 py-0.5 text-xs font-semibold text-white">
                 {show.year}
               </span>
@@ -136,7 +136,7 @@ export function TicketStubCard({ show }: { show: Show }) {
           {/* infofelt */}
           <div className="p-6">
             <div className="mb-2"><TypeBadge type={show.type} /></div>
-            <h3 className="font-display text-2xl font-bold text-navy-900 line-clamp-1">{show.title}</h3>
+            <h3 className="font-sans text-2xl font-bold text-cynical-900 line-clamp-1">{show.title}</h3>
             {show.story?.[0]?.children?.[0]?.text && (
               <p className="mt-2 text-sm text-gray-700 line-clamp-4">
                 {show.story[0].children[0].text}
@@ -157,7 +157,7 @@ export function TicketStubCard({ show }: { show: Show }) {
 export function GlassGlowCard({ show }: { show: Show }) {
   return (
     <Link to={`/arkiv/${show.slug}`}>
-      <div className="group relative rounded-2xl bg-linear-to-br from-navy-900 to-burgundy-900 p-px shadow-lg hover:shadow-2xl transition-shadow">
+      <div className="group relative rounded-2xl bg-linear-to-br from-cynical-900 to-burgundy-900 p-px shadow-lg hover:shadow-2xl transition-shadow">
         {/* glow-kant */}
         <div className="absolute inset-0 rounded-2xl opacity-60 blur-xl bg-[radial-linear(60%_60%_at_80%_10%,var(--color-torch-500),transparent)] pointer-events-none" />
         <div className="relative rounded-2xl bg-white/80 backdrop-blur-xl ring-1 ring-black/10 overflow-hidden">
@@ -173,7 +173,7 @@ export function GlassGlowCard({ show }: { show: Show }) {
           )}
           <div className="p-5">
             <div className="mb-2"><TypeBadge type={show.type} /></div>
-            <h3 className="font-display text-2xl font-bold text-navy-900 line-clamp-1">{show.title}</h3>
+            <h3 className="font-sans text-2xl font-bold text-cynical-900 line-clamp-1">{show.title}</h3>
             <div className="mt-3 flex items-center gap-2 text-sm text-gray-700">
               <Calendar className="h-4 w-4" />
               {show.year}
@@ -204,7 +204,7 @@ export function DeckledPaperCard({ show }: { show: Show }) {
         )}
         <div className="p-5">
           <div className="mb-2"><TypeBadge type={show.type} /></div>
-          <h3 className="font-display text-2xl font-bold text-navy-900">{show.title}</h3>
+          <h3 className="font-sans text-2xl font-bold text-cynical-900">{show.title}</h3>
           {show.story?.[0]?.children?.[0]?.text && (
             <p className="mt-2 text-sm text-gray-700 line-clamp-3">{show.story[0].children[0].text}</p>
           )}

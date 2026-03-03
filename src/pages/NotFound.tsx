@@ -21,7 +21,7 @@ export default function NotFound() {
         description="Siden du leter etter finnes ikke. Kanskje den er flyttet eller skrevet feil."
       />
 
-      <section className="relative overflow-hidden bg-linear-to-br from-navy-900 to-burgundy-900 text-white">
+      <section className="relative overflow-hidden bg-linear-to-br from-cynical-900 to-burgundy-900 text-white">
         {/* aurora/spotlight */}
         <motion.div
           aria-hidden
@@ -57,7 +57,7 @@ export default function NotFound() {
               transition={{ duration: 0.5 }}
               className="mb-2"
             >
-              <span className="block text-7xl sm:text-8xl font-display font-black tracking-wider">
+              <span className="block text-7xl sm:text-8xl font-sans font-black tracking-wider">
                 404
               </span>
             </motion.div>
@@ -65,12 +65,12 @@ export default function NotFound() {
             <h1
               ref={h1Ref}
               tabIndex={-1}
-              className="text-3xl sm:text-4xl font-display font-bold mb-4 focus:outline-none"
+              className="text-3xl sm:text-4xl font-sans font-bold mb-4 focus:outline-none"
             >
               Denne siden står ikke på programmet
             </h1>
 
-            <p className="text-navy-100/80 mb-8">
+            <p className="text-cynical-100/80 mb-8">
               Enten har vi skrevet om manuset, eller så har du fulgt en gammel
               rekvisitt av en lenke. Prøv en av disse scenene i stedet:
             </p>
@@ -99,7 +99,7 @@ export default function NotFound() {
             </div>
 
             {/* Hilsen fra Eventyrfestningen */}
-            <div className="mt-10 inline-flex flex-col items-center gap-2 text-xs sm:text-sm text-navy-100/80">
+            <div className="mt-10 inline-flex flex-col items-center gap-2 text-xs sm:text-sm text-cynical-100/80">
               <span className="uppercase tracking-[0.2em] text-gold-200 text-[0.7rem]">
                 Hilsen Eventyrfestningen
               </span>

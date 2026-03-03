@@ -51,7 +51,7 @@ export function Countdown({ targetDate }: CountdownProps) {
     <div 
       className="inline-flex items-center 
                  gap-3 sm:gap-4 md:gap-4 lg:gap-5 xl:gap-6
-                 bg-navy-900/60 backdrop-blur-md 
+                 bg-cynical-900/60 backdrop-blur-md 
                  border border-gold-400/20 
                  rounded-xl sm:rounded-2xl
                  px-4 py-3
@@ -67,7 +67,7 @@ export function Countdown({ targetDate }: CountdownProps) {
         <div key={unit.label} className="flex flex-col items-center">
           {/* Number - Større på mobil, balansert på desktop */}
           <div 
-            className="font-display font-bold text-gold-400 tabular-nums leading-none
+            className="font-sans font-bold text-gold-400 tabular-nums leading-none
                        text-3xl
                        sm:text-4xl
                        md:text-3xl

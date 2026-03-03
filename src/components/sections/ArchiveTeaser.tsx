@@ -1,10 +1,12 @@
+// routes/landing/sections/ArchiveTeaser.tsx
 import { useMemo, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useReducedMotion } from "@/hooks/useRedusedMotion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button-variants";
+import { Button } from "@/components/ui/Button";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 export interface ArchiveData {
   title: string;
@@ -20,130 +22,145 @@ interface Props {
   data: ArchiveData;
 }
 
+// ─── Component ────────────────────────────────────────────────────────────────
+
 export default function ArchiveTeaser({ data }: Props) {
   const sectionRef = useRef<HTMLElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const reduced = useReducedMotion();
 
+  // ── Parallax ──────────────────────────────────────────────────────────────
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
 
-  const imageY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? ["0%", "0%"] : ["0%", "40%"]
-  );
+  const imageY     = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"]   : ["0%", "40%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], reduced ? [1, 1]         : [1, 1.15]);
+  // Innholdet "flyter opp" mot bildet som scroller ned — dramatisk avslutning
+  const contentY   = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"]   : ["0%", "-18%"]);
 
-  const imageScale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? [1, 1] : [1, 1.15]
-  );
-
-  const contentY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    prefersReducedMotion ? ["0%", "0%"] : ["0%", "-18%"]
-  );
-
+  // ── Årstall sortert stigende ───────────────────────────────────────────────
   const sortedYears = useMemo(
     () => [...data.highlightYears].sort((a, b) => parseInt(a) - parseInt(b)),
     [data.highlightYears]
   );
 
   return (
-    <section ref={sectionRef} className="relative min-h-[100svh] overflow-hidden">
-      {/* Background */}
+    <section
+      ref={sectionRef}
+      className="relative min-h-[100svh] overflow-hidden"
+      aria-labelledby="archive-heading"
+    >
+      {/* ── Parallax-bakgrunn ──────────────────────────────────────────────── */}
       <motion.div className="absolute inset-0" style={{ y: imageY }}>
         <motion.img
           src={data.previewImage}
-          alt="" // dekorativ bakgrunn
+          alt=""
           className="w-full h-full object-cover"
           style={{ scale: imageScale }}
           loading="lazy"
           decoding="async"
+          width={1920}
+          height={1080}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950/70 via-navy-950/85 to-navy-950" />
+        {/* Gradient mot bunn — innholdet fader inn fra mørket */}
+        <div className="absolute inset-0 bg-gradient-to-b from-cynical-950/70 via-cynical-950/85 to-cynical-950" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_55%,rgba(3,7,18,0.85)_100%)]" />
-        
       </motion.div>
 
-      {/* Content */}
+      {/* ── Innhold ───────────────────────────────────────────────────────────
+          justify-between: tittel øverst, tidslinje + CTA nederst.
+          contentY counter-parallax gir "curtain call"-effekt.
+      ──────────────────────────────────────────────────────────────────────── */}
       <motion.div
         className="relative z-10 min-h-[100svh] flex flex-col justify-between py-16 sm:py-20 px-4"
         style={{ y: contentY }}
       >
-        <div className="text-center max-w-5xl mx-auto">
-        <span className="text-torch-400 font-sans text-xs sm:text-sm uppercase tracking-widest">
+        {/* ── Tittelblokk ─────────────────────────────────────────────────── */}
+        <div className="text-center max-w-5xl mx-auto space-y-4">
+          <p className="eyebrow text-torch-400 text-[0.7rem] sm:text-xs">
             {data.subtitle}
-          </span>
+          </p>
 
-          {/* <h2 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-gold-400 mb-4 sm:mb-6 leading-tight drop-shadow-[0_0_30px_rgba(251,191,36,0.35)]">
-            {data.title}
-          </h2> */}
+          {/*
+            H2: gull-gradient med WebkitTextStroke for dybde.
+            Dette er sidens siste seksjon — et visuelt klimaks.
+            Gull-gradient er riktig her; det er et bevisst brudd
+            fra hvit h2 i de foregående seksjonene.
+          */}
           <h2
-            className="
-              font-display text-5xl sm:text-6xl md:text-7xl
-              bg-gradient-to-b from-gold-200 via-gold-400 to-gold-600
-              bg-clip-text text-transparent
-              drop-shadow-[0_10px_35px_rgba(0,0,0,0.55)]
-              mt-4
-            "
-            style={{
-              WebkitTextStroke: "1px rgba(20,14,8,0.35)",
-            }}
+            id="archive-heading"
+            className={[
+              "font-heading uppercase",
+              "text-[clamp(2.5rem,7vw,5rem)]",
+              "tracking-[0.05em] leading-[1.0]",
+              // Gull-gradient — klimaks-effekt på siste seksjon
+              "bg-gradient-to-b from-gold-200 via-gold-400 to-gold-600",
+              "bg-clip-text text-transparent",
+              "drop-shadow-[0_10px_35px_rgba(0,0,0,0.55)]",
+            ].join(" ")}
+            style={{ WebkitTextStroke: "1px rgba(20,14,8,0.35)" }}
           >
             {data.title}
           </h2>
         </div>
 
-        <div className="max-w-6xl mx-auto w-full">
-        <div className="prose prose-lg prose-invert max-w-none prose-p:text-white/80 prose-p:leading-relaxed text-center mx-auto mb-8">
-            <p>
+        {/* ── Nedre blokk: beskrivelse + tidslinje + CTA ──────────────────── */}
+        <div className="max-w-4xl mx-auto w-full space-y-10 sm:space-y-12">
+
+          {/* Beskrivelse */}
+          <p className="text-white/80 text-base sm:text-lg text-center leading-relaxed max-w-2xl mx-auto">
             {data.description}
-            </p>
-            </div>
-        {/* <p className="mb-8 text-white text-center text-base sm:text-lg md:text-xl font-sans font-light max-w-2xl mx-auto drop-shadow-[0_4px_8px_rgba(0,0,0,0.7)]">
-            {data.description}
-          </p> */}
-          {/* Timeline */}
+          </p>
+
+          {/* ── Tidslinje ─────────────────────────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={reduced ? false : { opacity: 0, y: 24 }}
+            whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-10 sm:mb-12"
+            transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="relative pb-14 sm:pb-16">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent" />
+            <div className="relative pb-12 sm:pb-14">
+              {/* Horisontal linje */}
+              <div
+                className="absolute top-[6px] sm:top-[7px] left-0 right-0 h-px
+                  bg-gradient-to-r from-transparent via-gold-500/70 to-transparent"
+                aria-hidden="true"
+              />
+
+              {/* Årstall */}
               <div className="relative flex justify-between items-start px-2 sm:px-4">
                 {sortedYears.map((year, idx) => (
                   <motion.div
                     key={year}
-                    initial={{ opacity: 0, scale: 0.85, y: 16 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    initial={reduced ? false : { opacity: 0, scale: 0.85, y: 16 }}
+                    whileInView={reduced ? undefined : { opacity: 1, scale: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{
                       delay: 0.15 + idx * 0.06,
-                      duration: 0.5,
+                      duration: 0.45,
                       ease: "easeOut",
                     }}
-                    className="relative flex flex-col items-center"
+                    className="relative flex flex-col items-center gap-2.5"
                   >
+                    {/* Dot */}
                     <div
-                      className="w-3.5 h-3.5 sm:w-4 sm:h-4 bg-gold-500 rounded-full border-4 border-navy-900
-                                 shadow-[0_0_18px_rgba(251,191,36,0.7)] mb-3"
+                      className="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full
+                        bg-gold-500 border-[3px] border-cynical-900
+                        shadow-[0_0_14px_rgba(251,191,36,0.65)]"
                       aria-hidden="true"
                     />
-                    <div className="text-gold-400 font-display font-bold text-base sm:text-lg md:text-xl drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]">
-                      {year}
-                    </div>
 
-                    {!prefersReducedMotion && (
+                    {/* Årstall-tekst */}
+                    <span className="font-heading text-gold-400 text-sm sm:text-base md:text-lg drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]">
+                      {year}
+                    </span>
+
+                    {/* Pulserende glow bak dot */}
+                    {!reduced && (
                       <motion.div
-                        className="absolute top-0 w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full bg-gold-500/25 blur-xl pointer-events-none"
-                        animate={{ scale: [1, 1.45, 1], opacity: [0.25, 0.55, 0.25] }}
+                        className="absolute top-0 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-gold-500/30 blur-lg pointer-events-none"
+                        animate={{ scale: [1, 1.6, 1], opacity: [0.25, 0.55, 0.25] }}
                         transition={{
                           duration: 2.2,
                           repeat: Infinity,
@@ -159,41 +176,39 @@ export default function ArchiveTeaser({ data }: Props) {
             </div>
           </motion.div>
 
-          {/* CTA */}
+          {/* ── CTA ──────────────────────────────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={reduced ? false : { opacity: 0, y: 20 }}
+            whileInView={reduced ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="text-center"
+            transition={{ duration: 0.7, ease: "easeOut", delay: 0.12 }}
+            className="flex justify-center"
           >
-            <Link
-              to={data.ctaLink}
-              className={cn(
-                buttonVariants({ variant: "outline", size: "xl" }),
-                "group relative overflow-hidden text-lg sm:text-xl px-10 sm:px-12 py-5 sm:py-6"
-              )}
+            <Button
+              asChild
+              variant="outline"
+              size="xl"
+              withShine
+              className="text-base sm:text-lg px-10 sm:px-12"
             >
-              <span
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
-                           translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none"
-                aria-hidden="true"
-              />
-              <span className="relative drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+              <Link to={data.ctaLink}>
                 {data.ctaText}
-              </span>
-              <ArrowRight className="relative w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
-            </Link>
+                <ArrowRight
+                  className="w-5 h-5 sm:w-6 sm:h-6 motion-safe:group-hover:translate-x-1 motion-safe:transition-transform motion-safe:duration-200"
+                  aria-hidden="true"
+                />
+              </Link>
+            </Button>
           </motion.div>
         </div>
       </motion.div>
 
-      {/* Decorative corners */}
+      {/* ── Dekorative hjørner — "teaterramme" rundt hele seksjonen ─────────── */}
       <div className="absolute inset-0 pointer-events-none z-20" aria-hidden="true">
-        <div className="absolute top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 border-t-4 border-l-4 border-gold-500/35" />
-        <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 border-t-4 border-r-4 border-gold-500/35" />
-        <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-32 sm:h-32 border-b-4 border-l-4 border-gold-500/35" />
-        <div className="absolute bottom-0 right-0 w-24 h-24 sm:w-32 sm:h-32 border-b-4 border-r-4 border-gold-500/35" />
+        <div className="absolute top-0    left-0  w-20 h-20 sm:w-28 sm:h-28 border-t-[3px] border-l-[3px] border-gold-500/30" />
+        <div className="absolute top-0    right-0 w-20 h-20 sm:w-28 sm:h-28 border-t-[3px] border-r-[3px] border-gold-500/30" />
+        <div className="absolute bottom-0 left-0  w-20 h-20 sm:w-28 sm:h-28 border-b-[3px] border-l-[3px] border-gold-500/30" />
+        <div className="absolute bottom-0 right-0 w-20 h-20 sm:w-28 sm:h-28 border-b-[3px] border-r-[3px] border-gold-500/30" />
       </div>
     </section>
   );

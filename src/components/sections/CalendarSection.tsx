@@ -134,7 +134,7 @@ export function CalendarSection() {
         description="Se alle forestillingsdatoer og kjøp billetter til sommerens store familieforestilling på Kongsvinger Festning."
       />
 
-      <Section background="navy" className="py-16 sm:py-20 lg:py-24">
+      <Section background="cynical" className="py-16 sm:py-20 lg:py-24">
         <Container>
           {/* Header */}
           <motion.header
@@ -149,7 +149,7 @@ export function CalendarSection() {
                 7 magiske sommerkvelder
               </span>
             </div>
-            <h1 className="flex items-center gap-3 text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-white mb-4">
+            <h1 className="flex items-center gap-3 text-3xl sm:text-4xl lg:text-5xl font-sans font-semibold text-white mb-4">
               <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10">
                 <CalendarIcon className="w-5 h-5 text-gold-300" />
               </span>
@@ -191,11 +191,11 @@ export function CalendarSection() {
                         relative rounded-2xl border px-4 sm:px-5 py-4 sm:py-5
                         transition-all duration-200
                         flex items-center gap-4 sm:gap-5
-                        bg-navy-900/60 backdrop-blur-md
+                        bg-cynical-900/60 backdrop-blur-md
                         ${
                           isActive
                             ? "border-torch-500 shadow-[0_0_40px_rgba(248,187,109,0.25)]"
-                            : "border-white/10 hover:border-gold-400/50 hover:bg-navy-800/70"
+                            : "border-white/10 hover:border-gold-400/50 hover:bg-cynical-800/70"
                         }
                       `}
                     >
@@ -203,12 +203,12 @@ export function CalendarSection() {
                       <div
                         className={`
                           flex-shrink-0 flex flex-col items-center justify-center rounded-2xl border-2 px-3 py-2
-                          font-display font-semibold
+                          font-sans font-semibold
                           transition-all duration-200
                           ${
                             isActive
                               ? "bg-gradient-to-br from-torch-500 to-burgundy-600 text-white border-torch-300 shadow-lg shadow-torch-500/40 scale-105"
-                              : "bg-navy-950 text-gold-300 border-gold-500/40"
+                              : "bg-cynical-950 text-gold-300 border-gold-500/40"
                           }
                         `}
                       >
@@ -282,13 +282,13 @@ export function CalendarSection() {
               transition={{ duration: 0.5, delay: 0.15 }}
               className="flex flex-col gap-6"
             >
-              <div className="rounded-3xl border border-white/10 bg-navy-950/80 backdrop-blur-xl p-6 sm:p-7 shadow-[0_24px_80px_rgba(15,23,42,0.9)]">
+              <div className="rounded-3xl border border-white/10 bg-cynical-950/80 backdrop-blur-xl p-6 sm:p-7 shadow-[0_24px_80px_rgba(15,23,42,0.9)]">
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold-300/80">
                       KALENDER
                     </p>
-                    <h3 className="text-2xl sm:text-3xl font-display font-bold text-white">
+                    <h3 className="text-2xl sm:text-3xl font-sans font-bold text-white">
                       Juli 2026
                     </h3>
                   </div>
@@ -364,7 +364,7 @@ export function CalendarSection() {
                                     ? isActive
                                       ? "bg-gradient-to-br from-torch-500 to-burgundy-600 text-white shadow-lg shadow-torch-500/50"
                                       : "bg-gradient-to-br from-torch-500/90 to-burgundy-600/90 text-white shadow-md hover:shadow-lg"
-                                    : "bg-navy-800/50 text-white/40"
+                                    : "bg-cynical-800/50 text-white/40"
                                 }
                               `}
                             >
@@ -392,7 +392,7 @@ export function CalendarSection() {
                 variants={itemFade}
                 className="rounded-2xl border border-gold-500/30 bg-gradient-to-br from-gold-500/10 via-torch-500/5 to-burgundy-500/10 p-5 sm:p-6"
               >
-                <h3 className="flex items-center gap-2 text-base sm:text-lg font-display font-semibold text-white mb-2">
+                <h3 className="flex items-center gap-2 text-base sm:text-lg font-sans font-semibold text-white mb-2">
                   <Sparkles className="w-5 h-5 text-gold-300" />
                   Praktisk info i kortversjon
                 </h3>
