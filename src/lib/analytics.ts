@@ -142,7 +142,8 @@ type AnalyticsEventPayloads = {
       | "header_mobile_nav"
       | "hero_main"
       | "hero_more_info"
-      | "other";
+      | "other"
+      | `program_${string}`;
     page?: string;
   };
   scroll_depth: { page: string; depth: 25 | 50 | 75 | 100 };

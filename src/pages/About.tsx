@@ -118,7 +118,7 @@ export function About() {
         eyebrow="Om foreningen"
         title="Vår historie"
         subtitle="Fra en liten gruppe entusiaster samlet i Kongsvinger til å øke ambisjonene og skape store familieforestillinger for hele Kongsvingerregionen. Dette er historien om hvordan vi bringer liv til Kongsvinger Festning."
-        backgroundImageUrl="/media/bakgrunn.jpg"
+        backgroundImageUrl="/assets/landing/plakat_bakgrunn.png"
         backgroundImageAlt="Kongsvinger festning i kveldssol"
         align="left"
       />

@@ -31,7 +31,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/om-forestillingen" element={<AboutShow />} />
-            <Route path="/kalender" element={<Calendar />} />
+            <Route path="/program" element={<Calendar />} />
             <Route path="/nyheter" element={<NewsList />} />
             <Route path="/nyheter/:slug" element={<NewsPost />} />
             <Route path="/om-oss" element={<About />} />

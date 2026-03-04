@@ -362,7 +362,7 @@ export function Sponsors() {
         eyebrow="Samarbeidspartnere"
         title="Sponsorer"
         subtitle="Uten våre samarbeidspartnere hadde forestillingen på Kongsvinger Festning ikke vært mulig. Deres støtte bidrar til å skape en unik opplevelse for barn og voksne i alle aldre."
-        backgroundImageUrl="/media/bakgrunn.jpg"
+        backgroundImageUrl="/assets/landing/plakat_bakgrunn.png"
         backgroundImageAlt="Logoer og lyssetting på Kongsvinger Festning"
         align="left"
       />

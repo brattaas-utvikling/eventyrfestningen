@@ -56,7 +56,7 @@ export function Header() {
         external: true,
       },
       { name: "Om forestillingen", href: "/om-forestillingen" },
-      { name: "Kalender", href: "/kalender" },
+      { name: "Program", href: "/program" },
       { name: "Om oss", href: "/om-oss" },
       { name: "Arkiv", href: "/arkiv" },
       { name: "Sponsorer", href: "/sponsorer" },

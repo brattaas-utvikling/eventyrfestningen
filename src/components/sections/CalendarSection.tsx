@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  Calendar as CalendarIcon,
   Clock,
   MapPin,
   Ticket,
@@ -13,7 +12,7 @@ import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { SEOHead } from "@/components/SEOHead";
-import { trackEvent } from "@/lib/analytics";
+import { trackTicketClick } from "@/lib/analytics";
 
 const performances = [
   {
@@ -130,7 +129,7 @@ export function CalendarSection() {
   return (
     <>
       <SEOHead
-        title="Forestillingskalender"
+        title="Program"
         description="Se alle forestillingsdatoer og kjøp billetter til sommerens store familieforestilling på Kongsvinger Festning."
       />
 
@@ -143,16 +142,13 @@ export function CalendarSection() {
             transition={{ duration: 0.5 }}
             className="mb-12 sm:mb-16 max-w-3xl"
           >
-            <div className="inline-flex items-center gap-2 rounded-xl border border-torch-500/40 bg-torch-500/10 px-4 py-2 mb-4">
+            <div className="inline-flex items-center gap-2 mb-4">
               <Sparkles className="w-4 h-4 text-torch-300" />
               <span className="text-xs font-medium uppercase tracking-[0.12em] text-torch-200">
                 7 magiske sommerkvelder
               </span>
             </div>
             <h1 className="flex items-center gap-3 text-3xl sm:text-4xl lg:text-5xl font-sans font-semibold text-white mb-4">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10">
-                <CalendarIcon className="w-5 h-5 text-gold-300" />
-              </span>
               Forestillingskvelder i juli
             </h1>
             <p className="text-base sm:text-lg text-white/80 mb-2">
@@ -258,10 +254,10 @@ export function CalendarSection() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() =>
-                              trackEvent("ticket_click", {
-                                source: "other",
-                                page: `/kalender?date=${performance.date}`,
-                              })
+                              trackTicketClick(
+                                `program_${performance.date}`,
+                                "program"
+                              )
                             }
                           >
                             <Ticket className="w-4 h-4 mr-1.5" />

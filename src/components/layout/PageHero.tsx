@@ -109,7 +109,7 @@ export function PageHero({
               // for lange titler som "Forestillingskalender" på smal mobil.
               // clamp(1.75rem, 1.2rem + 2.8vw, 3.75rem):
               //   320px → ~2.65rem  |  768px → ~3.34rem  |  1280px → ~3.75rem
-              "font-heading leading-[1.05] tracking-[-0.02em]",
+              "font-heading uppercase leading-[1.05] tracking-[-0.02em]",
               "text-[clamp(1.75rem,1.2rem+2.8vw,3.75rem)]",
               "text-white",
             ].join(" ")}
