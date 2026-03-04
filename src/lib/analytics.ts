@@ -86,7 +86,25 @@ const REFERRER_MAP: Record<string, string> = {
 function parseReferrer(): { raw: string; source: string } {
   if (typeof document === "undefined") return { raw: "", source: "" };
   const ref = document.referrer;
-  if (!ref) return { raw: "", source: "direct" };
+  if (!ref) {
+    const ua = navigator.userAgent.toLowerCase();
+    // Sosiale medier
+    if (ua.includes("fban") || ua.includes("fbav")) return { raw: "", source: "facebook" };
+    if (ua.includes("instagram")) return { raw: "", source: "instagram" };
+    if (ua.includes("linkedin")) return { raw: "", source: "linkedin" };
+    if (ua.includes("tiktok")) return { raw: "", source: "tiktok" };
+    if (ua.includes("snapchat")) return { raw: "", source: "snapchat" };
+    if (ua.includes("pinterest")) return { raw: "", source: "pinterest" };
+    if (ua.includes("twitter") || ua.includes("x.com")) return { raw: "", source: "twitter" };
+    if (ua.includes("threads")) return { raw: "", source: "threads" };
+    // Norske medieapper
+    if (ua.includes("vgno") || ua.includes("vg.no")) return { raw: "", source: "vg" };
+    if (ua.includes("nrk")) return { raw: "", source: "nrk" };
+    if (ua.includes("amedia")) return { raw: "", source: "amedia" };
+    // Generisk in-app browser
+    if (ua.includes("wv)") || ua.includes("webview")) return { raw: "", source: "in-app" };
+    return { raw: "", source: "direct" };
+  }
 
   try {
     const hostname = new URL(ref).hostname.replace(/^www\./, "");
