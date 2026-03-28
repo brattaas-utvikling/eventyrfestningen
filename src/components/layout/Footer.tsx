@@ -38,7 +38,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
   return (
     <footer
       className={`relative ${wrap}`}
-      aria-labelledby="site-footer-heading"
+      aria-label="Bunntekst"
     >
       {/* Tynn gradientlinje på toppen */}
       <div

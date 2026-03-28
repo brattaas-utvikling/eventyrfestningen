@@ -16,6 +16,7 @@ import { PageViewTracker } from "./components/analytics/PageViewTracker";
 import { initGeoAnalytics, destroyGeoAnalytics } from "./lib/analytics";
 import { useEffect } from "react";
 import Avmeld from "./pages/Avmeld";
+import FrivilligPage from "./pages/FrivilligPage";
 
 export default function App() {
   useEffect(() => {
@@ -36,6 +37,8 @@ export default function App() {
             <Route path="/nyheter/:slug" element={<NewsPost />} />
             <Route path="/om-oss" element={<About />} />
             <Route path="/sponsorer" element={<Sponsors />} />
+            <Route path="/frivillig" element={<FrivilligPage />} />
+
             <Route path="/arkiv" element={<Archive />} />
             <Route path="/arkiv/:slug" element={<AboutShow />} />
             <Route path="/kontakt" element={<Contact />} />
