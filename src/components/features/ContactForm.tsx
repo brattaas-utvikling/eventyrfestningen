@@ -123,7 +123,7 @@ export function ContactForm() {
 
       {status === 'error' && (
         <div className="rounded-lg bg-red-500/10 border border-red-500/30 px-4 py-3 text-red-100">
-          Noe gikk galt. Prøv igjen eller send e-post til post@festningsteater.no
+          Noe gikk galt. Prøv igjen eller send e-post til kontakt@festningsteater.no
         </div>
       )}
     </form>

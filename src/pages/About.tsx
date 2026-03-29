@@ -488,10 +488,6 @@ export function About() {
             aria-hidden="true"
           />
 
-          <p className="eyebrow text-torch-300/80 text-[0.7rem] sm:text-xs">
-            Bli med
-          </p>
-
           <h2 className="font-heading text-[clamp(1.75rem,1.4rem+1.5vw,2.5rem)] text-white leading-[1.1] tracking-[-0.01em]">
           Vil du være med?
           </h2>

@@ -16,7 +16,7 @@ export function Calendar() {
         title="Program"
         subtitle="Her ser du alle planlagte kveldsforestillinger på Kongsvinger Festning sommeren 2026. Forestillingen starter kl. 22.00, og portene åpner kl. 20.00."
         backgroundImageUrl="/assets/landing/plakat_bakgrunn.png"
-        backgroundImageAlt="Scene og publikum ved Kongsvinger Festning"
+        backgroundImageAlt="Flyfoto av festningen 1814-ish"
         align="left"
       />
 
