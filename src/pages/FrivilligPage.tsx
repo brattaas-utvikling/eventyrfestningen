@@ -56,7 +56,7 @@ export default function FrivilligPage() {
           </TrackSection> */}
 
       {/* Wizard section */}
-      <section className="bg-cynical-900 py-12 md:py-16" aria-label="Påmeldingsskjema for frivillige">
+      <section className="bg-cynical-900 py-12 md:py-16 overflow-x-hidden" aria-label="Påmeldingsskjema for frivillige">
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
           {/* Card */}
           <div className="rounded-2xl border border-white/10 bg-cynical-800/40 p-6 shadow-2xl backdrop-blur-sm sm:p-8 md:p-10">
@@ -94,8 +94,8 @@ export default function FrivilligPage() {
               },
             ].map(({ q, a }) => (
               <div key={q}>
-                <dt className="font-heading text-lg text-white mb-2">{q}</dt>
-                <dd className="font-sans text-sm text-white/55 leading-relaxed">{a}</dd>
+                <dt className="font-heading text-lg text-white mb-2 break-words">{q}</dt>
+                <dd className="font-sans text-sm text-white/65 leading-relaxed">{a}</dd>
               </div>
             ))}
           </dl>

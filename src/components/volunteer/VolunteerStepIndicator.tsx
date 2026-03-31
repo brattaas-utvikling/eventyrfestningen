@@ -34,7 +34,7 @@ export default function VolunteerStepIndicator() {
         <div
           aria-hidden="true"
           className="absolute left-[1.125rem] top-[1.125rem] h-px origin-left overflow-hidden"
-          style={{ width: `calc(${progressPct}% * (100% - 2.25rem) / 100)` }}
+          style={{ width: `calc((100% - 2.25rem) * ${progressPct} / 100)` }}
         >
           <motion.div
             className="h-full bg-gradient-to-r from-torch-600 to-gold-400"

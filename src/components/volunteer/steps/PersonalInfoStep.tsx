@@ -70,7 +70,7 @@ function Field({ id, label, icon, error, hint, children }: FieldProps) {
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={id}
-        className="text-sm font-medium font-sans text-white/60 tracking-wide"
+        className="text-sm font-medium font-sans text-white/80 tracking-wide"
       >
         {label}
       </label>
@@ -114,17 +114,17 @@ function Field({ id, label, icon, error, hint, children }: FieldProps) {
 const inputClass = (hasError?: string) =>
   cn(
     // Base
-    'w-full rounded-lg border bg-cynical-800/50 pl-10 pr-4 py-3',
+    'w-full rounded-lg border bg-cynical-700 pl-10 pr-4 py-3',
     'font-sans text-[0.9375rem] text-white',
-    'placeholder:text-white/20',
+    'placeholder:text-cynical-400',
     // Transition
     'transition-all duration-150',
     // Focus
     'focus:outline-none focus:ring-2',
     // State-dependent border + ring
     hasError
-      ? 'border-burgundy-500/50 focus:border-burgundy-500/80 focus:ring-burgundy-500/15'
-      : 'border-white/8 focus:border-torch-500/60 focus:ring-torch-500/10 hover:border-white/15'
+      ? 'border-burgundy-500/50 focus:border-burgundy-500/80 focus:ring-burgundy-500/30'
+      : 'border-cynical-600 focus:border-torch-500 focus:ring-torch-500/30 hover:border-cynical-500'
   );
 
 // ─── Section divider ──────────────────────────────────────────────────────────

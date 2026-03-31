@@ -211,7 +211,7 @@ export default function RoleSelectionStep() {
           >
             <label
               htmlFor="annet-beskrivelse"
-              className="mb-1.5 block text-sm font-medium font-sans text-white/60"
+              className="mb-1.5 block text-sm font-medium font-sans text-white/80"
             >
               Hva ønsker du å hjelpe til med?{' '}
               <span className="text-torch-500">*</span>
@@ -223,12 +223,12 @@ export default function RoleSelectionStep() {
               onChange={(e) => setAnnetText(e.target.value)}
               placeholder="Fortell oss hva du tenker på…"
               className={cn(
-                'w-full resize-none rounded-lg border bg-cynical-800/50 px-4 py-3',
-                'font-sans text-sm text-white placeholder:text-white/20',
+                'w-full resize-none rounded-lg border bg-cynical-700 px-4 py-3',
+                'font-sans text-sm text-white placeholder:text-cynical-400',
                 'transition-all duration-150 focus:outline-none focus:ring-2',
                 showAnnetError
-                  ? 'border-burgundy-500/50 focus:border-burgundy-500/80 focus:ring-burgundy-500/15'
-                  : 'border-white/8 focus:border-torch-500/60 focus:ring-torch-500/10'
+                  ? 'border-burgundy-500/50 focus:border-burgundy-500/80 focus:ring-burgundy-500/30'
+                  : 'border-cynical-600 focus:border-torch-500 focus:ring-torch-500/30 hover:border-cynical-500'
               )}
               aria-required="true"
               aria-invalid={showAnnetError}
@@ -252,7 +252,7 @@ export default function RoleSelectionStep() {
         <div className="flex items-baseline justify-between mb-1.5">
           <label
             htmlFor="notat"
-            className="text-sm font-medium font-sans text-white/60"
+            className="text-sm font-medium font-sans text-white/80"
           >
             Noe vi bør vite om?
           </label>
@@ -269,16 +269,16 @@ export default function RoleSelectionStep() {
           onChange={(e) => setNotatText(e.target.value)}
           placeholder="F.eks. «Har god erfaring med snekring» eller «Kan ikke jobbe etter kl. 22»…"
           className={cn(
-            'w-full resize-none rounded-lg border border-white/8 bg-cynical-800/50 px-4 py-3',
-            'font-sans text-sm text-white placeholder:text-white/20',
+            'w-full resize-none rounded-lg border border-cynical-600 bg-cynical-700 px-4 py-3',
+            'font-sans text-sm text-white placeholder:text-cynical-400',
             'transition-all duration-150 focus:outline-none focus:ring-2',
-            'focus:border-torch-500/60 focus:ring-torch-500/10'
+            'focus:border-torch-500 focus:ring-torch-500/30 hover:border-cynical-500'
           )}
         />
       </div>
 
       {/* Navigation */}
-      <div className="mt-8 flex items-center justify-between gap-4">
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
         <Button variant="ghost" onClick={goToPrevStep}>
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           Tilbake

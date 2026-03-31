@@ -29,7 +29,7 @@ function SummaryRow({
         <span className="text-xs font-sans font-medium uppercase tracking-wider text-white/35">
           {label}
         </span>
-        <span className="font-sans text-sm text-white/85 wrap-break-word">{value}</span>
+        <span className="font-sans text-sm text-white/85 break-words">{value}</span>
       </div>
     </div>
   );
