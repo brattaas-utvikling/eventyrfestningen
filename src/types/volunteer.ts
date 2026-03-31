@@ -12,7 +12,7 @@ export type VolunteerRole =
   | 'backstage'
   | 'rydding-vasking'
   | 'salg-merch-mat'
-
+  | 'maling'
   | 'soldat-for-en-dag'
   | 'vasking-kostymer'
   | 'annet';
@@ -43,7 +43,7 @@ export const VOLUNTEER_ROLES: VolunteerRoleOption[] = [
     id: 'solskinnsgruppe',
     label: 'Solskinnsgruppen',
     description:
-      'Bake boller, koke kaffe og arrangere sosiale sammenkomster for skuespillere og produksjon',
+      'Bake boller og koke kaffe for skuespillere og produksjon',
   },
   {
     id: 'publikumsvert',
@@ -79,6 +79,11 @@ export const VOLUNTEER_ROLES: VolunteerRoleOption[] = [
     id: 'vasking-kostymer',
     label: 'Vasking av kostymer',
     description: 'Vask, stell og vedlikehold av kostymer',
+  },
+  {
+    id: 'maling',
+    label: 'Maling',
+    description: 'Både scenografi, kiosk og skilt',
   },
   {
     id: 'annet',

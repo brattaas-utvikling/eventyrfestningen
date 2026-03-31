@@ -74,7 +74,7 @@ export default function FrivilligPage() {
             {[
               {
                 q: 'Trenger jeg erfaring for å bli frivillig?',
-                a: 'Nei, du trenger ingen spesiell erfaring. Vi setter pris på all hjelp og sørger for at du får opplæring og støtte i din rolle.',
+                a: 'Nei, du trenger ingen spesiell erfaring. Vi setter pris på all hjelp og sørger for at du får informasjon og støtte i din rolle.',
               },
               {
                 q: 'Hvor mange timer forventes det at jeg stiller opp?',
@@ -90,7 +90,7 @@ export default function FrivilligPage() {
               },
               {
                 q: 'Hva skjer etter at jeg har meldt meg?',
-                a: 'Vi går gjennom påmeldingene og kontakter deg på e-post. Det holdes et informasjonsmøte for alle frivillige i forkant av forestillingsperioden.',
+                a: 'Vi går gjennom påmeldingene og kontakter deg på e-post eller telefon.',
               },
             ].map(({ q, a }) => (
               <div key={q}>

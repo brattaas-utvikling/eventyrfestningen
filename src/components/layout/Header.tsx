@@ -58,6 +58,7 @@ export function Header() {
       { name: "Om forestillingen", href: "/om-forestillingen" },
       { name: "Program", href: "/program" },
       { name: "Om oss", href: "/om-oss" },
+      { name: "Frivillig", href: "/frivillig" },
       { name: "Arkiv", href: "/arkiv" },
       { name: "Sponsorer", href: "/sponsorer" },
       { name: "Kontakt", href: "/kontakt" },
