@@ -27,6 +27,9 @@ export const buttonVariants = cva(
     // (Halyard Display, font-semibold, tracking-[0.02em], leading-[1.2])
     "btn antialiased",
 
+    // Cursor — ! tvinger gjennom @tailwindcss/forms-reset
+    "!cursor-pointer",
+
     // Base ring på alle knapper
     "ring-1 ring-white/10 hover:ring-white/15",
 
