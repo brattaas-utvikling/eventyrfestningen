@@ -12,6 +12,8 @@ import {
 } from '@/services/volunteerService';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
+import { Modal } from '@/components/ui/Modal';
+import { PrivacyPolicyContent } from '@/components/privacy/PrivacyPolicyContent';
 import { VOLUNTEER_ROLES, type VolunteerRole } from '@/types/volunteer';
 
 
@@ -51,6 +53,7 @@ export default function VolunteerSummaryStep() {
   const [vilkaarError, setVilkaarError] = useState(false);
   const [alreadyExists, setAlreadyExists] = useState(false);
   const [errorType, setErrorType] = useState<'network' | 'ratelimit' | 'server' | 'generic' | null>(null);
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   // Resolve role labels
   const roleLabels = data.selectedRoles
@@ -218,14 +221,13 @@ export default function VolunteerSummaryStep() {
               Jeg samtykker til at Eventyrfestningen lagrer mine kontaktopplysninger
               for å kunne ta kontakt angående frivilligarbeid. Opplysningene brukes
               kun til dette formålet og deles ikke med tredjepart.{' '}
-              <a
-                href="/personvern"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-torch-400 underline underline-offset-2 hover:text-torch-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-500 rounded"
+              <button
+                type="button"
+                onClick={() => setShowPrivacy(true)}
+                className="text-torch-400 underline underline-offset-2 hover:text-torch-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-500 rounded cursor-pointer"
               >
                 Les personvernerklæringen
-              </a>
+              </button>
               .
             </span>
           </label>
@@ -343,6 +345,15 @@ export default function VolunteerSummaryStep() {
           <span className="text-sm font-sans text-white/50">Sender inn påmeldingen din…</span>
         </motion.div>
       )}
+
+      {/* Privacy policy modal */}
+      <Modal
+        isOpen={showPrivacy}
+        onClose={() => setShowPrivacy(false)}
+        title="Personvernerklæring"
+      >
+        <PrivacyPolicyContent />
+      </Modal>
     </div>
   );
 }

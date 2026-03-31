@@ -88,7 +88,7 @@ function Field({ id, label, icon, error, hint, children }: FieldProps) {
 
       {/* Hint text — only when no error */}
       {hint && !error && (
-        <p className="text-[11px] font-sans text-white/30 leading-relaxed">
+        <p id={`${id}-hint`} className="text-[11px] font-sans text-white/30 leading-relaxed">
           {hint}
         </p>
       )}
@@ -96,12 +96,13 @@ function Field({ id, label, icon, error, hint, children }: FieldProps) {
       {/* Error message */}
       {error && (
         <motion.p
+          id={`${id}-error`}
           role="alert"
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center gap-1.5 text-xs font-sans text-burgundy-400"
         >
-          <span className="inline-block h-1 w-1 rounded-full bg-burgundy-400 shrink-0" aria-hidden="true" />
+          <span className="inline-block h-1 w-1 rounded-full bg-burgundy-400 flex-shrink-0" aria-hidden="true" />
           {error}
         </motion.p>
       )}
@@ -220,7 +221,9 @@ export default function PersonalInfoStep() {
               onBlur={handleBlur('fornavn')}
               placeholder="Ola"
               className={inputClass(touched.fornavn ? errors.fornavn : undefined)}
-              aria-invalid={touched.fornavn && !!errors.fornavn}
+              aria-required="true"
+              aria-invalid={touched.fornavn && !!errors.fornavn ? true : undefined}
+              aria-describedby={touched.fornavn && errors.fornavn ? `${uid}-fornavn-error` : undefined}
             />
           </Field>
 
@@ -239,7 +242,9 @@ export default function PersonalInfoStep() {
               onBlur={handleBlur('etternavn')}
               placeholder="Nordmann"
               className={inputClass(touched.etternavn ? errors.etternavn : undefined)}
-              aria-invalid={touched.etternavn && !!errors.etternavn}
+              aria-required="true"
+              aria-invalid={touched.etternavn && !!errors.etternavn ? true : undefined}
+              aria-describedby={touched.etternavn && errors.etternavn ? `${uid}-etternavn-error` : undefined}
             />
           </Field>
         </div>
@@ -262,7 +267,9 @@ export default function PersonalInfoStep() {
             onBlur={handleBlur('epost')}
             placeholder="ola@eventyr.no"
             className={inputClass(touched.epost ? errors.epost : undefined)}
-            aria-invalid={touched.epost && !!errors.epost}
+            aria-required="true"
+            aria-invalid={touched.epost && !!errors.epost ? true : undefined}
+            aria-describedby={touched.epost && errors.epost ? `${uid}-epost-error` : `${uid}-epost-hint`}
           />
         </Field>
 
@@ -282,7 +289,9 @@ export default function PersonalInfoStep() {
             onBlur={handleBlur('telefon')}
             placeholder="400 00 000"
             className={inputClass(touched.telefon ? errors.telefon : undefined)}
-            aria-invalid={touched.telefon && !!errors.telefon}
+            aria-required="true"
+            aria-invalid={touched.telefon && !!errors.telefon ? true : undefined}
+            aria-describedby={touched.telefon && errors.telefon ? `${uid}-telefon-error` : undefined}
           />
         </Field>
 
@@ -304,7 +313,9 @@ export default function PersonalInfoStep() {
             onBlur={handleBlur('adresse')}
             placeholder="Storgata 1"
             className={inputClass(touched.adresse ? errors.adresse : undefined)}
-            aria-invalid={touched.adresse && !!errors.adresse}
+            aria-required="true"
+            aria-invalid={touched.adresse && !!errors.adresse ? true : undefined}
+            aria-describedby={touched.adresse && errors.adresse ? `${uid}-adresse-error` : undefined}
           />
         </Field>
 
@@ -328,7 +339,9 @@ export default function PersonalInfoStep() {
               inputClass(touched.postnummer ? errors.postnummer : undefined),
               'max-w-36'
             )}
-            aria-invalid={touched.postnummer && !!errors.postnummer}
+            aria-required="true"
+            aria-invalid={touched.postnummer && !!errors.postnummer ? true : undefined}
+            aria-describedby={touched.postnummer && errors.postnummer ? `${uid}-postnummer-error` : undefined}
           />
         </Field>
 

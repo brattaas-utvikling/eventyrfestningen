@@ -94,7 +94,7 @@ export default function FrivilligPage() {
               },
             ].map(({ q, a }) => (
               <div key={q}>
-                <dt className="font-heading text-lg text-white mb-2 wrap-break-word">{q}</dt>
+                <dt className="font-heading text-lg text-white mb-2 break-words">{q}</dt>
                 <dd className="font-sans text-sm text-white/65 leading-relaxed">{a}</dd>
               </div>
             ))}

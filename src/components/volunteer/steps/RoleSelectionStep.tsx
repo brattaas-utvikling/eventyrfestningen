@@ -231,10 +231,12 @@ export default function RoleSelectionStep() {
                   : 'border-cynical-600 focus:border-torch-500 focus:ring-torch-500/30 hover:border-cynical-500'
               )}
               aria-required="true"
-              aria-invalid={showAnnetError}
+              aria-invalid={showAnnetError ? true : undefined}
+              aria-describedby={showAnnetError ? 'annet-beskrivelse-error' : undefined}
             />
             {showAnnetError && (
               <motion.p
+                id="annet-beskrivelse-error"
                 role="alert"
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -258,7 +260,7 @@ export default function RoleSelectionStep() {
           </label>
           <span className="text-[11px] font-sans text-white/25">Valgfritt</span>
         </div>
-        <p className="mb-2 text-[11px] font-sans text-white/30 leading-relaxed">
+        <p id="notat-hint" className="mb-2 text-[11px] font-sans text-white/30 leading-relaxed">
           Allergier, begrensninger, erfaring — hva som helst du tenker er
           relevant.
         </p>
@@ -274,6 +276,7 @@ export default function RoleSelectionStep() {
             'transition-all duration-150 focus:outline-none focus:ring-2',
             'focus:border-torch-500 focus:ring-torch-500/30 hover:border-cynical-500'
           )}
+          aria-describedby="notat-hint"
         />
       </div>
 
