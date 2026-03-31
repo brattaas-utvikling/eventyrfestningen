@@ -38,7 +38,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
   return (
     <footer
       className={`relative ${wrap}`}
-      aria-label="Bunntekst"
+      aria-label="Sidebunn"
     >
       {/* Tynn gradientlinje på toppen */}
       <div
@@ -49,13 +49,13 @@ export function Footer({ variant = "dark" }: FooterProps) {
       <Container>
         <div className="py-12 lg:py-16">
           {/* SENTRERT wrapper med max-width */}
-          <div className="mx-auto max-w-sm sm:max-w-2xl lg:max-w-5xl">
+          <div className="mx-auto max-w-2xl lg:max-w-5xl">
 
 
             {/* Grid: 1 kolonne mobil, 2 tablet, 4 desktop */}
-            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-flow-col-dense sm:gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-flow-col-dense sm:gap-8 lg:gap-12 justify-items-center sm:justify-items-start">
               {/* Om oss */}
-              <section aria-labelledby="footer-about" className="text-left">
+              <section aria-labelledby="footer-about" className="text-left w-72 sm:w-auto">
                 <h3
                   id="footer-about"
                   className={`text-lg font-sans font-semibold mb-4 ${heading}`}
@@ -69,7 +69,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
               </section>
 
               {/* Kontakt */}
-              <section aria-labelledby="footer-contact" className="text-left">
+              <section aria-labelledby="footer-contact" className="text-left w-72 sm:w-auto">
                 <h3
                   id="footer-contact"
                   className={`text-lg font-sans font-semibold mb-4 ${heading}`}
@@ -116,7 +116,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
               </section>
 
               {/* Snarveier */}
-              <nav aria-labelledby="footer-links" className="text-left">
+              <nav aria-labelledby="footer-links" className="text-left w-72 sm:w-auto">
                 <h3
                   id="footer-links"
                   className={`text-lg font-sans font-semibold mb-4 ${heading}`}
@@ -226,6 +226,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
                 href="https://www.brattaasutvikling.no"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Designet og levert av Brattås Utvikling (åpnes i ny fane)"
                 className="
                   group inline-flex items-center gap-2
                   py-1
@@ -234,8 +235,9 @@ export function Footer({ variant = "dark" }: FooterProps) {
                   transition-colors
                 "
               >
-                <span>Designet og levert av</span>
+                <span aria-hidden="true">Designet og levert av</span>
                 <span
+                  aria-hidden="true"
                   className="
                     font-semibold
                     bg-linear-to-r from-torch-300 via-torch-500 to-torch-600

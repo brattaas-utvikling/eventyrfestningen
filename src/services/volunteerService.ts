@@ -1,7 +1,35 @@
 // src/services/volunteerService.ts
-import { ID } from 'appwrite';
+import { ID, AppwriteException } from 'appwrite';
 import { getDatabases, getFunctions } from '@/lib/appwrite';
 import type { VolunteerData } from '@/types/volunteer';
+
+export class VolunteerAlreadyExistsError extends Error {
+  constructor() {
+    super('Denne e-postadressen er allerede registrert som frivillig.');
+    this.name = 'VolunteerAlreadyExistsError';
+  }
+}
+
+export class VolunteerNetworkError extends Error {
+  constructor() {
+    super('Det ser ut som du er uten nett. Sjekk tilkoblingen og prøv igjen.');
+    this.name = 'VolunteerNetworkError';
+  }
+}
+
+export class VolunteerRateLimitError extends Error {
+  constructor() {
+    super('For mange forsøk. Vent litt og prøv igjen.');
+    this.name = 'VolunteerRateLimitError';
+  }
+}
+
+export class VolunteerServerError extends Error {
+  constructor() {
+    super('Tjenesten er midlertidig utilgjengelig. Prøv igjen om litt.');
+    this.name = 'VolunteerServerError';
+  }
+}
 
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_FRIVILLIG_DATABASE_ID as string;
 const COLLECTION_ID = import.meta.env.VITE_APPWRITE_FRIVILLIG_COLLECTION_ID as string;
@@ -17,25 +45,40 @@ export async function submitVolunteer(
   data: VolunteerData
 ): Promise<VolunteerSubmitResult> {
   // 1. Lagre i Appwrite-database
-  const doc = await getDatabases().createDocument(
-    DATABASE_ID,
-    COLLECTION_ID,
-    ID.unique(),
-    {
-      fornavn: data.info.fornavn.trim(),
-      etternavn: data.info.etternavn.trim(),
-      epost: data.info.epost.trim().toLowerCase(),
-      telefon: data.info.telefon.trim(),
-      adresse: data.info.adresse.trim(),
-      postnummer: data.info.postnummer.trim(),
-      roller: data.selectedRoles,
-      annet_beskrivelse: data.annetBeskrivelse.trim() || null,
-      notat: data.notat.trim() || null,
-      vilkaar_akseptert: data.vilkaarAkseptert,
-      vilkaar_akseptert_tidspunkt: data.vilkaarAkseptertTidspunkt,
-      status: 'ny',
+  let doc;
+  try {
+    doc = await getDatabases().createDocument(
+      DATABASE_ID,
+      COLLECTION_ID,
+      ID.unique(),
+      {
+        fornavn: data.info.fornavn.trim(),
+        etternavn: data.info.etternavn.trim(),
+        epost: data.info.epost.trim().toLowerCase(),
+        telefon: data.info.telefon.trim(),
+        adresse: data.info.adresse.trim(),
+        postnummer: data.info.postnummer.trim(),
+        roller: data.selectedRoles,
+        annet_beskrivelse: data.annetBeskrivelse.trim() || null,
+        notat: data.notat.trim() || null,
+        vilkaar_akseptert: data.vilkaarAkseptert,
+        vilkaar_akseptert_tidspunkt: data.vilkaarAkseptertTidspunkt,
+        status: 'ny',
+      }
+    );
+  } catch (err) {
+    if (err instanceof AppwriteException) {
+      if (err.code === 409) throw new VolunteerAlreadyExistsError();
+      if (err.code === 429) throw new VolunteerRateLimitError();
+      if (err.code >= 500) throw new VolunteerServerError();
+      throw new VolunteerServerError();
     }
-  );
+    // Nettverksfeil: fetch feilet uten HTTP-respons
+    if (err instanceof TypeError && err.message.includes('fetch')) {
+      throw new VolunteerNetworkError();
+    }
+    throw err;
+  }
 
   // 2. Send e-postvarsling via Cloud Function (blokkerer IKKE innsending ved feil)
   if (EMAIL_FUNCTION_ID) {
@@ -80,8 +123,3 @@ export async function submitVolunteer(
 // vilkaar_akseptert           | Boolean   | –         | ✓       |
 // vilkaar_akseptert_tidspunkt | varchar   | 50        | ✗       | ISO 8601 datostreng
 // status                      | varchar   | 20        | ✗       | default: 'ny'; fullt indekserbart
-//
-// Anbefalte indekser:
-//   - epost     → unique (forhindrer duplikat-påmelding)
-//   - status    → key   (for admin-filtrering: ny / kontaktet / bekreftet)
-//   - $createdAt → key  (for sortering, nyeste øverst)

@@ -1,9 +1,15 @@
 // src/components/volunteer/steps/VolunteerSummaryStep.tsx
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Send, User, Mail, Phone, MapPin, Tag, MessageSquare, Loader2 } from 'lucide-react';
+import { ArrowLeft, Send, User, Mail, Phone, MapPin, Tag, MessageSquare, Loader2, WifiOff, AlertCircle } from 'lucide-react';
 import { useVolunteer } from '@/contexts/VolunteerContext';
-import { submitVolunteer } from '@/services/volunteerService';
+import {
+  submitVolunteer,
+  VolunteerAlreadyExistsError,
+  VolunteerNetworkError,
+  VolunteerRateLimitError,
+  VolunteerServerError,
+} from '@/services/volunteerService';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { VOLUNTEER_ROLES, type VolunteerRole } from '@/types/volunteer';
@@ -41,7 +47,10 @@ export default function VolunteerSummaryStep() {
   const { state, dispatch, goToPrevStep } = useVolunteer();
   const { data } = state;
 
+  const [isPending, startTransition] = useTransition();
   const [vilkaarError, setVilkaarError] = useState(false);
+  const [alreadyExists, setAlreadyExists] = useState(false);
+  const [errorType, setErrorType] = useState<'network' | 'ratelimit' | 'server' | 'generic' | null>(null);
 
   // Resolve role labels
   const roleLabels = data.selectedRoles
@@ -53,7 +62,7 @@ export default function VolunteerSummaryStep() {
     if (e.target.checked) setVilkaarError(false);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!data.vilkaarAkseptert) {
@@ -61,27 +70,43 @@ export default function VolunteerSummaryStep() {
       return;
     }
 
-    dispatch({ type: 'SET_SUBMITTING', payload: true });
-    dispatch({ type: 'SET_SUBMIT_ERROR', payload: null });
+    // useTransition (React 19) setter isPending=true synkront og umiddelbart,
+    // slik at loading-state garantert rendres før nettverkskallet starter
+    startTransition(async () => {
+      setAlreadyExists(false);
+      setErrorType(null);
+      dispatch({ type: 'SET_SUBMIT_ERROR', payload: null });
 
-    try {
-      const result = await submitVolunteer(data);
-      dispatch({ type: 'SET_SUBMIT_SUCCESS', payload: result.documentId });
-      // Navigate to confirmation step
-      dispatch({ type: 'SET_STEP', payload: 'bekreftelse' });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (err) {
-      const message =
-        err instanceof Error
-          ? err.message
-          : 'Noe gikk galt. Prøv igjen eller ta kontakt med oss.';
-      dispatch({ type: 'SET_SUBMIT_ERROR', payload: message });
-      dispatch({ type: 'SET_SUBMITTING', payload: false });
-    }
+      try {
+        const result = await submitVolunteer(data);
+        dispatch({ type: 'SET_SUBMIT_SUCCESS', payload: result.documentId });
+        dispatch({ type: 'SET_STEP', payload: 'bekreftelse' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        if (err instanceof VolunteerAlreadyExistsError) {
+          setAlreadyExists(true);
+          return;
+        }
+        if (err instanceof VolunteerNetworkError) {
+          setErrorType('network');
+        } else if (err instanceof VolunteerRateLimitError) {
+          setErrorType('ratelimit');
+        } else if (err instanceof VolunteerServerError) {
+          setErrorType('server');
+        } else {
+          setErrorType('generic');
+        }
+        const message =
+          err instanceof Error
+            ? err.message
+            : 'Noe gikk galt. Prøv igjen eller ta kontakt med oss.';
+        dispatch({ type: 'SET_SUBMIT_ERROR', payload: message });
+      }
+    });
   };
 
   return (
-    <div>
+    <div className="relative">
       {/* Header */}
       <div className="mb-8">
         <p className="eyebrow text-torch-500 mb-2">Steg 3 av 4</p>
@@ -91,7 +116,11 @@ export default function VolunteerSummaryStep() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} noValidate>
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        className={isPending ? 'opacity-40 pointer-events-none transition-opacity duration-300' : 'transition-opacity duration-300'}
+      >
         {/* Personal info summary */}
         <section
           aria-labelledby="summary-kontakt"
@@ -211,16 +240,61 @@ export default function VolunteerSummaryStep() {
           )}
         </div>
 
-        {/* Submit error */}
-        {state.submitError && (
+        {/* Already exists error */}
+        {alreadyExists && (
           <motion.div
             role="alert"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-4 rounded-lg border border-burgundy-500/40 bg-burgundy-500/10 px-4 py-3 text-sm font-sans text-burgundy-300"
+            className="mb-4 rounded-lg border border-gold-500/30 bg-gold-500/8 px-4 py-4"
           >
-            <strong className="font-semibold">Feil ved innsending:</strong>{' '}
-            {state.submitError}
+            <p className="text-sm font-sans font-semibold text-gold-300 mb-1">
+              E-postadressen er allerede registrert
+            </p>
+            <p className="text-sm font-sans text-white/60 mb-3">
+              <strong className="text-white/80">{data.info.epost}</strong> er allerede
+              meldt på som frivillig. Har du glemt det, eller ønsker du å bruke en
+              annen e-postadresse?
+            </p>
+            <button
+              type="button"
+              onClick={() => dispatch({ type: 'SET_STEP', payload: 'personlig-info' })}
+              className="text-sm font-sans font-medium text-gold-400 underline underline-offset-2 hover:text-gold-300"
+            >
+              Endre e-postadresse
+            </button>
+          </motion.div>
+        )}
+
+        {/* Submit error */}
+        {state.submitError && errorType && (
+          <motion.div
+            role="alert"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-4 rounded-lg border border-burgundy-500/40 bg-burgundy-500/10 px-4 py-4"
+          >
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 shrink-0 text-burgundy-400" aria-hidden="true">
+                {errorType === 'network'
+                  ? <WifiOff className="h-4 w-4" />
+                  : <AlertCircle className="h-4 w-4" />}
+              </span>
+              <div>
+                <p className="text-sm font-sans font-semibold text-burgundy-300 mb-0.5">
+                  {errorType === 'network' && 'Ingen nettilkobling'}
+                  {errorType === 'ratelimit' && 'For mange forsøk'}
+                  {errorType === 'server' && 'Tjenesten er utilgjengelig'}
+                  {errorType === 'generic' && 'Noe gikk galt'}
+                </p>
+                <p className="text-sm font-sans text-white/55">
+                  {state.submitError}
+                  {(errorType === 'network' || errorType === 'server') && (
+                    <> Påmeldingen din er <strong className="text-white/70">ikke</strong> sendt inn.</>
+                  )}
+                </p>
+              </div>
+            </div>
           </motion.div>
         )}
 
@@ -229,7 +303,7 @@ export default function VolunteerSummaryStep() {
           <Button
             variant="ghost"
             onClick={goToPrevStep}
-            disabled={state.isSubmitting}
+            disabled={isPending}
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Tilbake
@@ -239,9 +313,9 @@ export default function VolunteerSummaryStep() {
             type="submit"
             variant="torch"
             withShine
-            disabled={state.isSubmitting}
+            disabled={isPending}
           >
-            {state.isSubmitting ? (
+            {isPending ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
                 Sender inn…
@@ -255,6 +329,20 @@ export default function VolunteerSummaryStep() {
           </Button>
         </div>
       </form>
+
+      {/* Inline loading state */}
+      {isPending && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+          className="mt-6 flex items-center justify-center gap-2.5"
+          aria-live="polite"
+        >
+          <Loader2 className="h-4 w-4 animate-spin text-torch-400" aria-hidden="true" />
+          <span className="text-sm font-sans text-white/50">Sender inn påmeldingen din…</span>
+        </motion.div>
+      )}
     </div>
   );
 }

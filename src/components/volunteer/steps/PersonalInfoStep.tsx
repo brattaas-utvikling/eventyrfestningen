@@ -101,7 +101,7 @@ function Field({ id, label, icon, error, hint, children }: FieldProps) {
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center gap-1.5 text-xs font-sans text-burgundy-400"
         >
-          <span className="inline-block h-1 w-1 rounded-full bg-burgundy-400 flex-shrink-0" aria-hidden="true" />
+          <span className="inline-block h-1 w-1 rounded-full bg-burgundy-400 shrink-0" aria-hidden="true" />
           {error}
         </motion.p>
       )}
@@ -326,7 +326,7 @@ export default function PersonalInfoStep() {
             placeholder="2212"
             className={cn(
               inputClass(touched.postnummer ? errors.postnummer : undefined),
-              'max-w-[9rem]'
+              'max-w-36'
             )}
             aria-invalid={touched.postnummer && !!errors.postnummer}
           />
