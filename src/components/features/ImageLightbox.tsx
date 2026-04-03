@@ -119,7 +119,7 @@ export function ImageLightbox({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm"
+          className="fixed inset-0 z-50 bg-cynical-900/98 backdrop-blur-sm"
           onClick={onClose}
         >
           <button
@@ -180,9 +180,9 @@ export function ImageLightbox({
 
               {currentCaption ? (
                 <div
-                  className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-black/80 to-transparent text-white text-center rounded-b-lg"
+                  className="absolute bottom-0 left-0 right-0 p-4 bg-linear-to-t from-cynical-900/80 to-transparent text-white text-center rounded-b-lg"
                 >
-                  <p className="text-sm sm:text-base">{currentCaption}</p>
+                  <p className="ui-text">{currentCaption}</p>
                 </div>
               ) : null}
             </motion.div>

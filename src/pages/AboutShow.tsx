@@ -37,7 +37,7 @@ export function AboutShow() {
   if (!show) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-cynical-900">
-        <p className="text-xl text-gray-200">
+        <p className="lead text-white/70">
           Ingen forestilling funnet
           {slug ? ` for "${slug}"` : ""}.
         </p>
@@ -123,10 +123,10 @@ export function AboutShow() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-spice font-bold text-white mb-4">
+                <h1 className="font-heading text-[clamp(2.5rem,1.2rem+3.5vw,4.5rem)] leading-[1.05] tracking-[-0.02em] text-white mb-4">
                   {show.title}
                 </h1>
-                <p className="text-xl sm:text-2xl text-gray-200">
+                <p className="lead text-white/70">
                   {show.type === "halloween"
                     ? "Halloween-forestilling"
                     : "Hovedforestilling"}{" "}

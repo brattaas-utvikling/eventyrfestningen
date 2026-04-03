@@ -141,10 +141,10 @@ export function CastGallery({ show }: CastGalleryProps) {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-10 pb-8 border-b border-white/10"
           >
-            <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white mb-3">
+            <h2 className="h2 text-white mb-3">
               Rollebesetning
-            </h3>
-            <p className="text-cynical-100/70 text-sm">
+            </h2>
+            <p className="lead text-cynical-100/70">
               Møt de talentfulle skuespillerne som gir liv til historien
             </p>
           </motion.div>
@@ -173,7 +173,7 @@ export function CastGallery({ show }: CastGalleryProps) {
                   key={key}
                   type="button"
                   variants={cardVariants}
-                  className="group rounded-xl bg-white/5 backdrop-blur border border-white/10 p-4 text-center cursor-pointer hover:bg-white/10 hover:border-gold-400/30 transition-color transform-gpu focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900"
+                  className="group rounded-xl bg-white/5 backdrop-blur border border-white/10 p-4 text-center cursor-pointer hover:bg-white/10 hover:border-gold-400/30 transition-colors transform-gpu focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900"
                   whileHover={
                     prefersReducedMotion
                       ? undefined
@@ -196,29 +196,29 @@ export function CastGallery({ show }: CastGalleryProps) {
                       />
                     ) : (
                       <div className="h-full w-full bg-cynical-900/30 flex items-center justify-center">
-                        <span className="text-gold-400/30 text-4xl font-bold">
+                        <span className="ui-text text-gold-400/30 text-4xl">
                           {actor?.name?.charAt(0) ?? "?"}
                         </span>
                       </div>
                     )}
 
                     <div className="absolute inset-0 bg-cynical-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <span className="text-white text-xs font-semibold">
+                      <span className="ui-text font-semibold text-white">
                         Les mer →
                       </span>
                     </div>
                   </div>
 
-                  <h3 className="text-white font-semibold group-hover:text-gold-400 transition-colors">
+                  <h3 className="ui-text font-semibold text-white group-hover:text-gold-400 transition-colors">
                     {actor?.name ?? "Ukjent skuespiller"}
                   </h3>
 
                   {item.role && (
-                    <p className="text-gold-200 text-sm mt-1">{item.role}</p>
+                    <p className="ui-text text-gold-200 mt-1">{item.role}</p>
                   )}
 
                   {actor?.bio && (
-                    <p className="text-xs text-cynical-100/70 mt-3 line-clamp-2">
+                    <p className="ui-text text-cynical-100/70 mt-3 line-clamp-2">
                       {actor.bio}
                     </p>
                   )}
@@ -239,10 +239,10 @@ export function CastGallery({ show }: CastGalleryProps) {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center mb-10"
           >
-            <h3 className="text-3xl sm:text-4xl font-sans font-bold text-white mb-3">
+            <h2 className="h2 text-white mb-3">
               Produksjonsteam
-            </h3>
-            <p className="text-cynical-100/70 text-sm">
+            </h2>
+            <p className="lead text-cynical-100/70">
               De kreative hodene bak kulissene
             </p>
           </motion.div>
@@ -266,7 +266,7 @@ export function CastGallery({ show }: CastGalleryProps) {
                   key={person?._id ?? `crew-${index}`}
                   type="button"
                   variants={crewCardVariants}
-                  className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur border border-white/10 rounded-lg hover:bg-white/10 hover:border-gold-400/30 transition-color group cursor-pointer transform-gpu focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900"
+                  className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur border border-white/10 rounded-lg hover:bg-white/10 hover:border-gold-400/30 transition-colors group cursor-pointer transform-gpu focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-400 focus-visible:ring-offset-2 focus-visible:ring-offset-cynical-900"
                   whileHover={
                     prefersReducedMotion
                       ? undefined
@@ -290,7 +290,7 @@ export function CastGallery({ show }: CastGalleryProps) {
                       />
                     ) : (
                       <div className="w-14 h-14 rounded-full bg-cynical-900/30 border-2 border-gold-400/40 group-hover:border-gold-400 flex items-center justify-center transition-colors">
-                        <span className="text-gold-400/60 text-xl font-bold">
+                        <span className="ui-text text-gold-400/60 text-xl">
                           {person?.name?.charAt(0) ?? "?"}
                         </span>
                       </div>
@@ -298,10 +298,10 @@ export function CastGallery({ show }: CastGalleryProps) {
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <div className="text-xs text-gold-200/80 font-medium uppercase tracking-wider mb-1">
+                    <div className="eyebrow text-gold-200/80 mb-1">
                       {crewMember.role}
                     </div>
-                    <div className="text-white font-semibold truncate group-hover:text-gold-400 transition-colors">
+                    <div className="ui-text font-semibold text-white truncate group-hover:text-gold-400 transition-colors">
                       {person?.name ?? "Ukjent"}
                     </div>
                   </div>
@@ -363,26 +363,26 @@ export function CastGallery({ show }: CastGalleryProps) {
 
           <div className="flex-1 p-8 md:p-10">
             {selectedPerson.role && (
-              <div className="inline-block px-4 py-1.5 mb-4 bg-gold-400/20 border border-gold-400/30 text-gold-200 text-sm font-semibold rounded-full backdrop-blur">
+              <div className="inline-block px-4 py-1.5 mb-4 bg-gold-400/20 border border-gold-400/30 text-gold-200 rounded-full backdrop-blur eyebrow">
                 {selectedPerson.role}
               </div>
             )}
 
             <h3
               id="modal-title"
-              className="text-3xl md:text-4xl font-sans font-bold text-white mb-6"
+              className="h2 text-white mb-6"
             >
               {selectedPerson.actor?.name ?? "Ukjent person"}
             </h3>
 
             {selectedPerson.actor?.bio ? (
-              <div className="text-cynical-100/90 leading-relaxed space-y-4">
+              <div className="space-y-4">
                 {selectedPerson.actor.bio.split("\n\n").map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
+                  <p key={i} className="lead text-cynical-100/90">{paragraph}</p>
                 ))}
               </div>
             ) : (
-              <p className="text-cynical-100/70 italic">
+              <p className="lead text-cynical-100/70 italic">
                 Ingen biografi tilgjengelig.
               </p>
             )}

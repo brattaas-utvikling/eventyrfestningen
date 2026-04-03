@@ -17,6 +17,8 @@ import { initGeoAnalytics, destroyGeoAnalytics } from "./lib/analytics";
 import { useEffect } from "react";
 import Avmeld from "./pages/Avmeld";
 import FrivilligPage from "./pages/FrivilligPage";
+import Soldat from "./pages/Soldat";
+
 
 export default function App() {
   useEffect(() => {
@@ -38,10 +40,10 @@ export default function App() {
             <Route path="/om-oss" element={<About />} />
             <Route path="/sponsorer" element={<Sponsors />} />
             <Route path="/frivillig" element={<FrivilligPage />} />
-
             <Route path="/arkiv" element={<Archive />} />
             <Route path="/arkiv/:slug" element={<AboutShow />} />
             <Route path="/kontakt" element={<Contact />} />
+            <Route path="/soldat" element={<Soldat />} />
             <Route path="/personvern" element={<Privacy />} />
             <Route path="/avmeld" element={<Avmeld />} />
             <Route path="*" element={<NotFound />} />

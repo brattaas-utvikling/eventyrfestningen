@@ -24,19 +24,19 @@ function renderPortableText(blocks?: PT) {
     switch (block.style) {
       case "h2":
         return (
-          <h2 key={block._key} className="text-2xl font-sans text-white mt-6 mb-2">
+          <h2 key={block._key} className="h2 text-white mt-6 mb-2">
             {text}
           </h2>
         );
       case "h3":
         return (
-          <h3 key={block._key} className="text-xl font-sans text-white mt-4 mb-2">
+          <h3 key={block._key} className="h3 text-white mt-4 mb-2">
             {text}
           </h3>
         );
       default:
         return (
-          <p key={block._key} className="text-cynical-100/80 leading-relaxed mb-3">
+          <p key={block._key} className="lead text-white/70 mb-3">
             {text}
           </p>
         );
@@ -81,14 +81,14 @@ export function ShowOverview({ show, onImageClick }: ShowOverviewProps) {
   const gallery = show.galleryImages ?? [];
 
   return (
-    <section className="bg-cynical-900 py-16">
-      <div className="max-w-6xl mx-auto px-4 space-y-10">
+    <section className="bg-cynical-900 py-16 sm:py-20 lg:py-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         {/* topp-del */}
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] items-start">
           <div>
-            <h2 className="text-3xl font-sans text-white mb-4">Om forestillingen</h2>
+            <h2 className="h2 text-white mb-4">Om forestillingen</h2>
             {renderPortableText(show.story) || (
-              <p className="text-cynical-100/70">Ingen tekst er lagt inn ennå.</p>
+              <p className="lead text-cynical-100/70">Ingen tekst er lagt inn ennå.</p>
             )}
           </div>
           <div className="space-y-4">
@@ -99,7 +99,7 @@ export function ShowOverview({ show, onImageClick }: ShowOverviewProps) {
                 className="rounded-xl border border-gold-400/40 shadow-lg"
               />
             ) : null}
-            <div className="rounded-lg border border-cynical-700 bg-cynical-900/40 p-4 text-sm text-cynical-100/80 space-y-2">
+            <div className="rounded-lg border border-cynical-700 bg-cynical-900/40 p-4 ui-text text-cynical-100/80 space-y-2">
               <p>
                 <span className="text-white font-medium">År:</span> {show.year}
               </p>
@@ -120,7 +120,7 @@ export function ShowOverview({ show, onImageClick }: ShowOverviewProps) {
         {/* galleri */}
         {gallery.length > 0 ? (
           <div>
-            <h3 className="text-xl font-sans text-white mb-4">Fra forestillingen</h3>
+            <h3 className="h3 text-white mb-4">Fra forestillingen</h3>
 
             {/* MOBIL: Swiper */}
             <div className="md:hidden">
