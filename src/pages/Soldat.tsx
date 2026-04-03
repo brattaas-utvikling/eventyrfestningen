@@ -236,8 +236,8 @@ export default function Soldat() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3, ease: EASE }}
         >
-          <span className="sm:hidden">Dagaktivitet · Kongsvinger Festning<br />Sommer 2025</span>
-          <span className="hidden sm:inline">Dagaktivitet · Kongsvinger Festning · Sommer 2025</span>
+          <span className="sm:hidden">Dagaktivitet · Kongsvinger Festning<br />Sommer 2026</span>
+          <span className="hidden sm:inline">Dagaktivitet · Kongsvinger Festning · Sommer 2026</span>
         </motion.p>
 
         {/* Innhold — sentrert, under header */}
@@ -262,11 +262,11 @@ export default function Soldat() {
                 <p className="lead max-w-md text-white/60">
                   Bli med på en morsom dag på festningen i 1814! Har du lyst til å prøve deg som soldat?
                 </p>
-                <div className="flex flex-wrap gap-3 pt-1">
+                {/* <div className="flex flex-wrap gap-3 pt-1">
                   <Button variant="outline" size="md" withShine caps>
                     Påmelding kommer snart
                   </Button>
-                </div>
+                </div> */}
 
                 {/* Scroll-indikator — inline under knappene */}
                 <motion.div
