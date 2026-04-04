@@ -32,7 +32,6 @@ import imgTegne       from '@/assets/soldat/tegneaktivitet.webp';
 import imgBaand       from '@/assets/soldat/utdeling av bånd.webp';
 import { Container } from '@/components/layout/Container';
 import { Section } from '@/components/layout/Section';
-import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
@@ -47,14 +46,14 @@ const STORY_TEXT =
   'Kanskje må nettopp du bli med å redde festningen?';
 
 const BENTO = [
-  { src: imgDansAggie,  alt: 'Aggie danser' },
+  { src: imgDansAggie,  alt: 'Aggie danser med barna' },
   { src: imgKanon,      alt: 'Kanon på festningen' },
   { src: imgMedaljong,  alt: 'Medaljongen' },
   { src: imgMarsere,    alt: 'Marsjerer inn i festningen' },
   { src: imgHule,       alt: 'Inn i hulen' },
   { src: imgKrebbarna,  alt: 'Krebs og barna' },
   { src: imgKart,       alt: 'Kart over festningen' },
-  { src: imgDansDoro,   alt: 'Dorothea danser' },
+  { src: imgDansDoro,   alt: 'Dorothea danser med barna' },
   { src: imgKartaktiv,  alt: 'Kartaktivitet' },
   { src: imgTegne,      alt: 'Tegneaktivitet' },
   { src: imgBaand,      alt: 'Utdeling av bånd' },
@@ -210,7 +209,7 @@ export default function Soldat() {
         >
           <img
             src={imgHero}
-            alt=""
+            alt="Soldater og barn danser"
             className="h-full w-full object-cover"
             loading="eager"
           />
