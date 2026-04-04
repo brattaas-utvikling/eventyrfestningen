@@ -389,7 +389,7 @@ export default function Soldat() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: EASE }}
           >
-            <p className="eyebrow text-torch-400/70">2025</p>
+            <p className="eyebrow text-torch-400/70 uppercase">Aktiviteter</p>
             <h2 className="h2 text-white">Soldat for en dag</h2>
           </motion.div>
 
