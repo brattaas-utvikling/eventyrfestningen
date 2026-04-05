@@ -49,7 +49,7 @@ export default function AnnouncementSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden mt-3 lg:mt-6"
+      className="relative overflow-hidden"
       aria-labelledby="announcement-heading"
     >
 
@@ -161,9 +161,8 @@ export default function AnnouncementSection() {
           <div className="relative flex flex-col gap-3 pt-7">
             <Button
               asChild
-              variant="torch"
+              variant="gold"
               size="lg"
-              caps
               withShine
               withPulse={!reduced}
               className="w-full justify-center text-base"
@@ -192,7 +191,7 @@ export default function AnnouncementSection() {
       <div className="absolute inset-0 z-0 hidden lg:block" aria-hidden="true">
         <img
           src={d.bgImage}
-          alt=""
+          alt="Jonas Strand Gravli som Oberst Krebs"
           className="w-full h-full object-cover"
           loading="lazy"
           decoding="async"
@@ -235,7 +234,7 @@ export default function AnnouncementSection() {
             </div>
 
             <div className="flex gap-4 pt-2">
-              <Button asChild variant="torch" size="xl" caps withShine withPulse={!reduced}>
+              <Button asChild variant="gold" size="xl" withShine withPulse={!reduced}>
                 <a href={d.cta.href} target="_blank" rel="noopener noreferrer" onClick={() => trackTicketClick("hero_main", "home")}>
                   {d.cta.label}
                 </a>

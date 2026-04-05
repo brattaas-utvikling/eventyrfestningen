@@ -64,7 +64,7 @@ export default function ArchiveTeaser({ data }: Props) {
           height={1080}
         />
         {/* Gradient mot bunn — innholdet fader inn fra mørket */}
-        <div className="absolute inset-0 bg-gradient-to-b from-cynical-950/70 via-cynical-950/85 to-cynical-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-cynical-950/50 via-cynical-950/65 to-cynical-950" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,transparent_55%,rgba(3,7,18,0.85)_100%)]" />
       </motion.div>
 

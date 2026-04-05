@@ -1,6 +1,6 @@
 // SRC/components/sections/Hero.tsx
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { Ticket } from "lucide-react";
+import { ChevronDown, Ticket } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { urlFor } from "@/lib/sanity";
 import type { Show, Performance, SanityImage } from "@/types/sanity";
@@ -47,12 +47,14 @@ export function Hero({ show, nextPerformance }: HeroProps) {
     prefersReducedMotion ? [1, 1] : [1.06, 1.14]
   );
 
+  const chevronOpacity = useTransform(smooth, [0, 0.08], [1, 0]);
+
   const premiereDate = nextPerformance?.date ? new Date(nextPerformance.date) : null;
   const showWithLogo = show as ShowWithLogo;
   const logoImage = showWithLogo.logoImage;
 
   return (
-    <section ref={sectionRef} className="relative h-screen flex items-center overflow-hidden">
+    <section ref={sectionRef} className="relative h-[95svh] flex flex-col overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 bg-cynical-950">
         <motion.img
@@ -70,116 +72,116 @@ export function Hero({ show, nextPerformance }: HeroProps) {
           }}
         />
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-cynical-950/30 via-cynical-950/50 to-cynical-950/70" />
+        {/* Gradient overlay — lysere på mobil for å vise bildet, mørkere i bunn for lesbarhet */}
+        <div className="absolute inset-0 bg-gradient-to-b
+          from-cynical-950/40 via-cynical-950/20 to-cynical-950/75
+          sm:from-cynical-950/30 sm:via-cynical-950/40 sm:to-cynical-950/65" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full h-full">
-        <div className="flex flex-col h-full">
-          
-          <div className="flex-shrink-0 
-                        h-[10vh]
-                        sm:h-[11vh] 
-                        md:h-[12vh] 
-                        lg:h-[13vh] 
-                        xl:h-[14vh]" 
-          />
-          
+      {/* Content — full høyde, logo øverst, knapp i tommelsonen */}
+      <div className="relative z-10 flex flex-col h-full">
+
+        {/* Luft under header */}
+        <div className="flex-shrink-0 h-[13vh] sm:h-[14vh] md:h-[15vh]" />
+
+        {/* Logo — øvre del, i "himmel"-sonen av bakgrunnsbildet */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          className="flex-shrink-0 w-full flex justify-center px-4"
+        >
+          {logoImage ? (
+            <img
+              src={urlFor(logoImage).width(1400).quality(90).url()}
+              alt={show.title}
+              className="w-full h-auto
+                        max-w-[92%]
+                        sm:max-w-sm
+                        md:max-w-lg
+                        lg:max-w-xl
+                        xl:max-w-2xl
+                        max-h-[36vh] sm:max-h-[42vh] md:max-h-[44vh] lg:max-h-[50vh] xl:max-h-[54vh]
+                        object-contain
+                        drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)]
+                        filter brightness-105"
+            />
+          ) : (
+            <div className="h-16" />
+          )}
+        </motion.div>
+
+        {/* Skyver knapp ned til tommelsonen */}
+        <div className="flex-grow" />
+
+        {/* Nedtelling (valgfri) */}
+        {premiereDate && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="w-full flex justify-center px-4 flex-shrink-0"
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            className="flex-shrink-0 w-full flex justify-center px-4 mb-4 sm:mb-5"
           >
-            {logoImage ? (
-              <img
-                src={urlFor(logoImage).width(1400).quality(90).url()}
-                alt={show.title}
-                className="w-full h-auto
-                          max-w-[95%]
-                          md:max-w-lg
-                          lg:max-w-xl
-                          xl:max-w-2xl
-                          2xl:max-w-63l
-                          max-h-[42vh] sm:max-h-[46vh] md:max-h-[44vh] lg:max-h-[50vh] xl:max-h-[54vh]
-                          object-contain
-                          drop-shadow-[0_10px_40px_rgba(0,0,0,0.6)] 
-                          filter brightness-105"
-              />
-            ) : (
-              <div className="h-16" />
-            )}
+            <Countdown targetDate={premiereDate} />
           </motion.div>
+        )}
 
-          <div className="flex-grow min-h-[2vh]" />
-
-          <div className="flex flex-col items-center flex-shrink-0
-                        gap-5 sm:gap-6 md:gap-7 lg:gap-8">
-            
-            {premiereDate && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-                className="w-full flex justify-center px-4"
-              >
-                <Countdown targetDate={premiereDate} />
-              </motion.div>
-            )}
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
-              className="w-full flex justify-center px-4"
+        {/* Kjøp billetter — forankret i tommelsonen */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+          className="flex-shrink-0 w-full flex justify-center px-5"
+        >
+          <Button
+            size="xl"
+            variant="torch"
+            withShine
+            asChild
+            className="w-full
+                      sm:w-auto sm:min-w-[280px]
+                      md:min-w-[300px]
+                      lg:min-w-[320px] lg:text-lg lg:py-5
+                      active:scale-95"
+          >
+            <a
+              href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackTicketClick("hero_main", pathname)}
             >
-              <Button
-                size="xl"
-                variant="torch"
-                asChild
-                className="w-full max-w-xs sm:w-auto
-                          sm:min-w-[280px]
-                          md:min-w-[300px]
-                          lg:min-w-[320px]
-                          lg:text-lg
-                          lg:py-5
-                          active:scale-95"
-              >
-               <a 
-                  href={show.ticketUrl || "https://eventyrfestningen.ticketco.events/no/nb"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative overflow-hidden inline-flex items-center justify-center"
-                  // onClick={() =>
-                  //   trackEvent("ticket_click", {
-                  //     source: "hero_main",
-                  //     page,
-                  //   })
-                  // }
-                  onClick={() => trackTicketClick("hero_main", pathname)}
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent 
-                               translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none" />
-                  
-                  <span className="relative inline-flex items-center justify-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-                    <Ticket className="mr-4 h-5 w-5 lg:h-6 lg:w-6" />
-                    Kjøp billetter
-                  </span>
-                </a>
-              </Button>
-            </motion.div>
-          </div>
+              <Ticket className="mr-4 h-5 w-5 lg:h-6 lg:w-6" />
+              Kjøp billetter
+            </a>
+          </Button>
+        </motion.div>
 
-          <div className="flex-shrink-0 
-                        h-[8vh] 
-                        sm:h-[10vh] 
-                        md:h-[10vh] 
-                        lg:h-[12vh] 
-                        xl:h-[14vh]" 
-          />
-        </div>
+        {/* Bunn-luft — plass til chevron og neste seksjon som peeker */}
+        <div className="flex-shrink-0 h-[11vh] sm:h-[12vh] md:h-[10vh] lg:h-[12vh]" />
       </div>
+
+      {/* Scroll-invitasjon — fader inn etter kort delay, forsvinner ved scroll */}
+      {!prefersReducedMotion && (
+        <motion.div
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+          style={{ opacity: chevronOpacity }}
+          aria-hidden="true"
+        >
+          <motion.div
+            className="flex flex-col items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ChevronDown className="w-5 h-5 text-white/35" />
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 }
