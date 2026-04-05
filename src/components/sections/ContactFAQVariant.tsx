@@ -22,7 +22,7 @@ const FAQ_ITEMS = [
   {
     icon: Users,
     question: "Er forestillingen egnet for små barn?",
-    answer: "Forestillingen er familievennlig og passer for barn fra 5 år. Det er action, humor og spenning. Varighet ca. 1 time eog 40 minutter."
+    answer: "Forestillingen er familievennlig og passer for barn fra 5 år. Det er action, humor og spenning. Varighet ca. 1 time og 40 minutter."
   },
   {
     icon: HelpCircle,
@@ -52,10 +52,10 @@ export function ContactFAQVariant() {
         <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gold-400/10 mb-4">
           <HelpCircle className="h-6 w-6 text-gold-400" />
         </div>
-        <h3 className="text-2xl font-sans text-white mb-2">
+        <h3 className="h3 text-white mb-2">
           Ofte stilte spørsmål
         </h3>
-        <p className="text-cynical-100/70 text-sm">
+        <p className="ui-text text-cynical-100/70">
           Finn raskt svar på vanlige spørsmål
         </p>
       </div>

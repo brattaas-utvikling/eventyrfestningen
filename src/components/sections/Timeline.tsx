@@ -109,7 +109,7 @@ export function Timeline({ milestones }: TimelineProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15 }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="lead text-cynical-700 max-w-2xl mx-auto"
           >
             Fra første forestilling til i dag – historien om Kongsvinger
             Festningsteater
@@ -387,11 +387,11 @@ function TimelineCard({
 
         {/* Innhold */}
         <div className="relative p-6 sm:p-7">
-          <h3 className="text-2xl font-sans font-bold text-cynical-900 mb-3 tracking-[0.03em]">
+          <h3 className="h3 text-cynical-900 mb-3">
             {title}
           </h3>
           {desc ? (
-            <p className="text-[15px] leading-relaxed text-gray-800">
+            <p className="text-[15px] leading-relaxed text-cynical-800">
               {desc}
             </p>
           ) : null}
@@ -512,7 +512,7 @@ function TimelineCard({
 //             whileInView={{ opacity: 1, y: 0 }}
 //             viewport={{ once: true }}
 //             transition={{ delay: 0.15 }}
-//             className="text-lg text-gray-600 max-w-2xl mx-auto"
+//             className="lead text-cynical-700 max-w-2xl mx-auto"
 //           >
 //             Fra første forestilling til i dag – historien om Kongsvinger
 //             Festningsteater
@@ -745,11 +745,11 @@ function TimelineCard({
 
 //         {/* Innhold */}
 //         <div className="relative p-6 sm:p-7">
-//           <h3 className="text-2xl font-sans font-bold text-cynical-900 mb-3 tracking-[0.03em]">
+//           <h3 className="h3 text-cynical-900 mb-3">
 //             {title}
 //           </h3>
 //           {desc ? (
-//             <p className="text-[15px] leading-relaxed text-gray-800">
+//             <p className="text-[15px] leading-relaxed text-cynical-800">
 //               {desc}
 //             </p>
 //           ) : null}

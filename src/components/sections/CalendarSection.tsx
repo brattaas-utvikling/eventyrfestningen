@@ -144,13 +144,13 @@ export function CalendarSection() {
           >
             <div className="inline-flex items-center gap-2 mb-4">
               <Sparkles className="w-4 h-4 text-torch-300" />
-              <span className="text-xs font-medium uppercase tracking-[0.12em] text-torch-200">
+              <span className="eyebrow text-torch-300/80 text-xs">
                 7 magiske sommerkvelder
               </span>
             </div>
-            <h1 className="flex items-center gap-3 text-3xl sm:text-4xl lg:text-5xl font-sans font-semibold text-white mb-4">
+            <h2 className="h2 text-white mb-4">
               Forestillingskvelder i juli
-            </h1>
+            </h2>
             <p className="text-base sm:text-lg text-white/80 mb-2">
               Alle forestillinger starter kl. 22.00. Portene åpner kl. 20.00 (2
               timer før).
@@ -281,10 +281,10 @@ export function CalendarSection() {
               <div className="rounded-3xl border border-white/10 bg-cynical-950/80 backdrop-blur-xl p-6 sm:p-7 shadow-[0_24px_80px_rgba(15,23,42,0.9)]">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <p className="text-xs font-medium uppercase tracking-[0.18em] text-gold-300/80">
+                    <p className="eyebrow text-gold-300/80 text-xs">
                       KALENDER
                     </p>
-                    <h3 className="text-2xl sm:text-3xl font-sans font-bold text-white">
+                    <h3 className="h3 text-white">
                       Juli 2026
                     </h3>
                   </div>
@@ -388,7 +388,7 @@ export function CalendarSection() {
                 variants={itemFade}
                 className="rounded-2xl border border-gold-500/30 bg-gradient-to-br from-gold-500/10 via-torch-500/5 to-burgundy-500/10 p-5 sm:p-6"
               >
-                <h3 className="flex items-center gap-2 text-base sm:text-lg font-sans font-semibold text-white mb-2">
+                <h3 className="ui-text font-semibold text-white flex items-center gap-2 mb-2">
                   <Sparkles className="w-5 h-5 text-gold-300" />
                   Praktisk info i kortversjon
                 </h3>

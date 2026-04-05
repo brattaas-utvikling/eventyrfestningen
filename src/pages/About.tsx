@@ -44,7 +44,7 @@ function RenderPortableText({ value }: { value?: PortableTextType }) {
             return (
               <h2
                 key={block._key}
-                className="mt-6 mb-3 text-3xl font-sans text-white"
+                className="h2 text-white mt-6 mb-3"
               >
                 {text}
               </h2>
@@ -53,7 +53,7 @@ function RenderPortableText({ value }: { value?: PortableTextType }) {
             return (
               <h3
                 key={block._key}
-                className="mt-5 mb-2 text-2xl font-sans text-white"
+                className="h3 text-white mt-5 mb-2"
               >
                 {text}
               </h3>
@@ -62,7 +62,7 @@ function RenderPortableText({ value }: { value?: PortableTextType }) {
             return (
               <p
                 key={block._key}
-                className="mb-4 leading-relaxed text-gray-100"
+                className="lead text-white/70 mb-4"
               >
                 {text}
               </p>
@@ -137,7 +137,7 @@ export function About() {
         ) : organization ? (
           <div className="relative max-w-4xl mx-auto">
             {/* SECTION LABEL */}
-            <p className="text-center text-xs uppercase tracking-[0.2em] text-torch-500 mb-3">
+            <p className="eyebrow text-torch-300/80 text-xs text-center mb-3">
               Foreningen & frivilligheten
             </p>
 
@@ -145,7 +145,7 @@ export function About() {
             <div className="relative mb-20">
               {/* Sentrert tittel */}
               <div className="text-center mb-8">
-                <h2 className="text-3xl sm:text-4xl font-sans font-bold text-white">
+                <h2 className="h2 text-white">
                   {organization.title ?? "Om Eventyrfestningen"}
                 </h2>
               </div>
@@ -153,11 +153,11 @@ export function About() {
               {/* Venstrestilt tekst, sentrert på skjermen */}
               <div className="max-w-2xl mx-auto">
                 {organization.body ? (
-                  <div className="prose prose-lg prose-invert max-w-none text-gray-100">
+                  <div className="prose prose-lg prose-invert max-w-none">
                     <RenderPortableText value={organization.body} />
                   </div>
                 ) : (
-                  <p className="text-lg text-gray-100 leading-relaxed">
+                  <p className="lead text-white/70">
                     Eventyrfestningen er en frivillig teaterforening som
                     skaper familieforestillinger på Kongsvinger Festning.
                   </p>
@@ -196,7 +196,7 @@ export function About() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-amber-300/70 text-center mt-2">
+                  <p className="text-xs text-gold-300/70 text-center mt-2">
                     Sveip for å se flere bilder
                   </p>
                 </div>
@@ -267,7 +267,7 @@ export function About() {
             <div className="relative mt-16">
               {/* Sentrert tittel */}
               <div className="text-center mb-8">
-                <h2 className="text-3xl sm:text-4xl font-sans font-bold text-white">
+                <h2 className="h2 text-white">
                   Frivillighet
                 </h2>
               </div>
@@ -275,11 +275,11 @@ export function About() {
               {/* Venstrestilt tekst, sentrert på skjermen */}
               <div className="max-w-2xl mx-auto">
                 {organization.volunteering ? (
-                  <div className="prose prose-lg prose-invert max-w-none text-gray-100">
+                  <div className="prose prose-lg prose-invert max-w-none">
                     <RenderPortableText value={organization.volunteering} />
                   </div>
                 ) : (
-                  <p className="text-lg text-gray-100 leading-relaxed">
+                  <p className="lead text-white/70">
                     Vi er avhengige av frivillige for å skape magiske
                     teateropplevelser. Enten du vil stå på scenen, jobbe bak
                     kulissene eller bidra praktisk, finnes det en plass til deg.
@@ -318,14 +318,14 @@ export function About() {
                       </div>
                     ))}
                   </div>
-                  <p className="text-xs text-amber-300/70 text-center mt-2">
+                  <p className="text-xs text-gold-300/70 text-center mt-2">
                     Sveip for å se flere bilder
                   </p>
                 </div>
 
                 {/* Sentrert CTA-knapp */}
                 <div className="mt-8 text-center">
-                  <Button variant="outline" size="md">
+                  <Button variant="outline" size="md" asChild>
                     <a href="/kontakt">Jeg vil bidra</a>
                   </Button>
                 </div>
@@ -414,10 +414,10 @@ export function About() {
         <Section background="white">
           <Container>
             <div className="text-center mb-12">
-              <h2 className="text-4xl sm:text-5xl font-sans font-bold text-cynical-900 mb-4">
+              <h2 className="h2 text-cynical-900 mb-4">
                 Styret
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="lead text-cynical-700">
                 Møt menneskene som leder foreningen
               </p>
             </div>
@@ -450,7 +450,7 @@ export function About() {
             ) : (
               <div className="flex h-full w-full items-center justify-center">
                 <div className="flex h-20 w-20 items-center justify-center rounded-full bg-white/10 ring-2 ring-white/30">
-                  <span className="text-2xl font-semibold text-white">
+                  <span className="ui-text font-semibold text-white text-2xl">
                     {initials}
                   </span>
                 </div>
@@ -458,11 +458,11 @@ export function About() {
             )}
           </div>
           <div className="p-4 text-center">
-            <h3 className="font-semibold text-cynical-900">
+            <h3 className="ui-text font-semibold text-cynical-900">
               {member.name}
             </h3>
             {member.role ? (
-              <p className="text-sm text-gray-500">
+              <p className="ui-text text-cynical-600">
                 {member.role}
               </p>
             ) : null}

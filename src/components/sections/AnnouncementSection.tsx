@@ -221,14 +221,14 @@ export default function AnnouncementSection() {
             </h2>
 
             <div className="space-y-5 max-w-prose">
-              <p className="lead text-cynical-50/90">{d.intro}</p>
+              <p className="lead text-white/90">{d.intro}</p>
 
               <p className="font-heading text-gold-300 text-[clamp(1.75rem,1.4rem+1vw,2.5rem)] leading-[1.08] tracking-[-0.01em] drop-shadow-[0_0_18px_rgba(251,191,36,0.22)]">
                 {d.highlight}
               </p>
 
               {d.paragraphs.map((p, i) => (
-                <p key={i} className="text-cynical-50/85 text-base lg:text-[1.0625rem] leading-relaxed">
+                <p key={i} className="text-white/85 text-base lg:text-[1.0625rem] leading-relaxed">
                   {p}
                 </p>
               ))}
