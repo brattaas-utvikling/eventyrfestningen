@@ -45,7 +45,7 @@ export default function NotFound() {
 
         <Container className="relative z-10 py-20 sm:py-28">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gold-400/10 border border-gold-400/40 px-4 py-1 text-gold-50 text-sm">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gold-400/10 border border-gold-400/40 px-4 py-1 text-gold-200 text-sm">
               <Ghost className="h-4 w-4" />
               Her gikk teppet ned litt for tidlig
             </div>
@@ -57,7 +57,7 @@ export default function NotFound() {
               transition={{ duration: 0.5 }}
               className="mb-2"
             >
-              <span className="block text-7xl sm:text-8xl font-sans font-black tracking-wider">
+              <span className="block text-7xl sm:text-8xl font-sans tracking-wider">
                 404
               </span>
             </motion.div>
@@ -65,7 +65,7 @@ export default function NotFound() {
             <h1
               ref={h1Ref}
               tabIndex={-1}
-              className="text-3xl sm:text-4xl font-sans font-bold mb-4 focus:outline-none"
+              className="h2 text-white mb-4 focus:outline-none"
             >
               Denne siden står ikke på programmet
             </h1>
@@ -100,7 +100,7 @@ export default function NotFound() {
 
             {/* Hilsen fra Eventyrfestningen */}
             <div className="mt-10 inline-flex flex-col items-center gap-2 text-xs sm:text-sm text-cynical-100/80">
-              <span className="uppercase tracking-[0.2em] text-gold-200 text-[0.7rem]">
+              <span className="eyebrow text-gold-200 text-xs">
                 Hilsen Eventyrfestningen
               </span>
               <p className="max-w-md leading-relaxed">
@@ -108,10 +108,10 @@ export default function NotFound() {
                 lete etter denne siden? Hvis du ønsker å melde deg på som
                 frivillig, send en e-post til{" "}
                 <a
-                  href="mailto:kontak@eventyrfestningen.no"
+                  href="mailto:kontakt@eventyrfestningen.no"
                   className="underline decoration-gold-400 decoration-1 underline-offset-2 hover:text-gold-200"
                 >
-                  kontak@eventyrfestningen.no
+                  kontakt@eventyrfestningen.no
                 </a>
                 . Påmeldingsskjema kommer om ikke lenge – vi må bare skrive ferdig
                 eventyret først.

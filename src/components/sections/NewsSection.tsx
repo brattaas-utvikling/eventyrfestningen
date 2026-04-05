@@ -18,16 +18,16 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
   const displayPosts = limit ? posts.slice(0, limit) : posts
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-cynical-50">
+    <section className="py-16 sm:py-20 lg:py-24 bg-cynical-900">
       <Container>
         {/* Header */}
         {showTitle && (
           <div className="flex items-end justify-between mb-12">
             <div>
-              <h2 className="text-4xl sm:text-5xl font-sans font-bold text-cynical-900 mb-4">
+              <h2 className="h2 text-white mb-4">
                 Siste nytt
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="lead text-cynical-100/70">
                 Hold deg oppdatert på produksjonen
               </p>
             </div>
@@ -70,7 +70,7 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
 
                   <CardContent className="p-6">
                     {/* Date */}
-                    <div className="flex items-center gap-2 text-sm text-gray-600 mb-3">
+                    <div className="flex items-center gap-2 text-sm text-cynical-500 mb-3">
                       <Calendar className="h-4 w-4" />
                       <time dateTime={post.publishedAt}>
                         {new Date(post.publishedAt).toLocaleDateString('nb-NO', {
@@ -82,13 +82,13 @@ export function NewsSection({ posts, showTitle = true, limit }: NewsSectionProps
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-sans font-bold text-cynical-900 mb-3 group-hover:text-torch-600 transition-colors line-clamp-2">
+                    <h3 className="h3 text-cynical-900 mb-3 group-hover:text-torch-600 transition-colors line-clamp-2">
                       {post.title}
                     </h3>
 
                     {/* Excerpt */}
                     {post.excerpt && (
-                      <p className="text-gray-700 line-clamp-3 mb-4">
+                      <p className="text-cynical-600 line-clamp-3 mb-4">
                         {post.excerpt}
                       </p>
                     )}

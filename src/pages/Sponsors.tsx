@@ -69,7 +69,7 @@ function TierDivider({ tier }: { tier: SponsorTier }) {
       {/* Midtpunkt med ikon + label */}
       <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold-500/25 bg-cynical-800/60">
 
-        <span className="eyebrow text-gold-400/90 text-[0.6rem]">{description}</span>
+        <span className="eyebrow text-gold-400/90 text-xs">{description}</span>
       </div>
 
       {/* Høyre linje */}

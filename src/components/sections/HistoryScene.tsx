@@ -222,7 +222,7 @@ export default function HistoryScene({ data }: Props) {
                   </div>
 
                   {/* Label */}
-                  <div className="eyebrow text-cynical-400 text-[0.625rem] sm:text-[0.6875rem]">
+                  <div className="eyebrow text-cynical-600 text-[0.625rem] sm:text-[0.6875rem]">
                     {stat.label}
                   </div>
                 </div>
@@ -236,7 +236,7 @@ export default function HistoryScene({ data }: Props) {
                 className={[
                   "group inline-flex items-center gap-2",
                   "text-gold-300 hover:text-gold-200",
-                  "font-body font-medium text-base",
+                  "font-sans font-medium text-base",
                   "motion-safe:transition-colors motion-safe:duration-200",
                   // Focus-ring konsistent med design system
                   "focus:outline-none focus-visible:ring-2",

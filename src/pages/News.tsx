@@ -28,19 +28,19 @@ function RenderPortableText({ value }: { value?: PortableTextType }) {
         switch (block.style) {
           case 'h2':
             return (
-              <h2 key={block._key} className="mt-6 mb-3 text-3xl font-sans">
+              <h2 key={block._key} className="h2 text-cynical-900 mt-6 mb-3">
                 {text}
               </h2>
             )
           case 'h3':
             return (
-              <h3 key={block._key} className="mt-5 mb-2 text-2xl font-sans">
+              <h3 key={block._key} className="h3 text-cynical-900 mt-5 mb-2">
                 {text}
               </h3>
             )
           default:
             return (
-              <p key={block._key} className="mb-4 leading-relaxed text-gray-700">
+              <p key={block._key} className="lead text-cynical-700 mb-4">
                 {text}
               </p>
             )
@@ -92,12 +92,12 @@ export function NewsPost() {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-cynical-900">
         <div className="text-center">
-          <h1 className="text-4xl font-sans font-bold text-cynical-900 mb-4">
+          <h1 className="h1 text-white mb-4">
             Artikkelen ble ikke funnet
           </h1>
-          <Button asChild>
+          <Button asChild variant="outline">
             <Link to="/nyheter">Tilbake til nyheter</Link>
           </Button>
         </div>
@@ -119,7 +119,7 @@ export function NewsPost() {
         schema={generateArticleSchema(post)}
       />
       
-      <section className="py-12 sm:py-16 bg-cynical-50">
+      <section className="py-12 sm:py-16 bg-cynical-900 border-b border-cynical-700">
         <Container size="md">
           <Button variant="ghost" className="mb-8" asChild>
             <Link to="/nyheter" className="inline-flex items-center gap-2">
@@ -128,13 +128,13 @@ export function NewsPost() {
             </Link>
           </Button>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-bold text-cynical-900 mb-6">
+          <h1 className="h1 text-white mb-6">
             {post.title}
           </h1>
 
-          <div className="flex items-center gap-4 text-gray-500 mb-6">
+          <div className="flex items-center gap-4 text-cynical-300 mb-6">
             <Calendar className="h-4 w-4" />
-            <span>
+            <span className="ui-text">
               {new Date(post.publishedAt).toLocaleDateString('nb-NO', {
                 day: 'numeric',
                 month: 'long',
@@ -166,10 +166,9 @@ export function NewsPost() {
         </section>
       ) : null}
 
-      <Section background="white">
+      <Section background="cynical">
         <Container size="md">
-          <article className="prose prose-lg max-w-none">
-            {/* erstatter <PortableText /> */}
+          <article className="max-w-none space-y-4">
             <RenderPortableText value={post.body} />
           </article>
         </Container>
@@ -201,10 +200,10 @@ export function NewsList() {
       <section className="py-20 sm:py-28 bg-linear-to-br from-cynical-900 to-burgundy-900 text-white">
         <Container>
           <div className="max-w-3xl">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-sans font-bold mb-6">
+            <h1 className="h1 text-white mb-6">
               Nyheter
             </h1>
-            <p className="text-xl text-gray-200">
+            <p className="lead text-white/70">
               Hold deg oppdatert på det siste fra produksjonen, backstage og
               teatermiljøet.
             </p>
@@ -230,10 +229,10 @@ export function NewsList() {
       ) : posts && posts.length > 0 ? (
         <NewsSection posts={posts} showTitle={false} />
       ) : (
-        <Section background="white">
+        <Section background="cynical">
           <Container>
             <div className="text-center py-12">
-              <p className="text-xl text-gray-600">
+              <p className="lead text-white/70">
                 Ingen nyheter publisert ennå
               </p>
             </div>

@@ -24,14 +24,14 @@ export function Footer({ variant = "dark" }: FooterProps) {
 
   const wrap = isDark ? "bg-cynical-900 text-white" : "bg-white text-cynical-900";
   const heading = isDark ? "text-gold-400" : "text-torch-600";
-  const subtext = isDark ? "text-gray-300" : "text-cynical-700";
+  const subtext = isDark ? "text-cynical-300" : "text-cynical-700";
   const link = isDark
     ? "hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/50"
     : "hover:text-torch-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-500/40";
   const divider = isDark ? "border-cynical-700" : "border-cynical-200";
 
     const socialLink = isDark
-    ? "text-gray-300 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/50 rounded-sm"
+    ? "text-cynical-300 hover:text-gold-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-400/50 rounded-sm"
     : "text-cynical-700 hover:text-torch-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-500/40 rounded-sm";
 
 
@@ -135,7 +135,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
                   </li>
                   <li>
                     <Link
-                      to="/om-oss"
+                      to="/frivillig"
                       className={`inline-flex items-center gap-1 ${link}`}
                     >
                       Bli frivillig{" "}
@@ -199,7 +199,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
 
                 {/* Divider */}
                 <span className={`hidden sm:block w-px h-4 ${
-                  isDark ? "bg-gray-600" : "bg-cynical-300"
+                  isDark ? "bg-cynical-600" : "bg-cynical-300"
                 }`} aria-hidden="true" />
 
                 {/* Links */}
@@ -230,7 +230,7 @@ export function Footer({ variant = "dark" }: FooterProps) {
                 className="
                   group inline-flex items-center gap-2
                   py-1
-                  text-xs sm:text-sm text-gray-300
+                  text-xs sm:text-sm text-cynical-300
                   backdrop-blur-sm
                   transition-colors
                 "

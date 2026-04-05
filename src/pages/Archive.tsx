@@ -35,10 +35,10 @@ export function Archive() {
           title="Arkiv"
           description="Se tilbake på alle våre tidligere forestillinger på Kongsvinger Festning."
         />
-        <div className="min-h-screen flex items-center justify-center bg-[#0b0a09]">
+        <div className="min-h-screen flex items-center justify-center bg-cynical-900">
           <div className="text-center">
             <div className="w-16 h-16 border-4 border-gold-400/30 border-t-gold-400 rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-amber-100 text-lg">Laster inn arkivet...</p>
+            <p className="lead text-cynical-100">Laster inn arkivet...</p>
           </div>
         </div>
       </>
@@ -50,13 +50,13 @@ export function Archive() {
     return (
       <>
         <SEOHead title="Arkiv - Feil" />
-        <div className="min-h-screen flex items-center justify-center bg-[#0b0a09]">
+        <div className="min-h-screen flex items-center justify-center bg-cynical-900">
           <div className="text-center px-4">
-            <div className="text-6xl mb-4">⚠️</div>
-            <p className="text-amber-100 text-lg mb-2">
+            <div className="text-6xl mb-4" aria-label="Advarsel">⚠️</div>
+            <p className="lead text-cynical-100 mb-2">
               Kunne ikke laste arkivet
             </p>
-            <p className="text-amber-100/60 text-sm">
+            <p className="ui-text text-cynical-300">
               Prøv å laste siden på nytt
             </p>
           </div>
@@ -70,10 +70,10 @@ export function Archive() {
     return (
       <>
         <SEOHead title="Arkiv" />
-        <div className="min-h-screen flex items-center justify-center bg-[#0b0a09]">
+        <div className="min-h-screen flex items-center justify-center bg-cynical-900">
           <div className="text-center px-4">
-            <div className="text-6xl mb-4">📚</div>
-            <p className="text-amber-100 text-lg">
+            <div className="text-6xl mb-4" aria-label="Arkiv">📚</div>
+            <p className="lead text-cynical-100">
               Ingen forestillinger funnet i arkivet ennå
             </p>
           </div>
@@ -116,7 +116,7 @@ export function Archive() {
             aria-hidden="true"
           />
 
-          <p className="eyebrow text-torch-300/80 text-[0.7rem] sm:text-xs">
+          <p className="eyebrow text-torch-300/80 text-xs">
             Bli med
           </p>
 
