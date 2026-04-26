@@ -13,6 +13,7 @@ import ArchiveTeaser from "@/components/sections/ArchiveTeaser";
 import { landingData } from "@/components/sections/data/landingData";
 import AnnouncementSection from "@/components/sections/AnnouncementSection";
 import { PlakatHero } from "@/components/sections/PlakatHero";
+// import { CoverflowHero } from "@/components/sections/CoverflowHero";
 
 export default function Home() {
   const { data: show, isLoading } = useSanityQuery<Show>(
@@ -57,6 +58,10 @@ export default function Home() {
         />
       </TrackSection>
 
+      {/* <TrackSection page="home" section="carosel">
+      <CoverflowHero />
+      </TrackSection> */}
+      
       <TrackSection page="home" section="announcement">
         <AnnouncementSection />
       </TrackSection>

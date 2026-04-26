@@ -6,6 +6,108 @@
   <!-- HJEM -->
   <url>
     <loc>https://eventyrfestningen.no/</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- OM FORESTILLINGEN -->
+  <url>
+    <loc>https://eventyrfestningen.no/om-forestillingen</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- PROGRAM / KALENDER -->
+  <url>
+    <loc>https://eventyrfestningen.no/program</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- KONGSVINGER-GUIDE (ny side) -->
+  <!-- <url>
+    <loc>https://eventyrfestningen.no/hva-a-gjore-i-kongsvinger</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url> -->
+
+  <!-- NYHETER (LISTE) -->
+  <url>
+    <loc>https://eventyrfestningen.no/nyheter</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- OM OSS -->
+  <url>
+    <loc>https://eventyrfestningen.no/om-oss</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ARKIV (LISTE) -->
+  <url>
+    <loc>https://eventyrfestningen.no/arkiv</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- FRIVILLIG (manglet) -->
+  <url>
+    <loc>https://eventyrfestningen.no/frivillig</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- SPONSORER -->
+  <url>
+    <loc>https://eventyrfestningen.no/sponsorer</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- KONTAKT -->
+  <url>
+    <loc>https://eventyrfestningen.no/kontakt</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- PERSONVERN -->
+  <url>
+    <loc>https://eventyrfestningen.no/personvern</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!--
+    MERK: Nyhetsartikler og arkivsider fra Sanity er ikke inkludert her.
+    Disse bør genereres dynamisk. Se sitemap-generator.ts for implementasjon.
+    
+    Anbefalt løsning: Generer sitemap.xml ved build med Sanity-data,
+    eller bruk en Vercel serverless function som genererer den dynamisk.
+  -->
+</urlset>
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <!-- HJEM -->
+  <url>
+    <loc>https://eventyrfestningen.no/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -19,7 +121,7 @@
 
   <!-- KALENDER -->
   <url>
-    <loc>https://eventyrfestningen.no/kalender</loc>
+    <loc>https://eventyrfestningen.no/program</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -65,4 +167,4 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-</urlset>
+</urlset> -->

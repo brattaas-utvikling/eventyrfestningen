@@ -6,8 +6,9 @@ Disallow: /admin/
 Disallow: /studio/
 Disallow: /api/
 
-# Crawle-delay brukes ikke av Google, men respekteres av noen roboter
-Crawl-delay: 2
+# Hindre crawling av søkeparametere og session-URLs
+Disallow: /*?*
+Allow: /*?
 
-# Hvor sitemap ligger
+# Sitemap
 Sitemap: https://eventyrfestningen.no/sitemap.xml
