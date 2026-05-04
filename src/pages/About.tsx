@@ -101,7 +101,8 @@ export function About() {
         roleLower.includes("kontaktperson") ||
         roleLower.includes("styreleder") ||
         roleLower.includes("styremedlem") ||
-        roleLower.includes("dagligleder")
+        roleLower.includes("dagligleder") ||
+        roleLower.includes("daglig leder")
       );
     });
   }, [boardMembers]);
