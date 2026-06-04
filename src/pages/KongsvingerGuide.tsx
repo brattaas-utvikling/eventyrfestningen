@@ -16,7 +16,6 @@ import {
   Trees,
   Landmark,
   Compass,
-  Calendar,
   Bed,
   Star,
   type LucideIcon,
@@ -169,20 +168,6 @@ const CATEGORIES: Category[] = [
       },
       { name: "Kongsvinger Padel", desc: "Padelbaner i sentrum." },
       { name: "Slobrua og Sanngrund", desc: "Natur langs Glomma." },
-    ],
-  },
-  {
-    id: "arrangementer",
-    label: "Arrangementer",
-    title: "Arrangementer",
-    intro:
-      "Sjekk datoene før du planlegger — det er størst sjanse for å treffe noe i juli og august.",
-    icon: Calendar,
-    items: [
-      { name: "Kongsvingerdagene", desc: "Byfestival i august." },
-      { name: "Liv i leiren", desc: "Sommermarked i Øvrebyen." },
-      { name: "Julemarket i Øvrebyen", desc: "Første søndag i advent." },
-      { name: "Klang under kuppelen", desc: "Konserter i Vinger kirke gjennom sommeren." },
     ],
   },
   {
