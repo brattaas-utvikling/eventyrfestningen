@@ -95,7 +95,7 @@ export default function UpcomingShowScene() {
               className={[
                 // Mobil: litt smalere enn full bredde, sentrert
                 // Desktop: venstrejustert
-                "relative aspect-[2/3] max-w-[320px] sm:max-w-sm mx-auto lg:mx-0",
+                "relative aspect-2/3 max-w-[320px] sm:max-w-sm mx-auto lg:mx-0",
                 "rounded-xl overflow-hidden",
                 // Gull-border — forestillingens "farge" (vs torch for Jonas-seksjonen)
                 "border-4 border-gold-500/40",
@@ -117,7 +117,7 @@ export default function UpcomingShowScene() {
 
               {/* Gull-glow nedover */}
               <div
-                className="absolute inset-0 bg-gradient-to-t from-gold-500/10 via-transparent to-transparent pointer-events-none"
+                className="absolute inset-0 bg-linear-to-t from-gold-500/10 via-transparent to-transparent pointer-events-none"
                 aria-hidden="true"
               />
 

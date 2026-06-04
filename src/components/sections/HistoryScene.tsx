@@ -307,10 +307,8 @@ export default function HistoryScene({ data }: Props) {
 
               {/* Ambient glow bak bildet */}
               {!reduced && (
-                <motion.div
-                  animate={{ scale: [1, 1.05, 1], opacity: [0.22, 0.42, 0.22] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute inset-0 -z-10 bg-gold-500/16 blur-3xl rounded-xl"
+                <div
+                  className="absolute inset-0 -z-10 bg-gold-500/16 blur-3xl rounded-xl animate-pulse"
                   aria-hidden="true"
                 />
               )}

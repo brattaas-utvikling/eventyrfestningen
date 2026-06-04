@@ -38,7 +38,7 @@ interface NavigationItem {
 // Pulserende torch-prikk — kjerne + ekspanderende ring
 function TorchDot() {
   return (
-    <span className="relative flex items-center justify-center w-1.5 h-1.5 flex-shrink-0">
+    <span className="relative flex items-center justify-center w-1.5 h-1.5 shrink-0">
       <span className="absolute inset-0 rounded-full bg-torch-400 animate-[pulse-ring_2.4s_ease-out_infinite]" />
       <span className="relative w-1.5 h-1.5 rounded-full bg-torch-400 shadow-[0_0_5px_rgba(251,146,60,0.8)] animate-[pulse-core_2.4s_ease-in-out_infinite]" />
     </span>
@@ -69,6 +69,7 @@ export function Header() {
       { name: "Om oss", href: "/om-oss" },
       { name: "Frivillig", href: "/frivillig" },
       { name: "Arkiv", href: "/arkiv" },
+      // { name: "Aktiviteter", href: "/hva-a-gjore-i-kongsvinger" },
       { name: "Sponsorer", href: "/sponsorer" },
       { name: "Kontakt", href: "/kontakt" },
     ],
@@ -243,7 +244,7 @@ export function Header() {
       className="fixed top-0 w-full z-50 transition-all duration-300 ease-in-out bg-cynical-900/95 backdrop-blur-sm shadow-lg border-b border-white/20"
       role="banner"
     >
-      <Container>
+      <Container size="full">
         <nav
           className="flex items-center justify-between py-3 lg:py-6"
           aria-label="Hovednavigasjon"

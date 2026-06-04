@@ -261,12 +261,17 @@ export default function Soldat() {
                 <p className="lead max-w-md text-white/60">
                   Bli med på en morsom dag på festningen i 1814! Har du lyst til å prøve deg som soldat?
                 </p>
-                {/* <div className="flex flex-wrap gap-3 pt-1">
-                  <Button variant="outline" size="md" withShine caps>
-                    Påmelding kommer snart
-                  </Button>
-                </div> */}
 
+                <div className="flex flex-wrap gap-3 pt-1">
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfaNyf7cNLAHvE8-7t0EWuKfwiFB8KnnATkqRrbpLv058byvw/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg bg-torch-500 px-5 py-3 text-sm font-bold uppercase tracking-wider text-cynical-950 transition hover:bg-torch-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-400"
+                  >
+                    Meld deg på
+                  </a>
+                </div>
                 {/* Scroll-indikator — inline under knappene */}
                 <motion.div
                   className="flex items-center gap-2.5 justify-center"
@@ -370,6 +375,16 @@ export default function Soldat() {
                       </div>
                     </div>
                   ))}
+                </div>
+                <div className="mt-5 pt-5 border-t border-white/8">
+                  <a
+                    href="https://docs.google.com/forms/d/e/1FAIpQLSfaNyf7cNLAHvE8-7t0EWuKfwiFB8KnnATkqRrbpLv058byvw/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-torch-500 px-4 py-3 text-sm font-bold uppercase tracking-wider text-cynical-950 transition hover:bg-torch-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-torch-400"
+                  >
+                    Meld deg på
+                  </a>
                 </div>
               </div>
             </motion.div>

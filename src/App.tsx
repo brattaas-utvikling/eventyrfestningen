@@ -18,6 +18,8 @@ import { useEffect } from "react";
 import Avmeld from "./pages/Avmeld";
 import FrivilligPage from "./pages/FrivilligPage";
 import Soldat from "./pages/Soldat";
+import KongsvingerGuide from "./pages/KongsvingerGuide";
+import { HotelPackageSection } from "./components/sections/HotelPackageSection";
 
 
 export default function App() {
@@ -44,8 +46,10 @@ export default function App() {
             <Route path="/arkiv/:slug" element={<AboutShow />} />
             <Route path="/kontakt" element={<Contact />} />
             <Route path="/soldat" element={<Soldat />} />
+            <Route path="/hva-kan-man-gjore-i-kongsvinger" element={<KongsvingerGuide />} />
             <Route path="/personvern" element={<Privacy />} />
             <Route path="/avmeld" element={<Avmeld />} />
+            <Route path="/hotell" element={<HotelPackageSection />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Analytics />
