@@ -65,7 +65,8 @@ const CATEGORIES: Category[] = [
     icon: UtensilsCrossed,
     items: [
       { name: "Skarstad gartneri", desc: "Familieeid, kortreist og sesongbasert." },
-      { name: "ARV Kafferøsteri", desc: "Lokalt spesialkaffe-røsteri." },
+      { name: "ARV", desc: "Lokal interiørbutikk i Storgata 2" },
+      { name: "Skogens Kafferøsteri", desc: "Lokalt spesialkaffe-røsteri." },
       { name: "Ingelsruds konditori", desc: "Kafé og bakeri med hjemmelaget mat og bakst." },
       { name: "Tante Marie", desc: "Restaurant og kafé i sentrum. Hyggelig stemning." },
       { name: "Cafe Bohem", desc: "Kafé i Øvrebyen." },
@@ -73,7 +74,6 @@ const CATEGORIES: Category[] = [
       { name: "Brandval gartneri", desc: "Blomster, grønnsaker og planter." },
       { name: "Opaker gård (Grue)", desc: "Lokale produkter, godt dagsmål-utfluktsmål." },
       { name: "Peders kjøtt og fisk", desc: "Lokal kjøtt- og fiskehandler." },
-      { name: "Palace Café", desc: "Kafé i sentrum." },
       { name: "Maistro", desc: "Restaurant i Kongsvinger." },
       { name: "Castrum", desc: "Restaurant." },
     ],
@@ -167,7 +167,8 @@ const CATEGORIES: Category[] = [
         desc: "Kåret til Norges beste golfbane 8 år på rad (World Golf Awards).",
       },
       { name: "Kongsvinger Padel", desc: "Padelbaner i sentrum." },
-      { name: "Slobrua og Sanngrund", desc: "Natur langs Glomma." },
+      // { name: "Slobruad", desc: "Natur langs Glomma." },
+      // { name: "Sanngrunn", desc: "Natur langs Glomma." },
     ],
   },
   {
@@ -350,8 +351,7 @@ function AnimatedHero() {
               className="text-cynical-100/80 text-lg sm:text-xl leading-relaxed max-w-2xl mt-6"
             >
               Kongsvinger er litt over en times kjøring fra Oslo, men det føles lenger unna — på den
-              gode måten. Festning, fredet trehusbebyggelse og skog inn til bykjernen. Vi
-              holder til på Kongsvinger festning om sommeren og kjenner regionen godt.
+              gode måten. Festning, fredet trehusbebyggelse og skog inn til bykjernen.
             </motion.p>
           </motion.div>
         </Container>
