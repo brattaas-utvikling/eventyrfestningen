@@ -68,6 +68,7 @@ export function Header() {
       { name: "Program", href: "/program" },
       { name: "Om oss", href: "/om-oss" },
       { name: "Frivillig", href: "/frivillig" },
+      { name: "Soldat", href: "/soldat" },
       { name: "Arkiv", href: "/arkiv" },
       // { name: "Aktiviteter", href: "/hva-a-gjore-i-kongsvinger" },
       { name: "Sponsorer", href: "/sponsorer" },

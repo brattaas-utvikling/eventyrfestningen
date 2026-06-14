@@ -39,10 +39,10 @@ import { cn } from '@/lib/utils';
 const EASE: [number, number, number, number] = [0.23, 1, 0.32, 1];
 
 const STORY_TEXT =
+  'Har du lyst til å prøve deg som soldat på festningen? ' +
   'Bli kjent med Klara, kjøkkenpikene, soldatene og alt det andre ' +
   'mystiske som gjemmer seg på festningen. Festningen har fått besøk ' +
-  'av en spennende skotsk skikkelse som har med seg noe verdifullt — ' +
-  'noe som noen andre på festningen har veldig lyst på... ' +
+  'av en spennende skotsk skuespiller, men farer oppstår... ' +
   'Kanskje må nettopp du bli med å redde festningen?';
 
 const BENTO = [
@@ -193,7 +193,7 @@ export default function Soldat() {
     <>
       <SEOHead
         title="Soldat for en dag"
-        description="Bli med på en morsom dag på festningen i 1814! Interaktiv tidsreise med historiefortelling, lek, fekting, dans og sang for barn fra skolestarter til 3. trinn."
+        description="Bli med på en morsom dag på festningen i 1814! Interaktiv tidsreise med historiefortelling, lek, fekting, dans og sang for barn fra 5 til 11 år.."
       />
 
       {/* ════════════════════════════════════════════════════════════════════
@@ -311,7 +311,7 @@ export default function Soldat() {
                   />
                   <div className="absolute right-3 bottom-14 rounded-xl border border-torch-500/30 bg-cynical-800/90 px-3 py-2 backdrop-blur-sm">
                     <p className="eyebrow text-torch-400">Passer for</p>
-                    <p className="ui-text text-sm font-semibold text-white">Skolestarter–3. trinn</p>
+                    <p className="ui-text text-sm font-semibold text-white">Fra 5 til 11 år</p>
                   </div>
                 </div>
               </motion.div>
@@ -361,9 +361,9 @@ export default function Soldat() {
                 <p className="eyebrow mb-5 text-gold-400/60">Praktisk</p>
                 <div className="space-y-5">
                   {[
-                    { icon: Calendar, label: 'Datoer',  value: '26.–28. juni\nog 1.–5. juli' },
+                    { icon: Calendar, label: 'Datoer',  value: '24.–26. juni\n29.–30. juni\nog 1.–3. juli' },
                     { icon: Clock,    label: 'Tid',     value: 'Kl. 13.30–15.00' },
-                    { icon: Users,    label: 'Alder',   value: 'Skolestarter\ntil 3. trinn' },
+                    { icon: Users,    label: 'Alder',   value: 'Fra 5 til 11 år.' },
                   ].map(({ icon: Icon, label, value }) => (
                     <div key={label} className="flex gap-4">
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-torch-500/20 bg-torch-500/8">
