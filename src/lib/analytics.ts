@@ -142,6 +142,7 @@ type AnalyticsEventPayloads = {
       | "header_mobile_nav"
       | "hero_main"
       | "hero_more_info"
+      | "next_season_teaser" 
       | "other"
       | `program_${string}`;
     page?: string;
