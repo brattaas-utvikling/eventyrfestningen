@@ -14,6 +14,12 @@ import { landingData } from "@/components/sections/data/landingData";
 import AnnouncementSection from "@/components/sections/AnnouncementSection";
 import { PlakatHero } from "@/components/sections/PlakatHero";
 import { CoverflowHero } from "@/components/sections/CoverflowHero";
+import { EventHero } from "@/components/sections/EventHero";
+import {
+  halloweenData,
+  halloweenEventSchema,
+  isHalloweenActive,
+} from "@/components/sections/data/halloweenData";
 import NextSeasonTeaser from "@/components/sections/NextSeasonTeaserData";
 
 export default function Home() {
@@ -31,6 +37,8 @@ export default function Home() {
 
   if (isLoading || !show) return <Skeleton />;
 
+  const showHalloween = isHalloweenActive();
+
   const seoTitle = show.seo?.title ?? `${show.title} – ${defaultSEO.siteName}`;
   const seoDescription = show.seo?.description ?? defaultSEO.defaultDescription;
   const seoImage = show.seo?.ogImage
@@ -45,19 +53,26 @@ export default function Home() {
         title={seoTitle} 
         description={seoDescription} 
         image={seoImage}
+        schema={showHalloween ? halloweenEventSchema : undefined}
         // preloadVideo="/assets/landing/heroVideo.mp4"
       />
 
       {/* <TrackSection page="home" section="hero_ticket_launch">
         <Hero show={show} nextPerformance={performances?.[0]} />
       </TrackSection> */}
-      <TrackSection page="home" section="hero">
-        <PlakatHero
-          show={show}
-          portraitSrc="/assets/landing/plakat-2026-portrait.webp"
-          landscapeSrc="/assets/landing/plakat-2026-landscape.webp"
-        />
-      </TrackSection>
+      {showHalloween ? (
+        <TrackSection page="home" section="hero_halloween">
+          <EventHero {...halloweenData} />
+        </TrackSection>
+      ) : (
+        <TrackSection page="home" section="hero">
+          <PlakatHero
+            show={show}
+            portraitSrc="/assets/landing/plakat-2026-portrait.webp"
+            landscapeSrc="/assets/landing/plakat-2026-landscape.webp"
+          />
+        </TrackSection>
+      )}
       <NextSeasonTeaser />
 
       <TrackSection page="home" section="carosel">

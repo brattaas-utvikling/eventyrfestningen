@@ -105,6 +105,25 @@ export function Header() {
     [handleScrollBehavior]
   );
 
+  // Eksponer menylinjens høyde som --header-h (varierer med breakpoint og nav-bryting).
+  // Måles bare ved last og når vindusbredden endres – aldri når mobilmenyen åpnes.
+  useEffect(() => {
+    const header = headerRef.current;
+    const nav = header?.querySelector("nav");
+    if (!header || !nav) return;
+    const root = document.documentElement;
+    let lastWidth = -1;
+    const update = () => {
+      if (window.innerWidth === lastWidth) return; // mobil: adresselinja endrer bare høyden
+      lastWidth = window.innerWidth;
+      const border = header.offsetHeight - header.clientHeight;
+      root.style.setProperty("--header-h", `${nav.offsetHeight + border}px`);
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   useEffect(() => {
     window.addEventListener("scroll", throttledScrollHandler, { passive: true });
     return () => window.removeEventListener("scroll", throttledScrollHandler);
