@@ -11,7 +11,7 @@ export const halloweenData = {
   dateLabel: "22.–24. oktober",
   dateTime: "2026-10-22/2026-10-24",
   timeLabel: "Kl. 18.00–23.00",
-  note: "Billetter er snart tilgjengelig på radhusteatret.no",
+  note: "Billetter kjøpes på radhusteatret.no",
   images: {
     bgDesktop: `${IMG}/halloween-desktop.webp`,
     bgTablet: `${IMG}/halloween-tablet.webp`,
