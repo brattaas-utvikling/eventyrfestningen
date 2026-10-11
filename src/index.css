@@ -5,6 +5,13 @@
 /* =========================================================
    THEME TOKENS
    ========================================================= */
+/* Bred, liggende skjerm (desktop-oppsett). Stående nettbrett får stablet oppsett. */
+@custom-variant desk (@media (min-width: 64rem) and (orientation: landscape));
+/* Høy mobil/nettbrett (ikke desktop): nok høyde til større illustrasjoner. */
+@custom-variant tall (@media (min-height: 51rem) and (width < 64rem));
+/* Svært lav skjerm (f.eks. iPhone SE 1. gen). */
+@custom-variant short (@media (max-height: 38.75rem));
+
 @theme {
   /* Colors */
   --color-cynical-50: #fafafa;
@@ -98,6 +105,8 @@
   --animate-flicker: flicker 3s ease-in-out infinite;
   --animate-fade-in: fadeIn 0.5s ease-in;
   --animate-slide-up: slideUp 0.6s ease-out;
+  --animate-fog-drift: fogDrift 38s ease-in-out infinite alternate;
+  --animate-sway: sway 7s ease-in-out infinite;
 
   @keyframes flicker {
     0%,
@@ -106,6 +115,23 @@
     }
     50% {
       opacity: 0.8;
+    }
+  }
+  @keyframes fogDrift {
+    from {
+      transform: translate3d(-3%, 0, 0) scale(1.08);
+    }
+    to {
+      transform: translate3d(3%, -1.5%, 0) scale(1.12);
+    }
+  }
+  @keyframes sway {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-0.5deg);
     }
   }
   @keyframes fadeIn {

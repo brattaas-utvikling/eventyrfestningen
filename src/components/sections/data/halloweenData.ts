@@ -3,7 +3,7 @@
 
 const IMG = "/assets/halloween";
 
-export const HALLOWEEN_END = new Date("2026-10-24T23:30:00+02:00");
+export const HALLOWEEN_END = new Date("2026-10-24T23:00:00+02:00");
 
 export const halloweenData = {
   titleSpice: "Halloween",
@@ -28,7 +28,7 @@ export const halloweenEventSchema = {
   "@type": "Event",
   name: "Halloween på Festningen",
   startDate: "2026-10-22T18:00:00+02:00",
-  endDate: "2026-10-24T23:30:00+02:00",
+  endDate: "2026-10-24T23:00:00+02:00",
   eventStatus: "https://schema.org/EventScheduled",
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   image: [`https://eventyrfestningen.no${IMG}/halloween-desktop.webp`],

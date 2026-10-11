@@ -7,13 +7,13 @@ import { TrackSection } from "@/lib/Tracksection";
 import { SEOHead } from "@/components/SEOHead";
 import { urlFor } from "@/lib/sanity";
 import { defaultSEO } from "@/config/seo";
-import UpcomingShowScene from "@/components/sections/UpcomingShowScene";
+// import UpcomingShowScene from "@/components/sections/UpcomingShowScene";
 import HistoryScene from "@/components/sections/HistoryScene";
 import ArchiveTeaser from "@/components/sections/ArchiveTeaser";
 import { landingData } from "@/components/sections/data/landingData";
-import AnnouncementSection from "@/components/sections/AnnouncementSection";
+// import AnnouncementSection from "@/components/sections/AnnouncementSection";
 import { PlakatHero } from "@/components/sections/PlakatHero";
-import { CoverflowHero } from "@/components/sections/CoverflowHero";
+// import { CoverflowHero } from "@/components/sections/CoverflowHero";
 import { EventHero } from "@/components/sections/EventHero";
 import {
   halloweenData,
@@ -21,6 +21,15 @@ import {
   isHalloweenActive,
 } from "@/components/sections/data/halloweenData";
 import NextSeasonTeaser from "@/components/sections/NextSeasonTeaserData";
+import { AuditionHero } from "@/components/sections/AuditionHero";
+import { AuditionSection } from "@/components/sections/AuditionSection";
+import { auditionData, isAuditionActive } from "@/components/sections/data/auditionData";
+import { PrinsenHero } from "@/components/sections/PrinsenHero";
+import {
+  prinsenData,
+  prinsenEventSchema,
+  isPrinsenHeroActive,
+} from "@/components/sections/data/prinsenData";
 
 export default function Home() {
   const { data: show, isLoading } = useSanityQuery<Show>(
@@ -37,7 +46,10 @@ export default function Home() {
 
   if (isLoading || !show) return <Skeleton />;
 
+  // Hero etter dato: Halloween (til 24.10 kl. 23) → Audition (til 30.10) → Franske prinsen (til 10.7.2027) → PlakatHero.
   const showHalloween = isHalloweenActive();
+  const showAudition = isAuditionActive();
+  const showPrinsen = !showHalloween && !showAudition && isPrinsenHeroActive();
 
   const seoTitle = show.seo?.title ?? `${show.title} – ${defaultSEO.siteName}`;
   const seoDescription = show.seo?.description ?? defaultSEO.defaultDescription;
@@ -53,7 +65,7 @@ export default function Home() {
         title={seoTitle} 
         description={seoDescription} 
         image={seoImage}
-        schema={showHalloween ? halloweenEventSchema : undefined}
+        schema={showHalloween ? halloweenEventSchema : showPrinsen ? prinsenEventSchema : undefined}
         // preloadVideo="/assets/landing/heroVideo.mp4"
       />
 
@@ -64,6 +76,14 @@ export default function Home() {
         <TrackSection page="home" section="hero_halloween">
           <EventHero {...halloweenData} />
         </TrackSection>
+      ) : showAudition ? (
+        <TrackSection page="home" section="hero_audition">
+          <AuditionHero {...auditionData} />
+        </TrackSection>
+      ) : showPrinsen ? (
+        <TrackSection page="home" section="hero_prinsen">
+          <PrinsenHero {...prinsenData} />
+        </TrackSection>
       ) : (
         <TrackSection page="home" section="hero">
           <PlakatHero
@@ -73,19 +93,27 @@ export default function Home() {
           />
         </TrackSection>
       )}
-      <NextSeasonTeaser />
 
-      <TrackSection page="home" section="carosel">
+      {showHalloween && showAudition && (
+        <TrackSection page="home" section="audition">
+          <AuditionSection {...auditionData} />
+        </TrackSection>
+      )}
+
+      {/* Teaseren for 2027 er overflødig når samme forestilling allerede er hero */}
+      {!showPrinsen && <NextSeasonTeaser />}
+
+      {/* <TrackSection page="home" section="carosel">
       <CoverflowHero />
-      </TrackSection>
+      </TrackSection> */}
       
-      <TrackSection page="home" section="announcement">
+      {/* <TrackSection page="home" section="announcement">
         <AnnouncementSection />
-      </TrackSection>
+      </TrackSection> */}
 
-      <TrackSection page="home" section="upcoming_event">
+      {/* <TrackSection page="home" section="upcoming_event">
         <UpcomingShowScene />
-      </TrackSection>
+      </TrackSection> */}
 
       <TrackSection page="home" section="history">
         <HistoryScene data={landingData.history} />

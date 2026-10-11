@@ -129,10 +129,12 @@ type AnalyticsEventName =
   | "ticket_click"
   | "scroll_depth"
   | "section_view"
-  | "sponsor_click";
+  | "sponsor_click"
+  | "audition_click";
 
 type AnalyticsEventPayloads = {
   page_view: { page: string };
+  audition_click: { placement: "hero" | "section"; group: string; page: string };
   nav_menu_toggle: { open: boolean; device: "mobile" | "desktop" };
   ticket_click: {
     source:
