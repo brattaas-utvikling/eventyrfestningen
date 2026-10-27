@@ -21,7 +21,8 @@ import {
   isHalloweenActive,
 } from "@/components/sections/data/halloweenData";
 import NextSeasonTeaser from "@/components/sections/NextSeasonTeaserData";
-import { AuditionHero } from "@/components/sections/AuditionHero";
+import { useSearchParams } from "react-router-dom";
+import { AuditionHero, type AuditionHeroVariant } from "@/components/sections/AuditionHero";
 import { AuditionSection } from "@/components/sections/AuditionSection";
 import { auditionData, isAuditionActive } from "@/components/sections/data/auditionData";
 import { PrinsenHero } from "@/components/sections/PrinsenHero";
@@ -43,6 +44,11 @@ export default function Home() {
   // );
 
   useScrollDepthTracking("home");
+
+  // Designforslag for audition-heroen: ?hero=a|b|c (standard a)
+  const [searchParams] = useSearchParams();
+  const heroParam = searchParams.get("hero");
+  const auditionVariant: AuditionHeroVariant = heroParam === "b" || heroParam === "c" ? heroParam : "a";
 
   if (isLoading || !show) return <Skeleton />;
 
@@ -78,7 +84,7 @@ export default function Home() {
         </TrackSection>
       ) : showAudition ? (
         <TrackSection page="home" section="hero_audition">
-          <AuditionHero {...auditionData} />
+          <AuditionHero {...auditionData} variant={auditionVariant} />
         </TrackSection>
       ) : showPrinsen ? (
         <TrackSection page="home" section="hero_prinsen">

@@ -85,7 +85,7 @@ export function Header() {
 
   const handleScrollBehavior = useCallback(() => {
     const header = headerRef.current;
-    if (!header || window.innerWidth >= 1024) {
+    if (!header || window.innerWidth >= 1200) {
       if (header) header.style.transform = "translateY(0)";
       return;
     }
@@ -264,7 +264,7 @@ export function Header() {
       className="fixed top-0 w-full z-50 transition-all duration-300 ease-in-out bg-cynical-900/95 backdrop-blur-sm shadow-lg border-b border-white/20"
       role="banner"
     >
-      <Container size="full">
+      <Container size="xl">
         <nav
           className="flex items-center justify-between py-3 lg:py-6"
           aria-label="Hovednavigasjon"
@@ -287,7 +287,7 @@ export function Header() {
           </Link>
 
           {/* Desktop navigation */}
-          <ul className="hidden lg:flex lg:gap-x-3 xl:gap-x-6 lg:items-center list-none">
+          <ul className="hidden min-[1200px]:flex min-[1200px]:items-center min-[1200px]:gap-x-1.5 min-[1440px]:gap-x-3 list-none">
             {navigation.map((item, index) => (
               <motion.li
                 key={item.name}
@@ -308,7 +308,7 @@ export function Header() {
           {/* Mobile menu toggle */}
           <motion.button
             type="button"
-            className="lg:hidden text-white hover:text-gold-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-full p-2"
+            className="min-[1200px]:hidden text-white hover:text-gold-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2 focus:ring-offset-cynical-900 rounded-full p-2"
             onClick={() =>
               setMobileMenuOpen((prev) => {
                 const next = !prev;
@@ -348,7 +348,7 @@ export function Header() {
               animate={{ height: menuHeight, opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="lg:hidden overflow-hidden"
+              className="min-[1200px]:hidden overflow-hidden"
               aria-label="Mobilnavigasjon"
             >
               <ul
